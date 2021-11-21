@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Index = () => {
 	return (
 		<>
-			<Link to="/">홈으로</Link>
+			<Link to="/NetworkLists"> 모델둘러보기 </Link>
 		</>
 	);
 };
