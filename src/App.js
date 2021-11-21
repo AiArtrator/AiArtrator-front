@@ -5,16 +5,18 @@ import MainPage from './page/MainPage/Index.js';
 import NetworkListPage from './page/NetworkListPage/Index.js';
 import LogInPage from './page/LoginPage/Index.js';
 import NavBar from './components/NavBar/Index.js';
+import OwnNetworksPage from './page/OwnNetworksPage/Index.js';
 
 function App() {
 	return (
 		<div className="App">
-			<Test />
 			<NavBar />
+			<Test />
 			<Routes>
-				<Route exact path="/" component={MainPage}></Route>
-				<Route path="/NetworkList" component={NetworkListPage}></Route>
-				<Route path="/LogIn" component={LogInPage}></Route>
+				<Route exact path="/" component={MainPage} />
+				<Route path="/NetworkLists" component={NetworkListPage} />
+				<Route path="/LogIn" component={LogInPage} />
+				<Route path="/OwnNetworks" component={OwnNetworksPage} />
 			</Routes>
 		</div>
 	);
