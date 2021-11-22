@@ -5,6 +5,7 @@ import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
 import OwnNetworksBtn from './MyMenu/OwnNetworksButton/Index.js';
+import { Link } from 'react-router-dom';
 
 const Index = () => {
 	return (
@@ -22,7 +23,9 @@ const Index = () => {
 						<li>
 							<OwnNetworksBtn />
 						</li>
-						<li>로그아웃</li>
+						<li>
+							<Link to="/">임시 로그아웃</Link>
+						</li>
 					</ul>
 				</li>
 				<li>

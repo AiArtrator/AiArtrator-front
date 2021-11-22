@@ -6,6 +6,7 @@ import NetworkListPage from './page/NetworkListPage/Index.js';
 import LogInPage from './page/LoginPage/Index.js';
 import NavBar from './components/NavBar/Index.js';
 import OwnNetworksPage from './page/OwnNetworksPage/Index.js';
+import MyInfoPage from './page/MyInfoPage/Index.js';
 
 function App() {
 	return (
@@ -17,6 +18,7 @@ function App() {
 				<Route path="/NetworkLists" component={NetworkListPage} />
 				<Route path="/LogIn" component={LogInPage} />
 				<Route path="/OwnNetworks" component={OwnNetworksPage} />
+				<Route path="/MyInfo" component={MyInfoPage} />
 			</Routes>
 		</div>
 	);
