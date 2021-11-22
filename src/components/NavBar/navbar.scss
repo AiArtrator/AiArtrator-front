@@ -39,7 +39,7 @@
 }
 
 .dropmenu li ul {
-	background: rgb(173, 173, 173) ffff;
+	background: rgba(173, 173, 173, 0.475) fff;
 	display: none;
 	height: auto;
 	border: 0px;
@@ -55,7 +55,7 @@
 }
 
 .dropmenu li li {
-	background: rgb(173, 173, 173);
+	background: rgba(173, 173, 173, 0.475);
 	display: block;
 	float: none;
 	margin: 0px;
@@ -78,7 +78,7 @@
 
 .dropmenu li ul a:hover,
 .dropmenu li ul li:hover a {
-	background: rgb(171, 171, 171);
+	background: rgba(173, 173, 173, 0.475);
 	border: 0px;
 	color: #ffffff;
 	text-decoration: none;
