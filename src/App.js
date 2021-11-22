@@ -1,11 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
 import Test from './components/test/Test';
+import OwnNetworks from './page/OwnNetworksPage/Index.js';
 
 function App() {
 	return (
 		<div className="App">
-			<header className="App-header">
+			<OwnNetworks />
+			{/* <header className="App-header">
 				<img src={logo} className="App-logo" alt="logo" />
 				<p>
 					Edit <code>src/App.js</code> and save to reload.
@@ -19,7 +21,7 @@ function App() {
 					Learn React
 				</a>
 				<Test />
-			</header>
+			</header> */}
 		</div>
 	);
 }
