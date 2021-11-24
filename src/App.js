@@ -14,6 +14,9 @@ function App() {
 	return (
 		<div className="App">
 			<NavBar />
+			<Test />
+			<OwnNetworksPage />{' '}
+			{/*  App에서 이렇게 하면 화면에 잘 보임!!!!SCSS문제인듯 */}
 			<Routes>
 				<Route path="/" component={MainPage} exact={true} />
 				<Route path="/NetworkLists" component={NetworkListPage} />
@@ -21,7 +24,6 @@ function App() {
 				<Route path="/OwnNetworks" component={OwnNetworksPage} />
 				<Route path="/MyInfo" component={MyInfoPage} />
 			</Routes>
-			<Test />
 		</div>
 	);
 }
