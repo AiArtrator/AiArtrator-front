@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import './own-network-items.scss';
 
@@ -24,6 +25,10 @@ const Index = ({ network }) => {
 			</div>
 		</div>
 	);
+};
+
+Index.propTypes = {
+	network: PropTypes.object,
 };
 
 export default Index;

@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React /* , { useState, useEffect } */ from 'react';
 import './own-network-list.scss';
 import OwnNetworksItem from './OwnNetworkItems/Index.js';
-import axios from 'axios';
+// import axios from 'axios';
 
 const sampleNetworks = {
 	title: '샘플 모델 이름',
@@ -9,7 +9,7 @@ const sampleNetworks = {
 	sampleImg: 'https://via.placeholder.com/160',
 };
 const Index = () => {
-	//API완성되고 axios 사용시
+	// API완성되고 axios 사용시
 	// const [networks, setNetworks] = useState(null);
 	// const [loading, setLoading] = useState(false);
 
@@ -41,7 +41,7 @@ const Index = () => {
 	// 	return null;
 	// }
 
-	//networks 값이 유효할때
+	// networks 값이 유효할때
 	return (
 		<div className="own-list-block">
 			<OwnNetworksItem network={sampleNetworks} />
