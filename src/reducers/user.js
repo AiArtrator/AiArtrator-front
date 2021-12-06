@@ -2,17 +2,17 @@ import { getUserById, Logout } from '../axios/User';
 
 // Initial State
 const initialState = {
-	user: {
-		id: 2,
-		email: 'hello1@email.com',
-		idFirebase: 'RKN8DBF3',
-		createdAt: '2021-11-28T14:15:29.724Z',
-		updatedAt: '2021-11-28T14:15:29.724Z',
-		isDeleted: false,
-		organization: '고려대학교',
-		loginId: 'seol2',
-	},
-	accesstoken: 'eW1WwuY29tIiwiaW2VzhpdM',
+	// user: {
+	// 	id: 2,
+	// 	email: 'hello1@email.com',
+	// 	idFirebase: 'RKN8DBF3',
+	// 	createdAt: '2021-11-28T14:15:29.724Z',
+	// 	updatedAt: '2021-11-28T14:15:29.724Z',
+	// 	isDeleted: false,
+	// 	organization: '고려대학교',
+	// 	loginId: 'seol2',
+	// },
+	// accesstoken: 'eW1WwuY29tIiwiaW2VzhpdM',
 };
 
 export const SET_USER = 'user/setUser';
