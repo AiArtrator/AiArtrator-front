@@ -7,6 +7,7 @@ import LogInPage from './page/LoginPage/Index.js';
 import NavBar from './components/NavBar/Index.js';
 import OwnNetworksPage from './page/OwnNetworksPage/Index.js';
 import MyInfoPage from './page/MyInfoPage/Index.js';
+import SignupForm from './components/Login/SignupForm';
 // import GlobalStyle from './GlobalStyle';
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
 		<div className="App">
 			<NavBar />
 			<Test />
+			<SignupForm />
 			<OwnNetworksPage />{' '}
 			{/*  App에서 이렇게 하면 화면에 잘 보임!!!!SCSS문제인듯 */}
 			<Routes>
