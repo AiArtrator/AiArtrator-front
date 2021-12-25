@@ -1,23 +1,41 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { signup } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
+import { MainLogo } from '../Logo';
+import { Input, SubmitButton } from '.';
 
 const Index = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userState = useSelector((state) => state.user);
-	const [info, setInfo] = useState({});
+	const [info, setInfo] = useState({
+		loginId: '',
+		password: '',
+		passwordCheck: '',
+		email: '',
+		organization: '',
+	});
 
-	const submit = async () => {
+	const checkForm = () => {
+		if (info.password !== info.passwordCheck) return false;
+		return true;
+	};
+
+	const signupSubmit = async () => {
+		if (!checkForm()) {
+			alert(`비밀번호가 일치하지 않습니다.`);
+		}
 		try {
 			const res = await signup(info);
-			console.log(`[+] signup: ${res.data.data}`);
+			console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
 			dispatch(setUser(res.data.data.user));
 			dispatch(setAccsstoken(res.data.data.accesstoken));
-			console.log(userState);
+			console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+			navigate('/');
 		} catch (err) {
 			console.error(err);
 		}
@@ -30,6 +48,8 @@ const Index = () => {
 			setInfo({ ...info, email: value });
 		} else if (className === 'password') {
 			setInfo({ ...info, password: value });
+		} else if (className === 'passwordCheck') {
+			setInfo({ ...info, passwordCheck: value });
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else if (className === 'loginId') {
@@ -39,51 +59,59 @@ const Index = () => {
 		}
 	};
 
-	const handleKeyDown = (e) => {
-		if (e.which === 13) {
-			const nextSibling = e.target.nextElementSibling;
-			if (nextSibling?.tagName === 'INPUT') {
-				nextSibling.focus();
-			} else {
-				submit();
-			}
-		}
-	};
-
 	return (
 		<SignupForm>
-			<input
-				className="loginId"
-				placeholder="login id"
-				type="text"
-				value={info.loginId}
-				onChange={handleChange}
-				onKeyDown={handleKeyDown}
-			/>
-			<input
-				className="email"
-				placeholder="email"
-				type="email"
-				value={info.email}
-				onChange={handleChange}
-				onKeyDown={handleKeyDown}
-			/>
-			<input
-				className="password"
-				placeholder="password"
-				type="password"
-				value={info.password}
-				onChange={handleChange}
-				onKeyDown={handleKeyDown}
-			/>
-			<input
-				className="organization"
-				placeholder="organization"
-				type="text"
-				value={info.organization}
-				onChange={handleChange}
-				onKeyDown={handleKeyDown}
-			/>
+			<div className="logoContainer">
+				<MainLogo />
+			</div>
+			<Input>
+				<div className="title">아이디</div>
+				<input
+					className="loginId"
+					type="text"
+					value={info.loginId}
+					onChange={handleChange}
+				/>
+			</Input>
+			<Input>
+				<div className="title">비밀번호</div>
+				<input
+					className="password"
+					type="password"
+					value={info.password}
+					onChange={handleChange}
+				/>
+			</Input>
+			<Input>
+				<div className="title">비밀번호 확인</div>
+				<input
+					className="passwordCheck"
+					type="password"
+					value={info.passwordCheck}
+					onChange={handleChange}
+				/>
+			</Input>
+			<Input>
+				<div className="title">이메일</div>
+				<input
+					className="email"
+					type="email"
+					value={info.email}
+					onChange={handleChange}
+				/>
+			</Input>
+			<Input>
+				<div className="title">소속기관</div>
+				<input
+					className="organization"
+					type="text"
+					value={info.organization}
+					onChange={handleChange}
+				/>
+			</Input>
+			<div className="submitButtonContainer" onClick={signupSubmit}>
+				<SubmitButton>회원가입</SubmitButton>
+			</div>
 		</SignupForm>
 	);
 };
@@ -92,6 +120,10 @@ export default Index;
 
 const SignupForm = styled.div`
 	position: relative;
-	width: 200px;
-	height: 100px;
+	.logoContainer {
+		margin-bottom: 50px;
+	}
+	.submitButtonContainer {
+		margin-top: 30px;
+	}
 `;

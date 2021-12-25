@@ -7,6 +7,7 @@ import LoginPage from './page/LoginPage/Index';
 import NavBar from './components/NavBar/Index';
 import OwnNetworksPage from './page/OwnNetworksPage/Index';
 import MyInfoPage from './page/MyInfoPage/Index';
+import SignupPage from './page/SignupPage/Index';
 
 function App() {
 	return (
@@ -16,6 +17,7 @@ function App() {
 				<Route path="/" element={<MainPage />} exact={true} />
 				<Route path="/NetworkLists" element={<NetworkListPage />} />
 				<Route path="/Login" element={<LoginPage />} />
+				<Route path="/Signup" element={<SignupPage />} />
 				<Route path="/OwnNetworks" element={<AuthRoute />}>
 					<Route path="/OwnNetworks" element={<OwnNetworksPage />} />
 				</Route>
