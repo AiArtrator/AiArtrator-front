@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+export const signup = (data) => {
+	return axios({
+		method: 'POST',
+		url: '/api/auth/signup',
+		data,
+	});
+};
+
 export const Logout = () => {
 	return axios(
 		{
@@ -10,11 +18,11 @@ export const Logout = () => {
 	);
 };
 
-export const getUserInfo = () => {
+export const getUserById = (id) => {
 	return axios(
 		{
 			method: 'GET',
-			url: '/api/account/me/',
+			url: `/api/user/me/${id}`,
 		},
 		{
 			withCredentials: true,
