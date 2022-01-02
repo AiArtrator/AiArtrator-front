@@ -28,11 +28,11 @@ const Index = () => {
 	};
 
 	const handleChange = (e) => {
-		const className = e.target.className;
+		const id = e.target.id;
 		const value = e.target.value;
-		if (className === 'email') {
+		if (id === 'email') {
 			setInfo({ ...info, email: value });
-		} else if (className === 'password') {
+		} else if (id === 'password') {
 			setInfo({ ...info, password: value });
 		} else {
 			console.log('[-] error from AuthLogin');
