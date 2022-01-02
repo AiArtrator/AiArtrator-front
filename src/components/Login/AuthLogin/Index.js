@@ -1,8 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './auth-login.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { login } from '../../../axios/User';
+import { setAccsstoken, setUser } from '../../../reducers/user';
 
 const Index = () => {
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const userState = useSelector((state) => state.user);
+	const [info, setInfo] = useState({
+		email: '',
+		password: '',
+	});
+
+	const loginSubmit = async () => {
+		try {
+			const res = await login(info);
+			console.log(`[+] login - res data: ${JSON.stringify(res.data.data)}`);
+			dispatch(setUser(res.data.data.user));
+			dispatch(setAccsstoken(res.data.data.accesstoken));
+			console.log(`[+] login - userState: ${JSON.stringify(userState)}`);
+			navigate('/');
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const handleChange = (e) => {
+		const className = e.target.className;
+		const value = e.target.value;
+		if (className === 'email') {
+			setInfo({ ...info, email: value });
+		} else if (className === 'password') {
+			setInfo({ ...info, password: value });
+		} else {
+			console.log('[-] error from AuthLogin');
+		}
+	};
+
 	return (
 		<div className="login">
 			<div className="background">
@@ -14,16 +50,24 @@ const Index = () => {
 				<h3>Generative model</h3>
 
 				<label>User ID</label>
-				<input type="text" placeholder="ID를 입력해주세요." id="username" />
+				<input
+					type="text"
+					placeholder="ID를 입력해주세요."
+					id="email"
+					value={info.email}
+					onChange={handleChange}
+				/>
 
 				<label>Password</label>
 				<input
 					type="password"
 					placeholder="비밀먼호를 입력해주세요. "
 					id="password"
+					value={info.password}
+					onChange={handleChange}
 				/>
 
-				<button>로그인 Log-In</button>
+				<button onClick={loginSubmit}>로그인 Log-In</button>
 				<Link to="/Signup">
 					<button>1초만에 회원가입</button>
 				</Link>
