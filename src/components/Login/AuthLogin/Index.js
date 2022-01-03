@@ -52,8 +52,8 @@ const Index = () => {
 				<label>User ID</label>
 				<input
 					type="text"
-					placeholder="ID를 입력해주세요."
 					id="email"
+					placeholder="ID를 입력해주세요."
 					value={info.email}
 					onChange={handleChange}
 				/>
@@ -61,8 +61,8 @@ const Index = () => {
 				<label>Password</label>
 				<input
 					type="password"
-					placeholder="비밀먼호를 입력해주세요. "
 					id="password"
+					placeholder="비밀먼호를 입력해주세요. "
 					value={info.password}
 					onChange={handleChange}
 				/>
