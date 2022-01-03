@@ -1,12 +1,12 @@
 import React from 'react';
+import { Route } from 'react-router-dom';
+import { AuthWrapper } from '../../components/Login';
 
 const Index = () => {
 	return (
-		<>
-			<div>
-				<h2>login</h2>
-			</div>
-		</>
+		<AuthWrapper>
+			<Route path="/Signup">회원가입</Route>
+		</AuthWrapper>
 	);
 };
 

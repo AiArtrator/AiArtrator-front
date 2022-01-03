@@ -1,7 +1,13 @@
+.nav-layout {
+	position: fixed;
+	width: 100%;
+	top: 0rem;
+}
 .dropmenu {
 	border: none;
 	border: 0px;
 	margin: 0px;
+
 	padding: 0px;
 	font: 'sans-serif';
 	font-size: 18px;
@@ -46,8 +52,8 @@
 	position: absolute;
 	width: 200px;
 	z-index: 200;
-	/*top:1em;
-	/*left:0;*/
+
+	// /*left:0;*/
 }
 
 .dropmenu li:hover ul {

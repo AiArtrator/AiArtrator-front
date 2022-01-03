@@ -29,3 +29,11 @@ export const getUserById = (id) => {
 		}
 	);
 };
+
+export const login = (data) => {
+	return axios({
+		method: 'POST',
+		url: '/api/auth/login/email',
+		data,
+	});
+};
