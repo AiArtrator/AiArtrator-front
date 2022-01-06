@@ -8,6 +8,7 @@ import NavBar from './components/NavBar/Index';
 import OwnNetworksPage from './page/OwnNetworksPage/Index';
 import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
+import NetworkUploadPage from './page/NetworkUploadPage/Index';
 
 function App() {
 	return (
@@ -24,6 +25,9 @@ function App() {
 				<Route path="/MyInfo" element={<AuthRoute />}>
 					<Route path="/MyInfo" element={<MyInfoPage />} />
 				</Route>
+				{/* <Route path="/NetworkUpload" element={<AuthRoute />}> */}
+				<Route path="/NetworkUpload" element={<NetworkUploadPage />} />
+				{/* </Route> */}
 			</Routes>
 		</div>
 	);
