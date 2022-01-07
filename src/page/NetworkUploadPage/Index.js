@@ -1,19 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import { InferenceForm } from '../../components/NetworkUpload';
+import {
+	InferenceForm,
+	NetworkDetailForm,
+} from '../../components/NetworkUpload';
 
 const Index = () => {
 	return (
-		<InferenceFormContainer>
-			<InferenceForm />
-		</InferenceFormContainer>
+		<NetworkUploadContainer>
+			<FormContainer>
+				<NetworkDetailForm />
+			</FormContainer>
+			<FormContainer>
+				<InferenceForm />
+			</FormContainer>
+		</NetworkUploadContainer>
 	);
 };
 
-const InferenceFormContainer = styled.div`
+const NetworkUploadContainer = styled.div`
 	position: relative;
-	width: 900px;
-	height: 300px;
+	margin-top: 300px;
+	display: flex;
+	flex-flow: column wrap;
+	justify-content: space-around;
+`;
+const FormContainer = styled.div`
+	position: relative;
+	width: 100%;
+	height: max-content;
 	font-size: 16px;
 	font-weight: 600;
 	left: 50%;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
-import { inference } from '../../axios/inference';
+import { inference } from '../../axios/Network';
 
 const Index = () => {
 	const [imgSrc, setImgSrc] = useState('');
@@ -17,6 +17,10 @@ const Index = () => {
 			alert('Not available');
 		}
 	};
+
+	useEffect(() => {
+		setImgSrc(getInfer('/logo512.png'));
+	}, []);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
@@ -41,7 +45,7 @@ const Index = () => {
 
 	return (
 		<InferenceForm>
-			<canvas ref={canvasRef} />
+			<canvas ref={canvasRef} height="300px" />
 			<div className="inferenceButton" onClick={() => getInfer('/logo512.png')}>
 				Inference
 			</div>
@@ -54,13 +58,14 @@ export default Index;
 const InferenceForm = styled.div`
 	position: relative;
 	display: flex;
-	flex-flow: row wrap;
+	flex-flow: row nowrap;
 	justify-content: space-between;
+	align-content: space-evenly;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
 	padding: 5%;
 	canvas {
-		height: 100%;
+		flex-basis: 300px;
 		border: 2px solid;
 	}
 	.inferenceButton {
