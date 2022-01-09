@@ -65,7 +65,7 @@ const Index = () => {
 				<MainLogo />
 			</div>
 			<Input>
-				<div className="title">아이디</div>
+				<div className="inputTitle">아이디</div>
 				<input
 					className="loginId"
 					type="text"
@@ -74,7 +74,7 @@ const Index = () => {
 				/>
 			</Input>
 			<Input>
-				<div className="title">비밀번호</div>
+				<div className="inputTitle">비밀번호</div>
 				<input
 					className="password"
 					type="password"
@@ -83,7 +83,7 @@ const Index = () => {
 				/>
 			</Input>
 			<Input>
-				<div className="title">비밀번호 확인</div>
+				<div className="inputTitle">비밀번호 확인</div>
 				<input
 					className="passwordCheck"
 					type="password"
@@ -92,7 +92,7 @@ const Index = () => {
 				/>
 			</Input>
 			<Input>
-				<div className="title">이메일</div>
+				<div className="inputTitle">이메일</div>
 				<input
 					className="email"
 					type="email"
@@ -101,7 +101,7 @@ const Index = () => {
 				/>
 			</Input>
 			<Input>
-				<div className="title">소속기관</div>
+				<div className="inputTitle">소속기관</div>
 				<input
 					className="organization"
 					type="text"
