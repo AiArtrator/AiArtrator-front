@@ -41,6 +41,7 @@ const Index = () => {
 		return null;
 	}
 
+	console.log(networks);
 	// networks 값이 유효할때
 	return (
 		<div className="own-list-block">
@@ -52,7 +53,7 @@ const Index = () => {
 			<OwnNetworksItem network={sampleNetworks} />
 
 			{networks.map((network) => (
-				<OwnNetworksItem key={network.url} network={network} />
+				<OwnNetworksItem key={network.id} network={network} />
 			))}
 		</div>
 	);
