@@ -1,18 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { fetchNetworkDetail, setNetworkDetail } from '../../reducers/network';
 import { Input } from '../Login';
 import imageCompression from 'browser-image-compression';
 import { DEFAULT_THUMBNAIL } from '../../constants';
-import { putNetworkDetail } from '../../axios/Network';
+import { postNetworkDetail, putNetworkDetail } from '../../axios/Network';
 import { useParams } from 'react-router-dom';
 
 // TODO: check user is network owner, else block/redirect
 
-const Index = () => {
+const Index = ({ newNetwork }) => {
 	const dispatch = useDispatch();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
+	const userId = useSelector((state) => state.user.user.id);
 	const networkDetail = useSelector((state) => state.network.detail);
 	const { postId } = useParams();
 
@@ -24,7 +26,8 @@ const Index = () => {
 	});
 
 	useEffect(() => {
-		dispatch(fetchNetworkDetail(postId));
+		console.log(`newNetwork:${newNetwork}, postId:${postId}`);
+		if (!newNetwork) dispatch(fetchNetworkDetail(postId));
 	}, []);
 
 	useEffect(() => {
@@ -89,18 +92,23 @@ const Index = () => {
 				imgSrc,
 				`thumbnail-${date.toDateString().replaceAll(' ', '-')}.png`
 			);
-			formData.append('thumbnail', file);
+			formData.append('image_urls', file);
 		}
 		formData.append('title', detailInfo.title);
 		formData.append('description', detailInfo.desc);
 		formData.append('tags', detailInfo.tags);
+		formData.append('userId', userId);
+		formData.append('ver', 1);
+
 		return formData;
 	};
 
 	const saveNetworkDetail = async () => {
 		try {
 			const formData = await createFormData();
-			const res = await putNetworkDetail(accesstoken, postId, formData);
+			const res = newNetwork
+				? await postNetworkDetail(accesstoken, formData)
+				: await putNetworkDetail(accesstoken, postId, formData);
 			console.log(res);
 			alert('Saved!');
 			dispatch(setNetworkDetail(detailInfo));
@@ -161,6 +169,10 @@ const Index = () => {
 			</TextContainer>
 		</NetworkDetailForm>
 	);
+};
+
+Index.propTypes = {
+	newNetwork: PropTypes.bool,
 };
 
 export default Index;

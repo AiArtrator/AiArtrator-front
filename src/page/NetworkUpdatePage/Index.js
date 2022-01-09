@@ -1,12 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NetworkDetailForm } from '../../components/NetworkUpload';
+import {
+	InferenceForm,
+	NetworkDetailForm,
+} from '../../components/NetworkUpload';
 
 const Index = () => {
 	return (
 		<NetworkUploadContainer>
 			<FormContainer>
-				<NetworkDetailForm newNetwork />
+				<NetworkDetailForm />
+			</FormContainer>
+			<FormContainer>
+				<InferenceForm />
 			</FormContainer>
 		</NetworkUploadContainer>
 	);

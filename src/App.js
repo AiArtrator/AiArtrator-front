@@ -9,6 +9,7 @@ import OwnNetworksPage from './page/OwnNetworksPage/Index';
 import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
 import NetworkUploadPage from './page/NetworkUploadPage/Index';
+import NetworkUpdatePage from './page/NetworkUpdatePage/Index';
 
 function App() {
 	return (
@@ -25,9 +26,15 @@ function App() {
 				<Route path="/MyInfo" element={<AuthRoute />}>
 					<Route path="/MyInfo" element={<MyInfoPage />} />
 				</Route>
-				{/* <Route path="/NetworkUpload" element={<AuthRoute />}> */}
-				<Route path="/NetworkUpload/:postId" element={<NetworkUploadPage />} />
-				{/* </Route> */}
+				<Route path="/NetworkUpload" element={<AuthRoute />}>
+					<Route path="/NetworkUpload" element={<NetworkUploadPage />} />
+				</Route>
+				<Route path="/NetworkUpdate/:postId" element={<AuthRoute />}>
+					<Route
+						path="/NetworkUpdate/:postId"
+						element={<NetworkUpdatePage />}
+					/>
+				</Route>
 			</Routes>
 		</div>
 	);
