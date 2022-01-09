@@ -4,7 +4,7 @@ import Logo from './NavTitle/Index.js';
 import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
-import UploadNetworksBtn from './MyMenu/UploadNetworksButton/Index.js';
+import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/OwnNetworksButton/Index.js';
 import MyNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
 import { Link } from 'react-router-dom';
@@ -23,7 +23,7 @@ const Index = () => {
 					<MyMenus />
 					<ul>
 						<li>
-							<UploadNetworksBtn />
+							<NetworkUploadBtn />
 						</li>
 						<li>
 							<OwnNetworksBtn />

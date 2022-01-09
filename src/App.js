@@ -9,7 +9,6 @@ import OwnNetworksPage from './page/OwnNetworksPage/Index';
 import MyNetworksPage from './page/MyNetworksPage/Index';
 import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
-import UploadNetworksPage from './page/UploadNetworksPage/Index';
 import NetworkUploadPage from './page/NetworkUploadPage/Index';
 import NetworkUpdatePage from './page/NetworkUpdatePage/Index';
 
@@ -22,17 +21,14 @@ function App() {
 				<Route path="/NetworkLists" element={<NetworkListPage />} />
 				<Route path="/Login" element={<LoginPage />} />
 				<Route path="/Signup" element={<SignupPage />} />
+				<Route path="/MyInfo" element={<AuthRoute />}>
+					<Route path="/MyInfo" element={<MyInfoPage />} />
+				</Route>
 				<Route path="/OwnNetworks" element={<AuthRoute />}>
 					<Route path="/OwnNetworks" element={<OwnNetworksPage />} />
 				</Route>
 				<Route path="/MyNetworks" element={<AuthRoute />}>
 					<Route path="/MyNetworks" element={<MyNetworksPage />} />
-				</Route>
-				<Route path="/UploadNetworks" element={<AuthRoute />}>
-					<Route path="/UploadNetworks" element={<UploadNetworksPage />} />
-				</Route>
-				<Route path="/MyInfo" element={<AuthRoute />}>
-					<Route path="/MyInfo" element={<MyInfoPage />} />
 				</Route>
 				<Route path="/NetworkUpload" element={<AuthRoute />}>
 					<Route path="/NetworkUpload" element={<NetworkUploadPage />} />
