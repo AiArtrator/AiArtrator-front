@@ -8,6 +8,13 @@ export const inference = (url) => {
 	});
 };
 
+export const getNetworkList = () => {
+	return axios({
+		method: 'GET',
+		url: '/api/post/list',
+	});
+};
+
 export const getNetworkDetailById = (postId: String) => {
 	return axios({
 		method: 'GET',
