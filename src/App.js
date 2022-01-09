@@ -6,8 +6,10 @@ import NetworkListPage from './page/NetworkListPage/Index';
 import LoginPage from './page/LoginPage/Index';
 import NavBar from './components/NavBar/Index';
 import OwnNetworksPage from './page/OwnNetworksPage/Index';
+import MyNetworksPage from './page/MyNetworksPage/Index';
 import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
+import UploadNetworksPage from './page/UploadNetworksPage/Index';
 
 function App() {
 	return (
@@ -20,6 +22,12 @@ function App() {
 				<Route path="/Signup" element={<SignupPage />} />
 				<Route path="/OwnNetworks" element={<AuthRoute />}>
 					<Route path="/OwnNetworks" element={<OwnNetworksPage />} />
+				</Route>
+				<Route path="/MyNetworks" element={<AuthRoute />}>
+					<Route path="/MyNetworks" element={<MyNetworksPage />} />
+				</Route>
+				<Route path="/UploadNetworks" element={<AuthRoute />}>
+					<Route path="/UploadNetworks" element={<UploadNetworksPage />} />
 				</Route>
 				<Route path="/MyInfo" element={<AuthRoute />}>
 					<Route path="/MyInfo" element={<MyInfoPage />} />
