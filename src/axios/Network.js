@@ -7,3 +7,23 @@ export const inference = (url) => {
 		responseType: 'arraybuffer',
 	});
 };
+
+export const getNetworkDetailById = (postId: String) => {
+	return axios({
+		method: 'GET',
+		url: `/api/post/${postId}`,
+	});
+};
+
+export const putNetworkDetail = (
+	accesstoken: String,
+	postId: String,
+	formData: Object
+) => {
+	return axios({
+		method: 'PUT',
+		url: `/api/post/${postId}`,
+		headers: { accesstoken },
+		data: formData,
+	});
+};

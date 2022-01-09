@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { inference } from '../../axios/Network';
+import { DEFAULT_INFERENCE } from '../../constants';
 
 const Index = () => {
 	const [imgSrc, setImgSrc] = useState('');
@@ -19,17 +20,15 @@ const Index = () => {
 	};
 
 	useEffect(() => {
-		setImgSrc(getInfer('/logo512.png'));
+		setImgSrc(getInfer(DEFAULT_INFERENCE));
 	}, []);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		console.log(canvas);
 		const ctx = canvas?.getContext('2d');
 		const img = new Image();
 		img.onload = () => {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			console.log(canvas, canvas.width, canvas.height);
 			ctx.fillStyle = '#ffffff';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			const scale = Math.min(
@@ -46,7 +45,7 @@ const Index = () => {
 	return (
 		<InferenceForm>
 			<canvas ref={canvasRef} height="300px" />
-			<div className="inferenceButton" onClick={() => getInfer('/logo512.png')}>
+			<div className="inferenceButton" onClick={() => getInfer('/logo192.png')}>
 				Inference
 			</div>
 		</InferenceForm>
@@ -73,5 +72,6 @@ const InferenceForm = styled.div`
 		padding: 10px;
 		border: 3px solid;
 		align-self: center;
+		cursor: pointer;
 	}
 `;

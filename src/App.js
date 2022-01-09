@@ -26,7 +26,7 @@ function App() {
 					<Route path="/MyInfo" element={<MyInfoPage />} />
 				</Route>
 				{/* <Route path="/NetworkUpload" element={<AuthRoute />}> */}
-				<Route path="/NetworkUpload" element={<NetworkUploadPage />} />
+				<Route path="/NetworkUpload/:postId" element={<NetworkUploadPage />} />
 				{/* </Route> */}
 			</Routes>
 		</div>

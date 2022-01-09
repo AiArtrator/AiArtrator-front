@@ -1,16 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { fetchNetworkDetail, setNetworkDetail } from '../../reducers/network';
 import { Input } from '../Login';
+import imageCompression from 'browser-image-compression';
+import { DEFAULT_THUMBNAIL } from '../../constants';
+import { putNetworkDetail } from '../../axios/Network';
+import { useParams } from 'react-router-dom';
 
 // TODO: check user is network owner, else block/redirect
-// TODO: connet with backend
 
 const Index = () => {
+	const dispatch = useDispatch();
+	const accesstoken = useSelector((state) => state.user.accesstoken);
+	const networkDetail = useSelector((state) => state.network.detail);
+	const { postId } = useParams();
+
+	const [imgSrc, setImgSrc] = React.useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
 		title: '',
 		desc: '',
 		tags: '',
 	});
+
+	useEffect(() => {
+		dispatch(fetchNetworkDetail(postId));
+	}, []);
+
+	useEffect(() => {
+		if (networkDetail) {
+			setDetailInfo({
+				title: networkDetail.title,
+				desc: networkDetail.description,
+				tags: networkDetail.tags,
+			});
+		}
+	}, [networkDetail]);
 
 	const handleChange = (e) => {
 		const className = e.target.className;
@@ -26,11 +51,79 @@ const Index = () => {
 		}
 	};
 
+	const loadProfileImg = async (_imgFile) => {
+		try {
+			const reader = new FileReader();
+			reader.onloadend = () => {
+				const base64 = reader.result;
+				if (base64) {
+					setImgSrc(base64.toString());
+				}
+			};
+			if (_imgFile) {
+				const imgFile = await imageCompression(_imgFile, {
+					maxSizeMB: 0.5,
+					maxWidthOrHeight: 1180,
+					useWebWorker: true,
+				});
+				console.log(imgFile.size, _imgFile.size);
+				reader.readAsDataURL(imgFile);
+			}
+			console.log(imgSrc);
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
+	const imgSrcToFile = async (_imgSrc, fileName) => {
+		const res: Response = await fetch(_imgSrc);
+		const blob: Blob = await res.blob();
+		return new File([blob], fileName, { type: 'image/png' });
+	};
+
+	const createFormData = async () => {
+		const formData = new FormData();
+		if (imgSrc && imgSrc !== DEFAULT_THUMBNAIL) {
+			const date = new Date();
+			const file = await imgSrcToFile(
+				imgSrc,
+				`thumbnail-${date.toDateString().replaceAll(' ', '-')}.png`
+			);
+			formData.append('thumbnail', file);
+		}
+		formData.append('title', detailInfo.title);
+		formData.append('description', detailInfo.desc);
+		formData.append('tags', detailInfo.tags);
+		return formData;
+	};
+
+	const saveNetworkDetail = async () => {
+		try {
+			const formData = await createFormData();
+			const res = await putNetworkDetail(accesstoken, postId, formData);
+			console.log(res);
+			alert('Saved!');
+			dispatch(setNetworkDetail(detailInfo));
+		} catch (err) {
+			console.error(err);
+			alert(err.response.data.message);
+		}
+	};
+
 	return (
 		<NetworkDetailForm>
 			<ImgContainer>
-				<img src="/logo512.png" alt="thumbnail" />
-				<div className="uploadButton">upload</div>
+				<img src={imgSrc} alt="thumbnail" />
+
+				<div className="uploadButton">
+					<label htmlFor="uploadButton">Upload</label>
+					<input
+						type="file"
+						id="uploadButton"
+						accept=".jpeg, .jpg, .png"
+						onChange={(e) => loadProfileImg((e?.target?.files)[0])}
+					/>
+				</div>
 			</ImgContainer>
 			<TextContainer>
 				<DetailInput>
@@ -62,6 +155,9 @@ const Index = () => {
 						rows="2"
 					/>
 				</DetailInput>
+				<div className="saveButton" onClick={saveNetworkDetail}>
+					save
+				</div>
 			</TextContainer>
 		</NetworkDetailForm>
 	);
@@ -98,6 +194,10 @@ const ImgContainer = styled.div`
 		padding: 10px;
 		border: 3px solid;
 		align-self: center;
+		cursor: pointer;
+		input[type='file'] {
+			display: none;
+		}
 	}
 `;
 
@@ -106,6 +206,13 @@ const TextContainer = styled.div`
 	height: 100%;
 	width: 50%;
 	flex-direction: column;
+	.saveButton {
+		height: max-content;
+		padding: 10px;
+		border: 3px solid;
+		align-self: center;
+		cursor: pointer;
+	}
 `;
 
 const DetailInput = styled(Input)`
