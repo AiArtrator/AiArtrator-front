@@ -9,7 +9,6 @@ const sampleNetworks = {
 	sampleImg: 'https://via.placeholder.com/160',
 };
 const Index = () => {
-	// API완성되고 axios 사용시
 	const [networks, setNetworks] = useState(null);
 	const [loading, setLoading] = useState(false);
 

@@ -15,12 +15,12 @@ const Index = ({ network }) => {
 				</div>
 			)}
 			<div className="contents">
-				<h2>
+				<h3>
 					<a>
 						{/* <a href={url} target="_blank" rel="noopener noreferrer"> */}
 						{title}
 					</a>
-				</h2>
+				</h3>
 				<p>{description}</p>
 			</div>
 		</div>
