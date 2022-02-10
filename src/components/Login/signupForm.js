@@ -2,21 +2,23 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { signup } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
-import { MainLogo } from '../Logo';
-import { Input, SubmitButton } from '.';
+// import { MainLogo } from '../Logo';
+// import { Input, SubmitButton } from '.';
+import './signup-form.scss';
 
 const Index = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userState = useSelector((state) => state.user);
 	const [info, setInfo] = useState({
-		loginId: '',
+		email: '',
 		password: '',
 		passwordCheck: '',
-		email: '',
+		nickname: '',
+		phone: '',
 		organization: '',
 	});
 
@@ -52,78 +54,87 @@ const Index = () => {
 			setInfo({ ...info, passwordCheck: value });
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
-		} else if (className === 'loginId') {
-			setInfo({ ...info, loginId: value });
+		} else if (className === 'nickname') {
+			setInfo({ ...info, nickname: value });
+		} else if (className === 'phone') {
+			setInfo({ ...info, phone: value });
+			// }else if (className === 'loginId') {
+			// 	setInfo({ ...info, loginId: value });
 		} else {
 			console.err('[-] error from SignupForm');
 		}
 	};
 
 	return (
-		<SignupForm>
-			<div className="logoContainer">
-				<MainLogo />
+		<div className="signup-form">
+			<div className="form">
+				<h3>P O G</h3>
+
+				<div>
+					<div className="inputTitle">이메일</div>
+					<input
+						className="email"
+						type="email"
+						placeholder="이메일을 입력해주세요. "
+						value={info.email}
+						onChange={handleChange}
+					/>
+				</div>
+				<div>
+					<div className="inputTitle">비밀번호</div>
+					<input
+						className="password"
+						type="password"
+						placeholder="비밀먼호를 입력해주세요. "
+						value={info.password}
+						onChange={handleChange}
+					/>
+				</div>
+				<div>
+					<div className="inputTitle">비밀번호 확인</div>
+					<input
+						className="passwordCheck"
+						type="password"
+						placeholder="비밀먼호를 한번 더 입력해주세요. "
+						value={info.passwordCheck}
+						onChange={handleChange}
+					/>
+				</div>
+				<div>
+					<div className="inputTitle">닉네임</div>
+					<input
+						className="nickname"
+						type="nickname"
+						placeholder="닉네임을 입력해주세요. "
+						value={info.nickname}
+						onChange={handleChange}
+					/>
+				</div>
+				<div>
+					<div className="inputTitle">전화번호</div>
+					<input
+						className="phone"
+						type="phonenumber"
+						placeholder="휴대폰 번호를 입력해주세요. "
+						value={info.phone}
+						onChange={handleChange}
+					/>
+				</div>
+				<div>
+					<div className="inputTitle">소속기관 (선택)</div>
+					<input
+						className="organization"
+						type="text"
+						placeholder="소속 기관을 입력해주세요. "
+						value={info.organization}
+						onChange={handleChange}
+					/>
+				</div>
+
+				<button onClick={signupSubmit}>회원가입</button>
 			</div>
-			<Input>
-				<div className="inputTitle">아이디</div>
-				<input
-					className="loginId"
-					type="text"
-					value={info.loginId}
-					onChange={handleChange}
-				/>
-			</Input>
-			<Input>
-				<div className="inputTitle">비밀번호</div>
-				<input
-					className="password"
-					type="password"
-					value={info.password}
-					onChange={handleChange}
-				/>
-			</Input>
-			<Input>
-				<div className="inputTitle">비밀번호 확인</div>
-				<input
-					className="passwordCheck"
-					type="password"
-					value={info.passwordCheck}
-					onChange={handleChange}
-				/>
-			</Input>
-			<Input>
-				<div className="inputTitle">이메일</div>
-				<input
-					className="email"
-					type="email"
-					value={info.email}
-					onChange={handleChange}
-				/>
-			</Input>
-			<Input>
-				<div className="inputTitle">소속기관</div>
-				<input
-					className="organization"
-					type="text"
-					value={info.organization}
-					onChange={handleChange}
-				/>
-			</Input>
-			<div className="submitButtonContainer" onClick={signupSubmit}>
-				<SubmitButton>회원가입</SubmitButton>
-			</div>
-		</SignupForm>
+		</div>
 	);
 };
 
 export default Index;
-
-const SignupForm = styled.div`
-	position: relative;
-	.logoContainer {
-		margin-bottom: 50px;
-	}
-	.submitButtonContainer {
-		margin-top: 30px;
-	}
-`;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import './auth-login.scss';
+import './login-form.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../../axios/User';
 import { setAccsstoken, setUser } from '../../../reducers/user';
@@ -40,7 +40,7 @@ const Index = () => {
 	};
 
 	return (
-		<div className="login">
+		<div className="login-form">
 			<div className="background">
 				<div className="shape"></div>
 			</div>
@@ -72,14 +72,14 @@ const Index = () => {
 					<button>1초만에 회원가입</button>
 				</Link>
 
-				<div className="social">
+				{/* <div className="social">
 					<div className="go">
 						<i className="fab fa-google"></i> Kakaotalk
 					</div>
 					<div className="fb">
 						<i className="fab fa-facebook"></i> Google
 					</div>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);
