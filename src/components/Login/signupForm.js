@@ -18,18 +18,32 @@ const Index = () => {
 		phone: '',
 		organization: '',
 	});
-	const [checkError, setCheckError] = useState('');
+	const [isMatchPassword, setIsMatchPassword] = useState(true);
 
 	const checkForm = () => {
 		if (info.password !== info.passwordCheck) return false;
 		return true;
 	};
 
+	const checkMatchPassword = () => {
+		let timer;
+		if (timer) {
+			clearTimeout(timer);
+		}
+		timer = setTimeout(() => {
+			if (info.password === info.passwordCheck) {
+				setIsMatchPassword({ isMatchPassword: true });
+			} else {
+				setIsMatchPassword({ isMatchPassword: false });
+				console.log(`비밀번호가 다릅니다. `);
+			}
+		}, 500);
+	};
+
 	const signupSubmit = async () => {
 		if (!checkForm()) {
-			setCheckError('비밀번호가 일치하지 않습니다.');
+			alert('비밀번호가 일치하지 않습니다.');
 		} else {
-			setCheckError('');
 			try {
 				const res = await signup(info);
 				console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
@@ -62,6 +76,7 @@ const Index = () => {
 			setInfo({ ...info, password: value });
 		} else if (className === 'passwordCheck') {
 			setInfo({ ...info, passwordCheck: value });
+			checkMatchPassword();
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else if (className === 'nickname') {
@@ -107,7 +122,15 @@ const Index = () => {
 						value={info.passwordCheck}
 						onChange={handleChange}
 					/>
-					<span id="passwordCheckWrong">{checkError}</span>
+					{info.passwordCheck ? (
+						isMatchPassword ? (
+							<></>
+						) : (
+							<span style={{ color: 'red' }}>
+								비밀번호가 일치하지 않습니다.
+							</span>
+						)
+					) : null}
 				</div>
 				<div>
 					<label>닉네임</label>
