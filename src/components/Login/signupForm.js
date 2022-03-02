@@ -2,11 +2,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import styled from 'styled-components';
 import { signup } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
-// import { MainLogo } from '../Logo';
-// import { Input, SubmitButton } from '.';
 import './signup-form.scss';
 
 const Index = () => {
@@ -21,6 +18,7 @@ const Index = () => {
 		phone: '',
 		organization: '',
 	});
+	const [checkError, setCheckError] = useState('');
 
 	const checkForm = () => {
 		if (info.password !== info.passwordCheck) return false;
@@ -29,18 +27,30 @@ const Index = () => {
 
 	const signupSubmit = async () => {
 		if (!checkForm()) {
-			alert(`비밀번호가 일치하지 않습니다.`);
+			setCheckError('비밀번호가 일치하지 않습니다.');
+		} else {
+			setCheckError('');
+			try {
+				const res = await signup(info);
+				console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
+				dispatch(setUser(res.data.data.user));
+				dispatch(setAccsstoken(res.data.data.accesstoken));
+				console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+				navigate('/');
+			} catch (err) {
+				console.error(err);
+			}
 		}
-		try {
-			const res = await signup(info);
-			console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
-			dispatch(setUser(res.data.data.user));
-			dispatch(setAccsstoken(res.data.data.accesstoken));
-			console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
-			navigate('/');
-		} catch (err) {
-			console.error(err);
-		}
+		// try {
+		// 	const res = await signup(info);
+		// 	console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
+		// 	dispatch(setUser(res.data.data.user));
+		// 	dispatch(setAccsstoken(res.data.data.accesstoken));
+		// 	console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+		// 	navigate('/');
+		// } catch (err) {
+		// 	console.error(err);
+		// }
 	};
 
 	const handleChange = (e) => {
@@ -58,8 +68,6 @@ const Index = () => {
 			setInfo({ ...info, nickname: value });
 		} else if (className === 'phone') {
 			setInfo({ ...info, phone: value });
-			// }else if (className === 'loginId') {
-			// 	setInfo({ ...info, loginId: value });
 		} else {
 			console.err('[-] error from SignupForm');
 		}
@@ -71,7 +79,7 @@ const Index = () => {
 				<h3>P O G</h3>
 
 				<div>
-					<div className="inputTitle">이메일</div>
+					<label>이메일</label>
 					<input
 						className="email"
 						type="email"
@@ -81,7 +89,7 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<div className="inputTitle">비밀번호</div>
+					<label>비밀번호</label>
 					<input
 						className="password"
 						type="password"
@@ -91,7 +99,7 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<div className="inputTitle">비밀번호 확인</div>
+					<label>비밀번호 확인</label>
 					<input
 						className="passwordCheck"
 						type="password"
@@ -99,9 +107,10 @@ const Index = () => {
 						value={info.passwordCheck}
 						onChange={handleChange}
 					/>
+					<span id="passwordCheckWrong">{checkError}</span>
 				</div>
 				<div>
-					<div className="inputTitle">닉네임</div>
+					<label>닉네임</label>
 					<input
 						className="nickname"
 						type="nickname"
@@ -111,7 +120,7 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<div className="inputTitle">전화번호</div>
+					<label>전화번호</label>
 					<input
 						className="phone"
 						type="phonenumber"
@@ -121,7 +130,7 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<div className="inputTitle">소속기관 (선택)</div>
+					<label>소속기관 (선택)</label>
 					<input
 						className="organization"
 						type="text"

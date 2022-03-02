@@ -12,7 +12,7 @@ export const Logout = () => {
 	return axios(
 		{
 			method: 'POST',
-			url: '/api/oauth/logout/',
+			url: '/api/auth/logout/',
 		},
 		{ withCredentials: true }
 	);
