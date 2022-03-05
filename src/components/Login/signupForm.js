@@ -52,7 +52,23 @@ const Index = () => {
 				console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
 				navigate('/');
 			} catch (err) {
-				console.error(err);
+				if (err.status === 400) {
+					alert(err.message);
+					console.error(err.message);
+				} else if (err.status === 409) {
+					alert(err.message);
+					console.error(err.message);
+				} else if (err.status === 412) {
+					alert(err.message);
+					console.error(err.message);
+				} else if (err.status === 500) {
+					alert(err.message);
+					console.error(err.message);
+				} else {
+					setError(error.message);
+					console.error(err.message);
+					console.error(err);
+				}
 			}
 		}
 		// try {
@@ -94,7 +110,8 @@ const Index = () => {
 				<h3>P O G</h3>
 
 				<div>
-					<label>이메일</label>
+					<span>이메일</span>
+					<span style={{ color: 'red' }}> *</span>
 					<input
 						className="email"
 						type="email"
@@ -104,7 +121,8 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<label>비밀번호</label>
+					<span>비밀번호</span>
+					<span style={{ color: 'red' }}> *</span>
 					<input
 						className="password"
 						type="password"
@@ -114,7 +132,8 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<label>비밀번호 확인</label>
+					<span>비밀번호 확인</span>
+					<span style={{ color: 'red' }}> *</span>
 					<input
 						className="passwordCheck"
 						type="password"
@@ -124,16 +143,15 @@ const Index = () => {
 					/>
 					{info.passwordCheck ? (
 						isMatchPassword ? (
-							<></>
+							<div></div>
 						) : (
-							<span style={{ color: 'red' }}>
-								비밀번호가 일치하지 않습니다.
-							</span>
+							<div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>
 						)
 					) : null}
 				</div>
 				<div>
-					<label>닉네임</label>
+					<span>닉네임</span>
+					<span style={{ color: 'red' }}> *</span>
 					<input
 						className="nickname"
 						type="nickname"
@@ -143,7 +161,8 @@ const Index = () => {
 					/>
 				</div>
 				<div>
-					<label>전화번호</label>
+					<span>전화번호</span>
+					<span style={{ color: 'red' }}> *</span>
 					<input
 						className="phone"
 						type="phonenumber"
@@ -164,6 +183,7 @@ const Index = () => {
 				</div>
 
 				<button onClick={signupSubmit}>회원가입</button>
+				<span id="error">{error}</span>
 			</div>
 		</div>
 	);
