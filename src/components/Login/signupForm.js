@@ -18,32 +18,36 @@ const Index = () => {
 		phone: '',
 		organization: '',
 	});
-	const [isMatchPassword, setIsMatchPassword] = useState(true);
+	//const [isMatchPassword, setIsMatchPassword] = useState(true);
+	const [checkError, setCheckError] = useState('');
 
 	const checkForm = () => {
 		if (info.password !== info.passwordCheck) return false;
 		return true;
 	};
 
-	const checkMatchPassword = () => {
-		let timer;
-		if (timer) {
-			clearTimeout(timer);
-		}
-		timer = setTimeout(() => {
-			if (info.password === info.passwordCheck) {
-				setIsMatchPassword({ isMatchPassword: true });
-			} else {
-				setIsMatchPassword({ isMatchPassword: false });
-				console.log(`비밀번호가 다릅니다. `);
-			}
-		}, 500);
-	};
+	// const checkMatchPassword = () => {
+	// 	let timer;
+	// 	if (timer) {
+	// 		clearTimeout(timer);
+	// 	}
+	// 	timer = setTimeout(() => {
+	// 		if (info.password === info.passwordCheck) {
+	// 			setIsMatchPassword({ isMatchPassword: true });
+	// 			setCheckError('');
+	// 		} else {
+	// 			setIsMatchPassword({ isMatchPassword: false });
+	// 			setCheckError('비밀번호가 일치하지 않습니다.');
+	// 		}
+	// 	}, 200);
+	// };
 
 	const signupSubmit = async () => {
 		if (!checkForm()) {
 			alert('비밀번호가 일치하지 않습니다.');
+			setCheckError('비밀번호가 일치하지 않습니다.');
 		} else {
+			setCheckError('');
 			try {
 				const res = await signup(info);
 				console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
@@ -65,22 +69,11 @@ const Index = () => {
 					alert(err.message);
 					console.error(err.message);
 				} else {
-					setError(error.message);
 					console.error(err.message);
 					console.error(err);
 				}
 			}
 		}
-		// try {
-		// 	const res = await signup(info);
-		// 	console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
-		// 	dispatch(setUser(res.data.data.user));
-		// 	dispatch(setAccsstoken(res.data.data.accesstoken));
-		// 	console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
-		// 	navigate('/');
-		// } catch (err) {
-		// 	console.error(err);
-		// }
 	};
 
 	const handleChange = (e) => {
@@ -92,7 +85,7 @@ const Index = () => {
 			setInfo({ ...info, password: value });
 		} else if (className === 'passwordCheck') {
 			setInfo({ ...info, passwordCheck: value });
-			checkMatchPassword();
+			//checkMatchPassword();
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else if (className === 'nickname') {
@@ -141,13 +134,18 @@ const Index = () => {
 						value={info.passwordCheck}
 						onChange={handleChange}
 					/>
-					{info.passwordCheck ? (
+					<div id="checkMess" style={{ color: 'red' }}>
+						{checkError}
+					</div>
+					{/* {info.passwordCheck ? (
 						isMatchPassword ? (
-							<div></div>
+							<div>{checkError}</div>
 						) : (
-							<div style={{ color: 'red' }}>비밀번호가 일치하지 않습니다.</div>
+							<div id="checkMess" style={{ color: 'red' }}>
+								{checkError}
+							</div>
 						)
-					) : null}
+					) : null} */}
 				</div>
 				<div>
 					<span>닉네임</span>
@@ -183,7 +181,6 @@ const Index = () => {
 				</div>
 
 				<button onClick={signupSubmit}>회원가입</button>
-				<span id="error">{error}</span>
 			</div>
 		</div>
 	);
