@@ -1,40 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { fetchNetworkDetail, setNetworkDetail } from '../../reducers/network';
+import { setNetworkDetail } from '../../reducers/network';
 import imageCompression from 'browser-image-compression';
 import { DEFAULT_THUMBNAIL } from '../../constants';
-import { postNetworkDetail, putNetworkDetail } from '../../axios/Network';
-import { useParams } from 'react-router-dom';
+import { postNetworkDetail } from '../../axios/Network';
 
-// TODO: check user is network owner, else block/redirect
-
-const Index = ({ newNetwork }) => {
+const Index = () => {
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
-	const userId = useSelector((state) => state.user.user.id);
 	const networkDetail = useSelector((state) => state.network.detail);
-	const { postId } = useParams();
 
 	const [imgSrc, setImgSrc] = React.useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
 		title: '',
 		summary: '',
 		ver: '',
-		tagList: ['t1', 'sdfsdf1', 'sadfasd'],
+		tagList: [],
 		desc: '',
 	});
-
-	useEffect(() => {
-		console.log(`newNetwork:${newNetwork}, postId:${postId}`);
-		if (!newNetwork) dispatch(fetchNetworkDetail(postId));
-	}, []);
-
-	// ! TEST
-	useEffect(() => {
-		console.log(detailInfo.tagList);
-	}, [detailInfo]);
 
 	useEffect(() => {
 		if (networkDetail) {
@@ -68,7 +54,7 @@ const Index = ({ newNetwork }) => {
 		if (e.code === 'Enter') {
 			const tmpTagList = detailInfo.tagList;
 			const index = tmpTagList.indexOf(e.target.value);
-			if (index === -1) {
+			if (index === -1 && !e.target.value.includes(',')) {
 				tmpTagList.push(e.target.value);
 				setDetailInfo({ ...detailInfo, tagList: tmpTagList });
 			}
@@ -78,7 +64,7 @@ const Index = ({ newNetwork }) => {
 
 	const deleteTag = (e) => {
 		const tmpTagList = detailInfo.tagList;
-		const index = tmpTagList.indexOf(e.target.getAttribute('tagName'));
+		const index = tmpTagList.indexOf(e.target.getAttribute('tagname'));
 		if (index > -1) {
 			tmpTagList.splice(index, 1);
 		}
@@ -100,10 +86,8 @@ const Index = ({ newNetwork }) => {
 					maxWidthOrHeight: 1180,
 					useWebWorker: true,
 				});
-				console.log(imgFile.size, _imgFile.size);
 				reader.readAsDataURL(imgFile);
 			}
-			console.log(imgSrc);
 		} catch (err) {
 			console.error(err);
 		}
@@ -125,26 +109,27 @@ const Index = ({ newNetwork }) => {
 			);
 			formData.append('image_urls', file);
 		}
-		formData.append('userId', userId);
 		formData.append('title', detailInfo.title);
 		formData.append('summary', detailInfo.summary);
 		formData.append('ver', detailInfo.ver);
-		formData.append('tags', detailInfo.tags);
+		let tagString = '';
+		detailInfo.tagList.forEach((tag) => {
+			tagString += tag + ',';
+		});
+		formData.append('tagList', tagString.length ? tagString.slice(0, -1) : '');
 		formData.append('description', detailInfo.desc);
 
 		return formData;
 	};
 
-	// TODO: fix api
 	const saveNetworkDetail = async () => {
 		try {
 			const formData = await createFormData();
-			const res = newNetwork
-				? await postNetworkDetail(accesstoken, formData)
-				: await putNetworkDetail(accesstoken, postId, formData);
+			const res = await postNetworkDetail(accesstoken, formData);
 			console.log(res);
 			alert('Saved!');
 			dispatch(setNetworkDetail(detailInfo));
+			navigate('/NetworkDetail'); // TODO:
 		} catch (err) {
 			console.error(err);
 			alert(err.response.data.message);
@@ -224,7 +209,7 @@ const Index = ({ newNetwork }) => {
 					{detailInfo.tagList.map((tagName) => (
 						<div className="tag" key={tagName}>
 							{tagName}{' '}
-							<span onClick={deleteTag} tagName={tagName}>
+							<span onClick={deleteTag} tagname={tagName}>
 								✖
 							</span>
 						</div>
@@ -236,10 +221,6 @@ const Index = ({ newNetwork }) => {
 			</div>
 		</NetworkDetailForm>
 	);
-};
-
-Index.propTypes = {
-	newNetwork: PropTypes.bool,
 };
 
 export default Index;
