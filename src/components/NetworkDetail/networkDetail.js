@@ -14,8 +14,10 @@ const Index = () => {
 	const [imgSrc] = React.useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
 		title: '',
-		summary: '',
+		writer: '',
+		updatedAt: '',
 		ver: '',
+		summary: '',
 		tagList: ['t1', 'sdfsdf1', 'sadfasd'],
 		desc: '',
 	});
@@ -24,87 +26,71 @@ const Index = () => {
 		dispatch(fetchNetworkDetail(postId));
 	}, []);
 
-	// ! TEST
-	useEffect(() => {
-		console.log(detailInfo.tagList);
-	}, [detailInfo]);
-
 	useEffect(() => {
 		if (networkDetail) {
 			setDetailInfo({
 				title: networkDetail.title,
-				summary: networkDetail.summary,
+				writer: networkDetail.writer.nickname,
+				updatedAt: networkDetail.updatedAt,
 				ver: networkDetail.ver,
+				summary: networkDetail.summary,
 				tagList: networkDetail.tagList,
 				desc: networkDetail.description,
 			});
 		}
+		console.log(detailInfo);
 	}, [networkDetail]);
 
 	return (
-		<NetworkDetailForm>
-			<ImgContainer>
-				<img src={imgSrc} alt="thumbnail" />
-			</ImgContainer>
+		<NetworkDetail>
+			<img src={imgSrc} alt="thumbnail" />
 			<TextContainer>
-				<DetailInput>
-					<div className="inputTitle">Title</div>
-					<input
-						className="title"
-						type="text"
-						value={detailInfo.title}
-						placeholder="max 50 chars"
-						maxLength="50" // TODO: fix maxLength
-					/>
-				</DetailInput>
-				<DetailInput>
-					<div className="inputTitle">Summary</div>
-					<input
+				<DetailText>
+					<div className="textTitle">{detailInfo.title}</div>
+				</DetailText>
+				<DetailText>
+					<div className="textTitle">Summary</div>
+					{/* <input
 						className="summary"
 						type="text"
 						value={detailInfo.summary}
 						placeholder="max 100 chars"
 						maxLength="100"
-					/>
-				</DetailInput>
-				<DetailInput>
-					<div className="inputTitle">Version</div>
-					<input
+					/> */}
+				</DetailText>
+				<DetailText>
+					<div className="textTitle">Version</div>
+					{/* <input
 						className="ver"
 						type="text"
 						value={detailInfo.ver}
 						placeholder="max 20 chars"
 						maxLength="20" // TODO: fix maxLength
-					/>
-				</DetailInput>
+					/> */}
+				</DetailText>
 			</TextContainer>
-			<DetailInput>
-				<div className="inputTitle">Description</div>
-				<textarea
+			<DetailText>
+				<div className="textTitle">Description</div>
+				{/* <textarea
 					className="desc"
 					type="text"
 					value={detailInfo.desc}
 					placeholder="max 3000 chars"
 					maxLength="3000" // TODO: fix maxLength
 					rows="5"
-				/>
-			</DetailInput>
+				/> */}
+			</DetailText>
 			<TagListContainer>
 				<div className="tagListTitle">Add Tag</div>
-				<div className="tagList">
-					<input
-						className="tag tagInput"
-						placeholder="#Input_tag"
-						maxLength="15"
-					/>
+				{/* <div className="tagList">
 					{detailInfo.tagList.map((tagName) => (
 						<div className="tag" key={tagName}>
 							{tagName}{' '}
 						</div>
 					))}
-				</div>
+				</div> */}
 			</TagListContainer>
-		</NetworkDetailForm>
+		</NetworkDetail>
 	);
 };
 
@@ -114,7 +100,7 @@ Index.propTypes = {
 
 export default Index;
 
-const NetworkDetailForm = styled.div`
+const NetworkDetail = styled.div`
 	position: relative;
 	display: grid;
 	grid-template-columns: 1fr 2fr;
@@ -179,13 +165,13 @@ const TextContainer = styled.div`
 	flex-direction: column;
 `;
 
-const DetailInput = styled.div`
+const DetailText = styled.div`
 	flex-direction: column;
 	position: relative;
 	display: flex;
 	margin: 15px 0px;
 	grid-column: 1 / 3;
-	.inputTitle {
+	.textTitle {
 		font-size: 16px;
 		width: 200px;
 		margin: 7px;

@@ -34,7 +34,7 @@ function App() {
 				<Route path="/NetworkUpload" element={<AuthRoute />}>
 					<Route path="/NetworkUpload" element={<NetworkUploadPage />} />
 				</Route>
-				<Route path="/NetworkDetail" element={<NetworkDetailPage />} />
+				<Route path="/NetworkDetail/:postId" element={<NetworkDetailPage />} />
 				<Route path="/NetworkUpdate/:postId" element={<AuthRoute />}>
 					<Route
 						path="/NetworkUpdate/:postId"
