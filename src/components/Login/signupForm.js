@@ -18,62 +18,84 @@ const Index = () => {
 		phone: '',
 		organization: '',
 	});
-	//const [isMatchPassword, setIsMatchPassword] = useState(true);
+	const [checkPassword, setCheckPassword] = useState('');
 	const [checkError, setCheckError] = useState('');
+	const [checkDupl, setCheckDupl] = useState('');
 
 	const checkForm = () => {
 		if (info.password !== info.passwordCheck) return false;
 		return true;
 	};
 
-	// const checkMatchPassword = () => {
-	// 	let timer;
-	// 	if (timer) {
-	// 		clearTimeout(timer);
-	// 	}
-	// 	timer = setTimeout(() => {
-	// 		if (info.password === info.passwordCheck) {
-	// 			setIsMatchPassword({ isMatchPassword: true });
-	// 			setCheckError('');
-	// 		} else {
-	// 			setIsMatchPassword({ isMatchPassword: false });
-	// 			setCheckError('비밀번호가 일치하지 않습니다.');
-	// 		}
-	// 	}, 200);
-	// };
-
 	const signupSubmit = async () => {
 		if (!checkForm()) {
-			alert('비밀번호가 일치하지 않습니다.');
-			setCheckError('비밀번호가 일치하지 않습니다.');
+			setCheckPassword('  비밀번호가 일치하지 않습니다.');
 		} else {
-			setCheckError('');
-			try {
-				const res = await signup(info);
-				console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
-				dispatch(setUser(res.data.data.user));
-				dispatch(setAccsstoken(res.data.data.accesstoken));
-				console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
-				navigate('/');
-			} catch (err) {
-				if (err.status === 400) {
-					alert(err.message);
-					console.error(err.message);
-				} else if (err.status === 409) {
-					alert(err.message);
-					console.error(err.message);
-				} else if (err.status === 412) {
-					alert(err.message);
-					console.error(err.message);
-				} else if (err.status === 500) {
-					alert(err.message);
-					console.error(err.message);
-				} else {
-					console.error(err.message);
-					console.error(err);
-				}
-			}
+			setCheckPassword('');
 		}
+		// try {
+		// 	const res = await signup(info);
+		// 	console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
+		// 	dispatch(setUser(res.data.data.user));
+		// 	dispatch(setAccsstoken(res.data.data.accesstoken));
+		// 	console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+		// 	navigate('/');
+		// } catch (err) {
+		// 	if (err.status === 400) {
+		// 		alert(err.message);
+		// 		setCheckError(res.message);
+		// 		console.error(err.message);
+		// 	} else if (err.status === 409) {
+		// 		alert(err.message);
+		// 		console.error(err.message);
+		// 		setCheckDupl(err.message);
+		// 	} else if (err.status === 412) {
+		// 		alert(err.message);
+		// 		console.error(err.message);
+		// 		setCheckPassword('  패스워드는 최소 6자리의 문자열이어야 합니다.');
+		// 	} else if (err.status === 500) {
+		// 		alert(err.message);
+		// 		console.error(err.message);
+		// 		setCheckError(' 서버 오류입니다.');
+		// 	} else {
+		// 		console.error(err.message);
+		// 		console.error(err);
+		// 		setCheckError('');
+		// 		setCheckDupl('');
+		// 	}
+		// }
+
+		await signup(info)
+			.then((res) => {
+				if (res.status === 200) {
+					console.log(
+						`[+] signup - res data: ${JSON.stringify(res.data.data)}`
+					);
+					dispatch(setUser(res.data.data.user));
+					dispatch(setAccsstoken(res.data.data.accesstoken));
+					console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+					navigate('/');
+				} else if (res.status === 400) {
+					setCheckError(res.message);
+					console.log(res.message);
+				} else if (res.status === 409) {
+					alert(res.message);
+					console.error(res.message);
+					setCheckDupl(res.message);
+				} else if (res.status === 412) {
+					alert(res.message);
+					console.error(res.message);
+					setCheckPassword('  패스워드는 최소 6자리의 문자열이어야 합니다.');
+				} else if (res.status === 500) {
+					alert(res.message);
+					console.log(res.message);
+					setCheckError(' 서버 오류입니다.');
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				console.log(err.code, err.message);
+			});
 	};
 
 	const handleChange = (e) => {
@@ -85,7 +107,6 @@ const Index = () => {
 			setInfo({ ...info, password: value });
 		} else if (className === 'passwordCheck') {
 			setInfo({ ...info, passwordCheck: value });
-			//checkMatchPassword();
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else if (className === 'nickname') {
@@ -103,7 +124,7 @@ const Index = () => {
 				<h3>P O G</h3>
 
 				<div>
-					<span>이메일</span>
+					<span className="label">이메일</span>
 					<span style={{ color: 'red' }}> *</span>
 					<input
 						className="email"
@@ -134,18 +155,9 @@ const Index = () => {
 						value={info.passwordCheck}
 						onChange={handleChange}
 					/>
-					<div id="checkMess" style={{ color: 'red' }}>
-						{checkError}
+					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+						{checkPassword}
 					</div>
-					{/* {info.passwordCheck ? (
-						isMatchPassword ? (
-							<div>{checkError}</div>
-						) : (
-							<div id="checkMess" style={{ color: 'red' }}>
-								{checkError}
-							</div>
-						)
-					) : null} */}
 				</div>
 				<div>
 					<span>닉네임</span>
@@ -179,7 +191,12 @@ const Index = () => {
 						onChange={handleChange}
 					/>
 				</div>
-
+				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					{checkError}
+				</div>
+				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					{checkDupl}
+				</div>
 				<button onClick={signupSubmit}>회원가입</button>
 			</div>
 		</div>

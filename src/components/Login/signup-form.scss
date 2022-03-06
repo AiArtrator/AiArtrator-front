@@ -9,12 +9,12 @@
 	font-size: 0.7rem;
 
 	.form {
-		height: 50rem;
+		height: 47rem;
 		width: 23rem;
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
 		transform: translate(-50%, -50%);
-		top: 4rem;
+		top: 5rem;
 		left: 50%;
 		border-radius: 10px;
 		// backdrop-filter: blur(12px);
@@ -35,6 +35,9 @@
 		text-align: center;
 		padding-bottom: 2rem;
 	}
+	.errorMessage {
+		margin-bottom: 1.5rem;
+	}
 
 	label {
 		display: block;
@@ -49,7 +52,8 @@
 		border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 		border-radius: 3px;
 		padding: 0 10px;
-		margin-bottom: 1.5rem;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 		font-weight: 500;
 	}
 	::placeholder {
@@ -72,5 +76,6 @@
 	button:hover {
 		background-color: rgba(0, 0, 128, 1);
 		color: #eaf0fb;
+		margin-bottom: 0;
 	}
 }
