@@ -21,6 +21,7 @@ const Index = () => {
 	const [checkPassword, setCheckPassword] = useState('');
 	const [checkError, setCheckError] = useState('');
 	const [checkDupl, setCheckDupl] = useState('');
+	const [errorMessage, setErrorMessage] = useState('');
 
 	const checkForm = () => {
 		if (info.password !== info.passwordCheck) return false;
@@ -67,6 +68,8 @@ const Index = () => {
 
 		await signup(info)
 			.then((res) => {
+				setErrorMessage(res.message);
+				console.log(errorMessage);
 				if (res.status === 200) {
 					console.log(
 						`[+] signup - res data: ${JSON.stringify(res.data.data)}`
@@ -82,6 +85,7 @@ const Index = () => {
 					alert(res.message);
 					console.error(res.message);
 					setCheckDupl(res.message);
+					console.log(errorMessage);
 				} else if (res.status === 412) {
 					alert(res.message);
 					console.error(res.message);
@@ -190,6 +194,9 @@ const Index = () => {
 						value={info.organization}
 						onChange={handleChange}
 					/>
+				</div>
+				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					{errorMessage}
 				</div>
 				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 					{checkError}

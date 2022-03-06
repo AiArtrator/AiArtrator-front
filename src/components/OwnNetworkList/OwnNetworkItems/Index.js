@@ -3,17 +3,17 @@ import React from 'react';
 import './own-network-items.scss';
 
 const Index = ({ network }) => {
-	const { title, description, sampleImg } = network;
+	const { thumbnail, title, summary } = network;
+
 	return (
 		<div className="own-items-block">
-			{sampleImg && (
-				<div className="thumbnail">
-					<a>
-						{/* <a href={url} target="_blank" rel="noopener noreferrer"> */}
-						<img src={sampleImg} alt="thumbnail" />
-					</a>
-				</div>
-			)}
+			<div className="thumbnail">
+				<a>
+					{/* <a href={thumbnail} target="_blank" rel="noopener noreferrer" /> */}
+					<img src={thumbnail} alt="thumbnail" />
+				</a>
+			</div>
+
 			<div className="contents">
 				<h3>
 					<a>
@@ -21,7 +21,7 @@ const Index = ({ network }) => {
 						{title}
 					</a>
 				</h3>
-				<p>{description}</p>
+				<p>{summary}</p>
 			</div>
 		</div>
 	);
