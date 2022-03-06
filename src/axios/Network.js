@@ -44,3 +44,12 @@ export const putNetworkDetail = (
 		data: formData,
 	});
 };
+
+export const ownNetworkList = (userId: String, accesstoken: String, data) => {
+	return axios({
+		method: 'GET',
+		url: `/api/user/${userId}/post/list`,
+		headers: { accesstoken },
+		data,
+	});
+};

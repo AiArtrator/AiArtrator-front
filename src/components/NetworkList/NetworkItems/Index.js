@@ -3,13 +3,12 @@ import React from 'react';
 import './network-items.scss';
 
 const Index = ({ network }) => {
-	const { thumbnail, title, summary } = network;
+	const { thumbnail, title, writer, summary } = network;
 
 	return (
 		<div className="items-block">
 			<div className="thumbnail">
 				<a>
-					{/* <a href={thumbnail} target="_blank" rel="noopener noreferrer" /> */}
 					<img src={thumbnail} alt="thumbnail" />
 				</a>
 			</div>
@@ -21,7 +20,9 @@ const Index = ({ network }) => {
 						{title}
 					</a>
 				</h3>
+				<p>{writer.nickname}</p>
 				<p>{summary}</p>
+				{/* <p>{tagList}</p> */}
 			</div>
 		</div>
 	);

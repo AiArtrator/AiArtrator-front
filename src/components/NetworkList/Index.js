@@ -16,8 +16,9 @@ const Index = () => {
 			setLoading(true);
 			try {
 				const response = await getNetworkList(null); // TODO : replace to getNetworkByUserId
-				setNetworks(response.data.postList);
-				setNetworksCount(response.data.postListCount);
+				setNetworks(response.data.data.postList);
+				console.log(response.data.data);
+				setNetworksCount(response.data.data.postListCount);
 			} catch (err) {
 				console.error(err);
 				setError(err);
@@ -47,7 +48,7 @@ const Index = () => {
 	// networks 값이 유효할때
 	return (
 		<div className="list-block">
-			{networksCount}
+			<div>현재 판매중인 모델 {networksCount} 개</div>
 			{networks.map((network) => {
 				return <NetworksItem key={network.id} network={network} />;
 			})}
