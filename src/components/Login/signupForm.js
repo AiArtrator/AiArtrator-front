@@ -34,37 +34,6 @@ const Index = () => {
 		} else {
 			setCheckPassword('');
 		}
-		// try {
-		// 	const res = await signup(info);
-		// 	console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
-		// 	dispatch(setUser(res.data.data.user));
-		// 	dispatch(setAccsstoken(res.data.data.accesstoken));
-		// 	console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
-		// 	navigate('/');
-		// } catch (err) {
-		// 	if (err.status === 400) {
-		// 		alert(err.message);
-		// 		setCheckError(res.message);
-		// 		console.error(err.message);
-		// 	} else if (err.status === 409) {
-		// 		alert(err.message);
-		// 		console.error(err.message);
-		// 		setCheckDupl(err.message);
-		// 	} else if (err.status === 412) {
-		// 		alert(err.message);
-		// 		console.error(err.message);
-		// 		setCheckPassword('  패스워드는 최소 6자리의 문자열이어야 합니다.');
-		// 	} else if (err.status === 500) {
-		// 		alert(err.message);
-		// 		console.error(err.message);
-		// 		setCheckError(' 서버 오류입니다.');
-		// 	} else {
-		// 		console.error(err.message);
-		// 		console.error(err);
-		// 		setCheckError('');
-		// 		setCheckDupl('');
-		// 	}
-		// }
 
 		await signup(info)
 			.then((res) => {
