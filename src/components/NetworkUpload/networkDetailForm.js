@@ -318,11 +318,10 @@ const DetailInput = styled.div`
 		margin: 7px;
 		border: 1px solid rgba(236, 236, 236, 1);
 		border-radius: 3px;
-		font-family: inherit;
-		font-size: inherit;
 		font-weight: 400;
 		outline: none;
 		height: max-content;
+		font-family: inherit;
 	}
 `;
 

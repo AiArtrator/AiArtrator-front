@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { fetchNetworkDetail } from '../../reducers/network';
@@ -11,14 +10,14 @@ const Index = () => {
 	const networkDetail = useSelector((state) => state.network.detail);
 	const { postId } = useParams();
 
-	const [imgSrc] = React.useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
 		title: '',
+		thumbnail: DEFAULT_THUMBNAIL,
 		writer: '',
 		updatedAt: '',
 		ver: '',
 		summary: '',
-		tagList: ['t1', 'sdfsdf1', 'sadfasd'],
+		tagList: [],
 		desc: '',
 	});
 
@@ -30,6 +29,7 @@ const Index = () => {
 		if (networkDetail) {
 			setDetailInfo({
 				title: networkDetail.title,
+				thumbnail: networkDetail.thumbnail,
 				writer: networkDetail.writer.nickname,
 				updatedAt: networkDetail.updatedAt,
 				ver: networkDetail.ver,
@@ -38,64 +38,33 @@ const Index = () => {
 				desc: networkDetail.description,
 			});
 		}
-		console.log(detailInfo);
 	}, [networkDetail]);
 
 	return (
 		<NetworkDetail>
-			<img src={imgSrc} alt="thumbnail" />
+			<img src={detailInfo.thumbnail} alt="thumbnail" />
 			<TextContainer>
-				<DetailText>
-					<div className="textTitle">{detailInfo.title}</div>
-				</DetailText>
-				<DetailText>
-					<div className="textTitle">Summary</div>
-					{/* <input
-						className="summary"
-						type="text"
-						value={detailInfo.summary}
-						placeholder="max 100 chars"
-						maxLength="100"
-					/> */}
-				</DetailText>
-				<DetailText>
-					<div className="textTitle">Version</div>
-					{/* <input
-						className="ver"
-						type="text"
-						value={detailInfo.ver}
-						placeholder="max 20 chars"
-						maxLength="20" // TODO: fix maxLength
-					/> */}
-				</DetailText>
+				<div className="networkTitle">{detailInfo.title}</div>
+				<div className="updatedAt">{detailInfo.updatedAt}</div>
+				<div className="detailTitle">writer</div>
+				<div className="writer">{detailInfo.writer}</div>
+				<div className="detailTitle">version</div>
+				<div className="detail">{detailInfo.ver}</div>
+				<div className="summary">{detailInfo.summary}</div>
+
+				<TagListContainer>
+					<div className="tagList">
+						{detailInfo.tagList.map(({ id, name }) => (
+							<div className="tag" key={id}>
+								{name}
+							</div>
+						))}
+					</div>
+				</TagListContainer>
 			</TextContainer>
-			<DetailText>
-				<div className="textTitle">Description</div>
-				{/* <textarea
-					className="desc"
-					type="text"
-					value={detailInfo.desc}
-					placeholder="max 3000 chars"
-					maxLength="3000" // TODO: fix maxLength
-					rows="5"
-				/> */}
-			</DetailText>
-			<TagListContainer>
-				<div className="tagListTitle">Add Tag</div>
-				{/* <div className="tagList">
-					{detailInfo.tagList.map((tagName) => (
-						<div className="tag" key={tagName}>
-							{tagName}{' '}
-						</div>
-					))}
-				</div> */}
-			</TagListContainer>
+			<div className="desc">{detailInfo.desc}</div>
 		</NetworkDetail>
 	);
-};
-
-Index.propTypes = {
-	newNetwork: PropTypes.bool,
 };
 
 export default Index;
@@ -103,103 +72,91 @@ export default Index;
 const NetworkDetail = styled.div`
 	position: relative;
 	display: grid;
-	grid-template-columns: 1fr 2fr;
-	grid-template-rows: 300px auto auto;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: 300px minmax(100px, auto);
 	grid-gap: 10px 50px;
 	gap: 10px 50px;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
 	padding: 5%;
-	.detailUploadButton {
-		/* padding: 10px;
-		border: 3px solid;
-		align-self: center;
-		cursor: pointer;
-		height: max-content;
-		width: 100%; */
-		grid-column: 2 / 3;
-		justify-self: end;
-		width: 100px;
-		right: 0;
-		padding: 10px 0px;
-		text-align: center;
-		border-radius: 5px;
-		background-color: rgba(166, 185, 241, 0.3);
-		color: #24146c;
-		cursor: pointer;
-		user-select: none;
-		input[type='file'] {
-			display: none;
-		}
-	}
-`;
-
-const ImgContainer = styled.div`
-	position: relative;
-	text-align: center;
 	img {
-		height: calc(100% - 44px);
+		width: 100%;
+		height: 100%;
+		text-align: center;
 		object-fit: contain;
 		align-self: center;
 	}
-	.uploadButton {
-		height: max-content;
-		width: 100%;
-		padding: 10px 0px;
-		text-align: center;
-		border-radius: 5px;
-		background-color: rgba(166, 185, 241, 0.3);
-		color: #24146c;
-		cursor: pointer;
-		user-select: none;
-		input[type='file'] {
-			display: none;
-		}
-	}
-`;
-
-const TextContainer = styled.div`
-	display: flex;
-	height: 100%;
-	width: 100%;
-	flex-direction: column;
-`;
-
-const DetailText = styled.div`
-	flex-direction: column;
-	position: relative;
-	display: flex;
-	margin: 15px 0px;
-	grid-column: 1 / 3;
-	.textTitle {
-		font-size: 16px;
-		width: 200px;
-		margin: 7px;
-		color: #0d005c;
-	}
-	input {
-		font-size: 16px;
-		width: calc(100% - 14px); // padding
-		padding: 7px;
-		border: 0px;
-		border-bottom: 1px solid rgba(236, 236, 236, 1);
-		outline: none;
-	}
-	textarea {
-		font-size: 16px;
+	.desc {
+		grid-column: 1 / 3;
 		resize: none;
-		width: calc(100% - 18px); // padding + border
 		padding: 7px;
 		margin: 7px;
 		border: 1px solid rgba(236, 236, 236, 1);
 		border-radius: 3px;
-		font-family: inherit;
-		font-size: inherit;
 		font-weight: 400;
 		outline: none;
 		height: max-content;
+		min-height: 100px;
 	}
 `;
+
+const TextContainer = styled.div`
+	display: grid;
+	grid-template-columns: auto 1fr;
+	.networkTitle {
+		grid-column: 1 / 3;
+		font-size: 24px;
+		font-weight: 600;
+	}
+	.updatedAt {
+		grid-column: 1 / 3;
+		justify-self: end;
+	}
+	.detailTitle {
+		color: #0d005c;
+		margin-right: 20px;
+		/* font-size: 18px; */
+	}
+	.summary {
+		grid-column: 1 / 3;
+	}
+`;
+
+// const DetailText = styled.div`
+// 	flex-direction: column;
+// 	position: relative;
+// 	display: flex;
+// 	margin: 15px 0px;
+// 	grid-column: 1 / 3;
+// 	.textTitle {
+// 		font-size: 16px;
+// 		width: 200px;
+// 		margin: 7px;
+// 		color: #0d005c;
+// 	}
+// 	input {
+// 		font-size: 16px;
+// 		width: calc(100% - 14px); // padding
+// 		padding: 7px;
+// 		border: 0px;
+// 		border-bottom: 1px solid rgba(236, 236, 236, 1);
+// 		outline: none;
+// 	}
+// 	textarea {
+// 		font-size: 16px;
+// 		resize: none;
+// 		width: calc(100% - 18px); // padding + border
+// 		padding: 7px;
+// 		margin: 7px;
+// 		border: 1px solid rgba(236, 236, 236, 1);
+// 		border-radius: 3px;
+// 		font-family: inherit;
+// 		font-size: inherit;
+// 		font-weight: 400;
+// 		outline: none;
+// 		height: max-content;
+// 	}
+// `;
 
 const TagListContainer = styled.div`
 	position: relative;
@@ -209,20 +166,12 @@ const TagListContainer = styled.div`
 	font-size: 16px;
 	font-weight: 400;
 	user-select: none;
-	.tagListTitle {
-		width: 200px;
-		margin: 7px;
-		font-weight: 600;
-		color: #0d005c;
-	}
 	.tagList {
 		display: flex;
 		flex-flow: row wrap;
-		padding: 7px;
+		/* padding: 7px; */
 		color: #666666;
-		.tag,
-		.tagInput {
-			/* height: 37px; */
+		.tag {
 			width: max-content;
 			padding: 7px;
 			border: 1px solid rgba(102, 102, 102, 1);
@@ -232,12 +181,6 @@ const TagListContainer = styled.div`
 			span {
 				cursor: pointer;
 			}
-		}
-		.tagInput {
-			width: 100px;
-			color: #000000;
-			border: 1px solid rgba(0, 0, 0, 1);
-			outline: none;
 		}
 	}
 `;
