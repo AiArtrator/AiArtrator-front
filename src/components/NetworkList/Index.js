@@ -1,28 +1,36 @@
 import React, { useState, useEffect } from 'react';
 import './network-list.scss';
 import NetworksItem from './NetworkItems/Index.js';
-import { getNetworkList } from '../../axios/Network';
+import { getNetworkList, getSearchNetwork } from '../../axios/Network';
 
 const Index = () => {
 	const [networks, setNetworks] = useState(null);
 	const [networksCount, setNetworksCount] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
-	const [searchword, setSearchword] = useState('');
+	const [searchWord, setSearchWord] = useState('');
+	const [resCount, setResCount] = useState(0);
+	const [result, setResult] = useState('');
 
 	const handleChange = (e) => {
-		setSearchword(e.target.value);
+		setSearchWord(e.target.value);
 	};
+
 	const handleSearch = () => {
 		const fetchData = async () => {
 			setError(null);
-			setNetworks(null);
 			setLoading(true);
 			try {
-				const response = await getNetworkList(searchword); // TODO : replace to getNetworkByUserId
-				setNetworks(response.data.data.postList);
-				console.log(response.data.data);
-				setNetworksCount(response.data.data.postListCount);
+				console.log(searchWord);
+				const response = await getSearchNetwork({ search: searchWord }); // TODO : replace to getNetworkByUserId
+				console.log('검색 결과 개수는 ', response.data.data.postListCount);
+
+				setResCount(response.data.data.postListCount);
+				setResult('검색 결과 ');
+				if (resCount > 0) {
+					setNetworks(null);
+					setNetworks(response.data.data.postList);
+				}
 			} catch (err) {
 				console.error(err);
 				setError(err);
@@ -37,9 +45,9 @@ const Index = () => {
 			setError(null);
 			setNetworks(null);
 			setLoading(true);
-			setSearchword('');
+			setSearchWord('');
 			try {
-				const response = await getNetworkList(null); // TODO : replace to getNetworkByUserId
+				const response = await getNetworkList(); // TODO : replace to getNetworkByUserId
 				setNetworks(response.data.data.postList);
 				console.log(response.data.data);
 				setNetworksCount(response.data.data.postListCount);
@@ -62,7 +70,6 @@ const Index = () => {
 		console.log('아직 networks값이 설정되지 않음');
 		return null;
 	}
-
 	console.log(networks);
 	console.log('networks.postList');
 	console.log(networks.postList);
@@ -75,11 +82,18 @@ const Index = () => {
 			<input
 				type="search"
 				placeholder="모델 키워드 또는 태그를 검색하세요."
-				value={searchword}
+				value={searchWord}
 				onChange={handleChange}
 			/>
 			<button onClick={handleSearch}>검색</button>
-			<div className="now-count">현재 판매중인 모델 {networksCount} 개</div>
+
+			{result ? (
+				<div className="now-count">검색결과 {resCount} 건</div>
+			) : (
+				<div className="now-count">현재 판매중인 모델 {networksCount} 개</div>
+			)}
+
+			{/* <div className="now-count">현재 판매중인 모델 {networksCount} 개</div> */}
 			{networks.map((network) => {
 				return <NetworksItem key={network.id} network={network} />;
 			})}

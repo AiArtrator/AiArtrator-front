@@ -11,7 +11,6 @@ import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
 import NetworkUploadPage from './page/NetworkUploadPage/Index';
 import NetworkUpdatePage from './page/NetworkUpdatePage/Index';
-import SearchPage from './page/SearchPage/Index';
 
 function App() {
 	return (
@@ -19,7 +18,6 @@ function App() {
 			<NavBar />
 			<Routes>
 				<Route path="/" element={<MainPage />} exact={true} />
-				<Route path="/NetworkSearch" element={<SearchPage />} />
 				<Route path="/NetworkLists" element={<NetworkListPage />} />
 				<Route path="/Login" element={<LoginPage />} />
 				<Route path="/Signup" element={<SignupPage />} />
