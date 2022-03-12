@@ -31,6 +31,13 @@ export const getNetworkDetailById = (postId: String) => {
 	});
 };
 
+export const getMyNetworkListById = (userId: String) => {
+	return axios({
+		method: 'GET',
+		url: `/api/user/${userId}/post/list`,
+	});
+};
+
 export const postNetworkDetail = (accesstoken: String, formData: Object) => {
 	return axios({
 		method: 'POST',
