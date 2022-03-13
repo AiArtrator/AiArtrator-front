@@ -54,10 +54,26 @@ export const userLogout = async () => {
 // eslint-disable-next-line default-param-last
 const reducer = (state = initialState, action) => {
 	switch (action.type) {
+		/* LOGIN */
+		// case AUTH_LOGIN:
+		// 	return {
+		// 		...state,
+		// 		login: {
+		// 			status: 'WAITING',
+		// 		},
+		// 	};
 		case SET_USER: {
 			return {
 				...state,
 				user: action.payload,
+				login: {
+					status: 'SUCCESS',
+				},
+				status: {
+					...state.status,
+					isLoggedIn: true,
+					currentUser: action.username,
+				},
 			};
 		}
 		case SET_ACCESSTOKEN: {
@@ -66,6 +82,7 @@ const reducer = (state = initialState, action) => {
 				accesstoken: action.payload,
 			};
 		}
+
 		default:
 			return state;
 	}
