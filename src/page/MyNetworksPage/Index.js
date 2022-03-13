@@ -1,7 +1,12 @@
 import React from 'react';
+import MyNetwork from '../../components/MyNetworkList/Index';
 
 const Index = () => {
-	return <>내가 업로드한 모델</>;
+	return (
+		<>
+			<MyNetwork />
+		</>
+	);
 };
 
 export default Index;

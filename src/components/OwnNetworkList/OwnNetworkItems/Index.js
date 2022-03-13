@@ -3,25 +3,25 @@ import React from 'react';
 import './own-network-items.scss';
 
 const Index = ({ network }) => {
-	const { title, description, sampleImg } = network;
+	const { thumbnail, title, summary } = network;
+
 	return (
 		<div className="own-items-block">
-			{sampleImg && (
-				<div className="thumbnail">
-					<a>
-						{/* <a href={url} target="_blank" rel="noopener noreferrer"> */}
-						<img src={sampleImg} alt="thumbnail" />
-					</a>
-				</div>
-			)}
+			<div className="thumbnail">
+				<a>
+					{/* <a href={thumbnail} target="_blank" rel="noopener noreferrer" /> */}
+					<img src={thumbnail} alt="thumbnail" />
+				</a>
+			</div>
+
 			<div className="contents">
-				<h2>
+				<h3>
 					<a>
 						{/* <a href={url} target="_blank" rel="noopener noreferrer"> */}
 						{title}
 					</a>
-				</h2>
-				<p>{description}</p>
+				</h3>
+				<p>{summary}</p>
 			</div>
 		</div>
 	);

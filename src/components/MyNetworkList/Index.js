@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import './own-network-list.scss';
-import OwnNetworksItem from './OwnNetworkItems/Index.js';
-import { getNetworkList } from '../../axios/Network';
+import './my-network-list.scss';
+import NetworksItem from './NetworkItems/Index.js';
+import { getMyNetworkListById } from '../../axios/Network';
+import { useSelector } from 'react-redux';
 
 const Index = () => {
+	const userId = useSelector((state) => state.user.user.id);
+	const nickname = useSelector((state) => state.user.user.nickname);
 	const [networks, setNetworks] = useState(null);
-	const [networksCount, setNetworksCount] = useState(0);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -14,10 +16,11 @@ const Index = () => {
 			setError(null);
 			setNetworks(null);
 			setLoading(true);
+
 			try {
-				const response = await getNetworkList(null); // TODO : replace to getNetworkByUserId
-				setNetworks(response.data.postList);
-				setNetworksCount(response.data.postListCount);
+				const response = await getMyNetworkListById(userId);
+				setNetworks(response.data.data.postList);
+				console.log(response.data.data);
 			} catch (err) {
 				console.error(err);
 				setError(err);
@@ -29,7 +32,7 @@ const Index = () => {
 
 	// 대기중일때
 	if (loading) {
-		return <div className="own-list-block">로딩 중</div>;
+		return <div className="list-block">로딩 중</div>;
 	}
 	if (error) return <div>에러가 발생했습니다</div>;
 	// 아직 networks값이 설정되지 않았을때
@@ -38,18 +41,14 @@ const Index = () => {
 		return null;
 	}
 
-	console.log(networks);
-	console.log('networks.postList');
-	console.log(networks.postList);
-	console.log('networksCount');
-	console.log(networksCount);
-
-	// networks 값이 유효할때
 	return (
-		<div className="own-list-block">
-			{networksCount}
+		<div className="list-block">
+			<div className="now-count">
+				{nickname} 님이 업로드한 모델 리스트입니다.
+			</div>
+
 			{networks.map((network) => {
-				return <OwnNetworksItem key={network.id} network={network} />;
+				return <NetworksItem key={network.id} network={network} />;
 			})}
 		</div>
 	);
