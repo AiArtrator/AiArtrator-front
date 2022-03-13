@@ -8,11 +8,12 @@ export const signup = (data) => {
 	});
 };
 
-export const Logout = () => {
+export const Logout = (accesstoken: String) => {
 	return axios(
 		{
 			method: 'POST',
-			url: '/api/oauth/logout/',
+			url: '/api/auth/logout',
+			headers: { accesstoken },
 		},
 		{ withCredentials: true }
 	);
