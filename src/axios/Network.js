@@ -16,11 +16,10 @@ export const getNetworkList = (data) => {
 	});
 };
 
-export const getSearchNetwork = (data, search: String) => {
+export const getSearchNetwork = (search: String) => {
 	return axios({
 		method: 'GET',
 		url: `/api/post/list?search=${search}`,
-		data,
 	});
 };
 

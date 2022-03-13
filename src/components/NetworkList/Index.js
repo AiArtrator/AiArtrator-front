@@ -20,17 +20,15 @@ const Index = () => {
 		const fetchData = async () => {
 			setError(null);
 			setLoading(true);
+			setNetworks(null);
 			try {
 				console.log(searchWord);
-				const response = await getSearchNetwork({ search: searchWord }); // TODO : replace to getNetworkByUserId
+				const response = await getSearchNetwork(searchWord); // TODO : replace to getNetworkByUserId
 				console.log('검색 결과 개수는 ', response.data.data.postListCount);
 
 				setResCount(response.data.data.postListCount);
+				setNetworks(response.data.data.postList);
 				setResult('검색 결과 ');
-				if (resCount > 0) {
-					setNetworks(null);
-					setNetworks(response.data.data.postList);
-				}
 			} catch (err) {
 				console.error(err);
 				setError(err);
