@@ -8,6 +8,22 @@ export const signup = (data) => {
 	});
 };
 
+export const emailDupl = (data) => {
+	return axios({
+		method: 'POST',
+		url: '/api/auth/check/email',
+		data,
+	});
+};
+
+export const nicknameDupl = (data) => {
+	return axios({
+		method: 'POST',
+		url: '/api/auth/check/email',
+		data,
+	});
+};
+
 export const Logout = () => {
 	return axios(
 		{

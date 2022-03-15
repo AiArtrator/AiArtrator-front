@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signup } from '../../axios/User';
+import { signup, emailDupl } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
 import './signup-form.scss';
 
@@ -18,27 +18,64 @@ const Index = () => {
 		phone: '',
 		organization: '',
 	});
-	const [checkPassword, setCheckPassword] = useState('');
-	const [checkError, setCheckError] = useState('');
-	const [checkDupl, setCheckDupl] = useState('');
-	const [errorMessage, setErrorMessage] = useState('');
+
+	const [errorInfo, setErrorInfo] = useState({
+		email: '',
+		password: '',
+		passwordCheck: '',
+		nickname: '',
+		phone: '',
+		organization: '',
+	});
 
 	const checkForm = () => {
 		if (info.password !== info.passwordCheck) return false;
 		return true;
 	};
+	const emailDuplCheck = async () => {
+		console.log(info.email);
+		await emailDupl(info)
+			.then((res) => {
+				console.log(res.data);
+				if (res.data.success) {
+					setErrorInfo({ email: res.data.message });
+				}
+			})
+			.catch((err) => {
+				console.error(err);
+				console.log(err.data);
+			});
+	};
 
 	const signupSubmit = async () => {
 		if (!checkForm()) {
-			setCheckPassword('  비밀번호가 일치하지 않습니다.');
+			setErrorInfo({ passwordCheck: '  비밀번호가 일치하지 않습니다.' });
 		} else {
-			setCheckPassword('');
+			setErrorInfo({ passwordCheck: '' });
 		}
+		// if (info.email === '') {
+		// 	setErrorInfo({ email: '   이메일을 입력해주세요.' });
+		// } else {
+		// 	setErrorInfo({ email: '' });
+		// }
+		// if (info.password === '') {
+		// 	setErrorInfo({ password: '   비밀번호를 입력해주세요.' });
+		// } else {
+		// 	setErrorInfo({ password: '' });
+		// }
+		// if (info.nickname === '') {
+		// 	setErrorInfo({ nickname: '   닉네임을 입력해주세요.' });
+		// } else {
+		// 	setErrorInfo({ nickname: '' });
+		// }
+		// if (info.phone === '') {
+		// 	setErrorInfo({ phone: '    전화번호를 입력해주세요.' });
+		// } else {
+		// 	setErrorInfo({ phone: '' });
+		// }
 
 		await signup(info)
 			.then((res) => {
-				setErrorMessage(res.message);
-				console.log(errorMessage);
 				if (res.status === 200) {
 					console.log(
 						`[+] signup - res data: ${JSON.stringify(res.data.data)}`
@@ -48,21 +85,15 @@ const Index = () => {
 					console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
 					navigate('/');
 				} else if (res.status === 400) {
-					setCheckError(res.message);
 					console.log(res.message);
 				} else if (res.status === 409) {
 					alert(res.message);
-					console.error(res.message);
-					setCheckDupl(res.message);
-					console.log(errorMessage);
 				} else if (res.status === 412) {
 					alert(res.message);
 					console.error(res.message);
-					setCheckPassword('  패스워드는 최소 6자리의 문자열이어야 합니다.');
 				} else if (res.status === 500) {
 					alert(res.message);
 					console.log(res.message);
-					setCheckError(' 서버 오류입니다.');
 				}
 			})
 			.catch((err) => {
@@ -76,6 +107,7 @@ const Index = () => {
 		const value = e.target.value;
 		if (className === 'email') {
 			setInfo({ ...info, email: value });
+			setTimeout(emailDuplCheck, 1000);
 		} else if (className === 'password') {
 			setInfo({ ...info, password: value });
 		} else if (className === 'passwordCheck') {
@@ -106,6 +138,12 @@ const Index = () => {
 						value={info.email}
 						onChange={handleChange}
 					/>
+					{/* <button className="check-button" onClick={emailDupl}>
+						중복 확인
+					</button> */}
+					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+						{errorInfo.email}
+					</div>
 				</div>
 				<div>
 					<span>비밀번호</span>
@@ -117,6 +155,9 @@ const Index = () => {
 						value={info.password}
 						onChange={handleChange}
 					/>
+					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+						{errorInfo.password}
+					</div>
 				</div>
 				<div>
 					<span>비밀번호 확인</span>
@@ -129,7 +170,7 @@ const Index = () => {
 						onChange={handleChange}
 					/>
 					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
-						{checkPassword}
+						{errorInfo.passwordCheck}
 					</div>
 				</div>
 				<div>
@@ -142,6 +183,9 @@ const Index = () => {
 						value={info.nickname}
 						onChange={handleChange}
 					/>
+					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+						{errorInfo.nickname}
+					</div>
 				</div>
 				<div>
 					<span>전화번호</span>
@@ -153,6 +197,9 @@ const Index = () => {
 						value={info.phone}
 						onChange={handleChange}
 					/>
+					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+						{errorInfo.phone}
+					</div>
 				</div>
 				<div>
 					<label>소속기관 (선택)</label>
@@ -164,16 +211,9 @@ const Index = () => {
 						onChange={handleChange}
 					/>
 				</div>
-				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
-					{errorMessage}
-				</div>
-				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
-					{checkError}
-				</div>
-				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
-					{checkDupl}
-				</div>
-				<button onClick={signupSubmit}>회원가입</button>
+				<button className="submit-button" onClick={signupSubmit}>
+					회원가입
+				</button>
 			</div>
 		</div>
 	);
