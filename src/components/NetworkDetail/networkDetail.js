@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { fetchNetworkDetail } from '../../reducers/network';
-import { DEFAULT_THUMBNAIL } from '../../constants';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { fetchNetworkDetail } from '../../reducers/network';
+import { dateToText } from '../Utils';
+import { DEFAULT_THUMBNAIL } from '../../constants';
 
 const Index = () => {
 	const dispatch = useDispatch();
@@ -45,7 +46,7 @@ const Index = () => {
 			<img src={detailInfo.thumbnail} alt="thumbnail" />
 			<TextContainer>
 				<div className="networkTitle">{detailInfo.title}</div>
-				<div className="updatedAt">{detailInfo.updatedAt}</div>
+				<div className="updatedAt">{dateToText(detailInfo.updatedAt)}</div>
 				<div className="detailTitle">writer</div>
 				<div className="writer">{detailInfo.writer}</div>
 				<div className="detailTitle">version</div>
@@ -85,6 +86,7 @@ const NetworkDetail = styled.div`
 		text-align: center;
 		object-fit: contain;
 		align-self: center;
+		min-width: 300px;
 	}
 	.desc {
 		grid-column: 1 / 3;
@@ -97,66 +99,35 @@ const NetworkDetail = styled.div`
 		outline: none;
 		height: max-content;
 		min-height: 100px;
+		overflow-wrap: break-word;
 	}
 `;
 
 const TextContainer = styled.div`
 	display: grid;
 	grid-template-columns: auto 1fr;
+	min-width: 230px;
 	.networkTitle {
 		grid-column: 1 / 3;
 		font-size: 24px;
 		font-weight: 600;
+		overflow-wrap: break-word;
 	}
 	.updatedAt {
 		grid-column: 1 / 3;
 		justify-self: end;
+		overflow: auto;
 	}
 	.detailTitle {
 		color: #0d005c;
 		margin-right: 20px;
-		/* font-size: 18px; */
 	}
 	.summary {
 		grid-column: 1 / 3;
+		width: 100%;
+		overflow-wrap: break-word;
 	}
 `;
-
-// const DetailText = styled.div`
-// 	flex-direction: column;
-// 	position: relative;
-// 	display: flex;
-// 	margin: 15px 0px;
-// 	grid-column: 1 / 3;
-// 	.textTitle {
-// 		font-size: 16px;
-// 		width: 200px;
-// 		margin: 7px;
-// 		color: #0d005c;
-// 	}
-// 	input {
-// 		font-size: 16px;
-// 		width: calc(100% - 14px); // padding
-// 		padding: 7px;
-// 		border: 0px;
-// 		border-bottom: 1px solid rgba(236, 236, 236, 1);
-// 		outline: none;
-// 	}
-// 	textarea {
-// 		font-size: 16px;
-// 		resize: none;
-// 		width: calc(100% - 18px); // padding + border
-// 		padding: 7px;
-// 		margin: 7px;
-// 		border: 1px solid rgba(236, 236, 236, 1);
-// 		border-radius: 3px;
-// 		font-family: inherit;
-// 		font-size: inherit;
-// 		font-weight: 400;
-// 		outline: none;
-// 		height: max-content;
-// 	}
-// `;
 
 const TagListContainer = styled.div`
 	position: relative;
@@ -166,10 +137,10 @@ const TagListContainer = styled.div`
 	font-size: 16px;
 	font-weight: 400;
 	user-select: none;
+	overflow: auto;
 	.tagList {
 		display: flex;
 		flex-flow: row wrap;
-		/* padding: 7px; */
 		color: #666666;
 		.tag {
 			width: max-content;
