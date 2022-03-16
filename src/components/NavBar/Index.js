@@ -14,10 +14,7 @@ const Index = () => {
 		<div className="dropmenu">
 			<ul>
 				<li>
-					<Logo />
-				</li>
-				<li>
-					<ModelLists />
+					<LogIn />
 				</li>
 				<li>
 					<MyMenus />
@@ -37,7 +34,10 @@ const Index = () => {
 					</ul>
 				</li>
 				<li>
-					<LogIn />
+					<ModelLists />
+				</li>
+				<li>
+					<Logo />
 				</li>
 			</ul>
 		</div>

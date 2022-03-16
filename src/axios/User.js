@@ -31,6 +31,7 @@ export const getUserById = (id) => {
 	);
 };
 
+// Login
 export const login = (data) => {
 	return axios({
 		method: 'POST',

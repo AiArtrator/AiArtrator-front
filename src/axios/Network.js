@@ -8,10 +8,18 @@ export const inference = (url) => {
 	});
 };
 
-export const getNetworkList = () => {
+export const getNetworkList = (data) => {
 	return axios({
 		method: 'GET',
-		url: '/api/post/list',
+		url: `/api/post/list?search=`,
+		data,
+	});
+};
+
+export const getSearchNetwork = (search: String) => {
+	return axios({
+		method: 'GET',
+		url: `/api/post/list?search=${search}`,
 	});
 };
 
@@ -19,6 +27,13 @@ export const getNetworkDetailById = (postId: String) => {
 	return axios({
 		method: 'GET',
 		url: `/api/post/${postId}`,
+	});
+};
+
+export const getMyNetworkListById = (userId: String) => {
+	return axios({
+		method: 'GET',
+		url: `/api/user/${userId}/post/list`,
 	});
 };
 
@@ -41,5 +56,14 @@ export const putNetworkDetail = (
 		url: `/api/post/${postId}`,
 		headers: { accesstoken },
 		data: formData,
+	});
+};
+
+export const ownNetworkList = (userId: String, accesstoken: String, data) => {
+	return axios({
+		method: 'GET',
+		url: `/api/user/${userId}/post/list`,
+		headers: { accesstoken },
+		data,
 	});
 };
