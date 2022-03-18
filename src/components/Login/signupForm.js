@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signup, emailDupl, nicknameDupl } from '../../axios/User';
+import { signup, emailDupl, nicknameDupl, phoneDupl } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
 import './signup-form.scss';
 
@@ -36,59 +36,57 @@ const Index = () => {
 		}
 	};
 	const emailDuplCheck = async () => {
-		console.log(info.email);
 		await emailDupl(info)
 			.then((res) => {
-				console.log(res.data);
-
 				setErrorInfo({ email: res.data.message });
 			})
 			.catch((err) => {
 				setErrorInfo({ email: '이미 사용하고 있는 이메일 입니다.' });
-				console.error(err);
-				console.log(err.data);
+				console.log('catch구문');
+				console.error(err.data);
+				console.log(err.status);
+			});
+	};
+
+	const phoneDuplCheck = async () => {
+		await phoneDupl(info)
+			.then((res) => {
+				setErrorInfo({ phone: res.data.message });
+			})
+			.catch((err) => {
+				console.error(err.data);
+				setErrorInfo({ phone: '이미 사용하고 있는 전화번호 입니다.' });
 			});
 	};
 
 	const nicknameDuplCheck = async () => {
 		await nicknameDupl(info)
 			.then((res) => {
-				setErrorInfo({ nickname: res.data.message });
+				if (res.status === 200) {
+					setErrorInfo({ nickname: res.data.message });
+				} else {
+					console.log('Error message by res');
+					console.log(res.data.message);
+				}
 			})
-			.catch((err) => {
+			.throw((err) => {
 				console.error(err);
 				setErrorInfo({ nickname: '이미 사용하고 있는 닉네임입니다.' });
 			});
 	};
 
 	const signupSubmit = async () => {
-		checkForm();
-
 		await signup(info)
 			.then((res) => {
-				if (res.status === 200) {
-					console.log(
-						`[+] signup - res data: ${JSON.stringify(res.data.data)}`
-					);
-					dispatch(setUser(res.data.data.user));
-					dispatch(setAccsstoken(res.data.data.accesstoken));
-					console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
-					navigate('/');
-				} else if (res.status === 400) {
-					console.log(res.message);
-				} else if (res.status === 409) {
-					alert(res.message);
-				} else if (res.status === 412) {
-					alert(res.message);
-					console.error(res.message);
-				} else if (res.status === 500) {
-					alert(res.message);
-					console.log(res.message);
-				}
+				console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
+				dispatch(setUser(res.data.data.user));
+				dispatch(setAccsstoken(res.data.data.accesstoken));
+				console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+				navigate('/');
 			})
 			.catch((err) => {
 				console.error(err);
-				console.log(err.code, err.message);
+				console.log(err.message);
 			});
 	};
 
@@ -113,6 +111,11 @@ const Index = () => {
 			}
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
+			if (info.phone === '') {
+				setErrorInfo({ phone: '전화번호를 입력해주세요.' });
+			} else {
+				phoneDuplCheck();
+			}
 		} else if (className === 'nickname') {
 			setInfo({ ...info, nickname: value });
 			if (info.passwordCheck === '') {

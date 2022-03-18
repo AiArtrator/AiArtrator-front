@@ -8,10 +8,17 @@ export const signup = (data) => {
 	});
 };
 
-export const emailDupl = (data) => {
+export const emailDupl = () => {
 	return axios({
 		method: 'POST',
 		url: '/api/auth/check/email',
+	});
+};
+
+export const phoneDupl = (data) => {
+	return axios({
+		method: 'POST',
+		url: '/api/auth/check/phone',
 		data,
 	});
 };
