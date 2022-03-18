@@ -32,7 +32,6 @@ export const nicknameDupl = (data) => {
 	});
 };
 
-
 export const Logout = (accesstoken: String) => {
 	return axios(
 		{

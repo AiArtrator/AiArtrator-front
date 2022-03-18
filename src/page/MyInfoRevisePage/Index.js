@@ -64,12 +64,13 @@ const Index = () => {
 		}
 	};
 	return (
-		<div className="mypage-form">
-			<div className="myform">
+		<div className="myrevise-form">
+			<div className="reviseform">
 				<h3>P O G</h3>
 				<label>{info.nickname} 님의 정보수정</label>
 				<label>닉네임</label>
 				<div className="info">{info.nickname}</div>
+				<button className="dupl-button">중복확인</button>
 				<input
 					className="nickname"
 					type="nickname"
