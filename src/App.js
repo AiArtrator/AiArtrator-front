@@ -11,6 +11,7 @@ import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
 import NetworkUploadPage from './page/NetworkUploadPage/Index';
 import NetworkUpdatePage from './page/NetworkUpdatePage/Index';
+import MyInfoRevisePage from './page/MyInfoRevisePage/Index';
 import NetworkDetailPage from './page/NetworkDetailPage/Index';
 
 function App() {
@@ -24,6 +25,9 @@ function App() {
 				<Route path="/Signup" element={<SignupPage />} />
 				<Route path="/MyInfo" element={<AuthRoute />}>
 					<Route path="/MyInfo" element={<MyInfoPage />} />
+				</Route>
+				<Route path="/Revise" element={<AuthRoute />}>
+					<Route path="/Revise" element={<MyInfoRevisePage />} />
 				</Route>
 				<Route path="/OwnNetworks" element={<AuthRoute />}>
 					<Route path="/OwnNetworks" element={<OwnNetworksPage />} />

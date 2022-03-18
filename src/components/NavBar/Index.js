@@ -8,12 +8,37 @@ import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/OwnNetworksButton/Index.js';
 import MyNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Index = () => {
+	const accesstoken = useSelector((state) => state.user.accesstoken);
 	return (
 		<div className="dropmenu">
 			<ul>
-				<li>
+				{accesstoken ? (
+					<li>
+						<MyMenus />
+						<ul>
+							<li>
+								<NetworkUploadBtn />
+							</li>
+							<li>
+								<OwnNetworksBtn />
+							</li>
+							<li>
+								<MyNetworksBtn />
+							</li>
+							<li>
+								<Link to="/">임시 로그아웃</Link>
+							</li>
+						</ul>
+					</li>
+				) : (
+					<li>
+						<LogIn />
+					</li>
+				)}
+				{/* <li>
 					<LogIn />
 				</li>
 				<li>
@@ -32,7 +57,7 @@ const Index = () => {
 							<Link to="/">임시 로그아웃</Link>
 						</li>
 					</ul>
-				</li>
+				</li> */}
 				<li>
 					<ModelLists />
 				</li>
