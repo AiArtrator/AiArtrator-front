@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { signup, emailDupl } from '../../axios/User';
+import { signup, emailDupl, nicknameDupl } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
 import './signup-form.scss';
 
@@ -29,50 +29,40 @@ const Index = () => {
 	});
 
 	const checkForm = () => {
-		if (info.password !== info.passwordCheck) return false;
-		return true;
+		if (info.password !== info.passwordCheck) {
+			setErrorInfo({ passwordCheck: '비밀번호가 일치하지 않습니다.' });
+		} else {
+			setErrorInfo({ passwordCheck: '' });
+		}
 	};
 	const emailDuplCheck = async () => {
 		console.log(info.email);
 		await emailDupl(info)
 			.then((res) => {
 				console.log(res.data);
-				if (res.data.success) {
-					setErrorInfo({ email: res.data.message });
-				}
+
+				setErrorInfo({ email: res.data.message });
 			})
 			.catch((err) => {
+				setErrorInfo({ email: '이미 사용하고 있는 이메일 입니다.' });
 				console.error(err);
 				console.log(err.data);
 			});
 	};
 
+	const nicknameDuplCheck = async () => {
+		await nicknameDupl(info)
+			.then((res) => {
+				setErrorInfo({ nickname: res.data.message });
+			})
+			.catch((err) => {
+				console.error(err);
+				setErrorInfo({ nickname: '이미 사용하고 있는 닉네임입니다.' });
+			});
+	};
+
 	const signupSubmit = async () => {
-		if (!checkForm()) {
-			setErrorInfo({ passwordCheck: '  비밀번호가 일치하지 않습니다.' });
-		} else {
-			setErrorInfo({ passwordCheck: '' });
-		}
-		// if (info.email === '') {
-		// 	setErrorInfo({ email: '   이메일을 입력해주세요.' });
-		// } else {
-		// 	setErrorInfo({ email: '' });
-		// }
-		// if (info.password === '') {
-		// 	setErrorInfo({ password: '   비밀번호를 입력해주세요.' });
-		// } else {
-		// 	setErrorInfo({ password: '' });
-		// }
-		// if (info.nickname === '') {
-		// 	setErrorInfo({ nickname: '   닉네임을 입력해주세요.' });
-		// } else {
-		// 	setErrorInfo({ nickname: '' });
-		// }
-		// if (info.phone === '') {
-		// 	setErrorInfo({ phone: '    전화번호를 입력해주세요.' });
-		// } else {
-		// 	setErrorInfo({ phone: '' });
-		// }
+		checkForm();
 
 		await signup(info)
 			.then((res) => {
@@ -107,17 +97,36 @@ const Index = () => {
 		const value = e.target.value;
 		if (className === 'email') {
 			setInfo({ ...info, email: value });
-			setTimeout(emailDuplCheck, 1000);
 		} else if (className === 'password') {
 			setInfo({ ...info, password: value });
+			if (info.email === '') {
+				setErrorInfo({ email: '이메일을 입력하세요.' });
+			} else {
+				emailDuplCheck();
+			}
 		} else if (className === 'passwordCheck') {
 			setInfo({ ...info, passwordCheck: value });
+			if (info.password === '') {
+				setErrorInfo({ password: '비밀번호를 입력하세요.' });
+			} else {
+				setTimeout(checkForm, 1000);
+			}
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else if (className === 'nickname') {
 			setInfo({ ...info, nickname: value });
+			if (info.passwordCheck === '') {
+				setErrorInfo({ passwordCheck: '비밀번호를 다시 입력하세요.' });
+			} else {
+				checkForm();
+			}
 		} else if (className === 'phone') {
 			setInfo({ ...info, phone: value });
+			if (info.nickname === '') {
+				setErrorInfo({ nickname: '닉네임을 입력하세요.' });
+			} else {
+				nicknameDuplCheck();
+			}
 		} else {
 			console.err('[-] error from SignupForm');
 		}
