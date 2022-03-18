@@ -65,7 +65,6 @@ const Index = () => {
 				if (res.status === 200) {
 					setErrorInfo({ nickname: res.data.message });
 				} else {
-					console.log('Error message by res');
 					console.log(res.data.message);
 				}
 			})

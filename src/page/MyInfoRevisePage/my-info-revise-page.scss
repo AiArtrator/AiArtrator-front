@@ -9,12 +9,12 @@
 	font-size: 0.7rem;
 
 	.myform {
-		height: 32rem;
+		height: 40rem;
 		width: 23rem;
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
 		transform: translate(-50%, -50%);
-		top: 22rem;
+		top: 25rem;
 		left: 50%;
 		border-radius: 10px;
 		// backdrop-filter: blur(12px);
@@ -36,6 +36,9 @@
 		text-align: center;
 		padding-bottom: 0.5rem;
 	}
+	.errorMessage {
+		margin-bottom: 1.5rem;
+	}
 
 	label {
 		display: block;
@@ -43,11 +46,26 @@
 		// font-size: 16px;
 		font-weight: 500;
 	}
-
+	input {
+		display: block;
+		height: 2rem;
+		width: 100%;
+		border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+		border-radius: 3px;
+		padding: 0 10px;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		font-weight: 500;
+	}
+	::placeholder {
+		color: rgba(157, 157, 157, 1);
+		font-size: 0.7rem;
+		font-weight: 300;
+	}
 	.info {
 		margin-top: 0.5rem;
 		width: 100%;
-		background-color: rgba(166, 185, 241, 0.112);
+		background-color: rgba(166, 185, 241, 0.123);
 		color: rgba(13, 0, 92, 1);
 		padding: 10px 10px;
 		//font-size: 10px;
@@ -55,11 +73,11 @@
 		border-radius: 5px;
 	}
 
-	.revise-button {
+	.submit-button {
 		margin-top: 1rem;
 		width: 100%;
 		background-color: rgba(166, 185, 241, 0.3);
-		color: #0d005c;
+		color: rgba(13, 0, 92, 1);
 		padding: 10px 0;
 		font-size: 15px;
 		font-weight: 600;
