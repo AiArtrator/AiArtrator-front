@@ -27,7 +27,7 @@ export const phoneDupl = (data) => {
 export const nicknameDupl = (data) => {
 	return axios({
 		method: 'POST',
-		url: '/api/auth/check/email',
+		url: '/api/auth/check/nickname',
 		data,
 	});
 };
@@ -68,5 +68,14 @@ export const getMypage = (userId: String) => {
 	return axios({
 		method: 'GET',
 		url: `/api/user/${userId}`,
+	});
+};
+
+export const putReviseInfo = (accesstoken: String, formData: Object) => {
+	return axios({
+		method: 'PUT',
+		url: '/api/user',
+		headers: { accesstoken },
+		data: formData,
 	});
 };

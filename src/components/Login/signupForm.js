@@ -62,13 +62,9 @@ const Index = () => {
 	const nicknameDuplCheck = async () => {
 		await nicknameDupl(info)
 			.then((res) => {
-				if (res.status === 200) {
-					setErrorInfo({ nickname: res.data.message });
-				} else {
-					console.log(res.data.message);
-				}
+				setErrorInfo({ nickname: res.data.message });
 			})
-			.throw((err) => {
+			.catch((err) => {
 				console.error(err);
 				setErrorInfo({ nickname: '이미 사용하고 있는 닉네임입니다.' });
 			});
