@@ -49,10 +49,9 @@ const Index = () => {
 			.catch((err) => {
 				setErrorInfo({
 					...errorInfo,
-					email: '이미 사용하고 있는 이메일입니다.',
+					email: err.response.data.message,
 				});
-				console.log('catch구문');
-				console.error(err.data);
+				console.error(err);
 			});
 	};
 
@@ -62,10 +61,10 @@ const Index = () => {
 				setErrorInfo({ ...errorInfo, phone: res.data.message });
 			})
 			.catch((err) => {
-				console.error(err.data);
+				console.error(err);
 				setErrorInfo({
 					...errorInfo,
-					phone: '이미 사용하고 있는 전화번호입니다.',
+					phone: err.response.data.message,
 				});
 			});
 	};
@@ -79,7 +78,7 @@ const Index = () => {
 				console.error(err);
 				setErrorInfo({
 					...errorInfo,
-					nickname: '이미 사용하고 있는 닉네임입니다.',
+					nickname: err.response.data.message,
 				});
 			});
 	};
@@ -96,7 +95,7 @@ const Index = () => {
 			})
 			.catch((err) => {
 				console.error(err);
-				alert('회원가입 오류. 서버문제 or 이메일/닉네임/전화번호 중복');
+				alert(err.response.data.message);
 			});
 	};
 
@@ -189,6 +188,7 @@ const Index = () => {
 						value={info.email}
 						onChange={handleChange}
 					/>
+					<div className="line"></div>
 					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 						{errorInfo.email}
 					</div>
@@ -203,6 +203,7 @@ const Index = () => {
 						value={info.password}
 						onChange={handleChange}
 					/>
+					<div className="line"></div>
 					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 						{errorInfo.password}
 					</div>
@@ -217,6 +218,7 @@ const Index = () => {
 						value={info.passwordCheck}
 						onChange={handleChange}
 					/>
+					<div className="line"></div>
 					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 						{errorInfo.passwordCheck}
 					</div>
@@ -231,6 +233,7 @@ const Index = () => {
 						value={info.nickname}
 						onChange={handleChange}
 					/>
+					<div className="line"></div>
 					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 						{errorInfo.nickname}
 					</div>
@@ -245,6 +248,7 @@ const Index = () => {
 						value={info.phone}
 						onChange={handleChange}
 					/>
+					<div className="line"></div>
 					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 						{errorInfo.phone}
 					</div>
@@ -258,6 +262,7 @@ const Index = () => {
 						value={info.organization}
 						onChange={handleChange}
 					/>
+					<div className="line"></div>
 				</div>
 				<button className="submit-button" onClick={isPrepared}>
 					회원가입
