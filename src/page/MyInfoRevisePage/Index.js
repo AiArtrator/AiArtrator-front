@@ -1,18 +1,108 @@
 import React, { useState, useEffect } from 'react';
 import './my-info-revise-page.scss';
-import { getMypage } from '../../axios/User';
+import {
+	getMypage,
+	phoneDupl,
+	nicknameDupl,
+	putReviseInfo,
+} from '../../axios/User';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+	const navigate = useNavigate();
 	const userId = useSelector((state) => state.user.user.id);
+	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const [info, setInfo] = useState(null);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [reviseInfo, setReviseInfo] = useState({
-		email: '',
+		nickname: '',
 		phone: '',
 		organization: '',
 	});
+	const [errorInfo, setErrorInfo] = useState({
+		nickname: '',
+		phone: '',
+		organization: '',
+	});
+
+	const nicknameDuplCheck = async () => {
+		await nicknameDupl(reviseInfo)
+			.then((res) => {
+				setErrorInfo({ ...errorInfo, nickname: res.data.message });
+			})
+			.catch((err) => {
+				console.error(err);
+				console.log(JSON.stringify(err)); // 수정 필요
+				setErrorInfo({ nickname: '이미 사용하고 있는 닉네임입니다.' });
+			});
+	};
+	const nicknameDuplbutton = () => {
+		if (reviseInfo.nickname === '') {
+			setErrorInfo({ ...errorInfo, nickname: '닉네임을 입력해주세요.' });
+		} else {
+			nicknameDuplCheck();
+		}
+		console.log(reviseInfo.nickname);
+	};
+
+	const phoneDuplCheck = async () => {
+		await phoneDupl(reviseInfo)
+			.then((res) => {
+				setErrorInfo({ ...errorInfo, phone: res.data.message });
+			})
+			.catch((err) => {
+				console.error(err);
+				setErrorInfo({ phone: '이미 사용하고 있는 전화번호입니다' });
+			});
+	};
+
+	const phoneDuplbutton = () => {
+		if (reviseInfo.phone === '') {
+			setErrorInfo({ ...errorInfo, phone: '전화번호를 입력해주세요' });
+		} else {
+			phoneDuplCheck();
+		}
+	};
+
+	const reviseSubmit = async () => {
+		console.log('async중');
+		console.log(reviseInfo);
+		await putReviseInfo(accesstoken, reviseInfo)
+			.then((res) => {
+				console.log(
+					`[+] revise myinfo - res data: ${JSON.stringify(res.data)}`
+				);
+				alert('개인 정보 수정 성공');
+				navigate('/MyInfo');
+			})
+			.catch((err) => {
+				console.error(err);
+				alert('에러');
+			});
+	};
+
+	const isRevised = () => {
+		if (
+			reviseInfo.nickname === '' &&
+			reviseInfo.phone === '' &&
+			reviseInfo.organization === ''
+		) {
+			alert('수정된 정보가 없습니다.');
+		} else {
+			// if (reviseInfo.nickname === '') {
+			// 	setReviseInfo({ ...reviseInfo, nickname: info.nickname });
+			// 	if (reviseInfo.phone === '') {
+			// 		setReviseInfo({ ...reviseInfo, phone: info.phone });
+			// 	}
+			// } else if (reviseInfo.phone === '') {
+			// 	setReviseInfo({ ...reviseInfo, phone: info.phone });
+			// }
+			reviseSubmit();
+		}
+	};
+
 	useEffect(() => {
 		const fetchData = async () => {
 			setError(null);
@@ -48,46 +138,64 @@ const Index = () => {
 			setReviseInfo({ ...reviseInfo, nickname: value });
 		} else if (className === 'phone') {
 			setReviseInfo({ ...reviseInfo, phone: value });
-			if (reviseInfo.nickname === '') {
-				setReviseInfo(info.nickname);
-			}
+			// if (reviseInfo.nickname === '') {
+			// 	setReviseInfo(info.nickname);
+			// }
 		} else if (className === 'organization') {
 			setReviseInfo({ ...reviseInfo, organization: value });
-			if (reviseInfo.nickname === '') {
-				setReviseInfo({ nickname: info.nickname });
-			}
-			if (reviseInfo.phone === '') {
-				setReviseInfo({ phone: info.phone });
-			}
+			// if (reviseInfo.nickname === '') {
+			// 	setReviseInfo({ nickname: info.nickname });
+			// }
+			// if (reviseInfo.phone === '') {
+			// 	setReviseInfo({ phone: info.phone });
+			// }
 		} else {
-			console.err('[-] error from Revise');
+			console.error('[-] error from Revise');
 		}
 	};
 	return (
-		<div className="mypage-form">
-			<div className="myform">
+		<div className="myrevise-form">
+			<div className="reviseform">
 				<h3>P O G</h3>
-				<label>{info.nickname} 님의 정보수정</label>
-				<label>닉네임</label>
+				<label>{info.nickname} 님의 개인정보 수정</label>
+				<span>닉네임</span>
+				<span style={{ color: 'red' }}> *</span>
 				<div className="info">{info.nickname}</div>
-				<input
-					className="nickname"
-					type="nickname"
-					placeholder="수정을 원하시면 정보를 입력해주세요."
-					value={reviseInfo.nickname}
-					onChange={handleChange}
-				/>
-				<label>전화번호</label>
+				<div className="revise-part">
+					<input
+						className="nickname"
+						type="nickname"
+						placeholder="수정을 원하시면 정보를 입력해주세요."
+						value={reviseInfo.nickname}
+						onChange={handleChange}
+					/>
+					<button className="dupl-button" onClick={nicknameDuplbutton}>
+						중복확인
+					</button>
+				</div>
+				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					{errorInfo.nickname}
+				</div>
+				<span>전화번호</span>
+				<span style={{ color: 'red' }}> *</span>
 				<div className="info">{info.phone}</div>
-				<input
-					className="email"
-					type="email"
-					placeholder="수정을 원하시면 정보를 입력해주세요."
-					value={reviseInfo.phone}
-					onChange={handleChange}
-				/>
+				<div className="revise-part">
+					<input
+						className="phone"
+						type="phone"
+						placeholder="수정을 원하시면 정보를 입력해주세요."
+						value={reviseInfo.phone}
+						onChange={handleChange}
+					/>
+					<button className="dupl-button" onClick={phoneDuplbutton}>
+						중복확인
+					</button>
+				</div>
+				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					{errorInfo.phone}
+				</div>
 
-				<label>소속기관 (선택)</label>
+				<span>소속기관 (선택)</span>
 				<div className="info">
 					{info.organization ? (
 						<div>{info.organization}</div>
@@ -95,14 +203,18 @@ const Index = () => {
 						<div>입력된 정보가 없습니다.</div>
 					)}
 				</div>
-				<input
-					className="organization"
-					type="organization"
-					placeholder="수정을 원하시면 정보를 입력해주세요."
-					value={reviseInfo.organization}
-					onChange={handleChange}
-				/>
-				<button className="submit-button">정보수정</button>
+				<div className="revise-part">
+					<input
+						className="organization"
+						type="organization"
+						placeholder="수정을 원하시면 정보를 입력해주세요."
+						value={reviseInfo.organization}
+						onChange={handleChange}
+					/>
+				</div>
+				<button className="submit-button" onClick={isRevised}>
+					정보수정
+				</button>
 			</div>
 		</div>
 	);

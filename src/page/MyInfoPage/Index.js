@@ -47,7 +47,13 @@ const Index = () => {
 				<label>전화번호</label>
 				<div className="info">{info.phone}</div>
 				<label>소속기관</label>
-				<div className="info">-{info.organization}</div>
+				<div className="info">
+					{info.organization ? (
+						<>{info.organization}</>
+					) : (
+						<>입력된 정보가 없습니다.</>
+					)}
+				</div>
 				<Link to="/Revise">
 					{' '}
 					<button className="revise-button">정보수정</button>
