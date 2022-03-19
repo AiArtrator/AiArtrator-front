@@ -7,9 +7,10 @@ import {
 	putReviseInfo,
 } from '../../axios/User';
 import { useSelector } from 'react-redux';
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
+	const navigate = useNavigate();
 	const userId = useSelector((state) => state.user.user.id);
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const [info, setInfo] = useState(null);
@@ -66,13 +67,15 @@ const Index = () => {
 	};
 
 	const reviseSubmit = async () => {
+		console.log('async중');
+		console.log(reviseInfo);
 		await putReviseInfo(accesstoken, reviseInfo)
 			.then((res) => {
 				console.log(
 					`[+] revise myinfo - res data: ${JSON.stringify(res.data)}`
 				);
-				alert('개인 정보 수정 완료');
-				Navigate('/MyInfo');
+				alert('개인 정보 수정 성공');
+				navigate('/MyInfo');
 			})
 			.catch((err) => {
 				console.error(err);
@@ -89,9 +92,12 @@ const Index = () => {
 			alert('수정된 정보가 없습니다.');
 		} else {
 			// if (reviseInfo.nickname === '') {
-			// 	setReviseInfo({ nickname: info.nickname });
+			// 	setReviseInfo({ ...reviseInfo, nickname: info.nickname });
+			// 	if (reviseInfo.phone === '') {
+			// 		setReviseInfo({ ...reviseInfo, phone: info.phone });
+			// 	}
 			// } else if (reviseInfo.phone === '') {
-			// 	setReviseInfo({ phone: info.phone });
+			// 	setReviseInfo({ ...reviseInfo, phone: info.phone });
 			// }
 			reviseSubmit();
 		}
@@ -151,8 +157,9 @@ const Index = () => {
 		<div className="myrevise-form">
 			<div className="reviseform">
 				<h3>P O G</h3>
-				<label>{info.nickname} 님의 정보수정</label>
-				<label>닉네임</label>
+				<label>{info.nickname} 님의 개인정보 수정</label>
+				<span>닉네임</span>
+				<span style={{ color: 'red' }}> *</span>
 				<div className="info">{info.nickname}</div>
 				<div className="revise-part">
 					<input
@@ -169,7 +176,8 @@ const Index = () => {
 				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 					{errorInfo.nickname}
 				</div>
-				<label>전화번호</label>
+				<span>전화번호</span>
+				<span style={{ color: 'red' }}> *</span>
 				<div className="info">{info.phone}</div>
 				<div className="revise-part">
 					<input
@@ -187,7 +195,7 @@ const Index = () => {
 					{errorInfo.phone}
 				</div>
 
-				<label>소속기관 (선택)</label>
+				<span>소속기관 (선택)</span>
 				<div className="info">
 					{info.organization ? (
 						<div>{info.organization}</div>
