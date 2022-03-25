@@ -30,10 +30,10 @@ export const getNetworkDetailById = (postId: String) => {
 	});
 };
 
-export const getMyNetworkListById = (userId: String) => {
+export const getMyNetworkListById = (userId: String, page: String) => {
 	return axios({
 		method: 'GET',
-		url: `/api/user/${userId}/post/list`,
+		url: `/api/user/${userId}/post/list?filter=${page}&search=`,
 	});
 };
 

@@ -2,13 +2,21 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import './network-items.scss';
 import person from '../../../assets/person.png';
+import { useNavigate } from 'react-router-dom';
+
 const Index = ({ network }) => {
-	const { thumbnail, title, writer, summary, tagList } = network;
+	const navigate = useNavigate();
+	const { id, thumbnail, title, writer, summary, tagList } = network;
+	var postId = '/NetworkDetail/';
+
+	const toDetailPage = () => {
+		postId += id;
+		navigate(postId);
+	};
 
 	return (
-		<div className="items-block">
+		<div className="items-block" onClick={toDetailPage}>
 			<img src={thumbnail} alt="thumbnail" />
-
 			<div className="contents">
 				<h3>
 					<a>{title}</a>
@@ -26,7 +34,6 @@ const Index = ({ network }) => {
 						</div>
 					))}
 				</div>
-				{/* <div className="tag">{tagList.name}</div> */}
 			</div>
 		</div>
 	);
