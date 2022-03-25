@@ -4,12 +4,14 @@ import NetworksItem from './NetworkItems/Index.js';
 import { getMyNetworkListById } from '../../axios/Network';
 import { useSelector } from 'react-redux';
 
+// 내가 업로드한 모델 페이지
 const Index = () => {
 	const userId = useSelector((state) => state.user.user.id);
 	const nickname = useSelector((state) => state.user.user.nickname);
 	const [networks, setNetworks] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
+	const page = 'upload';
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -18,7 +20,7 @@ const Index = () => {
 			setLoading(true);
 
 			try {
-				const response = await getMyNetworkListById(userId);
+				const response = await getMyNetworkListById(userId, page);
 				setNetworks(response.data.data.postList);
 				console.log(response.data.data);
 			} catch (err) {
