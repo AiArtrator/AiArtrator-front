@@ -12,6 +12,7 @@ const Index = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const page = 'upload';
+	const [searchWord, setSearchWord] = useState('');
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -43,8 +44,19 @@ const Index = () => {
 		return null;
 	}
 
+	const handleChange = (e) => {
+		setSearchWord(e.target.value);
+	};
+
 	return (
 		<div className="list-block">
+			<input
+				type="search"
+				placeholder="모델 키워드 또는 태그를 검색하세요."
+				value={searchWord}
+				onChange={handleChange}
+			/>
+			<button>검색</button>
 			<div className="now-count">
 				{nickname} 님이 업로드한 모델 리스트입니다.
 			</div>
