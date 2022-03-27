@@ -13,7 +13,7 @@
 		position: absolute;
 		transform: translate(-50%, -50%);
 		left: 50%;
-		top: 60%;
+		top: 55%;
 	}
 	.background .shape {
 		height: 350px;
@@ -33,7 +33,7 @@
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
 		transform: translate(-50%, -50%);
-		top: 60%;
+		top: 50%;
 		left: 50%;
 		border-radius: 10px;
 		backdrop-filter: blur(10px);
@@ -75,11 +75,6 @@
 	::placeholder {
 		color: #ffffff;
 		font-weight: 400;
-	}
-	.error-info {
-		color: red;
-		font-weight: 500;
-		font-size: 15px;
 	}
 
 	button {
