@@ -15,7 +15,7 @@ const Index = () => {
 			<nav>
 				<ul>
 					<li className="my-networks" onClick={go}>
-						<span>업로드한모델</span>
+						<span>업로드 모델</span>
 					</li>
 					<li className="subscribe-networks">
 						<span>구독 모델</span>

@@ -24,6 +24,11 @@ const Index = () => {
 			navigate('/');
 		} catch (err) {
 			console.error(err);
+			if (err.response.data.status === (403 || 412)) {
+				alert('이메일 및 비밀번호를 확인해주세요.');
+			} else {
+				alert(err.response.data.message);
+			}
 		}
 	};
 

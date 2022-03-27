@@ -30,10 +30,14 @@ export const getNetworkDetailById = (postId: String) => {
 	});
 };
 // 내가 업로드한 모델 / 내가 구독중인 모델 / 이용 모델 페이지
-export const getMyNetworkListById = (userId: String, page: String) => {
+export const getMyNetworkListById = (
+	userId: String,
+	page: String,
+	search: String
+) => {
 	return axios({
 		method: 'GET',
-		url: `/api/user/${userId}/post/list?filter=${page}&search=`,
+		url: `/api/user/${userId}/post/list?filter=${page}&search=${search}`,
 	});
 };
 
