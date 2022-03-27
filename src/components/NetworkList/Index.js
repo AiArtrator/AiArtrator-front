@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './network-list.scss';
 import NetworksItem from './NetworkItems/Index.js';
-import { getNetworkList, getSearchNetwork } from '../../axios/Network';
+import { getNetworkList } from '../../axios/Network';
+import SearchPicto from '../../assets/search.png';
 
 const Index = () => {
 	const [networks, setNetworks] = useState(null);
@@ -23,7 +24,7 @@ const Index = () => {
 			setNetworks(null);
 			try {
 				console.log(searchWord);
-				const response = await getSearchNetwork(searchWord); // TODO : replace to getNetworkByUserId
+				const response = await getNetworkList(searchWord); // TODO : replace to getNetworkByUserId
 				console.log('검색 결과 개수는 ', response.data.data.postListCount);
 
 				setResCount(response.data.data.postListCount);
@@ -43,6 +44,7 @@ const Index = () => {
 			setError(null);
 			setNetworks(null);
 			setLoading(true);
+			setSearchWord('');
 			setSearchWord('');
 			try {
 				const response = await getNetworkList(); // TODO : replace to getNetworkByUserId
@@ -77,13 +79,16 @@ const Index = () => {
 	// networks 값이 유효할때
 	return (
 		<div className="list-block">
-			<input
-				type="search"
-				placeholder="모델 키워드 또는 태그를 검색하세요."
-				value={searchWord}
-				onChange={handleChange}
-			/>
-			<button onClick={handleSearch}>검색</button>
+			<div className="in-row">
+				<input
+					type="search"
+					placeholder="모델 키워드 또는 태그를 검색하세요."
+					value={searchWord}
+					onChange={handleChange}
+				/>
+
+				<img src={SearchPicto} alt="button" onClick={handleSearch} />
+			</div>
 
 			{result ? (
 				<div className="now-count">검색결과 {resCount} 건</div>
