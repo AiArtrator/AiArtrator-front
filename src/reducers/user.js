@@ -1,4 +1,5 @@
 import { getUserById, Logout } from '../axios/User';
+// import { getUserById } from '../axios/User';
 
 // Initial State
 const initialState = {
@@ -17,6 +18,8 @@ const initialState = {
 
 export const SET_USER = 'user/setUser';
 export const SET_ACCESSTOKEN = 'user/setAccesstoken';
+export const REMOVE_USER = 'user/removeUser';
+export const REMOVE_ACCESSTOKEN = 'user/removeAccesstoken';
 
 // action creators
 export const setUser = (user) => ({
@@ -27,6 +30,14 @@ export const setUser = (user) => ({
 export const setAccsstoken = (accesstoken) => ({
 	type: SET_ACCESSTOKEN,
 	payload: accesstoken,
+});
+
+export const removeUser = () => ({
+	type: REMOVE_USER,
+});
+
+export const removeAccsstoken = () => ({
+	type: REMOVE_ACCESSTOKEN,
 });
 
 export const getUser = () => {
@@ -41,12 +52,15 @@ export const getUser = () => {
 	};
 };
 
-export const userLogout = async () => {
+export const userLogout = async (dispatch, getState) => {
 	try {
-		await Logout();
-		window.location.href = '/';
+		const accesstoken = getState().user.accesstoken;
+		const res = await Logout(accesstoken);
+		alert(res.data.message); // TODO: remove alert
+		dispatch(removeAccsstoken());
+		dispatch(removeUser());
 	} catch (err) {
-		console.dir(err);
+		console.error(err);
 	}
 };
 
@@ -80,6 +94,20 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				accesstoken: action.payload,
+			};
+		}
+		case REMOVE_USER: {
+			return {
+				...state,
+				user: undefined,
+				login: undefined,
+				status: undefined,
+			};
+		}
+		case REMOVE_ACCESSTOKEN: {
+			return {
+				...state,
+				accesstoken: undefined,
 			};
 		}
 
