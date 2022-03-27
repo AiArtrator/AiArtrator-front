@@ -95,7 +95,7 @@ const Index = () => {
 			})
 			.catch((err) => {
 				console.error(err);
-				// alert(err.response.data.message);
+				alert(err.response.data.message);
 			});
 	};
 
