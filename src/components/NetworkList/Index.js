@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './network-list.scss';
 import NetworksItem from './NetworkItems/Index.js';
-import { getNetworkList } from '../../axios/Network';
+import { getNetworkList, getSearchNetwork } from '../../axios/Network';
 import SearchPicto from '../../assets/search.png';
 
 const Index = () => {
@@ -24,7 +24,7 @@ const Index = () => {
 			setNetworks(null);
 			try {
 				console.log(searchWord);
-				const response = await getNetworkList(searchWord); // TODO : replace to getNetworkByUserId
+				const response = await getSearchNetwork(searchWord); // TODO : replace to getNetworkByUserId
 				console.log('검색 결과 개수는 ', response.data.data.postListCount);
 
 				setResCount(response.data.data.postListCount);
