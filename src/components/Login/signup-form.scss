@@ -9,7 +9,7 @@
 	font-size: 0.7rem;
 
 	.form {
-		height: 48rem;
+		height: 50rem;
 		width: 23rem;
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
@@ -17,10 +17,10 @@
 		top: 50%;
 		left: 50%;
 		border-radius: 10px;
-		// backdrop-filter: blur(12px);
+
 		border: 2px solid rgba(255, 255, 255, 0.1);
 		box-shadow: 0 0 40px rgba(8, 7, 16, 0.42);
-		padding: 50px 35px;
+		padding: 40px 35px;
 	}
 	.form * {
 		font-family: 'Poppins', sans-serif;
@@ -29,19 +29,23 @@
 		outline: none;
 		border: none;
 	}
-	.form h3 {
-		font-size: 20px;
-		line-height: 42px;
+	.image {
 		text-align: center;
-		padding-bottom: 2rem;
+		img {
+			width: 8rem;
+			height: 8rem;
+			margin-bottom: 0.5rem;
+		}
 	}
 	.errorMessage {
 		margin-top: 0.5rem;
 		margin-bottom: 1.5rem;
+		color: rgba(13, 0, 92, 1);
+		font-weight: 300;
 	}
 
 	label {
-		display: block;
+		display: inline;
 		margin-top: 1rem;
 		// font-size: 16px;
 		font-weight: 500;
@@ -50,24 +54,47 @@
 		display: block;
 		height: 2rem;
 		width: 100%;
-		//border-bottom: 5px thin rgb(0, 0, 0);
 		border-radius: 3px;
 		padding: 0 10px;
 		margin-top: 0.5rem;
-		// margin-bottom: 1rem;
 		font-weight: 500;
 	}
 	::placeholder {
 		color: rgba(157, 157, 157, 1);
 		font-size: 0.7rem;
 		font-weight: 300;
+		background-color: white;
 	}
 	.line {
 		border-top: 0.1rem solid rgba(166, 185, 241, 0.3);
 	}
 
+	input {
+		display: inline;
+		height: 2rem;
+		width: 76%;
+		//border-bottom: 5px thin rgb(0, 0, 0);
+		border-radius: 3px;
+		padding: 0 10px;
+		margin-top: 0.5rem;
+
+		font-weight: 500;
+	}
+	.inrow-button {
+		display: inline;
+		font-size: 0.8rem;
+		font-weight: 300;
+		color: rgba(13, 0, 92, 1);
+
+		background-color: rgb(255, 255, 255); //white;
+		border: 0.1rem solid rgba(166, 185, 241, 0.3);
+		padding: 0.2rem 0.4rem 0.2rem 0.4rem;
+		border-radius: 0.2rem;
+	}
+
 	.submit-button {
 		margin-top: 1rem;
+
 		width: 100%;
 		background-color: rgba(166, 185, 241, 0.3);
 		color: rgba(13, 0, 92, 1);
@@ -78,6 +105,7 @@
 		cursor: pointer;
 	}
 	button:hover {
+		font-weight: 500;
 		background-color: rgba(0, 0, 128, 1);
 		color: #eaf0fb;
 		margin-bottom: 0;
