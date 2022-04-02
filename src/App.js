@@ -14,6 +14,7 @@ import NetworkUpdatePage from './page/NetworkUpdatePage/Index';
 import MyInfoRevisePage from './page/MyInfoRevisePage/Index';
 import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import { WeightUploadForm2 } from './components/NetworkUpload2';
+import MySubscribePage from './page/MySubscribePage/Index';
 function App() {
 	return (
 		<div className="App">
@@ -34,6 +35,9 @@ function App() {
 				</Route>
 				<Route path="/MyNetworks" element={<AuthRoute />}>
 					<Route path="/MyNetworks" element={<MyNetworksPage />} />
+				</Route>
+				<Route path="/MySubscribe" element={<AuthRoute />}>
+					<Route path="/MySubscribe" element={<MySubscribePage />} />
 				</Route>
 				<Route path="/NetworkUpload" element={<AuthRoute />}>
 					<Route path="/NetworkUpload" element={<NetworkUploadPage />} />

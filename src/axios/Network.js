@@ -23,9 +23,11 @@ export const getSearchNetwork = (search: String) => {
 	});
 };
 
-export const getNetworkDetailById = (postId: String) => {
+// 모델디테일 페이지
+export const getNetworkDetailById = (postId: String, accesstoken: String) => {
 	return axios({
 		method: 'GET',
+		headers: { accesstoken },
 		url: `/api/post/${postId}`,
 	});
 };

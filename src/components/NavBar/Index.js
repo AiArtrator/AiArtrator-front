@@ -4,7 +4,6 @@ import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
 import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
-import OwnNetworksBtn from './MyMenu/OwnNetworksButton/Index.js';
 import MyNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -32,9 +31,7 @@ const Index = () => {
 								<li>
 									<NetworkUploadBtn />
 								</li>
-								<li>
-									<OwnNetworksBtn />
-								</li>
+
 								<li>
 									<MyNetworksBtn />
 								</li>

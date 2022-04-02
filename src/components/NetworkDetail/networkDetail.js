@@ -20,6 +20,7 @@ const Index = () => {
 		summary: '',
 		tagList: [],
 		desc: '',
+		isSubscribed: '',
 	});
 
 	useEffect(() => {
@@ -37,6 +38,7 @@ const Index = () => {
 				summary: networkDetail.summary,
 				tagList: networkDetail.tagList,
 				desc: networkDetail.description,
+				isSubscribed: networkDetail.isSubscribed,
 			});
 		}
 	}, [networkDetail]);
