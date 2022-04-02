@@ -3,6 +3,8 @@ import './my-info-page.scss';
 import { getMypage } from '../../axios/User';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Logo from '../../assets/logo/LogoBox1.png';
+
 const Index = () => {
 	const userId = useSelector((state) => state.user.user.id);
 	const [info, setInfo] = useState(null);
@@ -38,7 +40,9 @@ const Index = () => {
 	return (
 		<div className="mypage-form">
 			<div className="myform">
-				<h3>P O G</h3>
+				<div className="inrow">
+					<img src={Logo} />
+				</div>
 				<label>{info.nickname} 님의 개인정보</label>
 				<label>이메일</label>
 				<div className="info"> {info.email}</div>

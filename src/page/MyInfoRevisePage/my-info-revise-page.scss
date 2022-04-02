@@ -30,11 +30,12 @@
 		border: none;
 	}
 
-	.reviseform h3 {
-		font-size: 20px;
-		line-height: 42px;
+	.inrow {
 		text-align: center;
-		padding-bottom: 0.5rem;
+		img {
+			width: 5rem;
+			height: 5rem;
+		}
 	}
 	.errorMessage {
 		margin-bottom: 0.8rem;
