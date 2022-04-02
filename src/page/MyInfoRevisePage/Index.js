@@ -8,6 +8,7 @@ import {
 } from '../../axios/User';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import Logo from '../../assets/logo/LogoBox1.png';
 
 const Index = () => {
 	const navigate = useNavigate();
@@ -22,10 +23,11 @@ const Index = () => {
 		organization: '',
 	});
 	const [errorInfo, setErrorInfo] = useState({
-		nickname: '',
-		phone: '',
-		organization: '',
+		nickname: '\u00a0',
+		phone: '\u00a0',
+		organization: '\u00a0',
 	});
+	var tosubmit = { nickname: '', phone: '', organization: '' };
 
 	const nicknameDuplCheck = async () => {
 		await nicknameDupl(reviseInfo)
@@ -41,6 +43,8 @@ const Index = () => {
 	const nicknameDuplbutton = () => {
 		if (reviseInfo.nickname === '') {
 			setErrorInfo({ ...errorInfo, nickname: '닉네임을 입력해주세요.' });
+		} else if (reviseInfo.nickname === info.nickname) {
+			setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
 		} else {
 			nicknameDuplCheck();
 		}
@@ -61,6 +65,8 @@ const Index = () => {
 	const phoneDuplbutton = () => {
 		if (reviseInfo.phone === '') {
 			setErrorInfo({ ...errorInfo, phone: '전화번호를 입력해주세요' });
+		} else if (reviseInfo.phone === info.phone) {
+			setErrorInfo({ ...errorInfo, phone: '\u00a0' });
 		} else {
 			phoneDuplCheck();
 		}
@@ -69,36 +75,40 @@ const Index = () => {
 	const reviseSubmit = async () => {
 		console.log('async중');
 		console.log(reviseInfo);
-		await putReviseInfo(accesstoken, reviseInfo)
+		await putReviseInfo(accesstoken, tosubmit)
 			.then((res) => {
 				console.log(
 					`[+] revise myinfo - res data: ${JSON.stringify(res.data)}`
 				);
-				alert('개인 정보 수정 성공');
+				alert('개인정보 수정 완료');
 				navigate('/MyInfo');
 			})
 			.catch((err) => {
 				console.error(err);
-				alert('에러');
+				alert(err.response.data.message);
 			});
 	};
 
 	const isRevised = () => {
+		tosubmit = reviseInfo;
+		if (tosubmit.nickname === '') {
+			tosubmit.nickname = info.nickname;
+		} else if (tosubmit.phone === '') {
+			tosubmit.phone = info.phone;
+		}
 		if (
+			tosubmit.nickname === info.nickname &&
+			tosubmit.phone === info.phone &&
+			tosubmit.organization === info.organization
+		) {
+			alert('수정된 정보가 없습니다.');
+		} else if (
 			reviseInfo.nickname === '' &&
 			reviseInfo.phone === '' &&
 			reviseInfo.organization === ''
 		) {
 			alert('수정된 정보가 없습니다.');
 		} else {
-			// if (reviseInfo.nickname === '') {
-			// 	setReviseInfo({ ...reviseInfo, nickname: info.nickname });
-			// 	if (reviseInfo.phone === '') {
-			// 		setReviseInfo({ ...reviseInfo, phone: info.phone });
-			// 	}
-			// } else if (reviseInfo.phone === '') {
-			// 	setReviseInfo({ ...reviseInfo, phone: info.phone });
-			// }
 			reviseSubmit();
 		}
 	};
@@ -108,9 +118,11 @@ const Index = () => {
 			setError(null);
 			setLoading(true);
 			setInfo(null);
+			setReviseInfo(null);
 			try {
 				const response = await getMypage(userId);
 				setInfo(response.data.data);
+				setReviseInfo(response.data.data);
 				console.log(response.data.data);
 			} catch (err) {
 				console.error(err);
@@ -138,17 +150,8 @@ const Index = () => {
 			setReviseInfo({ ...reviseInfo, nickname: value });
 		} else if (className === 'phone') {
 			setReviseInfo({ ...reviseInfo, phone: value });
-			// if (reviseInfo.nickname === '') {
-			// 	setReviseInfo(info.nickname);
-			// }
 		} else if (className === 'organization') {
 			setReviseInfo({ ...reviseInfo, organization: value });
-			// if (reviseInfo.nickname === '') {
-			// 	setReviseInfo({ nickname: info.nickname });
-			// }
-			// if (reviseInfo.phone === '') {
-			// 	setReviseInfo({ phone: info.phone });
-			// }
 		} else {
 			console.error('[-] error from Revise');
 		}
@@ -156,7 +159,9 @@ const Index = () => {
 	return (
 		<div className="myrevise-form">
 			<div className="reviseform">
-				<h3>P O G</h3>
+				<div className="inrow">
+					<img src={Logo} alt="logo" />
+				</div>
 				<label>{info.nickname} 님의 개인정보 수정</label>
 				<span>닉네임</span>
 				<span style={{ color: 'red' }}> *</span>
