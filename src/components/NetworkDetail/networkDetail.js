@@ -4,27 +4,31 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchNetworkDetail } from '../../reducers/network';
 import { dateToText } from '../Utils';
-import { DEFAULT_THUMBNAIL } from '../../constants';
+import DEFAULT_THUMBNAIL from '../../assets/thumb.jpeg';
+import { useNavigate } from 'react-router-dom';
+import { postNetworkSubscribe } from '../../axios/Network';
 
 const Index = () => {
 	const dispatch = useDispatch();
 	const networkDetail = useSelector((state) => state.network.detail);
+	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const { postId } = useParams();
-
+	const navigate = useNavigate();
 	const [detailInfo, setDetailInfo] = useState({
-		title: '',
+		title: '로딩 중',
 		thumbnail: DEFAULT_THUMBNAIL,
-		writer: '',
-		updatedAt: '',
-		ver: '',
-		summary: '',
+		writer: '로딩 중',
+		updatedAt: '로딩 중',
+		ver: '로딩 중',
+		summary: '로딩 중입니다.',
 		tagList: [],
-		desc: '',
-		isSubscribed: '',
+		desc: '로딩 중',
+		isSubscribed: false,
 	});
+	const forrequest = { postId: postId };
 
 	useEffect(() => {
-		dispatch(fetchNetworkDetail(postId));
+		dispatch(fetchNetworkDetail(postId, accesstoken));
 	}, []);
 
 	useEffect(() => {
@@ -43,17 +47,59 @@ const Index = () => {
 		}
 	}, [networkDetail]);
 
+	const subscribe = async () => {
+		await postNetworkSubscribe(forrequest, accesstoken)
+			.then((res) => {
+				console.log(res.data.message);
+				alert('구독 완료');
+			})
+			.catch((err) => {
+				console.error(err);
+				console.log(err.response.data.message);
+			});
+	};
+	const subscribeBtn = () => {
+		if (networkDetail) {
+			subscribe();
+		} else {
+			alert('에러 발생');
+		}
+	};
+
 	return (
 		<NetworkDetail>
 			<img src={detailInfo.thumbnail} alt="thumbnail" />
 			<TextContainer>
 				<div className="networkTitle">{detailInfo.title}</div>
+				<div className="detailTitle"> </div>
 				<div className="updatedAt">{dateToText(detailInfo.updatedAt)}</div>
-				<div className="detailTitle">writer</div>
+				<div className="detailTitle">판매자</div>
 				<div className="writer">{detailInfo.writer}</div>
-				<div className="detailTitle">version</div>
+				<div className="detailTitle">모델 버전</div>
 				<div className="detail">{detailInfo.ver}</div>
-				<div className="summary">{detailInfo.summary}</div>
+				<div className="detailTitle">모델 구독</div>
+				<button
+					className="to-subscribe"
+					onClick={() => {
+						navigate('/Mysubscribe');
+					}}
+				>
+					나의 구독리스트
+				</button>
+				<div
+					className="summary"
+					style={{ color: 'lightgray', fontWeight: '350' }}
+				>
+					* 모델 구독시, 구독한 모델보기 페이지에서 확인 및 이용이 가능합니다.
+				</div>
+				<div
+					className={
+						detailInfo.isSubscribed ? 'already-subscribed' : 'subscribe-button'
+					}
+					onClick={subscribeBtn}
+				>
+					{detailInfo.isSubscribed ? '구독 중인 모델' : '구독하기'}
+				</div>
 
 				<TagListContainer>
 					<div className="tagList">
@@ -112,22 +158,85 @@ const TextContainer = styled.div`
 	.networkTitle {
 		grid-column: 1 / 3;
 		font-size: 24px;
-		font-weight: 600;
+		color: rgba(0, 0, 128, 1);
+		font-weight: 500;
 		overflow-wrap: break-word;
 	}
 	.updatedAt {
-		grid-column: 1 / 3;
-		justify-self: end;
+		// grid-column: 1 / 3;
+		// justify-self: center;
 		overflow: auto;
 	}
 	.detailTitle {
-		color: #0d005c;
+		color: rgba(0, 0, 128, 1);
+		font-weight: 500;
 		margin-right: 20px;
 	}
 	.summary {
 		grid-column: 1 / 3;
 		width: 100%;
 		overflow-wrap: break-word;
+	}
+	.to-subscribe {
+		color: rgba(0, 0, 128, 1);
+		font-weight: 200;
+		width: 15rem;
+		outline: 0;
+		border: 0;
+		background-color: white;
+		cursor: pointer;
+	}
+	.to-subscribe:hover {
+		font-weight: 500;
+	}
+	.already-subscribed {
+		margin-top: 1rem;
+		align-self: center;
+		text-align: center;
+		width: 100%;
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
+		padding: 0.5rem 6.5rem;
+		font-size: 15px;
+		font-weight: 600;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.already-subscribed:hover {
+		color: rgba(0, 0, 128, 1);
+
+		font-weight: 100;
+		background-color: rgba(166, 185, 241, 0.3);
+
+		margin-bottom: 0;
+	}
+	.already-subscribed:hover::after {
+		color: rgba(0, 0, 128, 1);
+		content: ' - 구독 취소';
+		font-weight: 500;
+
+		margin-bottom: 0;
+	}
+
+	.subscribe-button {
+		margin-top: 1rem;
+		align-self: center;
+		text-align: center;
+
+		width: 100%;
+		background-color: rgba(166, 185, 241, 0.3);
+		color: rgba(13, 0, 92, 1);
+		padding: 0.5rem 6.5rem;
+		font-size: 15px;
+		font-weight: 600;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	.subscribe-button:hover {
+		font-weight: 500;
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
+		margin-bottom: 0;
 	}
 `;
 

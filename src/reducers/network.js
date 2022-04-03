@@ -38,13 +38,15 @@ export const setNetworkDetail = (networkDetail) => ({
 	payload: networkDetail,
 });
 
-export const fetchNetworkDetail = (postId: String) => {
+export const fetchNetworkDetail = (postId: String, accesstoken: String) => {
 	return async (dispatch) => {
 		try {
-			const res = await getNetworkDetailById(postId);
+			const res = await getNetworkDetailById(postId, accesstoken);
 			dispatch(setNetworkDetail(res.data.data));
+			console.log(res.data.message);
 		} catch (err) {
 			console.error(err);
+			console.log(err.response.data.message);
 		}
 	};
 };
