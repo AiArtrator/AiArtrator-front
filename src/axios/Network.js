@@ -32,6 +32,15 @@ export const getNetworkDetailById = (postId: String, accesstoken: String) => {
 	});
 };
 
+export const deleteMyNetwork = (postId: String, accesstoken: String) => {
+	return axios({
+		method: 'DELETE',
+		headers: { accesstoken },
+		url: `/api/post/${postId}`,
+	});
+};
+
+// 구독 신청 및 취소
 export const postNetworkSubscribe = (data, accesstoken: String) => {
 	return axios({
 		method: 'POST',

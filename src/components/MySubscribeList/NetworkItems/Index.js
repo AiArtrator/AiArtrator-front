@@ -3,40 +3,35 @@ import React from 'react';
 import './network-items.scss';
 import person from '../../../assets/person.png';
 import { useNavigate } from 'react-router-dom';
-import { deleteMyNetwork } from '../../../axios/Network';
+import { postNetworkSubscribe } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
 
 const Index = ({ network }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
-	var postIdUrl = '/NetworkDetail/';
+	var postIdURL = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 
-	// const postIds = { postId: id };
 	const toDetailPage = () => {
-		postIdUrl += id;
-		navigate(postIdUrl);
+		postIdURL += id;
+		navigate(postIdURL);
 	};
-	const deleteModel = async () => {
+	const deleteSubscribe = async () => {
 		try {
-			const res = await deleteMyNetwork(accesstoken, { postId: id });
+			const res = await postNetworkSubscribe({ postId: id }, accesstoken);
 			console.log(res.data.message);
 		} catch (err) {
 			console.error(err);
-			alert('에러 입니다. ');
 			console.log(err.response.data.message);
+			alert('에러 입니다.');
 		}
 	};
 
 	return (
-		<div>
-			<div className="inrow">
-				<div className="button" onClick={deleteModel}>
-					삭제하기
-				</div>
-				<div className="button">수정하기</div>
+		<>
+			<div className="button" onClick={deleteSubscribe}>
+				구독취소
 			</div>
-
 			<div className="items-block" onClick={toDetailPage}>
 				<img src={thumbnail} alt="thumbnail" />
 
@@ -44,7 +39,6 @@ const Index = ({ network }) => {
 					<h3>
 						<a>{title}</a>
 					</h3>
-
 					<div className="writer">
 						<img src={person} alt="profile" />
 						<div className="writer-nickname">{writer.nickname}</div>
@@ -60,7 +54,7 @@ const Index = ({ network }) => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
