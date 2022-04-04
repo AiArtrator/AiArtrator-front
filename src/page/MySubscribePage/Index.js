@@ -1,12 +1,11 @@
 import React from 'react';
-import MyNetwork from '../../components/MyNetworkList/Index';
+import MySubscribe from '../../components/MySubscribeList/Index';
 import SideNav from '../../components/SideBar/Index';
 const Index = () => {
 	return (
 		<>
 			<SideNav />
-
-			<MyNetwork />
+			<MySubscribe />
 		</>
 	);
 };
