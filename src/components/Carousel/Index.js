@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-carousel-minimal';
+// import CarouselCustomize from './carousel.js';
 import JPG1 from '../../assets/carousel1.jpg';
 import JPG2 from '../../assets/carousel2.jpeg';
 import JPG3 from '../../assets/carousel3.jpeg';
@@ -50,20 +51,20 @@ const Index = () => {
 		fontWeight: 'bold',
 	};
 	return (
-		<div className="App">
+		<div className="App" style={{ height: '35rem' }}>
 			<div style={{ textAlign: 'center' }}>
 				<div
 					style={{
-						padding: '0 20px',
+						padding: '0',
 					}}
 				>
 					<Carousel
 						data={data}
 						time={3000}
-						width="850px"
-						height="500px"
+						width="100rem"
+						height="35rem"
 						captionStyle={captionStyle}
-						radius="10px"
+						radius="0px"
 						slideNumber={false}
 						slideNumberStyle={slideNumberStyle}
 						captionPosition="top"
@@ -78,9 +79,9 @@ const Index = () => {
 						showNavBtn={false}
 						style={{
 							textAlign: 'center',
-							maxWidth: '850px',
-							maxHeight: '500px',
-							margin: '40px auto',
+							maxWidth: '100%',
+							maxHeight: '35rem',
+							margin: '0rem',
 						}}
 					/>
 				</div>
