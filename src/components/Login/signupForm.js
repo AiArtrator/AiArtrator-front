@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { signup, emailDupl, nicknameDupl, phoneDupl } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
 import './signup-form.scss';
+import Logo from '../../assets/logo/MainLogoV1.png';
 
 const Index = () => {
 	const navigate = useNavigate();
@@ -20,12 +21,12 @@ const Index = () => {
 	});
 
 	const [errorInfo, setErrorInfo] = useState({
-		email: '',
-		password: '',
-		passwordCheck: '',
-		nickname: '',
-		phone: '',
-		organization: '',
+		email: '\u00a0',
+		password: '\u00a0',
+		passwordCheck: '\u00a0',
+		nickname: '\u00a0',
+		phone: '\u00a0',
+		organization: ' ',
 	});
 
 	const checkForm = () => {
@@ -36,7 +37,7 @@ const Index = () => {
 				passwordCheck: '비밀번호가 일치하지 않습니다.',
 			});
 		} else {
-			setErrorInfo({ ...errorInfo, passwordCheck: '' });
+			setErrorInfo({ ...errorInfo, passwordCheck: '\u00a0' });
 			ret = true;
 		}
 		return ret;
@@ -54,6 +55,13 @@ const Index = () => {
 				console.error(err);
 			});
 	};
+	const emailDuplBtn = () => {
+		if (info.email === '') {
+			setErrorInfo({ ...errorInfo, email: '입력을 먼저 해주세요.' });
+		} else {
+			emailDuplCheck();
+		}
+	};
 
 	const phoneDuplCheck = async () => {
 		await phoneDupl(info)
@@ -67,6 +75,13 @@ const Index = () => {
 					phone: err.response.data.message,
 				});
 			});
+	};
+	const phoneDuplBtn = () => {
+		if (info.phone === '') {
+			setErrorInfo({ ...errorInfo, phone: '입력을 먼저 해주세요.' });
+		} else {
+			phoneDuplCheck();
+		}
 	};
 
 	const nicknameDuplCheck = async () => {
@@ -82,6 +97,13 @@ const Index = () => {
 				});
 			});
 	};
+	const nicknameDuplBtn = () => {
+		if (info.nickname === '') {
+			setErrorInfo({ ...errorInfo, nickname: '입력을 먼저 해주세요.' });
+		} else {
+			nicknameDuplCheck();
+		}
+	};
 
 	const signupSubmit = async () => {
 		await signup(info)
@@ -95,7 +117,7 @@ const Index = () => {
 			})
 			.catch((err) => {
 				console.error(err);
-				// alert(err.response.data.message);
+				alert(err.response.data.message);
 			});
 	};
 
@@ -104,13 +126,9 @@ const Index = () => {
 		const value = e.target.value;
 		if (className === 'email') {
 			setInfo({ ...info, email: value });
+			setErrorInfo({ ...errorInfo, email: '중복 확인을 해주세요.' });
 		} else if (className === 'password') {
 			setInfo({ ...info, password: value });
-			if (info.email === '') {
-				setErrorInfo({ ...errorInfo, email: '이메일을 입력하세요.' });
-			} else {
-				emailDuplCheck();
-			}
 		} else if (className === 'passwordCheck') {
 			setInfo({ ...info, passwordCheck: value });
 			if (info.password === '') {
@@ -118,31 +136,12 @@ const Index = () => {
 			}
 		} else if (className === 'nickname') {
 			setInfo({ ...info, nickname: value });
-			if (info.passwordCheck === '') {
-				setErrorInfo({
-					...errorInfo,
-					passwordCheck: '비밀번호를 입력하세요.',
-				});
-			} else if (info.password === '') {
-				setErrorInfo({ ...errorInfo, password: '비밀번호를 입력하세요.' });
-			} else {
-				setErrorInfo({ ...errorInfo, password: '', passwordCheck: '' });
-				checkForm();
-			}
+			setErrorInfo({ ...errorInfo, nickname: '중복 확인을 해주세요.' });
 		} else if (className === 'phone') {
 			setInfo({ ...info, phone: value });
-			if (info.nickname === '') {
-				setErrorInfo({ ...errorInfo, nickname: '닉네임을 입력하세요.' });
-			} else {
-				nicknameDuplCheck();
-			}
+			setErrorInfo({ ...errorInfo, phone: '중복 확인을 해주세요.' });
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
-			if (info.phone === '') {
-				setErrorInfo({ ...errorInfo, phone: '전화번호를 입력해주세요.' });
-			} else {
-				phoneDuplCheck();
-			}
 		} else {
 			console.err('[-] error from SignupForm');
 		}
@@ -159,14 +158,12 @@ const Index = () => {
 			if (info.email === '') {
 				setErrorInfo({ ...errorInfo, email: '이메일을 입력하세요.' });
 			} else if (info.password === '') {
-				emailDuplCheck();
 				setErrorInfo({ ...errorInfo, password: '비밀번호를 입력하세요' });
 			} else if (info.passwordCheck === '') {
 				setErrorInfo({ ...errorInfo, passwordCheck: '비밀번호를 입력하세요' });
 			} else if (info.nickname === '') {
 				setErrorInfo({ ...errorInfo, nickname: '닉네임을 입력하세요' });
 			} else if (info.phone === '') {
-				nicknameDuplCheck();
 				setErrorInfo({ ...errorInfo, phone: '전화번호를 입력하세요' });
 			}
 		} else if (checkForm()) {
@@ -177,10 +174,14 @@ const Index = () => {
 	return (
 		<div className="signup-form">
 			<div className="form">
-				<h3>P O G</h3>
+				<div className="image">
+					<img className="image" src={Logo} alt="logo" />
+				</div>
 				<div>
-					<span className="label">이메일</span>
+					<label>이메일</label>
 					<span style={{ color: 'red' }}> *</span>
+					<br />
+
 					<input
 						className="email"
 						type="email"
@@ -188,14 +189,19 @@ const Index = () => {
 						value={info.email}
 						onChange={handleChange}
 					/>
+					<button className="inrow-button" onClick={emailDuplBtn}>
+						중복 확인
+					</button>
+
 					<div className="line"></div>
-					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					<div className="errorMessage" id="checkMess">
 						{errorInfo.email}
 					</div>
 				</div>
 				<div>
 					<span>비밀번호</span>
 					<span style={{ color: 'red' }}> *</span>
+					<br />
 					<input
 						className="password"
 						type="password"
@@ -204,13 +210,14 @@ const Index = () => {
 						onChange={handleChange}
 					/>
 					<div className="line"></div>
-					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					<div className="errorMessage" id="checkMess">
 						{errorInfo.password}
 					</div>
 				</div>
 				<div>
 					<span>비밀번호 확인</span>
 					<span style={{ color: 'red' }}> *</span>
+					<br />
 					<input
 						className="passwordCheck"
 						type="password"
@@ -219,13 +226,14 @@ const Index = () => {
 						onChange={handleChange}
 					/>
 					<div className="line"></div>
-					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					<div className="errorMessage" id="checkMess">
 						{errorInfo.passwordCheck}
 					</div>
 				</div>
 				<div>
 					<span>닉네임</span>
 					<span style={{ color: 'red' }}> *</span>
+					<br />
 					<input
 						className="nickname"
 						type="nickname"
@@ -233,14 +241,18 @@ const Index = () => {
 						value={info.nickname}
 						onChange={handleChange}
 					/>
+					<button className="inrow-button" onClick={nicknameDuplBtn}>
+						중복 확인
+					</button>
 					<div className="line"></div>
-					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					<div className="errorMessage" id="checkMess">
 						{errorInfo.nickname}
 					</div>
 				</div>
 				<div>
 					<span>전화번호</span>
 					<span style={{ color: 'red' }}> *</span>
+					<br />
 					<input
 						className="phone"
 						type="phonenumber"
@@ -248,8 +260,11 @@ const Index = () => {
 						value={info.phone}
 						onChange={handleChange}
 					/>
+					<button className="inrow-button" onClick={phoneDuplBtn}>
+						중복 확인
+					</button>
 					<div className="line"></div>
-					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
+					<div className="errorMessage" id="checkMess">
 						{errorInfo.phone}
 					</div>
 				</div>

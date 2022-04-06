@@ -23,17 +23,42 @@ export const getSearchNetwork = (search: String) => {
 	});
 };
 
-export const getNetworkDetailById = (postId: String) => {
+// 모델디테일 페이지
+export const getNetworkDetailById = (postId: String, accesstoken: String) => {
 	return axios({
 		method: 'GET',
+		headers: { accesstoken },
 		url: `/api/post/${postId}`,
 	});
 };
+
+export const deleteMyNetwork = (postId: String, accesstoken: String) => {
+	return axios({
+		method: 'DELETE',
+		headers: { accesstoken },
+		url: `/api/post/${postId}`,
+	});
+};
+
+// 구독 신청 및 취소
+export const postNetworkSubscribe = (data, accesstoken: String) => {
+	return axios({
+		method: 'POST',
+		headers: { accesstoken },
+		url: `/api/subscribe`,
+		data,
+	});
+};
+
 // 내가 업로드한 모델 / 내가 구독중인 모델 / 이용 모델 페이지
-export const getMyNetworkListById = (userId: String, page: String) => {
+export const getMyNetworkListById = (
+	userId: String,
+	page: String,
+	search: String
+) => {
 	return axios({
 		method: 'GET',
-		url: `/api/user/${userId}/post/list?filter=${page}&search=`,
+		url: `/api/user/${userId}/post/list?filter=${page}&search=${search}`,
 	});
 };
 

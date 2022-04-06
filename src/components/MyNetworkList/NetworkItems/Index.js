@@ -3,37 +3,61 @@ import React from 'react';
 import './network-items.scss';
 import person from '../../../assets/person.png';
 import { useNavigate } from 'react-router-dom';
+import { deleteMyNetwork } from '../../../axios/Network';
+import { useSelector } from 'react-redux';
 
 const Index = ({ network }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
-	var postId = '/NetworkDetail/';
+	var postIdUrl = '/NetworkDetail/';
+	const accesstoken = useSelector((state) => state.user.accesstoken);
 
+	// const postIds = { postId: id };
 	const toDetailPage = () => {
-		postId += id;
-		navigate(postId);
+		postIdUrl += id;
+		navigate(postIdUrl);
+	};
+	const deleteModel = async () => {
+		try {
+			const res = await deleteMyNetwork(accesstoken, { postId: id });
+			console.log(res.data.message);
+		} catch (err) {
+			console.error(err);
+			alert('에러 입니다. ');
+			console.log(err.response.data.message);
+		}
 	};
 
 	return (
-		<div className="items-block" onClick={toDetailPage}>
-			<img src={thumbnail} alt="thumbnail" />
-
-			<div className="contents">
-				<h3>
-					<a>{title}</a>
-				</h3>
-				<div className="writer">
-					<img src={person} alt="profile" />
-					<div className="writer-nickname">{writer.nickname}</div>
+		<div style={{ width: '100%' }}>
+			<div className="inrow">
+				<div className="button" onClick={deleteModel}>
+					삭제하기
 				</div>
+				<div className="button">수정하기</div>
+			</div>
 
-				<p>{summary}</p>
-				<div className="taglist">
-					{tagList.map((tag) => (
-						<div className="tag" tag={tag} key={tag.id}>
-							{tag.name}
-						</div>
-					))}
+			<div className="items-block" onClick={toDetailPage}>
+				<img src={thumbnail} alt="thumbnail" />
+
+				<div className="contents">
+					<h3>
+						<a>{title}</a>
+					</h3>
+
+					<div className="writer">
+						<img src={person} alt="profile" />
+						<div className="writer-nickname">{writer.nickname}</div>
+					</div>
+
+					<p>{summary}</p>
+					<div className="taglist">
+						{tagList.map((tag) => (
+							<div className="tag" tag={tag} key={tag.id}>
+								{tag.name}
+							</div>
+						))}
+					</div>
 				</div>
 			</div>
 		</div>

@@ -4,6 +4,7 @@ import './login-form.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import { login } from '../../../axios/User';
 import { setAccsstoken, setUser } from '../../../reducers/user';
+import Logo from '../../../assets/logo/MainLogoH1.png';
 
 const Index = () => {
 	const navigate = useNavigate();
@@ -24,6 +25,11 @@ const Index = () => {
 			navigate('/');
 		} catch (err) {
 			console.error(err);
+			if (err.response.data.status === (403 || 412)) {
+				alert('이메일 및 비밀번호를 확인해주세요.');
+			} else {
+				alert(err.response.data.message);
+			}
 		}
 	};
 
@@ -46,8 +52,9 @@ const Index = () => {
 			</div>
 
 			<div className="form">
-				<h3>Platform Of</h3>
-				<h3>Generative model</h3>
+				<div className="image">
+					<img src={Logo} alt="logo" />
+				</div>
 
 				<label>User ID</label>
 				<input

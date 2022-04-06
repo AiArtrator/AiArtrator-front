@@ -1,4 +1,6 @@
 .mypage-form {
+	min-height: 46rem;
+	//height: 100%;
 	*,
 	*:before,
 	*:after {
@@ -9,12 +11,12 @@
 	font-size: 0.7rem;
 
 	.myform {
-		height: 32rem;
+		height: 33rem;
 		width: 23rem;
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
 		transform: translate(-50%, -50%);
-		top: 22rem;
+		top: 50%;
 		left: 50%;
 		border-radius: 10px;
 		// backdrop-filter: blur(12px);
@@ -35,6 +37,13 @@
 		line-height: 42px;
 		text-align: center;
 		padding-bottom: 0.5rem;
+	}
+	.inrow {
+		text-align: center;
+		img {
+			width: 5rem;
+			height: 5rem;
+		}
 	}
 
 	label {

@@ -6,6 +6,7 @@
 		margin: 0;
 		box-sizing: border-box;
 	}
+	min-height: 46rem;
 	font-size: 0.7rem;
 
 	.reviseform {
@@ -14,7 +15,7 @@
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
 		transform: translate(-50%, -50%);
-		top: 23rem;
+		top: 50%;
 		left: 50%;
 		border-radius: 10px;
 		// backdrop-filter: blur(12px);
@@ -30,11 +31,12 @@
 		border: none;
 	}
 
-	.reviseform h3 {
-		font-size: 20px;
-		line-height: 42px;
+	.inrow {
 		text-align: center;
-		padding-bottom: 0.5rem;
+		img {
+			width: 5rem;
+			height: 5rem;
+		}
 	}
 	.errorMessage {
 		margin-bottom: 0.8rem;
