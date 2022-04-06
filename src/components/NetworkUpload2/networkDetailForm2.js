@@ -54,13 +54,15 @@ const Index = () => {
 	const addTag = (e) => {
 		if (e.code === 'Enter') {
 			const tmpTagList = detailInfo.tagList;
-			const index = tmpTagList.indexOf(e.target.value);
+			const val = e.target.value.trim();
+			const index = tmpTagList.indexOf(val);
 			if (
 				index === -1 &&
-				!e.target.value.includes(',') &&
-				tmpTagList.length < 10
+				!val.includes(',') &&
+				tmpTagList.length < 10 &&
+				val.length > 0
 			) {
-				tmpTagList.push(e.target.value);
+				tmpTagList.push(val);
 				setDetailInfo({ ...detailInfo, tagList: tmpTagList });
 			}
 			e.target.value = '';
@@ -114,9 +116,9 @@ const Index = () => {
 			);
 			formData.append('image_urls', file);
 		}
-		formData.append('title', detailInfo.title);
-		formData.append('summary', detailInfo.summary);
-		formData.append('ver', detailInfo.ver);
+		formData.append('title', detailInfo.title.trim());
+		formData.append('summary', detailInfo.summary.trim());
+		formData.append('ver', detailInfo.ver.trim());
 		let tagString = '';
 		detailInfo.tagList.forEach((tag) => {
 			tagString += tag + ',';
