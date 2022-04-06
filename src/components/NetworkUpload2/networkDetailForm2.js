@@ -55,7 +55,11 @@ const Index = () => {
 		if (e.code === 'Enter') {
 			const tmpTagList = detailInfo.tagList;
 			const index = tmpTagList.indexOf(e.target.value);
-			if (index === -1 && !e.target.value.includes(',')) {
+			if (
+				index === -1 &&
+				!e.target.value.includes(',') &&
+				tmpTagList.length < 10
+			) {
 				tmpTagList.push(e.target.value);
 				setDetailInfo({ ...detailInfo, tagList: tmpTagList });
 			}
@@ -133,7 +137,9 @@ const Index = () => {
 			navigate('/WeightUpload'); // TODO:
 		} catch (err) {
 			console.error(err);
-			alert(err.response.data.message);
+			console.error(err.response);
+			console.error(err.response.data);
+			alert(err.response.data);
 		}
 	};
 
@@ -205,7 +211,7 @@ const Index = () => {
 				<div className="tagList">
 					<input
 						className="tag tagInput"
-						placeholder="#Input_tag"
+						placeholder="#max_10_tags"
 						onKeyPress={addTag}
 						maxLength="15"
 					/>
