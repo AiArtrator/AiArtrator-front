@@ -1,11 +1,12 @@
 .side-nav {
+	//position: fixed;
 	display: flex;
 	align-items: center;
 	justify-content: left;
 	left: 0;
-	margin-top: 5rem;
+	//@debug: 5rem;
 	width: 5rem;
-	height: 3rem;
+	height: 20rem;
 
 	nav ul {
 		list-style-type: none;

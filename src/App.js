@@ -1,4 +1,4 @@
-import './App.css';
+import './App.scss';
 import { Route, Routes } from 'react-router-dom';
 import AuthRoute from './components/AuthRoute';
 import MainPage from './page/MainPage/Index';
@@ -15,12 +15,15 @@ import MyInfoRevisePage from './page/MyInfoRevisePage/Index';
 import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import { WeightUploadForm2 } from './components/NetworkUpload2';
 import MySubscribePage from './page/MySubscribePage/Index';
+import Footer from './components/Footer/Index';
+import IntroductionPage from './page/IntroductionPage/Index';
 function App() {
 	return (
-		<div className="App">
+		<div className="global">
 			<NavBar />
-			<Routes>
+			<Routes className="global-format">
 				<Route path="/" element={<MainPage />} exact={true} />
+				<Route path="/Introduction" element={<IntroductionPage />} />
 				<Route path="/NetworkLists" element={<NetworkListPage />} />
 				<Route path="/Login" element={<LoginPage />} />
 				<Route path="/Signup" element={<SignupPage />} />
@@ -53,6 +56,7 @@ function App() {
 					/>
 				</Route>
 			</Routes>
+			<Footer />
 		</div>
 	);
 }
