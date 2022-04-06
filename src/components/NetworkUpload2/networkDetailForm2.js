@@ -247,7 +247,7 @@ const NetworkDetailForm = styled.div`
 	gap: 10px 50px;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
-	padding: 3%;
+	padding: 7% 5% 5% 5%;
 
 	.detailUploadButton {
 		/* padding: 10px;
@@ -324,6 +324,7 @@ const DetailInput = styled.div`
 	display: flex;
 	margin: 10px 0px;
 	grid-column: 1 / 3;
+
 	.inputTitle {
 		font-size: 0.8rem;
 		width: 200px;
