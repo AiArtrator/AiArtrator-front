@@ -3,9 +3,9 @@ import './navbar.scss';
 import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
+import Logout from './LogoutButton/Index.js';
 import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import MainLogo from '../../assets/logo/MainLogoH1.png';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ const Index = () => {
 									<OwnNetworksBtn />
 								</li>
 								<li>
-									<Link to="/">임시 로그아웃</Link>
+									<Logout />
 								</li>
 							</ul>
 						</li>
