@@ -24,6 +24,7 @@ const Index = ({ network }) => {
 		} catch (err) {
 			console.error(err);
 			alert('에러 입니다. ');
+
 			console.log(err.response.data.message);
 		}
 	};

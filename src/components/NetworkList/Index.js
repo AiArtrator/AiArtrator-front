@@ -3,6 +3,7 @@ import './network-list.scss';
 import NetworksItem from './NetworkItems/Index.js';
 import { getNetworkList, getSearchNetwork } from '../../axios/Network';
 import SearchPicto from '../../assets/search.png';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
 	const [networks, setNetworks] = useState(null);
@@ -12,6 +13,7 @@ const Index = () => {
 	const [searchWord, setSearchWord] = useState('');
 	const [resCount, setResCount] = useState(0);
 	const [result, setResult] = useState('');
+	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		setSearchWord(e.target.value);
@@ -89,12 +91,20 @@ const Index = () => {
 
 				<img src={SearchPicto} alt="button" onClick={handleSearch} />
 			</div>
-
-			{result ? (
-				<div className="now-count">검색결과 {resCount} 건</div>
-			) : (
-				<div className="now-count">현재 판매중인 모델 {networksCount} 개</div>
-			)}
+			<div className="in-row">
+				{result ? (
+					<div className="now-count">검색결과 {resCount} 건</div>
+				) : (
+					<div className="now-count">현재 판매중인 모델 {networksCount} 개</div>
+				)}
+				<button
+					onClick={() => {
+						navigate('/NetworkUpload');
+					}}
+				>
+					모델 업로드하기
+				</button>
+			</div>
 
 			{/* <div className="now-count">현재 판매중인 모델 {networksCount} 개</div> */}
 			{networks.map((network) => {
