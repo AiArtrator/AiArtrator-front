@@ -1,10 +1,12 @@
 .nav-layout {
 	position: fixed;
 	width: 100%;
-	top: 0rem;
+	// top: 0rem;
 	
+	z-index: 999;
+
 	
-}
+
 .logo {
 	height: 2.5rem;
 	width: 8rem;
@@ -15,6 +17,7 @@
 }
 
 .dropmenu {
+	
 	border: none;
 	border: 0px;
 	margin: 0px;
@@ -52,13 +55,13 @@
 
 .dropmenu li a:hover,
 .dropmenu ul li:hover a {
-	background: rgba(166, 185, 241, 0.3);
+	background: rgba(189, 201, 239, 0.643);
 	color: rgba(52, 50, 80, 0.858);
 	text-decoration: none;
 }
 
 .dropmenu li ul {
-	background: rgba(166, 185, 241, 0.3);
+	background: rgba(180, 194, 237, 0.569);
 	display: none;
 	height: auto;
 	border: 0px;
@@ -72,7 +75,7 @@
 }
 
 .dropmenu li li {
-	background: rgba(166, 185, 241, 0.3);
+	background: rgba(209, 216, 239, 0.49);
 	display: block;
 	float: none;
 	margin: 0px;
@@ -104,3 +107,5 @@
 .dropmenu p {
 	clear: left;
 }
+}
+

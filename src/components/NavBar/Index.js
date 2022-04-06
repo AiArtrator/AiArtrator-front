@@ -14,7 +14,7 @@ const Index = () => {
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const navigate = useNavigate();
 	return (
-		<>
+		<div className="nav-layout">
 			<img
 				className="logo"
 				src={MainLogo}
@@ -51,7 +51,7 @@ const Index = () => {
 					</li>
 				</ul>
 			</div>
-		</>
+		</div>
 	);
 };
 

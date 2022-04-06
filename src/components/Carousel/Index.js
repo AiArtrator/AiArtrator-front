@@ -61,8 +61,8 @@ const Index = () => {
 					<Carousel
 						data={data}
 						time={3000}
-						width="100rem"
-						height="35rem"
+						width="100%"
+						height="37rem"
 						captionStyle={captionStyle}
 						radius="0px"
 						slideNumber={false}

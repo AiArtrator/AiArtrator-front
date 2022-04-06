@@ -29,7 +29,7 @@ const Index = ({ network }) => {
 	};
 
 	return (
-		<div>
+		<div style={{ width: '100%' }}>
 			<div className="inrow">
 				<div className="button" onClick={deleteModel}>
 					삭제하기
