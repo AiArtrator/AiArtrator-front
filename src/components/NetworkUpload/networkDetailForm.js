@@ -4,8 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setNetworkDetail } from '../../reducers/network';
 import imageCompression from 'browser-image-compression';
-import { DEFAULT_THUMBNAIL } from '../../constants';
+// import { DEFAULT_THUMBNAIL } from '../../constants';
 import { postNetworkDetail } from '../../axios/Network';
+import defaultimg from '../../assets/thumb.jpeg';
 
 const Index = () => {
 	const navigate = useNavigate();
@@ -13,7 +14,7 @@ const Index = () => {
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
 
-	const [imgSrc, setImgSrc] = React.useState(DEFAULT_THUMBNAIL);
+	const [imgSrc, setImgSrc] = React.useState(defaultimg); // React.useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
 		title: '',
 		summary: '',
@@ -53,9 +54,15 @@ const Index = () => {
 	const addTag = (e) => {
 		if (e.code === 'Enter') {
 			const tmpTagList = detailInfo.tagList;
-			const index = tmpTagList.indexOf(e.target.value);
-			if (index === -1 && !e.target.value.includes(',')) {
-				tmpTagList.push(e.target.value);
+			const val = e.target.value.trim();
+			const index = tmpTagList.indexOf(val);
+			if (
+				index === -1 &&
+				!val.includes(',') &&
+				tmpTagList.length < 10 &&
+				val.length > 0
+			) {
+				tmpTagList.push(val);
 				setDetailInfo({ ...detailInfo, tagList: tmpTagList });
 			}
 			e.target.value = '';
@@ -101,7 +108,7 @@ const Index = () => {
 
 	const createFormData = async () => {
 		const formData = new FormData();
-		if (imgSrc && imgSrc !== DEFAULT_THUMBNAIL) {
+		if (imgSrc && imgSrc !== defaultimg) {
 			const date = new Date();
 			const file = await imgSrcToFile(
 				imgSrc,
@@ -109,9 +116,9 @@ const Index = () => {
 			);
 			formData.append('image_urls', file);
 		}
-		formData.append('title', detailInfo.title);
-		formData.append('summary', detailInfo.summary);
-		formData.append('ver', detailInfo.ver);
+		formData.append('title', detailInfo.title.trim());
+		formData.append('summary', detailInfo.summary.trim());
+		formData.append('ver', detailInfo.ver.trim());
 		let tagString = '';
 		detailInfo.tagList.forEach((tag) => {
 			tagString += tag + ',';
@@ -127,16 +134,20 @@ const Index = () => {
 			const formData = await createFormData();
 			const res = await postNetworkDetail(accesstoken, formData);
 			console.log(res);
-			alert('Saved!');
+			// alert('Saved!');
 			dispatch(setNetworkDetail(detailInfo));
-			navigate('/NetworkDetail'); // TODO:
+			navigate('/WeightUpload'); // TODO:
 		} catch (err) {
 			console.error(err);
-			alert(err.response.data.message);
+			console.error(err.response);
+			console.error(err.response.data);
+			alert(err.response.data);
 		}
 	};
 
 	return (
+		// <MiddleForm>
+		// 	<div className="title">모델 업로드</div>
 		<NetworkDetailForm>
 			<ImgContainer>
 				<img src={imgSrc} alt="thumbnail" />
@@ -147,12 +158,12 @@ const Index = () => {
 						accept=".jpeg, .jpg, .png"
 						onChange={(e) => loadProfileImg((e?.target?.files)[0])}
 					/>
-					<label htmlFor="uploadButton">Thumbnail upload</label>
+					<label htmlFor="uploadButton">썸네일 업로드</label>
 				</div>
 			</ImgContainer>
 			<TextContainer>
 				<DetailInput>
-					<div className="inputTitle">Title</div>
+					<div className="inputTitle">모델 이름</div>
 					<input
 						className="title"
 						type="text"
@@ -163,7 +174,7 @@ const Index = () => {
 					/>
 				</DetailInput>
 				<DetailInput>
-					<div className="inputTitle">Summary</div>
+					<div className="inputTitle">요약</div>
 					<input
 						className="summary"
 						type="text"
@@ -174,7 +185,7 @@ const Index = () => {
 					/>
 				</DetailInput>
 				<DetailInput>
-					<div className="inputTitle">Version</div>
+					<div className="inputTitle">모델 버전</div>
 					<input
 						className="ver"
 						type="text"
@@ -186,7 +197,7 @@ const Index = () => {
 				</DetailInput>
 			</TextContainer>
 			<DetailInput>
-				<div className="inputTitle">Description</div>
+				<div className="inputTitle">모델 설명</div>
 				<textarea
 					className="desc"
 					type="text"
@@ -198,11 +209,11 @@ const Index = () => {
 				/>
 			</DetailInput>
 			<TagListContainer>
-				<div className="tagListTitle">Add Tag</div>
+				<div className="tagListTitle">태그 추가</div>
 				<div className="tagList">
 					<input
 						className="tag tagInput"
-						placeholder="#Input_tag"
+						placeholder="#max_10_tags"
 						onKeyPress={addTag}
 						maxLength="15"
 					/>
@@ -217,13 +228,23 @@ const Index = () => {
 				</div>
 			</TagListContainer>
 			<div className="detailUploadButton" onClick={saveNetworkDetail}>
-				Next
+				다음 &gt;
 			</div>
 		</NetworkDetailForm>
+		// {/* </MiddleForm> */}
 	);
 };
 
 export default Index;
+
+// const MiddleForm = styled.div`
+// 	display: table;
+// 	margin-left: auto;
+// 	margin-right: auto;
+// 	.title {
+// 		font-size: 20px;
+// 	}
+// `;
 
 const NetworkDetailForm = styled.div`
 	position: relative;
@@ -234,7 +255,8 @@ const NetworkDetailForm = styled.div`
 	gap: 10px 50px;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
-	padding: 5%;
+	padding: 3%;
+
 	.detailUploadButton {
 		/* padding: 10px;
 		border: 3px solid;
@@ -253,9 +275,15 @@ const NetworkDetailForm = styled.div`
 		color: #24146c;
 		cursor: pointer;
 		user-select: none;
+		font-size: 0.8rem;
 		input[type='file'] {
 			display: none;
 		}
+	}
+	.detailUploadButton:hover {
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
+		margin-bottom: 0;
 	}
 `;
 
@@ -263,9 +291,11 @@ const ImgContainer = styled.div`
 	position: relative;
 	text-align: center;
 	img {
-		height: calc(100% - 44px);
+		width: calc(100% - 50px);
+		height: calc(100% - 50px);
 		object-fit: contain;
 		align-self: center;
+		margin-bottom: 0.5rem;
 	}
 	.uploadButton {
 		height: max-content;
@@ -274,12 +304,18 @@ const ImgContainer = styled.div`
 		text-align: center;
 		border-radius: 5px;
 		background-color: rgba(166, 185, 241, 0.3);
+		font-size: 0.8rem;
 		color: #24146c;
 		cursor: pointer;
 		user-select: none;
 		input[type='file'] {
 			display: none;
 		}
+	}
+	.uploadButton:hover {
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
+		margin-bottom: 0;
 	}
 `;
 
@@ -294,16 +330,16 @@ const DetailInput = styled.div`
 	flex-direction: column;
 	position: relative;
 	display: flex;
-	margin: 15px 0px;
+	margin: 10px 0px;
 	grid-column: 1 / 3;
 	.inputTitle {
-		font-size: 16px;
+		font-size: 0.8rem;
 		width: 200px;
 		margin: 7px;
 		color: #0d005c;
 	}
 	input {
-		font-size: 16px;
+		font-size: 1rem;
 		width: calc(100% - 14px); // padding
 		padding: 7px;
 		border: 0px;
@@ -311,7 +347,7 @@ const DetailInput = styled.div`
 		outline: none;
 	}
 	textarea {
-		font-size: 16px;
+		font-size: 0.8rem;
 		resize: none;
 		width: calc(100% - 18px); // padding + border
 		padding: 7px;
@@ -330,7 +366,7 @@ const TagListContainer = styled.div`
 	display: flex;
 	grid-column: 1 / 3;
 	flex-direction: column;
-	font-size: 16px;
+	font-size: 0.8rem;
 	font-weight: 400;
 	user-select: none;
 	.tagListTitle {

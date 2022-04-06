@@ -1,9 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {
-	NetworkDetailForm,
-	WeightUploadForm,
-} from '../../components/NetworkUpload';
+import { NetworkDetailForm } from '../../components/NetworkUpload';
 
 const Index = () => {
 	return (
@@ -11,9 +8,9 @@ const Index = () => {
 			<FormContainer>
 				<NetworkDetailForm />
 			</FormContainer>
-			<FormContainer>
+			{/* <FormContainer>
 				<WeightUploadForm />
-			</FormContainer>
+			</FormContainer> */}
 		</NetworkUploadContainer>
 	);
 };

@@ -51,21 +51,75 @@ const Index = () => {
 	};
 
 	return (
-		<WeightUploadForm>
-			<Dashboard
-				uppy={uppy}
-				plugins={['OneDrive', 'Dropbox', 'GoogleDrive', 'Url']}
-				{...dashboardProps}
-			/>
-		</WeightUploadForm>
+		<>
+			<WeightForm>
+				<Dashboard
+					uppy={uppy}
+					plugins={['OneDrive', 'Dropbox', 'GoogleDrive', 'Url']}
+					{...dashboardProps}
+				/>
+				{/* <button className="uploadButton"></button> */}
+			</WeightForm>
+		</>
 	);
 };
 
 export default Index;
 
-const WeightUploadForm = styled.div`
+// const WeightUploadForm = styled.div`
+// 	position: relative;
+// 	width: fit-content;
+// 	left: 50%;
+// 	transform: translate(-50%, 0);
+// `;
+const WeightForm = styled.div`
+	// position: relative;
+	// display: grid;
+	// grid-template-columns: 1fr 2fr;
+	// grid-template-rows: 300px auto auto;
+	// grid-gap: 10px 50px;
+	// gap: 10px 50px;
+	// width: -webkit-fill-available;
+	// height: -webkit-fill-available;
 	position: relative;
 	width: fit-content;
 	left: 50%;
 	transform: translate(-50%, 0);
+	padding: 3%;
+
+	.weight-upload-form {
+		position: relative;
+		width: fit-content;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+
+	.uploadButton {
+		/* padding: 10px;
+		border: 3px solid;
+		align-self: center;
+		cursor: pointer;
+		height: max-content;
+		width: 100%; */
+		grid-column: 2 / 3;
+		justify-self: end;
+		width: 100px;
+		right: 0;
+		padding: 10px 0px;
+		text-align: center;
+		border-radius: 5px;
+		background-color: rgba(166, 185, 241, 0.3);
+		color: #24146c;
+		cursor: pointer;
+		user-select: none;
+		font-size: 0.8rem;
+		input[type='file'] {
+			display: none;
+		}
+	}
+	.uploadButton:hover {
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
+		margin-bottom: 0;
+	}
 `;
