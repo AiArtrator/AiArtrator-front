@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { NetworkDetailForm } from '../../components/NetworkUpload';
+import { WeightUploadForm } from '../../components/NetworkUpload';
 
 const Index = () => {
 	return (
@@ -8,9 +9,9 @@ const Index = () => {
 			<FormContainer>
 				<NetworkDetailForm />
 			</FormContainer>
-			{/* <FormContainer>
+			<FormContainer>
 				<WeightUploadForm />
-			</FormContainer> */}
+			</FormContainer>
 		</NetworkUploadContainer>
 	);
 };
@@ -21,6 +22,7 @@ const NetworkUploadContainer = styled.div`
 	flex-flow: column wrap;
 	justify-content: space-around;
 `;
+
 const FormContainer = styled.div`
 	position: relative;
 	width: 100%;
