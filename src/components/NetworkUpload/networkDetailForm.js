@@ -124,13 +124,15 @@ const Index = () => {
 			<ImgContainer>
 				<img src={imgSrc} alt="thumbnail" />
 				<div className="uploadButton">
-					<input
-						type="file"
-						id="uploadButton"
-						accept=".jpeg, .jpg, .png"
-						onChange={(e) => loadImg((e?.target?.files)[0], setImgSrc)}
-					/>
-					<label htmlFor="uploadButton">썸네일 업로드</label>
+					<label htmlFor="uploadButton">
+						<input
+							type="file"
+							id="uploadButton"
+							accept=".jpeg, .jpg, .png"
+							onChange={(e) => loadImg((e?.target?.files)[0], setImgSrc)}
+						/>
+						썸네일 업로드
+					</label>
 				</div>
 			</ImgContainer>
 			<TextContainer>
@@ -272,7 +274,7 @@ const ImgContainer = styled.div`
 	.uploadButton {
 		height: max-content;
 		width: 100%;
-		padding: 10px 0px;
+		line-height: 38px;
 		text-align: center;
 		border-radius: 5px;
 		background-color: rgba(166, 185, 241, 0.3);
@@ -283,11 +285,16 @@ const ImgContainer = styled.div`
 		input[type='file'] {
 			display: none;
 		}
-	}
-	.uploadButton:hover {
-		background-color: rgba(0, 0, 128, 1);
-		color: #eaf0fb;
-		margin-bottom: 0;
+		label {
+			display: block;
+			width: 100%;
+			height: 100%;
+		}
+		:hover {
+			background-color: rgba(0, 0, 128, 1);
+			color: #eaf0fb;
+			margin-bottom: 0;
+		}
 	}
 `;
 
