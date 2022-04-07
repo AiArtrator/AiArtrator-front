@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setNetworkDetail } from '../../reducers/network';
-import imageCompression from 'browser-image-compression';
-// import { DEFAULT_THUMBNAIL } from '../../constants';
 import { postNetworkDetail } from '../../axios/Network';
+import { loadImg, imgSrcToFile } from '../Utils';
+// import { DEFAULT_THUMBNAIL } from '../../constants';
 import startImg from '../../assets/weightUpload/start.svg';
 
 const Index = () => {
@@ -34,34 +34,6 @@ const Index = () => {
 			});
 		}
 	}, [networkDetail]);
-
-	const loadProfileImg = async (_imgFile) => {
-		try {
-			const reader = new FileReader();
-			reader.onloadend = () => {
-				const base64 = reader.result;
-				if (base64) {
-					setImgSrc(base64.toString());
-				}
-			};
-			if (_imgFile) {
-				const imgFile = await imageCompression(_imgFile, {
-					maxSizeMB: 0.5,
-					maxWidthOrHeight: 1180,
-					useWebWorker: true,
-				});
-				reader.readAsDataURL(imgFile);
-			}
-		} catch (err) {
-			console.error(err);
-		}
-	};
-
-	const imgSrcToFile = async (_imgSrc, fileName) => {
-		const res: Response = await fetch(_imgSrc);
-		const blob: Blob = await res.blob();
-		return new File([blob], fileName, { type: 'image/png' });
-	};
 
 	const createFormData = async () => {
 		const formData = new FormData();
@@ -121,7 +93,7 @@ const Index = () => {
 							type="file"
 							id="uploadButton"
 							// accept=".jpeg, .jpg, .png"
-							onChange={(e) => loadProfileImg((e?.target?.files)[0])}
+							onChange={(e) => loadImg((e?.target?.files)[0], setImgSrc)}
 						></input>
 					)}
 					{buttonText}
