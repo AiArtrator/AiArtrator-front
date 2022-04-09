@@ -86,7 +86,7 @@ const Index = () => {
 				imgSrc,
 				`thumbnail-${date.toDateString().replaceAll(' ', '-')}.png`
 			);
-			formData.append('image_urls', file);
+			formData.append('thumbnail', file);
 		}
 		formData.append('title', detailInfo.title.trim());
 		formData.append('summary', detailInfo.summary.trim());
@@ -158,18 +158,20 @@ const Index = () => {
 						maxLength="100"
 					/>
 				</DetailInput>
-				<DetailInput>
-					<div className="inputTitle">모델 버전</div>
-					<input
-						className="ver"
-						type="text"
-						value={detailInfo.ver}
-						placeholder="max 20 chars"
-						onChange={handleChange}
-						maxLength="20" // TODO: fix maxLength
-					/>
-				</DetailInput>
+				{/* TODO:  pay container */}
+				<PayContainer>TODO: pay container</PayContainer>
 			</TextContainer>
+			<DetailInput>
+				<div className="inputTitle">모델 버전</div>
+				<input
+					className="ver"
+					type="text"
+					value={detailInfo.ver}
+					placeholder="max 20 chars"
+					onChange={handleChange}
+					maxLength="20" // TODO: fix maxLength
+				/>
+			</DetailInput>
 			<DetailInput>
 				<div className="inputTitle">모델 설명</div>
 				<textarea
@@ -232,12 +234,6 @@ const NetworkDetailForm = styled.div`
 	padding: 3%;
 
 	.detailUploadButton {
-		/* padding: 10px;
-		border: 3px solid;
-		align-self: center;
-		cursor: pointer;
-		height: max-content;
-		width: 100%; */
 		grid-column: 2 / 3;
 		justify-self: end;
 		width: 100px;
@@ -361,7 +357,6 @@ const TagListContainer = styled.div`
 		color: #666666;
 		.tag,
 		.tagInput {
-			/* height: 37px; */
 			width: max-content;
 			padding: 7px;
 			border: 1px solid rgba(102, 102, 102, 1);
@@ -380,3 +375,5 @@ const TagListContainer = styled.div`
 		}
 	}
 `;
+
+const PayContainer = styled.div``;
