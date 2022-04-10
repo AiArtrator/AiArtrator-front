@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { setNetworkDetail } from '../../reducers/network';
@@ -8,8 +7,8 @@ import { imgSrcToFile, loadImg } from '../Utils';
 // import { DEFAULT_THUMBNAIL } from '../../constants';
 import defaultimg from '../../assets/thumb.jpeg';
 
-const Index = () => {
-	const navigate = useNavigate();
+// eslint-disable-next-line react/prop-types
+const Index = ({ setStage }) => {
 	const dispatch = useDispatch();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
@@ -21,6 +20,7 @@ const Index = () => {
 		ver: '',
 		tagList: [],
 		desc: '',
+		id: '',
 	});
 
 	useEffect(() => {
@@ -31,6 +31,7 @@ const Index = () => {
 				ver: networkDetail.ver,
 				tagList: networkDetail.tagList,
 				desc: networkDetail.description,
+				id: networkDetail.id,
 			});
 		}
 	}, [networkDetail]);
@@ -106,9 +107,8 @@ const Index = () => {
 			const formData = await createFormData();
 			const res = await postNetworkDetail(accesstoken, formData);
 			console.log(res);
-			// alert('Saved!');
-			dispatch(setNetworkDetail(detailInfo));
-			navigate('/WeightUpload'); // TODO:
+			dispatch(setNetworkDetail({ ...detailInfo, id: res.data.data.id }));
+			setStage(1);
 		} catch (err) {
 			console.error(err);
 			console.error(err.response);

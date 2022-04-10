@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { NetworkDetailForm } from '../../components/NetworkUpload';
 import { WeightUploadForm } from '../../components/NetworkUpload';
 
 const Index = () => {
+	const [stage, setStage] = useState(0);
 	return (
 		<NetworkUploadContainer>
 			<FormContainer>
-				<NetworkDetailForm />
-			</FormContainer>
-			<FormContainer>
-				<WeightUploadForm />
+				{!stage ? (
+					<NetworkDetailForm setStage={setStage} />
+				) : (
+					<WeightUploadForm setStage={setStage} />
+				)}
 			</FormContainer>
 		</NetworkUploadContainer>
 	);

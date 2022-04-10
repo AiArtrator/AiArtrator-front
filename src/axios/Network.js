@@ -84,6 +84,28 @@ export const putNetworkDetail = (
 	});
 };
 
+export const postWeight = (
+	accesstoken: String,
+	formData: Object,
+	fileName?: String,
+	setState?
+) => {
+	return axios({
+		method: 'POST',
+		url: `/api/post/weight`,
+		headers: { accesstoken },
+		data: formData,
+		onUploadProgress: (progressEvent) => {
+			if (setState) {
+				const p = Math.round(
+					(progressEvent.loaded / progressEvent.total) * 100
+				);
+				setState(`${fileName} (${p}%)`);
+			}
+		},
+	});
+};
+
 export const ownNetworkList = (userId: String, accesstoken: String, data) => {
 	return axios({
 		method: 'GET',

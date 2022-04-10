@@ -1,125 +1,97 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { setNetworkDetail } from '../../reducers/network';
-import { postNetworkDetail } from '../../axios/Network';
-import { loadImg, imgSrcToFile } from '../Utils';
-// import { DEFAULT_THUMBNAIL } from '../../constants';
+import { postWeight } from '../../axios/Network';
 import startImg from '../../assets/weightUpload/start.svg';
+import inprogressImg from '../../assets/weightUpload/inprogress.svg';
+import doneImg from '../../assets/weightUpload/done.svg';
 
-const Index = () => {
+// eslint-disable-next-line react/prop-types
+const Index = ({ setStage }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
-
-	const [imgSrc, setImgSrc] = React.useState(startImg); // React.useState(DEFAULT_THUMBNAIL);
-	const [detailInfo, setDetailInfo] = useState({
-		title: '',
-		summary: '',
-		ver: '',
-		tagList: [],
-		desc: '',
-	});
-
-	useEffect(() => {
-		if (networkDetail) {
-			setDetailInfo({
-				title: networkDetail.title,
-				summary: networkDetail.summary,
-				ver: networkDetail.ver,
-				tagList: networkDetail.tagList,
-				desc: networkDetail.description,
-			});
-		}
-	}, [networkDetail]);
+	const [weightFile, setWeightFile] = useState();
+	const [img, setImg] = useState(startImg);
+	const [text, setText] = useState('모델 weight를 올려야\n완료할 수 있습니다.');
+	const [buttonText, setButtonText] = useState('모델 업로드 하기');
+	const [fileName, setFileName] = useState();
+	const [isInput, setIsInput] = useState(true);
+	const [active, setActive] = useState(false);
 
 	const createFormData = async () => {
 		const formData = new FormData();
-		if (imgSrc) {
-			const date = new Date();
-			const file = await imgSrcToFile(
-				imgSrc,
-				`thumbnail-${date.toDateString().replaceAll(' ', '-')}.png`
-			);
-			formData.append('image_urls', file);
-		}
-		formData.append('title', detailInfo.title.trim());
-		formData.append('summary', detailInfo.summary.trim());
-		formData.append('ver', detailInfo.ver.trim());
-		let tagString = '';
-		detailInfo.tagList.forEach((tag) => {
-			tagString += tag + ',';
-		});
-		formData.append('tagList', tagString.length ? tagString.slice(0, -1) : '');
-		formData.append('description', detailInfo.desc);
-
+		formData.append('weight', weightFile);
+		formData.append('postId', networkDetail.id);
 		return formData;
 	};
 
-	const saveNetworkDetail = async () => {
+	const saveWeight = async () => {
 		try {
+			if (!weightFile) {
+				alert('파일을 선택해주세요.');
+				return;
+			}
+			setIsInput(false);
 			const formData = await createFormData();
-			const res = await postNetworkDetail(accesstoken, formData);
-			console.log(res);
-			// alert('Saved!');
-			dispatch(setNetworkDetail(detailInfo));
-			navigate('/WeightUpload'); // TODO:
+			const res = await postWeight(accesstoken, formData, fileName, setText);
+			console.log(`res: ${JSON.stringify(res.data)}`);
+			dispatch(
+				setNetworkDetail({ ...networkDetail, modelUuid: res.data.data.uuid })
+			);
+			setImg(doneImg);
+			setText('업로드 완료!');
+			alert('Saved!');
+			navigate(`/NetworkDetail/${networkDetail.id}`);
 		} catch (err) {
-			console.error(err);
 			console.error(err.response);
-			console.error(err.response.data);
-			alert(err.response.data);
+			alert(err.response.data.message);
 		}
 	};
 
 	// eslint-disable-next-line react/prop-types
-	const Button = ({ title, onClick, justify }) => (
-		<StlyedButton onClick={onClick} justify={justify}>
+	// eslint-disable-next-line
+	const Button = ({ title, onClick, active, justify }) => (
+		<StlyedButton onClick={onClick} active={active} justify={justify}>
 			{title}
 		</StlyedButton>
 	);
 
-	// eslint-disable-next-line react/prop-types
-	const Form = ({ img, text, buttonText, isInput }) => (
-		<UploadContainer>
-			<img src={img} alt="thumbnail" />
-			<pre>{text}</pre>
-			<div className="uploadButton">
-				<label htmlFor="uploadButton">
-					{isInput ?? (
-						<input
-							type="file"
-							id="uploadButton"
-							// accept=".jpeg, .jpg, .png"
-							onChange={(e) => loadImg((e?.target?.files)[0], setImgSrc)}
-						></input>
-					)}
-					{buttonText}
-				</label>
-			</div>
-		</UploadContainer>
-	);
-
 	return (
 		<WeightUploadForm>
-			<Form
-				img={imgSrc}
-				text={`모델 weight를 올려야\n완료할 수 있습니다.`}
-				buttonText="모델 업로드 하기"
+			<UploadForm>
+				<img src={img} alt="icon" />
+				<pre>{text}</pre>
+				{isInput && (
+					<div className="weightUploadButton">
+						<label htmlFor="weightUploadButton">
+							<input
+								type="file"
+								id="weightUploadButton"
+								onChange={(e) => {
+									setText(`${e.target.files[0].name}`);
+									setWeightFile(e.target.files[0]);
+									setFileName(e.target.files[0].name);
+									setButtonText('다른 파일 선택');
+									setImg(inprogressImg);
+									setActive(true);
+								}}
+							></input>
+							{buttonText}
+						</label>
+					</div>
+				)}
+			</UploadForm>
+			<Button title="이전" justify="start" onClick={() => setStage(0)} />
+			<Button
+				title="업로드"
+				justify="end"
+				active={active}
+				onClick={saveWeight}
 			/>
-			<Form
-				img={imgSrc}
-				text={`모델 weight를 올려야\n완료할 수 있습니다.`}
-				buttonText="모델 업로드 하기"
-				isInput
-			/>
-			<div className="detailUploadButton" onClick={saveNetworkDetail}>
-				이전 &gt;
-			</div>
-			<Button title="이전" justify="start" />
-			<Button title="다음" justify="end" />
 		</WeightUploadForm>
 	);
 };
@@ -148,22 +120,19 @@ const StlyedButton = styled.div`
 	padding: 10px 0px;
 	text-align: center;
 	border-radius: 5px;
-	background-color: rgba(166, 185, 241, 0.3);
-	color: #24146c;
+	color: ${(props) => (props.active ? '#eaf0fb' : '#24146c')};
+	background: ${(props) =>
+		props.active ? 'rgba(0, 0, 128, 1)' : 'rgba(166, 185, 241, 0.3)'};
 	cursor: pointer;
 	user-select: none;
 	font-size: 0.8rem;
-	input[type='file'] {
-		display: none;
-	}
 	:hover {
 		background-color: rgba(0, 0, 128, 1);
 		color: #eaf0fb;
-		margin-bottom: 0;
 	}
 `;
 
-const UploadContainer = styled.div`
+const UploadForm = styled.div`
 	grid-column: 2 / 3;
 	justify-self: center;
 	width: 317px;
@@ -181,6 +150,7 @@ const UploadContainer = styled.div`
 		object-fit: contain;
 	}
 	pre {
+		white-space: pre-wrap;
 		width: 80%;
 		font-weight: 500;
 		font-size: 16px;
@@ -188,7 +158,7 @@ const UploadContainer = styled.div`
 		align-self: center;
 		font-family: inherit;
 	}
-	.uploadButton {
+	.weightUploadButton {
 		width: 100%;
 		height: 100%;
 		background: rgba(166, 185, 241, 0.3);
@@ -207,10 +177,8 @@ const UploadContainer = styled.div`
 			width: 100%;
 			height: 100%;
 		}
-	}
-	.uploadButton:hover {
+		:hover {
 		background-color: rgba(0, 0, 128, 1);
 		color: #eaf0fb;
-		margin-bottom: 0;
 	}
 `;
