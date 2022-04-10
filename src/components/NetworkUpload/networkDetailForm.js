@@ -231,7 +231,7 @@ const NetworkDetailForm = styled.div`
 	gap: 10px 50px;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
-	padding: 3%;
+	padding: 7% 5% 5% 5%;
 
 	.detailUploadButton {
 		grid-column: 2 / 3;
