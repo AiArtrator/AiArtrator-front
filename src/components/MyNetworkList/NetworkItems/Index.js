@@ -6,13 +6,13 @@ import { useNavigate } from 'react-router-dom';
 import { deleteMyNetwork } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
 
+// Todo : 삭제완료시 리렌더링 (useState사용으로 수정)
 const Index = ({ network }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
 	var postIdUrl = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 
-	// const postIds = { postId: id };
 	const toDetailPage = () => {
 		postIdUrl += id;
 		navigate(postIdUrl);
@@ -24,6 +24,7 @@ const Index = ({ network }) => {
 		} catch (err) {
 			console.error(err);
 			alert('에러 입니다. ');
+
 			console.log(err.response.data.message);
 		}
 	};

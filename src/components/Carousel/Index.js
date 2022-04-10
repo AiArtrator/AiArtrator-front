@@ -13,8 +13,9 @@ const Index = () => {
 					  <br/>
 					  <h2>The Platfom of Generative model</h2>
 					  <br/>
-					  업로드된 머신러닝 모델을 통해 
-					  <br />새로운 이미지를 생성해보세요 !
+					  인공지능이 창조한 이미지를 
+					  <br /><br />30초만에 받아보세요 !
+					  <h1>Ai Artrator</h1>
 
 					</div>`,
 		},
@@ -24,8 +25,9 @@ const Index = () => {
 			<br/>
 			<h2>The Platfom of Generative model</h2>
 			<br/>
-			업로드된 머신러닝 모델을 통해 
-			<br />새로운 이미지를 생성해보세요 !
+			고성능 컴퓨터 없이, <br /><br />오직 스마트 폰만으로  
+			<br /><br />인공지능 서비스를 경험해보세요 !
+			<h1>Ai Artrator</h1>
 
 		  </div>`,
 		},
@@ -35,7 +37,8 @@ const Index = () => {
 			<br/>
 			<br/>
 			<br/>
-			<h2>P - O - G</h2>
+			<h2>Ai Artrator</h2>모델의 weight를 업로드하고 
+			<br /><br />수익을 창출하세요 !
 			
 
 		  </div>`,
