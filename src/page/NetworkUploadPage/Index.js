@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
 import { NetworkDetailForm } from '../../components/NetworkUpload';
 import { WeightUploadForm } from '../../components/NetworkUpload';
 
 const Index = () => {
 	const [stage, setStage] = useState(0);
+	let { postId } = useParams();
 	return (
 		<NetworkUploadContainer>
 			<FormContainer>
 				{!stage ? (
-					<NetworkDetailForm setStage={setStage} />
+					<NetworkDetailForm setStage={setStage} postId={postId} />
 				) : (
-					<WeightUploadForm setStage={setStage} />
+					<WeightUploadForm setStage={setStage} postId={postId} />
 				)}
 			</FormContainer>
 		</NetworkUploadContainer>

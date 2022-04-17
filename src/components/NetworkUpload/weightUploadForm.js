@@ -40,7 +40,10 @@ const Index = ({ setStage }) => {
 			const res = await postWeight(accesstoken, formData, fileName, setText);
 			console.log(`res: ${JSON.stringify(res.data)}`);
 			dispatch(
-				setNetworkDetail({ ...networkDetail, modelUuid: res.data.data.uuid })
+				setNetworkDetail({
+					...networkDetail,
+					weightUuid: res.data.data.uuid,
+				})
 			);
 			setImg(doneImg);
 			setText('업로드 완료!');
