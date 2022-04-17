@@ -143,7 +143,7 @@ const Index = () => {
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else {
-			console.err('[-] error from SignupForm');
+			console.error('[-] error from SignupForm');
 		}
 	};
 

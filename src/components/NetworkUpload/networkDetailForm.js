@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setNetworkDetail } from '../../reducers/network';
-import { postNetworkDetail } from '../../axios/Network';
+import { setNetworkDetail, fetchNetworkDetail } from '../../reducers/network';
+import { postNetworkDetail, putNetworkDetail } from '../../axios/Network';
 import { imgSrcToFile, loadImg } from '../Utils';
 // import { DEFAULT_THUMBNAIL } from '../../constants';
 import defaultimg from '../../assets/thumb.jpeg';
 
 // eslint-disable-next-line react/prop-types
-const Index = ({ setStage }) => {
+const Index = ({ setStage, postId }) => {
 	const dispatch = useDispatch();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
@@ -19,11 +19,14 @@ const Index = ({ setStage }) => {
 		summary: '',
 		ver: '',
 		tagList: [],
-		desc: '',
-		id: '',
+		description: '',
 		price: '', // TODO: sync to api
 	});
 	const [isFree, setIsFree] = useState(false); // useState(DEFAULT_THUMBNAIL);
+
+	useEffect(() => {
+		dispatch(fetchNetworkDetail(postId, accesstoken));
+	}, []);
 
 	useEffect(() => {
 		if (networkDetail) {
@@ -31,9 +34,8 @@ const Index = ({ setStage }) => {
 				title: networkDetail.title,
 				summary: networkDetail.summary,
 				ver: networkDetail.ver,
-				tagList: networkDetail.tagList,
-				desc: networkDetail.description,
-				id: networkDetail.id,
+				tagList: networkDetail.tagList.map(({ name }) => name),
+				description: networkDetail.description,
 				price: networkDetail.price, // TODO: sync to api
 			});
 		}
@@ -51,10 +53,10 @@ const Index = ({ setStage }) => {
 			setDetailInfo({ ...detailInfo, price: value });
 		} else if (className === 'ver') {
 			setDetailInfo({ ...detailInfo, ver: value });
-		} else if (className === 'desc') {
-			setDetailInfo({ ...detailInfo, desc: value });
+		} else if (className === 'description') {
+			setDetailInfo({ ...detailInfo, description: value });
 		} else {
-			console.err('[-] error from NetworkDetailForm');
+			console.error('[-] error from NetworkDetailForm');
 		}
 	};
 
@@ -104,7 +106,7 @@ const Index = ({ setStage }) => {
 			tagString += tag + ',';
 		});
 		formData.append('tagList', tagString.length ? tagString.slice(0, -1) : '');
-		formData.append('description', detailInfo.desc);
+		formData.append('description', detailInfo.description);
 
 		return formData;
 	};
@@ -112,9 +114,10 @@ const Index = ({ setStage }) => {
 	const saveNetworkDetail = async () => {
 		try {
 			const formData = await createFormData();
-			const res = await postNetworkDetail(accesstoken, formData);
-			console.log(res);
-			dispatch(setNetworkDetail({ ...detailInfo, id: res.data.data.id }));
+			let res;
+			if (postId) res = await putNetworkDetail(accesstoken, postId, formData);
+			else res = await postNetworkDetail(accesstoken, formData);
+			dispatch(setNetworkDetail(res.data.data));
 			setStage(1);
 		} catch (err) {
 			console.error(err?.response);
@@ -216,9 +219,9 @@ const Index = ({ setStage }) => {
 			<DetailInput>
 				<div className="inputTitle">모델 설명</div>
 				<textarea
-					className="desc"
+					className="description"
 					type="text"
-					value={detailInfo.desc}
+					value={detailInfo.description}
 					placeholder="max 3000 chars"
 					onChange={handleChange}
 					maxLength="3000" // TODO: fix maxLength
