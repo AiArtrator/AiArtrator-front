@@ -13,7 +13,7 @@ const Index = ({ setStage }) => {
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
 
-	const [imgSrc, setImgSrc] = React.useState(defaultimg); // React.useState(DEFAULT_THUMBNAIL);
+	const [imgSrc, setImgSrc] = useState(defaultimg); // useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
 		title: '',
 		summary: '',
@@ -21,7 +21,9 @@ const Index = ({ setStage }) => {
 		tagList: [],
 		desc: '',
 		id: '',
+		price: '', // TODO: sync to api
 	});
+	const [isFree, setIsFree] = useState(false); // useState(DEFAULT_THUMBNAIL);
 
 	useEffect(() => {
 		if (networkDetail) {
@@ -32,6 +34,7 @@ const Index = ({ setStage }) => {
 				tagList: networkDetail.tagList,
 				desc: networkDetail.description,
 				id: networkDetail.id,
+				price: networkDetail.price, // TODO: sync to api
 			});
 		}
 	}, [networkDetail]);
@@ -43,6 +46,9 @@ const Index = ({ setStage }) => {
 			setDetailInfo({ ...detailInfo, title: value });
 		} else if (className === 'summary') {
 			setDetailInfo({ ...detailInfo, summary: value });
+			// TODO: sync to api
+		} else if (className === 'price') {
+			setDetailInfo({ ...detailInfo, price: value });
 		} else if (className === 'ver') {
 			setDetailInfo({ ...detailInfo, ver: value });
 		} else if (className === 'desc') {
@@ -90,6 +96,7 @@ const Index = ({ setStage }) => {
 			formData.append('thumbnail', file);
 		}
 		formData.append('title', detailInfo.title.trim());
+		formData.append('price', detailInfo.price); // TODO: sync to api
 		formData.append('summary', detailInfo.summary.trim());
 		formData.append('ver', detailInfo.ver.trim());
 		let tagString = '';
@@ -110,9 +117,7 @@ const Index = ({ setStage }) => {
 			dispatch(setNetworkDetail({ ...detailInfo, id: res.data.data.id }));
 			setStage(1);
 		} catch (err) {
-			console.error(err);
-			console.error(err.response);
-			console.error(err.response.data);
+			console.error(err?.response);
 			alert(err.response.data);
 		}
 	};
@@ -158,8 +163,44 @@ const Index = ({ setStage }) => {
 						maxLength="100"
 					/>
 				</DetailInput>
-				{/* TODO:  pay container */}
-				<PayContainer>TODO: pay container</PayContainer>
+				<PriceContainer isFree={isFree}>
+					<div className="priceTitle">
+						모델 이용료
+						<br />
+						(이미지 1장 기준)
+					</div>
+					<input
+						className="price"
+						type="number"
+						value={detailInfo.price}
+						onChange={handleChange}
+						onDrop={() => false}
+						onPaste={() => false}
+						disabled={isFree}
+					/>
+					<div className="priceUnit">토큰</div>
+					<div className="freeCheckbox">
+						<label htmlFor="freeCheckbox">
+							<input
+								type="checkbox"
+								id="freeCheckbox"
+								onChange={() => {
+									if (!isFree) setDetailInfo({ ...detailInfo, price: 0 });
+									setIsFree(!isFree);
+								}}
+							/>
+							무료
+						</label>
+					</div>
+					<div className="noticeText">
+						* 1토큰은 10원에 해당됩니다.
+						<br />
+						* 모델 이용료의 90%를 가져가실 수 있으며, ‘무료’ 를 선택할 시 수익은
+						발생되지 않습니다.
+						<br />* 모델을 이용할 때, 인공지능 서버 요금인 기본 수수료가 이미지
+						1장 기준 1토큰씩 추가로 부과됩니다.
+					</div>
+				</PriceContainer>
 			</TextContainer>
 			<DetailInput>
 				<div className="inputTitle">모델 버전</div>
@@ -376,4 +417,60 @@ const TagListContainer = styled.div`
 	}
 `;
 
-const PayContainer = styled.div``;
+const PriceContainer = styled.div`
+	display: grid;
+	grid-template-columns: 150px 133px 45px auto;
+	grid-template-rows: 50px auto;
+	grid-gap: 10px 10px;
+	gap: 10px 10px;
+	align-items: center;
+	.priceTitle {
+		font-size: 0.8rem;
+		width: 100%;
+		color: #0d005c;
+	}
+	.price {
+		box-shadow: 0px 0px 3px 3px
+			${(props) =>
+				props.isFree ? 'rgba(157, 157, 157, 0.3)' : 'rgba(166, 185, 241, 0.3)'};
+		width: 100%;
+		border: 1px solid rgba(255, 255, 255, 0.3);
+		box-sizing: border-box;
+		border-radius: 5px;
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 19px;
+		color: #0d005c;
+		text-align: center;
+		outline: none;
+		::-webkit-outer-spin-button,
+		::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+		-moz-appearance: textfield;
+	}
+	.priceUnit {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 19px;
+		color: #0d005c;
+		justify-self: left;
+	}
+	.freeCheckbox {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 19px;
+		color: #0d005c;
+		input {
+			margin-right: 10px;
+		}
+	}
+	.noticeText {
+		grid-column: 1 / 5;
+		align-self: start;
+		font-weight: 400;
+		font-size: 14px;
+		line-height: 16px;
+		color: #ff0000;
+	}
+`;
