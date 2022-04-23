@@ -13,7 +13,7 @@ import NetworkUploadPage from './page/NetworkUploadPage/Index';
 import MyInfoRevisePage from './page/MyInfoRevisePage/Index';
 import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import MySubscribePage from './page/MySubscribePage/Index';
-import Footer from './components/Footer/Index';
+// import Footer from './components/Footer/Index';
 import IntroductionPage from './page/IntroductionPage/Index';
 function App() {
 	return (
@@ -49,7 +49,7 @@ function App() {
 				</Route>
 				<Route path="/NetworkDetail/:postId" element={<NetworkDetailPage />} />
 			</Routes>
-			<Footer />
+			{/* <Footer /> Todo: Footer SCSS */}
 		</div>
 	);
 }
