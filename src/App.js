@@ -15,10 +15,13 @@ import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import MySubscribePage from './page/MySubscribePage/Index';
 // import Footer from './components/Footer/Index';
 import IntroductionPage from './page/IntroductionPage/Index';
+import InfiniteScroll from './components/NetworkList/InfiniteScroll';
+
 function App() {
 	return (
 		<div className="global">
 			<NavBar />
+			<InfiniteScroll />
 			<Routes className="global-format">
 				<Route path="/" element={<MainPage />} exact={true} />
 				<Route path="/Introduction" element={<IntroductionPage />} />

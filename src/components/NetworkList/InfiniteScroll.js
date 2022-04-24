@@ -83,7 +83,7 @@ const Index = () => {
 	}, [getNetworkList]);
 
 	const setObservationTarget = useIntersectionObserver(fetchMoreData);
-
+	console.log('Infinite Scroll 테스트 페이지 로딩 - Infinite scroll');
 	// 대기중일때
 	if (loading) {
 		return <div className="list-block">로딩 중</div>;
