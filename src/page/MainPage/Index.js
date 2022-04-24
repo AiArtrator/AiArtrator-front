@@ -14,13 +14,11 @@ const Index = () => {
 
 					{/* <Infer /> */}
 
-					<br />
-					<img src={Logo} alt="logo" />
-
 					<div className="inrow">
 						<button>얼굴 이미지 생성</button>
 						<button>추상화 이미지 생성</button>
 					</div>
+					<img src={Logo} alt="logo" />
 				</div>
 			</div>
 		</div>

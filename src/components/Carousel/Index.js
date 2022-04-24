@@ -25,7 +25,7 @@ const Index = () => {
 			<br/>
 			<h2>The Platfom of Generative model</h2>
 			<br/>
-			고성능 컴퓨터 없이, <br /><br />오직 스마트 폰만으로  
+			고사양 컴퓨터 없이, <br /><br />오직 스마트 폰만으로  
 			<br /><br />인공지능 서비스를 경험해보세요 !
 			<h1>Ai Artrator</h1>
 
