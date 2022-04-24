@@ -32,12 +32,16 @@ const Index = () => {
 			try {
 				console.log(searchWord);
 				const response = await getSearchNetwork(searchWord); // TODO : replace to getNetworkByUserId
-				console.log('검색 결과 개수는 ', response.data.data.postListCount);
+				console.log(
+					'InfiniteScroll-검색 결과 개수는 ',
+					response.data.data.postListCount
+				);
 
 				setResCount(response.data.data.postListCount);
 				setNetworks(response.data.data.postList);
-				setResult('검색 결과 ');
+				setResult('InfiniteScroll-검색 결과 ');
 			} catch (err) {
+				console.log('InfiniteScroll-ERR');
 				console.error(err);
 				setError(err);
 			}
@@ -73,8 +77,10 @@ const Index = () => {
 			const newData = await getNetworkList();
 			setNetworks(newData);
 			setNetworksCount(newData.data.data.postListCount);
+			console.log('InfiniteScroll-networks값');
 			console.log(networks);
 		} catch (err) {
+			console.log('InfiniteScroll-ERR');
 			console.error(err);
 			setError(err);
 		}
@@ -91,7 +97,7 @@ const Index = () => {
 	if (error) return <div>에러가 발생했습니다</div>;
 	// 아직 networks값이 설정되지 않았을때
 	if (!networks) {
-		console.log('아직 networks값이 설정되지 않음');
+		console.log('InfiniteScroll-아직 networks값이 설정되지 않음');
 		return null;
 	}
 
