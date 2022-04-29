@@ -4,6 +4,7 @@ import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
 import Logout from './LogoutButton/Index.js';
+import MyTokenAccount from './MyTokenAccount/Index.js';
 import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
 import { useSelector } from 'react-redux';
@@ -36,7 +37,22 @@ const Index = () => {
 									<OwnNetworksBtn />
 								</li>
 								<li>
+									<MyTokenAccount />
+								</li>
+								<li>
 									<Logout />
+								</li>
+								<li
+									style={{
+										height: '5rem',
+										color: 'white',
+										background: 'rgba(0, 0, 0, 0.728)',
+										verticalAlign: 'center',
+									}}
+								>
+									보유 토큰
+									<br />
+									000 Token
 								</li>
 							</ul>
 						</li>
