@@ -13,15 +13,16 @@ import NetworkUploadPage from './page/NetworkUploadPage/Index';
 import MyInfoRevisePage from './page/MyInfoRevisePage/Index';
 import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import MySubscribePage from './page/MySubscribePage/Index';
-// import Footer from './components/Footer/Index';
 import IntroductionPage from './page/IntroductionPage/Index';
-import InfiniteScroll from './components/NetworkList/InfiniteScroll';
+import MyBalancePage from './page/MyBalancePage/Index';
+// import Footer from './components/Footer/Index';
+// import InfiniteScroll from './components/NetworkList/InfiniteScroll';
 
 function App() {
 	return (
 		<div className="global">
 			<NavBar />
-			<InfiniteScroll />
+			{/* <InfiniteScroll /> */}
 			<Routes className="global-format">
 				<Route path="/" element={<MainPage />} exact={true} />
 				<Route path="/Introduction" element={<IntroductionPage />} />
@@ -30,6 +31,9 @@ function App() {
 				<Route path="/Signup" element={<SignupPage />} />
 				<Route path="/MyInfo" element={<AuthRoute />}>
 					<Route path="/MyInfo" element={<MyInfoPage />} />
+				</Route>
+				<Route path="/MyBalance" element={<AuthRoute />}>
+					<Route path="/MyBalance" element={<MyBalancePage />} />
 				</Route>
 				<Route path="/Revise" element={<AuthRoute />}>
 					<Route path="/Revise" element={<MyInfoRevisePage />} />

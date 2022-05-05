@@ -15,17 +15,18 @@ import { tokenStatusInNav } from '../../axios/User';
 const Index = () => {
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const navigate = useNavigate();
-	const [nowToken, setNowToken] = useState('0');
+	const [nowToken, setNowToken] = useState(0);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			setNowToken(0);
 			try {
-				const response = await tokenStatusInNav(accesstoken); // TODO : replace to getNetworkByUserId
-				setNowToken(response.data.data.balance);
-				console.log(response.data);
-				console.log(response.data.data.balance);
+				const response = await tokenStatusInNav(accesstoken);
+				setNowToken(response.data.balance); // TODO:
+				console.log('Navbar 내 토큰 내역');
+				console.log(response.data.data);
 			} catch (err) {
+				console.log('Navbar 내 토큰 조회 에러');
 				console.error(err);
 			}
 		};
