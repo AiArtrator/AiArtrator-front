@@ -6,7 +6,7 @@
 		margin: 0;
 		box-sizing: border-box;
 	}
-	min-height: 35rem;
+	min-height: 90vh;
 
 	.background {
 		width: 430px;
@@ -14,7 +14,7 @@
 		position: absolute;
 		transform: translate(-50%, -50%);
 		left: 50%;
-		top: 55%;
+		top: 39%;
 	}
 	.background .shape {
 		height: 350px;
@@ -34,7 +34,7 @@
 		background-color: rgba(255, 255, 255, 0.13);
 		position: absolute;
 		transform: translate(-50%, -50%);
-		top: 50%;
+		top: 38%;
 		left: 50%;
 		border-radius: 10px;
 		backdrop-filter: blur(10px);

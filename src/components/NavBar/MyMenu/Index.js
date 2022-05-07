@@ -8,7 +8,7 @@ const Index = () => {
 	return (
 		<>
 			<Link to="/MyInfo">
-				<img src={Profileimg} alt="profile" />
+				<img className="profile-img" src={Profileimg} alt="profile" />
 				{usernickname} 님
 			</Link>
 		</>

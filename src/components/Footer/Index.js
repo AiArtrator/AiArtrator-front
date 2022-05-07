@@ -7,6 +7,7 @@ const Index = () => {
 		navigate('/Introduction');
 	};
 	if (
+		window.location.pathname === '/Signup' ||
 		window.location.pathname === '/NetworkLists' ||
 		window.location.pathname === '/MyNetworks' ||
 		window.location.pathname === '/MySubscribe'
@@ -22,7 +23,7 @@ const Index = () => {
 			<p>
 				Ai Artrator Developers Simo Ryu, Dohui Son, Jiwon Seol, Junhyeog Yun
 			</p>
-			<br />
+
 			<h3>
 				ⓒ Copyright 2022 Ai Artrator, Republic of Korea. All rights reserved.
 			</h3>
