@@ -3,6 +3,7 @@ import Carous from '../../components/Carousel/Index';
 // import Infer from '../../components/test/Test.jsx';
 import './main-page.scss';
 import Logo from '../../assets/main.jpeg';
+
 const Index = () => {
 	return (
 		<div className="main-format">

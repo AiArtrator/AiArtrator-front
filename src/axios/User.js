@@ -79,3 +79,12 @@ export const putReviseInfo = (accesstoken: String, formData: Object) => {
 		data: formData,
 	});
 };
+
+// 네비게이션바의 보유 토큰
+export const tokenStatusInNav = (accesstoken: String) => {
+	return axios({
+		method: 'GET',
+		url: '/api/payment',
+		headers: { accesstoken },
+	});
+};

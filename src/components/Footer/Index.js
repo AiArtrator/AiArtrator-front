@@ -6,6 +6,12 @@ const Index = () => {
 	const toIntroduction = () => {
 		navigate('/Introduction');
 	};
+	if (
+		window.location.pathname === '/NetworkLists' ||
+		window.location.pathname === '/MyNetworks' ||
+		window.location.pathname === '/MySubscribe'
+	)
+		return null;
 	return (
 		<div className="foot">
 			<div className="intro-button" onClick={toIntroduction}>
