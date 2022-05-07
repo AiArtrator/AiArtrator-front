@@ -15,7 +15,7 @@ import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import MySubscribePage from './page/MySubscribePage/Index';
 import IntroductionPage from './page/IntroductionPage/Index';
 import MyBalancePage from './page/MyBalancePage/Index';
-// import Footer from './components/Footer/Index';
+import Footer from './components/Footer/Index';
 // import InfiniteScroll from './components/NetworkList/InfiniteScroll';
 
 function App() {
@@ -56,7 +56,7 @@ function App() {
 				</Route>
 				<Route path="/NetworkDetail/:postId" element={<NetworkDetailPage />} />
 			</Routes>
-			{/* <Footer /> Todo: Footer SCSS */}
+			<Footer />
 		</div>
 	);
 }
