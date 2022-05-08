@@ -88,3 +88,12 @@ export const tokenStatusInNav = (accesstoken: String) => {
 		headers: { accesstoken },
 	});
 };
+
+// 내 결제 내역 정보
+export const myPaymentHist = (accesstoken: String) => {
+	return axios({
+		method: 'GET',
+		url: '/api/payment/list',
+		headers: { accesstoken },
+	});
+};

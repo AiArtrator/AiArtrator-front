@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 const Index = ({ network }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
-	var postId = '/NetworkDetail/';
+	let postId = '/NetworkDetail/';
 
 	const toDetailPage = () => {
 		postId += id;

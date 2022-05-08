@@ -10,7 +10,8 @@ const Index = () => {
 		window.location.pathname === '/Signup' ||
 		window.location.pathname === '/NetworkLists' ||
 		window.location.pathname === '/MyNetworks' ||
-		window.location.pathname === '/MySubscribe'
+		window.location.pathname === '/MySubscribe' ||
+		window.location.pathname === '/MyBalance'
 	)
 		return null;
 	return (
