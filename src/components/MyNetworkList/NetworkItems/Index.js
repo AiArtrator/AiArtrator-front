@@ -10,13 +10,14 @@ import { useSelector } from 'react-redux';
 const Index = ({ network }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
-	var postIdUrl = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 
 	const toDetailPage = () => {
+		let postIdUrl = '/NetworkDetail/';
 		postIdUrl += id;
 		navigate(postIdUrl);
 	};
+
 	const deleteModel = async () => {
 		try {
 			const res = await deleteMyNetwork(accesstoken, { postId: id });
