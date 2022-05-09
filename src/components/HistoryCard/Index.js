@@ -18,6 +18,6 @@ const Index = ({ history }) => {
 };
 
 Index.propTypes = {
-	tokenHistory: PropTypes.object,
+	history: PropTypes.object,
 };
 export default Index;

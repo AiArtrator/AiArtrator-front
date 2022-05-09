@@ -63,10 +63,6 @@ const Index = () => {
 				) : (
 					<></>
 				)}
-
-				{/* // {myTokenHistory.map((history) => {
-				// 	return <myHistoryItem key={history.id} history={history} />;
-				// })}  */}
 			</div>
 		</div>
 	);
