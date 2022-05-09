@@ -126,7 +126,8 @@ const NetworkDetail = styled.div`
 	grid-gap: 10px 50px;
 	gap: 10px 50px;
 	width: -webkit-fill-available;
-	height: -webkit-fill-available;
+	// height: -webkit-fill-available;
+	height: 75vh;
 	padding: 5%;
 	img {
 		width: 100%;
