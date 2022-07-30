@@ -48,16 +48,21 @@ const Index = () => {
 	}, [networkDetail]);
 
 	const subscribe = async () => {
-		await postNetworkSubscribe(forrequest, accesstoken)
-			.then((res) => {
-				console.log(res.data.message);
+		try {
+			const res = await postNetworkSubscribe(forrequest, accesstoken);
+			console.log(res.data.message);
+			if (detailInfo.isSubscribed) {
+				alert('구독 취소 완료');
+			} else {
 				alert('구독 완료');
-			})
-			.catch((err) => {
-				console.error(err);
-				console.log(err.response.data.message);
-			});
+			}
+			setDetailInfo({ ...detailInfo, isSubscribed: !detailInfo.isSubscribed });
+		} catch (err) {
+			console.error(err);
+			console.log(err.response.data.message);
+		}
 	};
+
 	const subscribeBtn = () => {
 		if (networkDetail) {
 			subscribe();
