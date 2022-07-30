@@ -54,11 +54,11 @@ export const getUser = () => {
 
 export const userLogout = async (dispatch, getState) => {
 	try {
+		dispatch(removeAccsstoken());
+		dispatch(removeUser());
 		const accesstoken = getState().user.accesstoken;
 		const res = await Logout(accesstoken);
 		alert(res.data.message); // TODO: remove alert
-		dispatch(removeAccsstoken());
-		dispatch(removeUser());
 	} catch (err) {
 		console.error(err);
 	}
