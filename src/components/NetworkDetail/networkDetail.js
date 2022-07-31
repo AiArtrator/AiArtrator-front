@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { fetchNetworkDetail } from '../../reducers/network';
 import { dateToText } from '../Utils';
 import DEFAULT_THUMBNAIL from '../../assets/thumb.jpeg';
-import { useNavigate } from 'react-router-dom';
 import { postNetworkSubscribe } from '../../axios/Network';
 
 const Index = () => {
@@ -28,7 +27,14 @@ const Index = () => {
 	const forrequest = { postId: postId };
 
 	useEffect(() => {
-		dispatch(fetchNetworkDetail(postId, accesstoken));
+		const checkNetworkDetail = async () => {
+			const res = await dispatch(fetchNetworkDetail(postId, accesstoken));
+			if (!res.success) {
+				alert(res.message);
+				navigate(-1);
+			}
+		};
+		checkNetworkDetail();
 	}, []);
 
 	useEffect(() => {
