@@ -114,3 +114,21 @@ export const ownNetworkList = (userId: String, accesstoken: String, data) => {
 		data,
 	});
 };
+
+export const postInference = (
+	accesstoken: String,
+	weightUuid: String,
+	imageCount: Number,
+	price: Number
+) => {
+	return axios({
+		method: 'POST',
+		url: `/api/inference`,
+		headers: { accesstoken },
+		data: {
+			weightUuid,
+			imageCount,
+			price,
+		},
+	});
+};

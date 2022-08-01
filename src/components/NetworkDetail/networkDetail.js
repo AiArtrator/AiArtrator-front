@@ -5,7 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchNetworkDetail, setNetworkDetail } from '../../reducers/network';
 import { dateToText } from '../Utils';
 import DEFAULT_THUMBNAIL from '../../assets/thumb.jpeg';
-import { postNetworkSubscribe } from '../../axios/Network';
+import { postNetworkSubscribe, postInference } from '../../axios/Network';
 
 const Index = () => {
 	const dispatch = useDispatch();
@@ -23,8 +23,12 @@ const Index = () => {
 		tagList: [],
 		desc: '로딩 중',
 		isSubscribed: false,
+		fee: 0,
+		weightUuid: '',
 	});
 	const forrequest = { postId: postId };
+	const [numImg, setNumImg] = useState('');
+	const [isPopup, setIsPopup] = useState(false);
 
 	useEffect(() => {
 		const checkNetworkDetail = async () => {
@@ -49,6 +53,8 @@ const Index = () => {
 				tagList: networkDetail.tagList,
 				desc: networkDetail.description,
 				isSubscribed: networkDetail.isSubscribed,
+				fee: networkDetail.fee,
+				weightUuid: networkDetail.weightUuid,
 			});
 		}
 	}, [networkDetail]);
@@ -80,6 +86,37 @@ const Index = () => {
 			subscribe();
 		} else {
 			alert('에러 발생');
+		}
+	};
+
+	const handleNumImg = (e) => {
+		if (e.target.value === '') {
+			setNumImg('');
+			return;
+		}
+		let val = parseInt(e.target.value, 10);
+		const minVal = parseInt(e.target.min, 10);
+		const maxVal = parseInt(e.target.max, 10);
+		if (val < minVal) {
+			val = '';
+		}
+		if (val > maxVal) {
+			val = numImg;
+		}
+		setNumImg(val);
+	};
+
+	const inference = async () => {
+		try {
+			const res = await postInference(
+				accesstoken,
+				detailInfo.weightUuid,
+				numImg || 0,
+				-detailInfo.fee
+			);
+			alert(res.data.message);
+		} catch (err) {
+			console.log(err);
 		}
 	};
 
@@ -138,8 +175,45 @@ const Index = () => {
 				<div className="networkUseDesc">
 					* 이용할 때마다 서비스 정책에 따라 금액이 부과됩니다.
 				</div>
-				<div className="networkUseButton">이 모델로 이미지 얻기</div>
+				<div className="networkUseButton" onClick={() => setIsPopup(!isPopup)}>
+					이 모델로 이미지 얻기
+				</div>
 			</NetworkUseContainer>
+			{isPopup && (
+				<PopupContainer>
+					<div className="popupTitle">모델 이용하기</div>
+					<div className="popupNetworkTitle">{detailInfo.title}</div>
+					<div className="subtitle">모델 이용료</div>
+					<div className="fee">{detailInfo.fee} 토큰</div>
+					<div className="subtitle">생성할 이미지 개수</div>
+					<input
+						className="numImg"
+						type="number"
+						value={numImg}
+						onChange={handleNumImg}
+						min="0"
+						max="99999" // TODO: fix max value
+					/>
+					<div className="numImgAfter">개</div>
+					<div className="notice">* 기본 수수료는 이미지 당 1토큰 입니다.</div>
+					<div className="totalFee">
+						총 결제 금액은 {detailInfo.fee * (numImg || 0)} (토큰)입니다.
+					</div>
+					<div className="popupDesc">
+						* 모델을 이용하여 이미지를 다운로드 받을 수 있습니다. 생성한
+						이미지들은 이미지 Library에 자동으로 아카이브 되며 언제든지 다시
+						다운로드 할 수 있습니다.
+						<br />* 결제 완료후 총 결제 금액만큼 토큰이 차감됩니다.
+						<br />* 1토큰은 10원입니다.
+					</div>
+					<div className="payButton" onClick={inference}>
+						결제하기
+					</div>
+					<div className="closeButton" onClick={() => setIsPopup(false)}>
+						닫기
+					</div>
+				</PopupContainer>
+			)}
 		</NetworkDetail>
 	);
 };
@@ -151,7 +225,6 @@ const NetworkDetail = styled.div`
 	display: grid;
 	grid-template-columns: auto 1fr;
 	grid-template-rows: min-content 300px min-content min-content;
-	grid-gap: 30px;
 	gap: 30px;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
@@ -319,5 +392,114 @@ const NetworkUseContainer = styled.div`
 		background-color: rgba(0, 0, 128, 1);
 		color: #eaf0fb;
 		margin-bottom: 0;
+	}
+`;
+
+const PopupContainer = styled.div`
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	padding: 30px;
+	transform: translate(-50%, -50%);
+	display: grid;
+	grid-template-columns: 150px 50px 100px 10px auto;
+	gap: 15px 0px;
+	align-items: center;
+	background: #ffffff;
+	box-shadow: 0px 0px 30px 10px rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+	.popupTitle {
+		grid-column: 1 / 6;
+		font-size: 18px;
+		color: #0d005c;
+		border-bottom: 2px solid #e2e2e2;
+		text-align: center;
+		padding-bottom: 15px;
+	}
+	.popupNetworkTitle {
+		grid-column: 1 / 6;
+		font-size: 22px;
+	}
+	.subtitle {
+		grid-column: 1 / 2;
+		font-size: 16px;
+		color: #0d005c;
+	}
+	.fee {
+		grid-column: 3 / 4;
+		color: #2e2e2e;
+	}
+	.numImg {
+		grid-column: 3 / 4;
+		outline: none;
+		border: 1px solid #000080;
+		border-radius: 3px;
+		text-align: center;
+		height: 25px;
+		font-size: 16px;
+	}
+	input::-webkit-outer-spin-button,
+	input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+	}
+	.numImgAfter {
+		grid-column: 5 / 6;
+		font-size: 16px;
+		color: #0d005c;
+	}
+	.notice {
+		grid-column: 1 / 6;
+		font-size: 14px;
+		color: #ff0000;
+		margin-bottom: 20px;
+	}
+	.totalFee {
+		grid-column: 1 / 6;
+		font-size: 18px;
+		font-weight: 600;
+		text-align: center;
+		color: #000080;
+		padding-bottom: 15px;
+		border-bottom: 2px solid #e2e2e2;
+	}
+	.popupDesc {
+		grid-column: 1 / 6;
+		font-size: 14px;
+		color: rgba(46, 46, 46, 0.6);
+		line-height: 140%;
+		margin-bottom: 20px;
+	}
+	.payButton {
+		grid-column: 1 / 3;
+		font-size: 16px;
+		text-align: center;
+		color: #000080;
+		background: #e4eafb;
+		border-radius: 5px;
+		padding: 7px;
+		width: 120px;
+		justify-self: center;
+	}
+	.payButton:hover {
+		font-weight: 500;
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
+	}
+	.closeButton {
+		grid-column: 3 / 6;
+		font-size: 16px;
+		text-align: center;
+		color: #000080;
+		background: #e4eafb;
+		border-radius: 5px;
+		padding: 7px;
+		width: 120px;
+		justify-self: center;
+	}
+	.closeButton:hover {
+		font-weight: 500;
+		background-color: rgba(0, 0, 128, 1);
+		color: #eaf0fb;
 	}
 `;
