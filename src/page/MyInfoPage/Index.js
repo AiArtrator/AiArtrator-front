@@ -3,6 +3,8 @@ import './my-info-page.scss';
 import { getMypage } from '../../axios/User';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import Loading from '../../components/Loading/Loading';
 import Logo from '../../assets/logo/LogoBox1.png';
 
 const Index = () => {
@@ -28,7 +30,7 @@ const Index = () => {
 		fetchData();
 	}, []);
 	if (loading) {
-		return <div>로딩중</div>;
+		return <Loading />;
 	}
 	if (error) {
 		return <div>에러가 발생했습니다.</div>;
