@@ -1,12 +1,12 @@
 import React from 'react';
-import OwnNetworksList from '../../components/OwnNetworkList/Index.js';
+import PurchasedNetworksList from '../../components/MyPurchasedNetworkList/Index.js';
 import './own-networks-page.scss';
 
 const Index = () => {
 	return (
-		<div className="own-networks-page">
+		<div className="purchased-networks-page">
 			<h2>내가 구매한 모델 목록</h2>
-			<OwnNetworksList />
+			<PurchasedNetworksList />
 		</div>
 	);
 };

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import './own-network-list.scss';
-import OwnNetworksItem from './OwnNetworkItems/Index.js';
+import './purchased-network-list.scss';
+import OwnNetworksItem from './PurchasedNetworkItems/Index.js';
 import { getNetworkList } from '../../axios/Network';
 
 const Index = () => {

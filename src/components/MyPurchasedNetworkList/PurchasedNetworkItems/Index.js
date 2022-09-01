@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import './own-network-items.scss';
+import './purchased-network-items.scss';
 
 const Index = ({ network }) => {
 	const { thumbnail, title, summary } = network;
