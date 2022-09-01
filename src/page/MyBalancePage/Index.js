@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
+
 import { useSelector } from 'react-redux';
+
 import { myPaymentHist } from '../../axios/User';
 import MyHistoryItem from '../../components/HistoryCard/Index.js';
+import Loading from 'react-loading';
+import MyBalanceContainer from '../../container/MyBalanceContainer';
 
 const Index = () => {
 	const usernickname = useSelector((state) => state.user?.user?.nickname);
@@ -33,38 +37,40 @@ const Index = () => {
 	}, []);
 
 	if (loading) {
-		return <div className="my-balance-form">로딩 중</div>;
+		return <Loading />;
 	}
 	if (error) {
-		return <div className="my-balance-form">ERROR</div>;
+		return <Loading />;
 	}
 	if (!myTokenHistory) {
-		console.log('아직 토큰 히스토리값이 설정되지 않음');
-		return null;
+		return <Loading />;
 	}
 
 	console.log('내 토큰 내역 및 충전 페이지');
 	return (
-		<div className="my-balance-form">
-			<br />
-			<h1>나의 토큰 내역 페이지 입니다</h1>
-			{usernickname} 님의 현재 보유 토큰
-			{nowBalance} Token
-			<div>충전하기</div>
-			<div>*1토큰은 10원입니다.</div>
-			<div className="my-history">
-				<h4>토큰 내역 조회</h4>
-				{myTokenHistory ? (
-					<div>
-						{myTokenHistory.map((history) => {
-							return <MyHistoryItem key={history.id} history={history} />;
-						})}
-					</div>
-				) : (
-					<></>
-				)}
+		<>
+			<MyBalanceContainer />
+			<div className="my-balance-form">
+				<br />
+				<h1>나의 토큰 내역 페이지 입니다</h1>
+				{usernickname} 님의 현재 보유 토큰
+				{nowBalance} Token
+				<div>충전하기</div>
+				<div>*1토큰은 10원입니다.</div>
+				<div className="my-history">
+					<h4>토큰 내역 조회</h4>
+					{myTokenHistory ? (
+						<div>
+							{myTokenHistory.map((history) => {
+								return <MyHistoryItem key={history.id} history={history} />;
+							})}
+						</div>
+					) : (
+						<></>
+					)}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

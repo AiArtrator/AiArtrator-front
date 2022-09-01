@@ -3,7 +3,7 @@ import './my-network-list.scss';
 
 import NetworksItem from './NetworkItems/Index.js';
 import { getMyNetworkListById } from '../../axios/Network';
-import Loading from 'react-loading';
+import Loading from '../../components/Loading/Loading';
 
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
