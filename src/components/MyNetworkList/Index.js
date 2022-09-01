@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import './my-network-list.scss';
+
 import NetworksItem from './NetworkItems/Index.js';
+import Loading from '../Loading/Loading';
+
 import { getMyNetworkListById } from '../../axios/Network';
+
 import { useSelector } from 'react-redux';
-import SearchPicto from '../../assets/search.png';
 import { useNavigate } from 'react-router-dom';
+
+import SearchPicto from '../../assets/search.png';
 
 // 내가 업로드한 모델 페이지
 const Index = () => {
 	const navigate = useNavigate();
+
 	const userId = useSelector((state) => state.user.user.id);
 	const nickname = useSelector((state) => state.user.user.nickname);
+
 	const [networks, setNetworks] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
-	const page = 'upload';
 	const [searchWord, setSearchWord] = useState('');
+	const [networkCnt, setNetworkCnt] = useState(0);
+	const page = 'upload';
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -25,6 +33,7 @@ const Index = () => {
 			try {
 				const response = await getMyNetworkListById(userId, page, searchWord);
 				setNetworks(response.data.data.postList);
+				setNetworkCnt(response.data.data.postList.length);
 				console.log(response.data.data);
 			} catch (err) {
 				console.error(err);
@@ -36,15 +45,11 @@ const Index = () => {
 	}, []);
 
 	// 대기중일때
-	if (loading) {
-		return <div className="list-block">로딩 중</div>;
-	}
+	if (loading) return <Loading />;
+
 	if (error) return <div>에러가 발생했습니다</div>;
 	// 아직 networks값이 설정되지 않았을때
-	if (!networks) {
-		console.log('아직 networks값이 설정되지 않음');
-		return null;
-	}
+	if (!networks) return <Loading />;
 
 	const handleChange = (e) => {
 		setSearchWord(e.target.value);
@@ -58,6 +63,7 @@ const Index = () => {
 				console.log(searchWord);
 				const response = await getMyNetworkListById(userId, page, searchWord);
 				setNetworks(response.data.data.postList);
+				setNetworkCnt(response.data.data.postList.length);
 			} catch (err) {
 				console.error(err);
 				setError(err);
@@ -93,7 +99,7 @@ const Index = () => {
 					onClick={handleSearch}
 				/>
 			</div>
-			<div className="now-count">모델 개수는 00개 입니다.</div>
+			<div className="now-count">모델 개수는 {networkCnt}개 입니다.</div>
 
 			{networks.map((network) => {
 				return <NetworksItem key={network.id} network={network} />;
