@@ -22,7 +22,7 @@
 		border-radius: 0.3rem;
 		letter-spacing: 0.1em;
 		width: 6rem;
-		height: 4.5rem;
+		height: 4rem;
 		position: relative;
 		overflow: hidden;
 		text-align: center;
@@ -39,6 +39,11 @@
 	}
 
 	nav ul li:hover {
+		font-weight: 700;
+		background-color: #000080;
+		color: white;
+	}
+	nav ul li:active {
 		font-weight: 700;
 		background-color: #000080;
 		color: white;

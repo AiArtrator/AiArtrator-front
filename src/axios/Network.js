@@ -32,7 +32,7 @@ export const getNetworkDetailById = (postId: String, accesstoken: String) => {
 	});
 };
 
-export const deleteMyNetwork = (postId: String, accesstoken: String) => {
+export const deleteMyNetwork = (postId, accesstoken) => {
 	return axios({
 		method: 'DELETE',
 		headers: { accesstoken },

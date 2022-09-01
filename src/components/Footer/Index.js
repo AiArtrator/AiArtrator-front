@@ -9,6 +9,7 @@ const Index = () => {
 	if (
 		window.location.pathname === '/Signup' ||
 		window.location.pathname === '/NetworkLists' ||
+		window.location.pathname === '/PurchasedNetwork' ||
 		window.location.pathname === '/MyNetworks' ||
 		window.location.pathname === '/MySubscribe' ||
 		window.location.pathname === '/MyBalance'

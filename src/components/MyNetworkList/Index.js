@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import SearchPicto from '../../assets/search.png';
+import Refresh from '../../assets/refresh.png';
 
 // 내가 업로드한 모델 페이지
 const Index = () => {
@@ -18,11 +19,13 @@ const Index = () => {
 	const userId = useSelector((state) => state.user.user.id);
 	const nickname = useSelector((state) => state.user.user.nickname);
 
-	const [networks, setNetworks] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [searchWord, setSearchWord] = useState('');
+
+	const [networks, setNetworks] = useState(null);
 	const [networkCnt, setNetworkCnt] = useState(0);
+	const [refresh, setRefresh] = useState(false);
 	const page = 'upload';
 
 	useEffect(() => {
@@ -44,16 +47,10 @@ const Index = () => {
 		fetchData();
 	}, []);
 
-	// 대기중일때
-	if (loading) return <Loading />;
-
-	if (error) return <div>에러가 발생했습니다</div>;
-	// 아직 networks값이 설정되지 않았을때
-	if (!networks) return <Loading />;
-
 	const handleChange = (e) => {
 		setSearchWord(e.target.value);
 	};
+
 	const handleSearch = () => {
 		const fetchData = async () => {
 			setError(null);
@@ -64,14 +61,27 @@ const Index = () => {
 				const response = await getMyNetworkListById(userId, page, searchWord);
 				setNetworks(response.data.data.postList);
 				setNetworkCnt(response.data.data.postList.length);
+				setSearchWord('');
 			} catch (err) {
 				console.error(err);
 				setError(err);
 			}
+			setRefresh(true);
 			setLoading(false);
 		};
 		fetchData();
 	};
+
+	const onRefresh = () => {
+		setRefresh(false);
+		handleSearch();
+	};
+
+	if (loading) return <Loading />;
+
+	if (error) return <Loading />;
+
+	if (!networks) return <Loading />;
 
 	return (
 		<div className="list-block">
@@ -104,6 +114,9 @@ const Index = () => {
 			{networks.map((network) => {
 				return <NetworksItem key={network.id} network={network} />;
 			})}
+			{refresh ? (
+				<img className="refresh-btn" src={Refresh} onClick={onRefresh} />
+			) : null}
 		</div>
 	);
 };

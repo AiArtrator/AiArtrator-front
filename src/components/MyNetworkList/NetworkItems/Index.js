@@ -1,60 +1,99 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './network-items.scss';
+
 import person from '../../../assets/person.png';
+import defaultimg from '../../../assets/main.jpeg';
+
 import { useNavigate } from 'react-router-dom';
-import { deleteMyNetwork } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+
+import { deleteMyNetwork } from '../../../axios/Network';
+import Loading from 'react-loading';
 
 // Todo : 삭제완료시 리렌더링 (useState사용으로 수정)
 const Index = ({ network }) => {
 	const navigate = useNavigate();
-	const { id, thumbnail, title, writer, summary, tagList } = network;
+	const [loading, setLoading] = useState(false);
+
 	const accesstoken = useSelector((state) => state.user.accesstoken);
+	const [networkData, setNetworkData] = useState({
+		id: 0,
+		thumbnail: defaultimg,
+		title: 'loading',
+		writer: 'loading',
+		summary: 'loading',
+		tagList: [],
+	});
+
+	useEffect(() => {
+		setNetworkData({
+			id: network.id,
+			thumbnail: network.thumbnail,
+			title: network.title,
+			writer: network.writer,
+			summary: network.summary,
+			tagList: network.tagList,
+		});
+	}, []);
 
 	const toDetailPage = () => {
 		let postIdUrl = '/NetworkDetail/';
-		postIdUrl += id;
+		postIdUrl += networkData.id;
 		navigate(postIdUrl);
 	};
 
+	const onRemove = (id) => {
+		setNetworkData(networkData.filter((data) => data.id !== id));
+	};
+
 	const deleteModel = async () => {
+		setLoading(true);
+		const tmp = networkData.id;
 		try {
-			const res = await deleteMyNetwork(accesstoken, { postId: id });
+			const res = await deleteMyNetwork(networkData.id, accesstoken);
 			console.log(res.data.message);
 		} catch (err) {
 			console.error(err);
-			alert('에러 입니다. ');
+			setLoading(true);
+			onRemove(tmp);
+		}
+		setLoading(false);
+	};
 
-			console.log(err.response.data.message);
+	const removeConfirm = () => {
+		if (window.confirm('업로드한 모델을 삭제합니다.')) {
+			deleteModel();
 		}
 	};
+
+	if (loading) return <Loading />;
 
 	return (
 		<div style={{ width: '100%' }}>
 			<div className="inrow">
-				<div className="button" onClick={deleteModel}>
+				<div className="button" onClick={removeConfirm}>
 					삭제하기
 				</div>
 				<div className="button">수정하기</div>
 			</div>
 
 			<div className="items-block" onClick={toDetailPage}>
-				<img src={thumbnail} alt="thumbnail" />
+				<img src={networkData.thumbnail} alt="thumbnail" />
 
 				<div className="contents">
 					<h3>
-						<a>{title}</a>
+						<a>{networkData.title}</a>
 					</h3>
 
 					<div className="writer">
 						<img src={person} alt="profile" />
-						<div className="writer-nickname">{writer.nickname}</div>
+						<div className="writer-nickname">{networkData.writer.nickname}</div>
 					</div>
 
-					<p>{summary}</p>
+					<p>{networkData.summary}</p>
 					<div className="taglist">
-						{tagList.map((tag) => (
+						{networkData.tagList.map((tag) => (
 							<div className="tag" tag={tag} key={tag.id}>
 								{tag.name}
 							</div>

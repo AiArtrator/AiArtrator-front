@@ -79,4 +79,15 @@
 		color: #eaf0fb;
 		margin-bottom: 0;
 	}
+	.refresh-btn {
+		margin: 10% 45%;
+		width: 7%;
+		opacity: 20%;
+		cursor: pointer;
+		box-shadow: 0 0 10px rgba(17, 27, 55, 0.436);
+		border-radius: 100%;
+	}
+	.refresh-btn:hover {
+		box-shadow: 0 0 10px rgb(17, 27, 55);
+	}
 }

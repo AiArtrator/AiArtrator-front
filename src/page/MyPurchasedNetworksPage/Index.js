@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PurchasedNetworksList from '../../components/MyPurchasedNetworkList/Index.js';
-import './own-networks-page.scss';
+import './purchased-networks-page.scss';
 
+import SideNav from '../../components/SideBar/Index';
+import TopBtn from '../../components/TopBtn/index';
 const Index = () => {
+	const scrollTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	};
+
+	useEffect(() => {
+		scrollTop();
+	}, []);
+
 	return (
-		<div className="purchased-networks-page">
-			<h2>내가 구매한 모델 목록</h2>
+		<>
+			<SideNav />
 			<PurchasedNetworksList />
-		</div>
+			<TopBtn />
+		</>
 	);
 };
 

@@ -5,7 +5,7 @@ import MainPage from './page/MainPage/Index';
 import NetworkListPage from './page/NetworkListPage/Index';
 import LoginPage from './page/LoginPage/Index';
 import NavBar from './components/NavBar/Index';
-import OwnNetworksPage from './page/OwnNetworksPage/Index';
+import MyPurchasedNetworkPage from './page/MyPurchasedNetworksPage/Index';
 import MyNetworksPage from './page/MyNetworksPage/Index';
 import MyInfoPage from './page/MyInfoPage/Index';
 import SignupPage from './page/SignupPage/Index';
@@ -38,8 +38,11 @@ function App() {
 				<Route path="/Revise" element={<AuthRoute />}>
 					<Route path="/Revise" element={<MyInfoRevisePage />} />
 				</Route>
-				<Route path="/OwnNetworks" element={<AuthRoute />}>
-					<Route path="/OwnNetworks" element={<OwnNetworksPage />} />
+				<Route path="/PurchasedNetwork" element={<AuthRoute />}>
+					<Route
+						path="/PurchasedNetwork"
+						element={<MyPurchasedNetworkPage />}
+					/>
 				</Route>
 				<Route path="/MyNetworks" element={<AuthRoute />}>
 					<Route path="/MyNetworks" element={<MyNetworksPage />} />

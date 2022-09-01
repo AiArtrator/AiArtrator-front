@@ -5,6 +5,8 @@ import { getNetworkList, getSearchNetwork } from '../../axios/Network';
 import SearchPicto from '../../assets/search.png';
 import { useNavigate } from 'react-router-dom';
 
+import TopBtn from '../TopBtn';
+
 const Index = () => {
 	const [networks, setNetworks] = useState(null);
 	const [networksCount, setNetworksCount] = useState(0);
@@ -110,6 +112,7 @@ const Index = () => {
 			{networks.map((network) => {
 				return <NetworksItem key={network.id} network={network} />;
 			})}
+			<TopBtn />
 		</div>
 	);
 };

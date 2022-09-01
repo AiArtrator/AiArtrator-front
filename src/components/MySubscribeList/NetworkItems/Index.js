@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './network-items.scss';
+
 import person from '../../../assets/person.png';
+
 import { useNavigate } from 'react-router-dom';
 import { postNetworkSubscribe } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
@@ -16,6 +18,7 @@ const Index = ({ network }) => {
 		postIdURL += id;
 		navigate(postIdURL);
 	};
+
 	const deleteSubscribe = async () => {
 		try {
 			const res = await postNetworkSubscribe({ postId: id }, accesstoken);
@@ -27,11 +30,23 @@ const Index = ({ network }) => {
 		}
 	};
 
+	const onDelete = () => {
+		if (window.confirm('구독을 취소합니다.')) {
+			deleteSubscribe();
+		}
+	};
+
 	return (
 		<>
-			<div className="button" onClick={deleteSubscribe}>
-				구독취소
+			<div className="inrow">
+				<div className="button" onClick={onDelete}>
+					이미지 생성
+				</div>
+				<div className="button" onClick={onDelete}>
+					구독 취소
+				</div>
 			</div>
+
 			<div className="items-block" onClick={toDetailPage}>
 				<img src={thumbnail} alt="thumbnail" />
 
