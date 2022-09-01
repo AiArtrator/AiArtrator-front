@@ -2,8 +2,11 @@ import React from 'react';
 
 import Loading from '../components/Loading/Loading';
 
-const MyBalanceContainer = ({ myData }) => {
-	if (!myData) {
+const MyBalanceContainer = ({ myBalData, myHistory }) => {
+	if (!myBalData) {
+		return <Loading />;
+	}
+	if (!myHistory) {
 		return <Loading />;
 	}
 	return <></>;

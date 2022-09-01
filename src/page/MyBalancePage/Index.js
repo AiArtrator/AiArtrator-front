@@ -49,7 +49,7 @@ const Index = () => {
 	console.log('내 토큰 내역 및 충전 페이지');
 	return (
 		<>
-			<MyBalanceContainer />
+			<MyBalanceContainer myBalData={nowBalance} myHistory={myTokenHistory} />
 			<div className="my-balance-form">
 				<br />
 				<h1>나의 토큰 내역 페이지 입니다</h1>
