@@ -5,7 +5,6 @@ const Index = () => {
 	return (
 		<>
 			<SideNav />
-
 			<MyNetwork />
 		</>
 	);

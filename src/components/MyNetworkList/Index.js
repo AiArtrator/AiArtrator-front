@@ -86,7 +86,12 @@ const Index = () => {
 					value={searchWord}
 					onChange={handleChange}
 				/>
-				<img src={SearchPicto} alt="button" onClick={handleSearch} />
+				<img
+					className="search-btn"
+					src={SearchPicto}
+					alt="button"
+					onClick={handleSearch}
+				/>
 			</div>
 			<div className="now-count">모델 개수는 00개 입니다.</div>
 

@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
 	const navigate = useNavigate();
+
 	const go = (e) => {
 		const className = e.target.className;
 		if (className === 'my-networks') {
@@ -12,6 +13,7 @@ const Index = () => {
 			navigate('/MySubscribe');
 		}
 	};
+
 	return (
 		<div className="side-nav">
 			<nav>

@@ -1,16 +1,17 @@
 .side-nav {
-	//position: fixed;
+	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: left;
 	left: 0;
-	//@debug: 5rem;
-	width: 5rem;
-	height: 20rem;
+	width: 7rem;
+	top: 7rem;
 
 	nav ul {
 		list-style-type: none;
 		padding: 0;
+		box-shadow: 0 0 16px rgba(24, 20, 49, 0.305);
+		border-radius: 20%;
 	}
 
 	nav ul li {
@@ -18,37 +19,28 @@
 		font-family: sans-serif;
 		background-color: rgb(255, 255, 255);
 		border: 2px solid rgba(166, 185, 241, 0.3);
-		border-radius: 0.5rem;
+		border-radius: 0.3rem;
 		letter-spacing: 0.1em;
-		width: 5rem;
-		height: 3rem;
+		width: 6rem;
+		height: 4.5rem;
 		position: relative;
 		overflow: hidden;
-		//margin: 0.5em;
+		text-align: center;
+
 		cursor: pointer;
 	}
 
 	nav ul li span {
-		vertical-align: middle;
-		font-size: 0.5rem;
-
+		font-weight: 600;
+		color: #000080;
+		font-size: 0.7rem;
 		color: rgb(255, 255, 255);
 		mix-blend-mode: difference;
 	}
 
-	nav ul li::before {
-		content: '';
-		position: absolute;
-		width: 1.5em;
-		height: inherit;
-		background-color: rgba(166, 185, 241, 0.596);
-		border-radius: 50%;
-		top: 0;
-		left: -0.65em;
-		transition: 0.5s ease-out;
-	}
-
-	nav ul li:hover::before {
-		transform: scale(7);
+	nav ul li:hover {
+		font-weight: 700;
+		background-color: #000080;
+		color: white;
 	}
 }
