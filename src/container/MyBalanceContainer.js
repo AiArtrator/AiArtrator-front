@@ -6,6 +6,9 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import MyHistoryItem from '../components/HistoryCard/Index.js';
+import MyBalanceBox from '../components/MyBalance/MyBalBox/index';
+
+import MainLogo from '../assets/logo/logo_c1.png';
 
 const MyBalanceContainer = ({ myBalance, myHistory }) => {
 	const usernickname = useSelector((state) => state.user?.user?.usernickname);
@@ -13,6 +16,8 @@ const MyBalanceContainer = ({ myBalance, myHistory }) => {
 		<>
 			{' '}
 			<div className="my-bal-form">
+				<img className="my-bal-logo" src={MainLogo} />
+				<MyBalanceBox myBalance={myBalance} />
 				<br />
 				<h1>나의 토큰 내역 페이지 입니다</h1>
 				{usernickname} 님의 현재 보유 토큰
@@ -38,6 +43,6 @@ const MyBalanceContainer = ({ myBalance, myHistory }) => {
 
 MyBalanceContainer.propTypes = {
 	myBalance: PropTypes.number,
-	myHistory: PropTypes.object,
+	myHistory: PropTypes.array,
 };
 export default MyBalanceContainer;
