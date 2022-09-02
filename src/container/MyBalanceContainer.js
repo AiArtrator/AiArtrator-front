@@ -5,31 +5,33 @@ import './my-balance-container.scss';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import MyHistoryItem from '../components/HistoryCard/Index.js';
 import MyBalanceBox from '../components/MyBalance/MyBalBox/index';
+import MyHistoryItem from '../components/MyBalance/HistoryCard/Index.js';
+import Loading from '../components/Loading/Loading';
+import TopBtn from '../components/TopBtn/index';
 
 import MainLogo from '../assets/logo/logo_c1.png';
 
 const MyBalanceContainer = ({ myBalance, myHistory }) => {
 	const usernickname = useSelector((state) => state.user?.user?.usernickname);
+
+	if (!myHistory) return <Loading />;
+
 	return (
 		<>
-			{' '}
 			<div className="my-bal-form">
 				<img className="my-bal-logo" src={MainLogo} />
 				<MyBalanceBox myBalance={myBalance} />
-				<br />
-				<h1>나의 토큰 내역 페이지 입니다</h1>
-				{usernickname} 님의 현재 보유 토큰
-				{myBalance} Token
-				<div>충전하기</div>
-				<div>*1토큰은 10원입니다.</div>
+
 				<div className="my-history">
-					<h4>토큰 내역 조회</h4>
+					<div className="hist-title">토큰 내역 조회</div>
+					<div>
+						<MyHistoryItem key={history.id} myHistory={history} />
+					</div>
 					{myHistory ? (
 						<div>
 							{myHistory.map((history) => {
-								return <MyHistoryItem key={history.id} history={history} />;
+								return <MyHistoryItem key={history.id} myHistory={history} />;
 							})}
 						</div>
 					) : (
@@ -37,6 +39,7 @@ const MyBalanceContainer = ({ myBalance, myHistory }) => {
 					)}
 				</div>
 			</div>
+			<TopBtn />
 		</>
 	);
 };

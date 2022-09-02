@@ -14,7 +14,15 @@ const Index = () => {
 	const [loading, setLoading] = useState(false);
 	const [myTokenHistory, setMyTokenHistory] = useState(null);
 
+	const scrollTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	};
+
 	useEffect(() => {
+		scrollTop();
 		const fetchData = async () => {
 			setLoading(true);
 			setError(null);
