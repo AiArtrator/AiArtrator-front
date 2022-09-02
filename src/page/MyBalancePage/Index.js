@@ -3,12 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { myPaymentHist } from '../../axios/User';
-import MyHistoryItem from '../../components/HistoryCard/Index.js';
+
 import Loading from 'react-loading';
 import MyBalanceContainer from '../../container/MyBalanceContainer';
 
 const Index = () => {
-	const usernickname = useSelector((state) => state.user?.user?.nickname);
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const [nowBalance, setNowBalance] = useState(0);
 	const [error, setError] = useState(null);
@@ -20,15 +19,12 @@ const Index = () => {
 			setLoading(true);
 			setError(null);
 			setNowBalance(0);
-			setMyTokenHistory(null);
+			setMyTokenHistory({});
 			try {
 				const response = await myPaymentHist(accesstoken);
 				setNowBalance(response.data.data.currentToken.currentToken);
 				setMyTokenHistory(response.data.data.paymentList);
-				console.log(response.data.data.paymentList);
-				console.log(response.data);
 			} catch (err) {
-				console.error(err);
 				setError(err);
 			}
 			setLoading(false);
@@ -36,40 +32,15 @@ const Index = () => {
 		fetchData();
 	}, []);
 
-	if (loading) {
-		return <Loading />;
-	}
-	if (error) {
-		return <Loading />;
-	}
-	if (!myTokenHistory) {
-		return <Loading />;
-	}
+	if (loading) return <Loading />;
 
-	console.log('내 토큰 내역 및 충전 페이지');
+	if (error) return <Loading />;
+
+	if (!myTokenHistory) return <Loading />;
+
 	return (
 		<>
-			<MyBalanceContainer myBalData={nowBalance} myHistory={myTokenHistory} />
-			<div className="my-balance-form">
-				<br />
-				<h1>나의 토큰 내역 페이지 입니다</h1>
-				{usernickname} 님의 현재 보유 토큰
-				{nowBalance} Token
-				<div>충전하기</div>
-				<div>*1토큰은 10원입니다.</div>
-				<div className="my-history">
-					<h4>토큰 내역 조회</h4>
-					{myTokenHistory ? (
-						<div>
-							{myTokenHistory.map((history) => {
-								return <MyHistoryItem key={history.id} history={history} />;
-							})}
-						</div>
-					) : (
-						<></>
-					)}
-				</div>
-			</div>
+			<MyBalanceContainer myBalance={nowBalance} myHistory={myTokenHistory} />
 		</>
 	);
 };
