@@ -5,6 +5,8 @@ import './purchased-networks-page.scss';
 import SideNav from '../../components/SideBar/Index';
 import TopBtn from '../../components/TopBtn/index';
 const Index = () => {
+	const pageCol = ['white', 'white', '#000080'];
+
 	const scrollTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -18,7 +20,7 @@ const Index = () => {
 
 	return (
 		<>
-			<SideNav />
+			<SideNav pageCol={pageCol} />
 			<PurchasedNetworksList />
 			<TopBtn />
 		</>

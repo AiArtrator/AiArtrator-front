@@ -10,6 +10,7 @@ const Index = () => {
 			behavior: 'smooth',
 		});
 	};
+	const pageCol = ['#000080', 'white', 'white'];
 
 	// 업로드 페이지 최초 진입시 스크롤 최상위로 자동 이동
 	useEffect(() => {
@@ -18,7 +19,7 @@ const Index = () => {
 
 	return (
 		<>
-			<SideNav />
+			<SideNav pageCol={pageCol} />
 			<MyNetwork />
 			<TopBtn />
 		</>

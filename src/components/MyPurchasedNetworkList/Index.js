@@ -67,6 +67,10 @@ const Index = () => {
 		fetchData();
 	};
 
+	const handleKeyPress = (e) => {
+		if (e.key === 'Enter') handleSearch();
+	};
+
 	const onRefresh = () => {
 		setRefresh(false);
 		handleSearch();
@@ -94,6 +98,7 @@ const Index = () => {
 					placeholder="모델 키워드 또는 태그를 검색하세요."
 					value={searchWord}
 					onChange={handleChange}
+					onKeyPress={handleKeyPress}
 				/>
 				<img
 					className="search-btn"

@@ -4,6 +4,8 @@ import MySubscribe from '../../components/MySubscribeList/Index';
 import SideNav from '../../components/SideBar/Index';
 import TopBtn from '../../components/TopBtn/index';
 const Index = () => {
+	const pageCol = ['white', '#000080', 'white'];
+
 	const scrollTop = () => {
 		window.scrollTo({
 			top: 0,
@@ -17,7 +19,7 @@ const Index = () => {
 
 	return (
 		<>
-			<SideNav />
+			<SideNav pageCol={pageCol} />
 			<MySubscribe />
 			<TopBtn />
 		</>

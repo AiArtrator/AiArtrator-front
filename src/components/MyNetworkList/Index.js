@@ -61,7 +61,6 @@ const Index = () => {
 			setLoading(true);
 			setNetworks(null);
 			try {
-				console.log(searchWord);
 				const response = await getMyNetworkListById(userId, page, searchWord);
 				setNetworks(response.data.data.postList);
 				setNetworkCnt(response.data.data.postList.length);
@@ -74,6 +73,10 @@ const Index = () => {
 			setLoading(false);
 		};
 		fetchData();
+	};
+
+	const handleKeyPress = (e) => {
+		if (e.key === 'Enter') handleSearch();
 	};
 
 	const onRefresh = () => {
@@ -105,6 +108,7 @@ const Index = () => {
 					placeholder="모델 키워드 또는 태그를 검색하세요."
 					value={searchWord}
 					onChange={handleChange}
+					onKeyPress={handleKeyPress}
 				/>
 				<img
 					className="search-btn"
