@@ -15,7 +15,7 @@ import { tokenStatusInNav } from '../../axios/User';
 const Index = () => {
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const navigate = useNavigate();
-	const [nowToken, setNowToken] = useState('로딩중');
+	const [nowToken, setNowToken] = useState('Loading');
 
 	useEffect(() => {
 		const fetchData = async () => {

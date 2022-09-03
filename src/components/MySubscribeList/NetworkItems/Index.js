@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { postNetworkSubscribe } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
 
-const Index = ({ network }) => {
+const Index = ({ network, onRemove }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
 	var postIdURL = '/NetworkDetail/';
@@ -20,9 +20,11 @@ const Index = ({ network }) => {
 	};
 
 	const deleteSubscribe = async () => {
+		const tmp = id;
 		try {
 			const res = await postNetworkSubscribe({ postId: id }, accesstoken);
 			console.log(res.data.message);
+			onRemove(tmp);
 		} catch (err) {
 			console.error(err);
 			console.log(err.response.data.message);
@@ -75,6 +77,7 @@ const Index = ({ network }) => {
 
 Index.propTypes = {
 	network: PropTypes.object,
+	onRemove: PropTypes.func,
 };
 
 export default Index;

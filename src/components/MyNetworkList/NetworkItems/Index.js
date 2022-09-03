@@ -12,7 +12,7 @@ import { deleteMyNetwork } from '../../../axios/Network';
 import Loading from 'react-loading';
 
 // Todo : 삭제완료시 리렌더링 (useState사용으로 수정)
-const Index = ({ network }) => {
+const Index = ({ network, onRemove }) => {
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
 
@@ -43,20 +43,16 @@ const Index = ({ network }) => {
 		navigate(postIdUrl);
 	};
 
-	const onRemove = (id) => {
-		setNetworkData(networkData.filter((data) => data.id !== id));
-	};
-
 	const deleteModel = async () => {
 		setLoading(true);
 		const tmp = networkData.id;
 		try {
 			const res = await deleteMyNetwork(networkData.id, accesstoken);
 			console.log(res.data.message);
+			onRemove(tmp);
 		} catch (err) {
 			console.error(err);
 			setLoading(true);
-			onRemove(tmp);
 		}
 		setLoading(false);
 	};
@@ -107,6 +103,7 @@ const Index = ({ network }) => {
 
 Index.propTypes = {
 	network: PropTypes.object,
+	onRemove: PropTypes.func,
 };
 
 export default Index;

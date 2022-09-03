@@ -47,6 +47,10 @@ const Index = () => {
 		fetchData();
 	}, []);
 
+	const onRemove = (id) => {
+		setNetworks(networks.filter((data) => data.id !== id));
+	};
+
 	const handleChange = (e) => {
 		setSearchWord(e.target.value);
 	};
@@ -112,7 +116,13 @@ const Index = () => {
 			<div className="now-count">모델 개수는 {networkCnt}개 입니다.</div>
 
 			{networks.map((network) => {
-				return <NetworksItem key={network.id} network={network} />;
+				return (
+					<NetworksItem
+						key={network.id}
+						network={network}
+						onRemove={onRemove}
+					/>
+				);
 			})}
 			{refresh ? (
 				<img className="refresh-btn" src={Refresh} onClick={onRefresh} />
