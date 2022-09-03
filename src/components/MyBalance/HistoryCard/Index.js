@@ -1,32 +1,29 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import './historycard.scss';
 
 const Index = ({ myHistory }) => {
-	const [history, setHistory] = useState({
+	const defaultData = {
 		content: '결제내역이 없습니다. ',
 		createdAt: '0000-00-00',
 		price: '0 Token',
 		balance: ' 0 Token',
-	});
-
-	// if (myHistory) {
-	// 	setHistory(myHistory);
-	// }
+	};
 
 	return (
 		<div className="hist-in-row">
 			<div>
-				{history.content}
-				<br />
-				<div className="created-at">{history.createdAt}</div>
+				<div>{myHistory.content}</div>
+
+				<div className="created-at">{myHistory.createdAt}</div>
 			</div>
 			<div>
-				{history.price}
+				<div>{myHistory.price}</div>
+
 				<br />
 				<div className="rest-title">잔여토큰</div>
-				{history.balance}
+				{myHistory.balance}
 			</div>
 		</div>
 	);

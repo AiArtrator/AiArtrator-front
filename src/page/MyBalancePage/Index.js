@@ -12,7 +12,7 @@ const Index = () => {
 	const [nowBalance, setNowBalance] = useState(0);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
-	const [myTokenHistory, setMyTokenHistory] = useState(null);
+	const [myTokenHistory, setMyTokenHistory] = useState([]);
 
 	const scrollTop = () => {
 		window.scrollTo({
