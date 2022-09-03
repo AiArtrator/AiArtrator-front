@@ -14,12 +14,14 @@ import Refresh from '../../assets/refresh.png';
 // 내가 구독한 모델 페이지
 const Index = () => {
 	const navigate = useNavigate();
+
 	const userId = useSelector((state) => state.user.user.id);
 	const nickname = useSelector((state) => state.user.user.nickname);
+
+	const page = 'inference';
 	const [networks, setNetworks] = useState(null);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
-	const page = 'inference';
 	const [searchWord, setSearchWord] = useState('');
 	const [networkCnt, setNetworkCnt] = useState(0);
 	const [refresh, setRefresh] = useState(false);

@@ -16,6 +16,7 @@ const Index = ({ network, onRemove }) => {
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
 
+	const postIdUrl = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const [networkData, setNetworkData] = useState({
 		id: 0,
@@ -37,10 +38,12 @@ const Index = ({ network, onRemove }) => {
 		});
 	}, []);
 
-	const toDetailPage = () => {
-		let postIdUrl = '/NetworkDetail/';
-		postIdUrl += networkData.id;
-		navigate(postIdUrl);
+	const onNavigate = (e) => {
+		if (e.target.id === 'detail') {
+			navigate(postIdUrl + networkData.id);
+		} else if (e.target.id === 'revise') {
+			navigate('/'); // todo: update the addresss to postRevisePage
+		}
 	};
 
 	const deleteModel = async () => {
@@ -71,10 +74,12 @@ const Index = ({ network, onRemove }) => {
 				<div className="button" onClick={removeConfirm}>
 					삭제하기
 				</div>
-				<div className="button">수정하기</div>
+				<div className="button" onClick={onNavigate}>
+					수정하기
+				</div>
 			</div>
 
-			<div className="items-block" onClick={toDetailPage}>
+			<div className="items-block" onClick={onNavigate}>
 				<img src={networkData.thumbnail} alt="thumbnail" />
 
 				<div className="contents">

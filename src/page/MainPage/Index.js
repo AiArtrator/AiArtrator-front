@@ -16,8 +16,8 @@ const Index = () => {
 					{/* <Infer /> */}
 
 					<div className="inrow">
-						<button>얼굴 이미지 생성</button>
-						<button>추상화 이미지 생성</button>
+						<button className="try-button">얼굴 이미지 생성</button>
+						<button className="try-button">추상화 이미지 생성</button>
 					</div>
 					<img src={Logo} alt="logo" />
 				</div>

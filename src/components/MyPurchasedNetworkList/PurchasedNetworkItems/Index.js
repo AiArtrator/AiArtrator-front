@@ -13,21 +13,20 @@ const Index = ({ network }) => {
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
 	var postIdURL = '/NetworkDetail/';
-	// const accesstoken = useSelector((state) => state.user.accesstoken);
 
 	const onNavigate = (e) => {
 		if (e.target.id === 'detail') {
 			postIdURL += id;
 			navigate(postIdURL);
 		} else if (e.target.id === 'library') {
-			navigate('/');
+			navigate('/'); // Todo: change the url
 		}
 	};
 
 	const produceConfirm = () => {
 		if (window.confirm('해당 인공지능 모델로 이미지를 생성합니다.')) {
 			// 이미지 생성
-			navigate('/');
+			navigate('/'); // Todo: change the url
 		}
 	};
 

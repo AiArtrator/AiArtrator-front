@@ -14,9 +14,13 @@ const Index = ({ network, onRemove }) => {
 	var postIdURL = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 
-	const toDetailPage = () => {
-		postIdURL += id;
-		navigate(postIdURL);
+	const onNavigate = (e) => {
+		if (e.target.id === 'produce') {
+			navigate('/'); // Todo: change the url - if needed to pay, go to payment page
+		} else if (e.target.id === 'detail') {
+			postIdURL += id;
+			navigate(postIdURL);
+		}
 	};
 
 	const deleteSubscribe = async () => {
@@ -41,7 +45,7 @@ const Index = ({ network, onRemove }) => {
 	return (
 		<>
 			<div className="inrow">
-				<div className="button" onClick={onDelete}>
+				<div className="button" id="produce" onClick={onNavigate}>
 					이미지 생성
 				</div>
 				<div className="button" onClick={onDelete}>
@@ -49,7 +53,7 @@ const Index = ({ network, onRemove }) => {
 				</div>
 			</div>
 
-			<div className="items-block" onClick={toDetailPage}>
+			<div className="items-block" id="detail" onClick={onNavigate}>
 				<img src={thumbnail} alt="thumbnail" />
 
 				<div className="contents">
