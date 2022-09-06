@@ -129,6 +129,7 @@ export const postInference = (
 			weightUuid,
 			imageCount,
 			price,
+			content: 'dump',
 		},
 	});
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
-import { setNetworkDetail } from '../../reducers/network';
+import { clearNetworkDetail, setNetworkDetail } from '../../reducers/network';
 import { postWeight } from '../../axios/Network';
 import startImg from '../../assets/weightUpload/start.svg';
 import inprogressImg from '../../assets/weightUpload/inprogress.svg';
@@ -48,6 +48,7 @@ const Index = ({ setStage }) => {
 			setImg(doneImg);
 			setText('업로드 완료!');
 			alert('Saved!');
+			dispatch(clearNetworkDetail());
 			navigate(`/NetworkDetail/${networkDetail.id}`);
 		} catch (err) {
 			console.error(err.response);
