@@ -16,9 +16,9 @@ export const fetchNetworkDetail = (postId: String, accesstoken: String) => {
 		try {
 			const res = await getNetworkDetailById(postId, accesstoken);
 			dispatch(setNetworkDetail(res.data.data));
+			return res.data;
 		} catch (err) {
-			console.error(err);
-			console.log(err.response.data.message);
+			return err.response.data;
 		}
 	};
 };
