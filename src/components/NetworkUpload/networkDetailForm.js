@@ -119,8 +119,8 @@ const Index = ({ setStage, postId }) => {
 			dispatch(setNetworkDetail(res.data.data));
 			setStage(1);
 		} catch (err) {
-			console.error(err?.response);
-			alert(err.response.data);
+			console.error(err.response);
+			if (err.response.data.message) alert(err.response.data.message);
 		}
 	};
 
