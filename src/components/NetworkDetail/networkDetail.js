@@ -115,6 +115,7 @@ const Index = () => {
 				-detailInfo.fee
 			);
 			alert(res.data.message);
+			navigate(`/Library/${postId}`);
 		} catch (err) {
 			console.log(err);
 		}

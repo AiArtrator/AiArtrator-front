@@ -20,12 +20,12 @@ const Index = ({ setStage, postId }) => {
 		ver: '',
 		tagList: [],
 		description: '',
-		price: '', // TODO: sync to api
+		fee: '',
 	});
 	const [isFree, setIsFree] = useState(false); // useState(DEFAULT_THUMBNAIL);
 
 	useEffect(() => {
-		dispatch(fetchNetworkDetail(postId, accesstoken));
+		if (postId) dispatch(fetchNetworkDetail(postId, accesstoken));
 	}, []);
 
 	useEffect(() => {
@@ -36,7 +36,7 @@ const Index = ({ setStage, postId }) => {
 				ver: networkDetail.ver,
 				tagList: networkDetail.tagList.map(({ name }) => name),
 				description: networkDetail.description,
-				price: networkDetail.price, // TODO: sync to api
+				fee: networkDetail.fee,
 			});
 		}
 	}, [networkDetail]);
@@ -48,9 +48,8 @@ const Index = ({ setStage, postId }) => {
 			setDetailInfo({ ...detailInfo, title: value });
 		} else if (className === 'summary') {
 			setDetailInfo({ ...detailInfo, summary: value });
-			// TODO: sync to api
-		} else if (className === 'price') {
-			setDetailInfo({ ...detailInfo, price: value });
+		} else if (className === 'fee') {
+			setDetailInfo({ ...detailInfo, fee: value });
 		} else if (className === 'ver') {
 			setDetailInfo({ ...detailInfo, ver: value });
 		} else if (className === 'description') {
@@ -98,7 +97,7 @@ const Index = ({ setStage, postId }) => {
 			formData.append('thumbnail', file);
 		}
 		formData.append('title', detailInfo.title.trim());
-		formData.append('price', detailInfo.price); // TODO: sync to api
+		formData.append('fee', detailInfo.fee);
 		formData.append('summary', detailInfo.summary.trim());
 		formData.append('ver', detailInfo.ver.trim());
 		let tagString = '';
@@ -120,8 +119,8 @@ const Index = ({ setStage, postId }) => {
 			dispatch(setNetworkDetail(res.data.data));
 			setStage(1);
 		} catch (err) {
-			console.error(err?.response);
-			alert(err.response.data);
+			console.error(err.response);
+			if (err.response.data.message) alert(err.response.data.message);
 		}
 	};
 
@@ -166,29 +165,29 @@ const Index = ({ setStage, postId }) => {
 						maxLength="100"
 					/>
 				</DetailInput>
-				<PriceContainer isFree={isFree}>
-					<div className="priceTitle">
+				<FeeContainer isFree={isFree}>
+					<div className="feeTitle">
 						모델 이용료
 						<br />
 						(이미지 1장 기준)
 					</div>
 					<input
-						className="price"
+						className="fee"
 						type="number"
-						value={detailInfo.price}
+						value={detailInfo.fee}
 						onChange={handleChange}
 						onDrop={() => false}
 						onPaste={() => false}
 						disabled={isFree}
 					/>
-					<div className="priceUnit">토큰</div>
+					<div className="feeUnit">토큰</div>
 					<div className="freeCheckbox">
 						<label htmlFor="freeCheckbox">
 							<input
 								type="checkbox"
 								id="freeCheckbox"
 								onChange={() => {
-									if (!isFree) setDetailInfo({ ...detailInfo, price: 0 });
+									if (!isFree) setDetailInfo({ ...detailInfo, fee: 0 });
 									setIsFree(!isFree);
 								}}
 							/>
@@ -203,7 +202,7 @@ const Index = ({ setStage, postId }) => {
 						<br />* 모델을 이용할 때, 인공지능 서버 요금인 기본 수수료가 이미지
 						1장 기준 1토큰씩 추가로 부과됩니다.
 					</div>
-				</PriceContainer>
+				</FeeContainer>
 			</TextContainer>
 			<DetailInput>
 				<div className="inputTitle">모델 버전</div>
@@ -420,19 +419,19 @@ const TagListContainer = styled.div`
 	}
 `;
 
-const PriceContainer = styled.div`
+const FeeContainer = styled.div`
 	display: grid;
 	grid-template-columns: 150px 133px 45px auto;
 	grid-template-rows: 50px auto;
 	grid-gap: 10px 10px;
 	gap: 10px 10px;
 	align-items: center;
-	.priceTitle {
+	.feeTitle {
 		font-size: 0.8rem;
 		width: 100%;
 		color: #0d005c;
 	}
-	.price {
+	.fee {
 		box-shadow: 0px 0px 3px 3px
 			${(props) =>
 				props.isFree ? 'rgba(157, 157, 157, 0.3)' : 'rgba(166, 185, 241, 0.3)'};
@@ -452,7 +451,7 @@ const PriceContainer = styled.div`
 		}
 		-moz-appearance: textfield;
 	}
-	.priceUnit {
+	.feeUnit {
 		font-weight: 400;
 		font-size: 16px;
 		line-height: 19px;

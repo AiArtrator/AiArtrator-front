@@ -129,6 +129,15 @@ export const postInference = (
 			weightUuid,
 			imageCount,
 			price,
+			content: 'dump',
 		},
+	});
+};
+
+export const getLibrary = (postId, accesstoken) => {
+	return axios({
+		method: 'GET',
+		url: `/api/inference/list/post/${postId}`,
+		headers: { accesstoken },
 	});
 };
