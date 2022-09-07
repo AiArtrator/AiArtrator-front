@@ -15,6 +15,7 @@ import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import MySubscribePage from './page/MySubscribePage/Index';
 import IntroductionPage from './page/IntroductionPage/Index';
 import MyBalancePage from './page/MyBalancePage/Index';
+import LibraryPage from './page/LibraryPage/Index';
 import Footer from './components/Footer/Index';
 // import InfiniteScroll from './components/NetworkList/InfiniteScroll';
 
@@ -58,6 +59,10 @@ function App() {
 					/>
 				</Route>
 				<Route path="/NetworkDetail/:postId" element={<NetworkDetailPage />} />
+				<Route path="/Library" element={<AuthRoute />}>
+					<Route path="/Library" element={<LibraryPage />} />
+					<Route path="/Library/:postId" element={<LibraryPage />} />
+				</Route>
 			</Routes>
 			<Footer />
 		</div>

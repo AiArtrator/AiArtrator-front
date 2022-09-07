@@ -133,3 +133,11 @@ export const postInference = (
 		},
 	});
 };
+
+export const getLibrary = (postId, accesstoken) => {
+	return axios({
+		method: 'GET',
+		url: `/api/inference/post/${postId}`,
+		headers: { accesstoken },
+	});
+};
