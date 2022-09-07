@@ -9,7 +9,7 @@ const Index = () => {
 		<>
 			<Link to="/MyInfo">
 				<img className="profile-img" src={Profileimg} alt="profile" />
-				{usernickname} 님
+				{usernickname}
 			</Link>
 		</>
 	);

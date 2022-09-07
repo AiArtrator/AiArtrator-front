@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+	const { t } = useTranslation();
 	return (
 		<>
-			<Link to="/LogIn"> 로그인 / 회원가입 </Link>
+			<Link to="/LogIn"> {t('login_signup')} </Link>
 		</>
 	);
 };
