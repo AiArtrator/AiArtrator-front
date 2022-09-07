@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { setNetworkDetail, fetchNetworkDetail } from '../../reducers/network';
+import {
+	setNetworkDetail,
+	fetchNetworkDetail,
+	clearNetworkDetail,
+} from '../../reducers/network';
 import { postNetworkDetail, putNetworkDetail } from '../../axios/Network';
 import { imgSrcToFile, loadImg } from '../Utils';
 // import { DEFAULT_THUMBNAIL } from '../../constants';
 import defaultimg from '../../assets/thumb.jpeg';
+import { useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line react/prop-types
 const Index = ({ setStage, postId }) => {
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
+	const nickname = useSelector((state) => state.user.user.nickname);
 
 	const [imgSrc, setImgSrc] = useState(defaultimg); // useState(DEFAULT_THUMBNAIL);
 	const [detailInfo, setDetailInfo] = useState({
@@ -26,10 +33,15 @@ const Index = ({ setStage, postId }) => {
 
 	useEffect(() => {
 		if (postId) dispatch(fetchNetworkDetail(postId, accesstoken));
+		else dispatch(clearNetworkDetail());
 	}, []);
 
 	useEffect(() => {
-		if (networkDetail) {
+		if (postId && networkDetail) {
+			if (nickname !== networkDetail.writer.nickname) {
+				alert('본인의 게시물이 아닙니다!');
+				navigate(-1);
+			}
 			setDetailInfo({
 				title: networkDetail.title,
 				summary: networkDetail.summary,
