@@ -50,28 +50,23 @@ const Index = () => {
 	const emailDuplCheck = async () => {
 		await emailDupl(info)
 			.then((res) => {
-				setErrorInfo({ ...errorInfo, email: res.data.message });
+				console.log(res);
+				setErrorInfo({ ...errorInfo, email: '\u00a0' });
 			})
 			.catch((err) => {
 				setErrorInfo({
 					...errorInfo,
-					email: err.response.data.message,
+					email: 'The Email is already registered.',
 				});
 				console.error(err);
 			});
-	};
-	const emailDuplBtn = () => {
-		if (info.email === '') {
-			setErrorInfo({ ...errorInfo, email: '입력을 먼저 해주세요.' });
-		} else {
-			emailDuplCheck();
-		}
 	};
 
 	const phoneDuplCheck = async () => {
 		await phoneDupl(info)
 			.then((res) => {
-				setErrorInfo({ ...errorInfo, phone: res.data.message });
+				console.log(res);
+				setErrorInfo({ ...errorInfo, phone: '\u00a0' });
 			})
 			.catch((err) => {
 				console.error(err);
@@ -81,33 +76,20 @@ const Index = () => {
 				});
 			});
 	};
-	const phoneDuplBtn = () => {
-		if (info.phone === '') {
-			setErrorInfo({ ...errorInfo, phone: '입력을 먼저 해주세요.' });
-		} else {
-			phoneDuplCheck();
-		}
-	};
 
 	const nicknameDuplCheck = async () => {
 		await nicknameDupl(info)
 			.then((res) => {
-				setErrorInfo({ ...errorInfo, nickname: res.data.message });
+				console.log(res);
+				setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
 			})
 			.catch((err) => {
 				console.error(err);
 				setErrorInfo({
 					...errorInfo,
-					nickname: err.response.data.message,
+					nickname: 'The Nickname is already registered.',
 				});
 			});
-	};
-	const nicknameDuplBtn = () => {
-		if (info.nickname === '') {
-			setErrorInfo({ ...errorInfo, nickname: '입력을 먼저 해주세요.' });
-		} else {
-			nicknameDuplCheck();
-		}
 	};
 
 	const signupSubmit = async () => {
@@ -122,7 +104,7 @@ const Index = () => {
 			})
 			.catch((err) => {
 				console.error(err);
-				alert(err.response.data.message);
+				alert('ERROR', err.response.data.message);
 			});
 	};
 
@@ -131,7 +113,7 @@ const Index = () => {
 		const value = e.target.value;
 		if (className === 'email') {
 			setInfo({ ...info, email: value });
-			setErrorInfo({ ...errorInfo, email: '중복 확인을 해주세요.' });
+			setErrorInfo({ ...errorInfo, email: '중복 확인이 필요합니다.' });
 		} else if (className === 'password') {
 			setInfo({ ...info, password: value });
 		} else if (className === 'passwordCheck') {
@@ -141,10 +123,10 @@ const Index = () => {
 			}
 		} else if (className === 'nickname') {
 			setInfo({ ...info, nickname: value });
-			setErrorInfo({ ...errorInfo, nickname: '중복 확인을 해주세요.' });
+			setErrorInfo({ ...errorInfo, nickname: '중복 확인이 필요합니다.' });
 		} else if (className === 'phone') {
 			setInfo({ ...info, phone: value });
-			setErrorInfo({ ...errorInfo, phone: '중복 확인을 해주세요.' });
+			setErrorInfo({ ...errorInfo, phone: '중복 확인이 필요합니다.' });
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else {
@@ -194,12 +176,9 @@ const Index = () => {
 						value={info.email}
 						onChange={handleChange}
 					/>
-					<button className="inrow-button" onClick={emailDuplBtn}>
-						중복 확인
-					</button>
 
 					<div className="line"></div>
-					<div className="errorMessage" id="checkMess">
+					<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 						{errorInfo.email}
 					</div>
 				</div>
@@ -213,6 +192,7 @@ const Index = () => {
 						placeholder="비밀먼호를 입력해주세요. "
 						value={info.password}
 						onChange={handleChange}
+						onClick={emailDuplCheck}
 					/>
 					<div className="line"></div>
 					<div className="errorMessage" id="checkMess">
@@ -245,10 +225,9 @@ const Index = () => {
 						placeholder="닉네임을 입력해주세요. "
 						value={info.nickname}
 						onChange={handleChange}
+						onClick={checkForm}
 					/>
-					<button className="inrow-button" onClick={nicknameDuplBtn}>
-						중복 확인
-					</button>
+
 					<div className="line"></div>
 					<div className="errorMessage" id="checkMess">
 						{errorInfo.nickname}
@@ -264,10 +243,8 @@ const Index = () => {
 						placeholder="휴대폰 번호를 입력해주세요. "
 						value={info.phone}
 						onChange={handleChange}
+						onClick={nicknameDuplCheck}
 					/>
-					<button className="inrow-button" onClick={phoneDuplBtn}>
-						중복 확인
-					</button>
 					<div className="line"></div>
 					<div className="errorMessage" id="checkMess">
 						{errorInfo.phone}
@@ -281,6 +258,7 @@ const Index = () => {
 						placeholder="소속 기관을 입력해주세요. "
 						value={info.organization}
 						onChange={handleChange}
+						onClick={phoneDuplCheck}
 					/>
 					<div className="line"></div>
 				</div>
