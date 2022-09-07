@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+
 import './login-form.scss';
+
+import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 import { login } from '../../../axios/User';
 import { setAccsstoken, setUser } from '../../../reducers/user';
+
 import Logo from '../../../assets/logo/MainLogoH1.png';
 
 const Index = () => {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userState = useSelector((state) => state.user);
+
 	const [info, setInfo] = useState({
 		email: '',
 		password: '',
@@ -26,7 +33,7 @@ const Index = () => {
 		} catch (err) {
 			console.error(err);
 			if (err.response.data.status === (403 || 412)) {
-				alert('이메일 및 비밀번호를 확인해주세요.');
+				alert(t('login_alert1'));
 			} else {
 				alert(err.response.data.message);
 			}
@@ -60,7 +67,7 @@ const Index = () => {
 				<input
 					type="text"
 					id="email"
-					placeholder="ID를 입력해주세요."
+					placeholder="Type your email."
 					value={info.email}
 					onChange={handleChange}
 				/>
@@ -69,24 +76,15 @@ const Index = () => {
 				<input
 					type="password"
 					id="password"
-					placeholder="비밀먼호를 입력해주세요. "
+					placeholder="Type your password. "
 					value={info.password}
 					onChange={handleChange}
 				/>
 
-				<button onClick={loginSubmit}>로그인 Log-In</button>
+				<button onClick={loginSubmit}>{t('login_btn')}</button>
 				<Link to="/Signup">
-					<button>1초만에 회원가입</button>
+					<button>{t('try_signup')}</button>
 				</Link>
-
-				{/* <div className="social">
-					<div className="go">
-						<i className="fab fa-google"></i> Kakaotalk
-					</div>
-					<div className="fb">
-						<i className="fab fa-facebook"></i> Google
-					</div>
-				</div> */}
 			</div>
 		</div>
 	);

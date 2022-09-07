@@ -15,8 +15,10 @@ import NetworkDetailPage from './page/NetworkDetailPage/Index';
 import MySubscribePage from './page/MySubscribePage/Index';
 import IntroductionPage from './page/IntroductionPage/Index';
 import MyBalancePage from './page/MyBalancePage/Index';
+import I18nBtn from './components/I18nBtn/index';
 import LibraryPage from './page/LibraryPage/Index';
 import Footer from './components/Footer/Index';
+
 // import InfiniteScroll from './components/NetworkList/InfiniteScroll';
 
 function App() {
@@ -64,6 +66,8 @@ function App() {
 					<Route path="/Library/:postId" element={<LibraryPage />} />
 				</Route>
 			</Routes>
+
+			<I18nBtn />
 			<Footer />
 		</div>
 	);

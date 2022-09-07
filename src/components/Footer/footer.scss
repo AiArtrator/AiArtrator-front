@@ -5,17 +5,16 @@
 	text-align: center;
 	width: 100%;
 	height: auto;
-	// height: 10rem; /* footer의 높이 */
-	// position: fixed;
+	z-index: 3;
+	position: absolute;
 	// position : relative;
-	// position: absolute;
+
 	//transform : translateY(1000%);
 	bottom: 0;
 	left: 0;
 	background-color: rgba(166, 185, 241, 0.3);
-	margin-top: 2rem;
-	padding-top: 1rem;
-	padding-bottom: 0.5rem;
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
 	color: rgba(0, 0, 128, 1);
 	h3 {
 		font-size: 1rem;

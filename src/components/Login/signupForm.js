@@ -1,13 +1,18 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
 import { signup, emailDupl, nicknameDupl, phoneDupl } from '../../axios/User';
 import { setAccsstoken, setUser } from '../../reducers/user';
+
 import './signup-form.scss';
 import Logo from '../../assets/logo/MainLogoV1.png';
 
 const Index = () => {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const userState = useSelector((state) => state.user);
@@ -178,7 +183,7 @@ const Index = () => {
 					<img className="image" src={Logo} alt="logo" />
 				</div>
 				<div>
-					<label>이메일</label>
+					<label>{t('email')}</label>
 					<span style={{ color: 'red' }}> *</span>
 					<br />
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './navbar.scss';
+
 import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
@@ -7,24 +8,29 @@ import Logout from './LogoutButton/Index.js';
 import MyTokenAccount from './MyTokenAccount/Index.js';
 import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
-import { useSelector } from 'react-redux';
+
 import MainLogo from '../../assets/logo/MainLogoH1.png';
-import { useNavigate } from 'react-router-dom';
 import { tokenStatusInNav } from '../../axios/User';
 
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+
 const Index = () => {
-	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const navigate = useNavigate();
+	const { t } = useTranslation();
+
+	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const [nowToken, setNowToken] = useState('Loading');
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setNowToken('로딩중');
+			setNowToken('Loading');
 			try {
 				const response = await tokenStatusInNav(accesstoken);
 				setNowToken(response.data.data);
 			} catch (err) {
-				console.log('Navbar 내 토큰 조회 에러');
+				console.log('Navbar My Token Balance Err');
 				console.error(err);
 			}
 		};
@@ -71,7 +77,7 @@ const Index = () => {
 										padding: '10px 20px',
 									}}
 								>
-									보유 토큰
+									{t('nowToken')}
 								</li>
 								<li
 									style={{

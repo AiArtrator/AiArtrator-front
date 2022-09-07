@@ -1,0 +1,18 @@
+{
+    "i18nbtn":"en",
+
+    "modellist":"모델 리스트",
+    "login_signup":"로그인",
+    "mymodels":"모델 관리",
+    "mytoken_account":"토큰 관리",
+    "logout":"로그아웃",
+    "nowToken": "보유 토큰",
+
+    "uploadbtn":"모델 업로드",
+
+    "email":"이메일",
+    
+    "login_alert1":"이메일 / 비밀번호를 확인해주세요. ",
+    "login_btn":"로그인 Log-In",
+    "try_signup":"1초만에 회원가입"
+}

@@ -1,0 +1,21 @@
+{
+    "i18nbtn" : "ko",
+
+
+    "modellist":"Model List",
+    "login_signup":"LogIn / SignUp",
+    "mymodels":"My Models",
+    "mytoken_account":"My Tokens",
+    "logout":"Log Out",
+    "nowToken": "Token Balance",
+
+    "uploadbtn":"Upload Model",
+
+    "email":"Email",
+
+    "login_alert1":"incorrect email or password",
+    "login_btn":"Log In",
+    "try_signup":"Sign Up"
+
+
+}
