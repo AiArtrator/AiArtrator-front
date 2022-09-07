@@ -19,7 +19,7 @@ const Index = ({ setStage }) => {
 	const [text, setText] = useState('모델 weight를 올려야\n완료할 수 있습니다.');
 	const [buttonText, setButtonText] = useState('모델 업로드 하기');
 	const [fileName, setFileName] = useState();
-	const [isInput, setIsInput] = useState(true);
+	const [isInput] = useState(true);
 	const [active, setActive] = useState(false);
 
 	const createFormData = async () => {
@@ -35,7 +35,7 @@ const Index = ({ setStage }) => {
 				alert('파일을 선택해주세요.');
 				return;
 			}
-			setIsInput(false);
+			// setIsInput(false);
 			const formData = await createFormData();
 			const res = await postWeight(accesstoken, formData, fileName, setText);
 			console.log(`res: ${JSON.stringify(res.data)}`);

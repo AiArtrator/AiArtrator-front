@@ -6,7 +6,7 @@ import { fetchNetworkDetail } from '../../reducers/network';
 // import { dateToText } from '../Utils';
 import DEFAULT_THUMBNAIL from '../../assets/thumb.jpeg';
 import DOWNLOAD_ICON from '../../assets/download.svg';
-// import { getLibrary } from '../../axios/Network';
+import { getLibrary } from '../../axios/Network';
 
 const Index = () => {
 	const dispatch = useDispatch();
@@ -30,11 +30,6 @@ const Index = () => {
 	const [selectedIdx, setSelectedIdx] = useState(0);
 	const [library, setLibrary] = useState([]);
 	useEffect(() => {
-		setSelectedIdx(0);
-		console.log(selectedIdx);
-		setLibrary([]);
-		console.log(library);
-		console.log(postId);
 		if (!postId) {
 			alert('Wrong access!');
 			navigate(-1);
@@ -47,40 +42,131 @@ const Index = () => {
 			}
 		};
 		const asyncSetLibrary = async () => {
-			// const res = await getLibrary(postId, accesstoken); // TODO sync api
-			const res = {
-				success: true,
-				data: [
-					{
-						id: 3,
-						content: '생성 진행 중',
-						createdAt: '2022-04-29T11:55:37.596Z',
-						imageCount: '총 0/1장',
-						thumbnail: DEFAULT_THUMBNAIL,
-					},
-					{
-						id: 4,
-						content: '과거에 생성한 이미지',
-						createdAt: '2022-04-29T19:34:11.657Z',
-						imageCount: '총 1장',
-						thumbnail: DEFAULT_THUMBNAIL,
-					},
-				],
-			};
-			if (!res.success) {
-				if (res.message) alert(res.message);
+			const res = await getLibrary(postId, accesstoken);
+			// let res = await getLibrary(postId, accesstoken);
+			// res = {
+			// 	data: {
+			// 		success: true,
+			// 		data: [
+			// 			{
+			// 				id: 3,
+			// 				content: '생성 진행 중',
+			// 				createdAt: '2022-04-29T11:55:37.596Z',
+			// 				imageCount: '총 0/1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 3,
+			// 				content: '생성 진행 중',
+			// 				createdAt: '2022-04-29T11:55:37.596Z',
+			// 				imageCount: '총 0/1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DEFAULT_THUMBNAIL,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 3,
+			// 				content: '생성 진행 중',
+			// 				createdAt: '2022-04-29T11:55:37.596Z',
+			// 				imageCount: '총 0/1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DEFAULT_THUMBNAIL,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 			{
+			// 				id: 4,
+			// 				content: '과거에 생성한 이미지',
+			// 				createdAt: '2022-04-29T19:34:11.657Z',
+			// 				imageCount: '총 1장',
+			// 				imageUrls: [DEFAULT_THUMBNAIL],
+			// 				thumbnail: DOWNLOAD_ICON,
+			// 			},
+			// 		],
+			// 	},
+			// };
+			if (!res.data.success) {
+				if (res.data.message) alert(res.data.message);
 				navigate(-1);
-			} else if (!res.data.length) {
+			} else if (!res.data.data.length) {
 				alert('Never used!');
 				navigate(-1);
 			} else {
-				console.log(res.data);
-				console.log(res.data[0]);
-				setLibrary(res.data);
+				res.data.data.reverse();
+				setLibrary(res.data.data);
 			}
 		};
-		checkNetworkDetail(); // TODO sync api
-		asyncSetLibrary(); // TODO sync api
+		checkNetworkDetail();
+		asyncSetLibrary();
 	}, []);
 
 	useEffect(() => {
@@ -106,10 +192,15 @@ const Index = () => {
 			<div className="libraryTitle">
 				Image library created with {detailInfo.title}
 			</div>
-			<div className="inferenceButton">Create New</div>
+			<div
+				className="inferenceButton"
+				onClick={() => navigate(`/NetworkDetail/${postId}`)}
+			>
+				Create New
+			</div>
 			<div className="thumbnail">
-				{library[selectedIdx]?.thumbnail && (
-					<img src={library[selectedIdx].thumbnail} />
+				{library[selectedIdx]?.imageUrls[0] && (
+					<img src={library[selectedIdx].imageUrls[0]} />
 				)}
 			</div>
 			<div className="itemList">
@@ -129,9 +220,19 @@ const Index = () => {
 								<div className="createdAt">{createdAt}</div>
 								<div className="imageCount">{item.imageCount}</div>
 							</div>
-							<div className="downloadButton">
+							<a
+								className="downloadButton"
+								target="_blank"
+								rel="noreferrer"
+								href={library[idx].imageUrls[0]}
+								// download={
+								// 	networkDetail?.title
+								// 		? `${networkDetail.title}-${createdAt}.png`
+								// 		: `${createdAt}.png`
+								// }
+							>
 								<img src={DOWNLOAD_ICON} />
-							</div>
+							</a>
 						</Item>
 					);
 				})}
@@ -188,17 +289,22 @@ const Library = styled.div`
 		margin: 0;
 		img {
 			width: 100%;
-			height: 100%;
+			aspect-ratio: 1 / 1;
 			object-fit: cover;
+			filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.25));
+			border-radius: 3px;
 		}
 	}
 	.itemList {
+		position: absolute;
 		grid-column: 2 / 3;
 		grid-row: 2/3;
 		display: flex;
 		flex-direction: column;
 		gap: 10px;
 		width: 100%;
+		height: 100%;
+		overflow-y: scroll;
 	}
 `;
 
@@ -207,8 +313,8 @@ const Item = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 50px;
 	gap: 10px;
-	height: 120px;
-	width: 100%;
+	max-height: 80px;
+	width: calc(90% - 10px);
 	background: ${(props) =>
 		props.selected ? 'rgba(166, 185, 241, 0.3)' : 'transparent'};
 	border: 0.5px solid #000080;
@@ -216,6 +322,7 @@ const Item = styled.div`
 	align-items: center;
 	padding: 5%;
 	.textWrapper {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		justify-content: space-around;
