@@ -68,5 +68,26 @@
     ,"next":"다음 >"
     ,"upload_alert2":"필수 정보가 없습니다."
 
+    ,"upw_notice1":"Can be completed\nOnly after uploading the weight"
+    ,"Upload Model":"모델 업로드 하기"
+    ,"upw_alert1":"파일을 선택해주세요."
+    ,"upw_alert2":"다른 파일 선택"
+    ,"upload":"업로드"
+    ,"back":"이전"
+
+    ,"detail_alert1":"Error"
+    ,"uploader":"게시자"
+    ,"anti_subscribe":"구독이 취소되었습니다."
+    ,"comp_subscribe":"구독을 완료했습니다."
+    ,"version":"모델 버전"
+    ,"subscribe":"모델 구독"
+    ,"subs_list":"나의 구독리스트"
+    ,"detail_notice1":"* 모델 구독시, 구독한 모델보기 페이지에서 확인 및 이용이 가능합니다."
+    ,"subscribed":"구독 중인 모델"
+    ,"subs_try":"구독하기"
+    ,"run_model":"모델 이용하기"
+    ,"detail_notice2":"* 모델을 이용하여 이미지를 디운로드 할 수 있고, 얻은 이미지들은 생성한 이미지 Library에 자동으로 아카이빙 되며 언제든지 다시 다운로드 할 수 있습니다."
+    ,"detail_notice3":"* 이용할 때마다 서비스 정책에 따라 금액이 부과됩니다. "
+    ,"run_btn":"이 모델로 이미지 얻기"
 
 }

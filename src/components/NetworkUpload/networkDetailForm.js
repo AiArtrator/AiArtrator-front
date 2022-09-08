@@ -144,8 +144,7 @@ const Index = ({ setStage, postId }) => {
 			detailInfo.fee === '' ||
 			detailInfo.summary === '' ||
 			detailInfo.title === '' ||
-			detailInfo.ver === '' ||
-			imgSrc === defaultimg
+			detailInfo.ver === ''
 		) {
 			alert(t('upload_alert2'));
 		} else {

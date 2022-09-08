@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+
 import { clearNetworkDetail, setNetworkDetail } from '../../reducers/network';
 import { postWeight } from '../../axios/Network';
 import startImg from '../../assets/weightUpload/start.svg';
@@ -12,12 +14,13 @@ import doneImg from '../../assets/weightUpload/done.svg';
 const Index = ({ setStage }) => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { t } = useTranslation();
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
 	const [weightFile, setWeightFile] = useState();
 	const [img, setImg] = useState(startImg);
-	const [text, setText] = useState('모델 weight를 올려야\n완료할 수 있습니다.');
-	const [buttonText, setButtonText] = useState('모델 업로드 하기');
+	const [text, setText] = useState(t('upw_notice1'));
+	const [buttonText, setButtonText] = useState(t('Upload Model'));
 	const [fileName, setFileName] = useState();
 	const [isInput] = useState(true);
 	const [active, setActive] = useState(false);
@@ -32,7 +35,7 @@ const Index = ({ setStage }) => {
 	const saveWeight = async () => {
 		try {
 			if (!weightFile) {
-				alert('파일을 선택해주세요.');
+				alert(t('upw_alert1'));
 				return;
 			}
 			// setIsInput(false);
@@ -46,13 +49,13 @@ const Index = ({ setStage }) => {
 				})
 			);
 			setImg(doneImg);
-			setText('업로드 완료!');
+			setText('Upload SUCCESS');
 			alert('Saved!');
 			dispatch(clearNetworkDetail());
 			navigate(`/NetworkDetail/${networkDetail.id}`);
 		} catch (err) {
 			console.error(err.response);
-			alert(err.response.data.message);
+			alert('Error : '); // /////////////////  ㅅTodo
 		}
 	};
 
@@ -79,7 +82,7 @@ const Index = ({ setStage }) => {
 									setText(`${e.target.files[0].name}`);
 									setWeightFile(e.target.files[0]);
 									setFileName(e.target.files[0].name);
-									setButtonText('다른 파일 선택');
+									setButtonText(t('upw_alert2'));
 									setImg(inprogressImg);
 									setActive(true);
 								}}
@@ -89,9 +92,9 @@ const Index = ({ setStage }) => {
 					</div>
 				)}
 			</UploadForm>
-			<Button title="이전" justify="start" onClick={() => setStage(0)} />
+			<Button title={t('back')} justify="start" onClick={() => setStage(0)} />
 			<Button
-				title="업로드"
+				title={t('upload')}
 				justify="end"
 				active={active}
 				onClick={saveWeight}
@@ -108,10 +111,10 @@ const WeightUploadForm = styled.div`
 	grid-template-columns: auto 500px auto;
 	grid-template-rows: 300px auto;
 	grid-gap: 10px 50px;
-	gap: 10px 50px;
+	gap: 20px 50px;
 	width: -webkit-fill-available;
 	height: -webkit-fill-available;
-	padding: 3%;
+	padding: 10%;
 	text-align: center;
 `;
 

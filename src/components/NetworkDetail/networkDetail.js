@@ -7,9 +7,11 @@ import { dateToText } from '../Utils';
 import DEFAULT_THUMBNAIL from '../../assets/thumb.jpeg';
 import { postNetworkSubscribe, postInference } from '../../axios/Network';
 import Loading from '../Loading/Loading';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
 	const dispatch = useDispatch();
+	const { t } = useTranslation();
 	const networkDetail = useSelector((state) => state.network.detail);
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const { postId } = useParams();
@@ -37,7 +39,7 @@ const Index = () => {
 		const checkNetworkDetail = async () => {
 			const res = await dispatch(fetchNetworkDetail(postId, accesstoken));
 			if (!res.success) {
-				alert(res.message);
+				alert(t('detail_alert1'));
 				navigate(-1);
 			}
 		};
@@ -71,9 +73,9 @@ const Index = () => {
 			const res = await postNetworkSubscribe(forrequest, accesstoken);
 			console.log(res.data.message);
 			if (detailInfo.isSubscribed) {
-				alert('구독 취소 완료');
+				alert(t('anti_subscribe'));
 			} else {
-				alert('구독 완료');
+				alert(t('comp_subscribe'));
 			}
 			dispatch(
 				setNetworkDetail({
@@ -93,7 +95,7 @@ const Index = () => {
 		if (networkDetail) {
 			subscribe();
 		} else {
-			alert('에러 발생');
+			alert('Error');
 		}
 	};
 
@@ -139,25 +141,25 @@ const Index = () => {
 			<div className="updatedAt">{dateToText(detailInfo.updatedAt)}</div>
 			<img src={detailInfo.thumbnail} alt="thumbnail" />
 			<TextContainer>
-				<div className="detailTitle">판매자</div>
+				<div className="detailTitle">{t('uploader')}</div>
 				<div className="detail">{detailInfo.writer}</div>
-				<div className="detailTitle">모델 버전</div>
+				<div className="detailTitle">{t('version')}</div>
 				<div className="detail">{detailInfo.ver}</div>
 				<div className="summary">{detailInfo.summary}</div>
-				<div className="detailTitle">모델 구독</div>
+				<div className="detailTitle">{t('subscribe')}</div>
 				<div
 					className="to-subscribe"
 					onClick={() => {
 						navigate('/Mysubscribe');
 					}}
 				>
-					나의 구독리스트
+					{t('subs_list')}
 				</div>
 				<div
 					className="summary"
 					style={{ color: 'lightgray', fontWeight: '350' }}
 				>
-					* 모델 구독시, 구독한 모델보기 페이지에서 확인 및 이용이 가능합니다.
+					{t('detail_notice1')}
 				</div>
 				<div
 					className={
@@ -165,7 +167,7 @@ const Index = () => {
 					}
 					onClick={subscribeBtn}
 				>
-					{detailInfo.isSubscribed ? '구독 중인 모델' : '구독하기'}
+					{detailInfo.isSubscribed ? t('subscribed') : t('subs_try')}
 				</div>
 			</TextContainer>
 			<TagListContainer>
@@ -179,17 +181,11 @@ const Index = () => {
 			</TagListContainer>
 			<div className="desc">{detailInfo.desc}</div>
 			<NetworkUseContainer>
-				<div className="networkUseTitle">모델 이용하기</div>
-				<div className="networkUseDesc">
-					* 모델을 이용하여 이미지를 디운로드 할 수 있고, 얻은 이미지들은 생성한
-					이미지 Library에 자동으로 아카이빙 되며 언제든지 다시 다운로드 할 수
-					있습니다.
-				</div>
-				<div className="networkUseDesc">
-					* 이용할 때마다 서비스 정책에 따라 금액이 부과됩니다.
-				</div>
+				<div className="networkUseTitle">{t('run_model')}</div>
+				<div className="networkUseDesc">{t('detail_notice2')}</div>
+				<div className="networkUseDesc">{t('detail_notice3')}</div>
 				<div className="networkUseButton" onClick={() => setIsPopup(!isPopup)}>
-					이 모델로 이미지 얻기
+					{t('run_btn')}
 				</div>
 			</NetworkUseContainer>
 			{isPopup && (

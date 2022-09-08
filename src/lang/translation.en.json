@@ -68,5 +68,28 @@
     ,"next":"Next  >"
     ,"upload_alert2":"Fill the blank."
 
+    ,"upw_notice1":"Can be completed\nOnly after uploading the weight"
+    ,"Upload Model":"Upload Model"
+    ,"upw_alert1":"Choose a file."
+    ,"upw_alert2":"Select other"
+    ,"upload":"Upload"
+    ,"back":"Back"
+
+
+    ,"detail_alert1":"Something wrong with the Model."
+    ,"uploader":"Publisher"
+    ,"anti_subscribe":"Cancelled the Subscription"
+    ,"comp_subscribe":"Subscription Success"
+    ,"version":"Version"
+    ,"subscribe":"Subscribe"
+    ,"subs_list":"My Subscription List"
+    ,"detail_notice1":"* Subscribed Models are listed in My Models - My Subscriptions."
+    ,"subscribed":"Already Subscribed"
+    ,"subs_try":"Subscribe the Model"
+    ,"run_model":"Running the Model on Cloud API"
+    ,"detail_notice2":"* After running the model, you can always download the image since they are archived in the Image Library.  "
+    ,"detail_notice3":"* According to the pricing policy, it would take some tokens to get the images by the model."
+    ,"run_btn":"Run Model and Get IMG"
+
 
 }
