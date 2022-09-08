@@ -1,14 +1,14 @@
 /* eslint-disable*/
 import React, { useState } from 'react';
 import './sidebar.scss';
+
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const Index = ({ pageCol }) => {
 	const navigate = useNavigate();
-
-	// const [pageCol, setPageCol] = useState(['#00080', 'white', 'white']);
-	console.log(pageCol);
+	const { t } = useTranslation();
 
 	const go = (e) => {
 		const className = e.target.className;
@@ -30,21 +30,21 @@ const Index = ({ pageCol }) => {
 						style={{ backgroundColor: pageCol[0] }}
 						onClick={go}
 					>
-						<span>업로드 모델</span>
+						<span>{t('uploaded_model')}</span>
 					</li>
 					<li
 						className="subscribe-networks"
 						onClick={go}
 						style={{ backgroundColor: pageCol[1] }}
 					>
-						<span>구독 모델</span>
+						<span>{t('subs_model')}</span>
 					</li>
 					<li
 						className="purchased-network"
 						onClick={go}
 						style={{ backgroundColor: pageCol[2] }}
 					>
-						<span>구매한 모델</span>
+						<span>{t('pur_model')}</span>
 					</li>
 				</ul>
 			</nav>

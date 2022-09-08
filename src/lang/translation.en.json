@@ -96,6 +96,10 @@
     ,"now_bal":"'s Balance"
     ,"fill_token":"Add Token"
     ,"account_summ":"Account Summary"
+
+    ,"uploaded_model":"Uploaded"
+    ,"subs_model":"Suscribed"
+    ,"pur_model":"Purchased"
     
 
 }

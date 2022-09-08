@@ -95,4 +95,10 @@
     ,"now_bal":"님의 현재 보유 토큰"
     ,"fill_token":"충전하기"
     ,"account_summ":"토큰 사용 내역"
+
+    ,"uploaded_model":"업로드한 모델"
+
+    ,"uploaded_model":"업로드한 모델"
+    ,"subs_model":"구독한 모델"
+    ,"pur_model":"구매한 모델"
 }
