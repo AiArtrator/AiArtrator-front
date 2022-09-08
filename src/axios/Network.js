@@ -71,6 +71,13 @@ export const postNetworkDetail = (accesstoken: String, formData: Object) => {
 	});
 };
 
+export const postNetworkDetailInfo = (postId) => {
+	return axios({
+		method: 'POST',
+		url: `/api/post/${postId}`,
+	});
+};
+
 export const putNetworkDetail = (
 	accesstoken: String,
 	postId: String,
