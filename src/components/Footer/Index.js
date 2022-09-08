@@ -7,17 +7,7 @@ const Index = () => {
 	const toIntroduction = () => {
 		navigate('/Introduction');
 	};
-	if (
-		window.location.pathname === '/NetworkUpload' ||
-		window.location.pathname === '/LogIn' ||
-		window.location.pathname === '/Signup' ||
-		window.location.pathname === '/NetworkLists' ||
-		window.location.pathname === '/PurchasedNetwork' ||
-		window.location.pathname === '/MyNetworks' ||
-		window.location.pathname === '/MySubscribe' ||
-		window.location.pathname === '/MyBalance'
-	)
-		return null;
+
 	return (
 		<div className="foot">
 			<div className="intro-button" onClick={toIntroduction}>

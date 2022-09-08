@@ -17,7 +17,6 @@ import IntroductionPage from './page/IntroductionPage/Index';
 import MyBalancePage from './page/MyBalancePage/Index';
 import I18nBtn from './components/I18nBtn/index';
 import LibraryPage from './page/LibraryPage/Index';
-import Footer from './components/Footer/Index';
 
 // import InfiniteScroll from './components/NetworkList/InfiniteScroll';
 
@@ -68,7 +67,6 @@ function App() {
 			</Routes>
 
 			<I18nBtn />
-			<Footer />
 		</div>
 	);
 }
