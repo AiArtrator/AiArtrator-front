@@ -41,9 +41,16 @@
     "seachplac_h":"   Search Anything Yout Want ",
     "modelcnt":"Total Models  ",
 
-    "revise_bnt" : "Revise Information",
+    "revise_btn" : "Revise Information",
     "myinfo" : "'s Account",
-    "blank" : "blank"
+    "blank" : "blank",
+
+    "revise_succ":"Your information is revised successfully.",
+    "revise_fail":"Failed to revise information.",
+    "no_change":"Nothing changed.",
+    "revise_page" : "Revise Information Page",
+    "dupl_btn":"Dupl Check",
+    "dupl_plach":"Type new information"
     
     
 

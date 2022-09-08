@@ -61,7 +61,7 @@ const Index = () => {
 				</div>
 				<Link to="/Revise">
 					{' '}
-					<button className="revise-button">{t('revise_bnt')}</button>
+					<button className="revise-button">{t('revise_btn')}</button>
 				</Link>
 			</div>
 		</div>

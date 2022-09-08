@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import './my-info-revise-page.scss';
 import {
 	getMypage,
 	phoneDupl,
 	nicknameDupl,
 	putReviseInfo,
 } from '../../axios/User';
-
 import Loading from '../../components/Loading/Loading';
+
+import './my-info-revise-page.scss';
 import Logo from '../../assets/logo/LogoBox1.png';
 
 const Index = () => {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const userId = useSelector((state) => state.user.user.id);
 	const accesstoken = useSelector((state) => state.user.accesstoken);
+
 	const [info, setInfo] = useState(null);
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -35,39 +38,39 @@ const Index = () => {
 	const nicknameDuplCheck = async () => {
 		await nicknameDupl(reviseInfo)
 			.then((res) => {
-				setErrorInfo({ ...errorInfo, nickname: res.data.message });
+				setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
+				console.log(res);
 			})
 			.catch((err) => {
-				console.error(err);
-				console.log(JSON.stringify(err)); // 수정 필요
-				setErrorInfo({ nickname: '이미 사용하고 있는 닉네임입니다.' });
+				console.log(err);
+				setErrorInfo({ ...errorInfo, nickname: t('signup_alert3') });
 			});
 	};
 	const nicknameDuplbutton = () => {
 		if (reviseInfo.nickname === '') {
-			setErrorInfo({ ...errorInfo, nickname: '닉네임을 입력해주세요.' });
+			setErrorInfo({ ...errorInfo, nickname: t('blank') });
 		} else if (reviseInfo.nickname === info.nickname) {
 			setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
 		} else {
 			nicknameDuplCheck();
 		}
-		console.log(reviseInfo.nickname);
 	};
 
 	const phoneDuplCheck = async () => {
 		await phoneDupl(reviseInfo)
 			.then((res) => {
-				setErrorInfo({ ...errorInfo, phone: res.data.message });
+				setErrorInfo({ ...errorInfo, phone: '\u00a0' });
+				console.log(res);
 			})
 			.catch((err) => {
-				console.error(err);
-				setErrorInfo({ phone: '이미 사용하고 있는 전화번호입니다' });
+				console.log(err);
+				setErrorInfo({ phone: t('signup_alert5') });
 			});
 	};
 
 	const phoneDuplbutton = () => {
 		if (reviseInfo.phone === '') {
-			setErrorInfo({ ...errorInfo, phone: '전화번호를 입력해주세요' });
+			setErrorInfo({ ...errorInfo, phone: t('signup_alert10') });
 		} else if (reviseInfo.phone === info.phone) {
 			setErrorInfo({ ...errorInfo, phone: '\u00a0' });
 		} else {
@@ -76,19 +79,17 @@ const Index = () => {
 	};
 
 	const reviseSubmit = async () => {
-		console.log('async중');
-		console.log(reviseInfo);
 		await putReviseInfo(accesstoken, tosubmit)
 			.then((res) => {
 				console.log(
 					`[+] revise myinfo - res data: ${JSON.stringify(res.data)}`
 				);
-				alert('개인정보 수정 완료');
+				alert(t('revise_succ'));
 				navigate('/MyInfo');
 			})
 			.catch((err) => {
 				console.error(err);
-				alert(err.response.data.message);
+				alert(t('revise_fail'));
 			});
 	};
 
@@ -104,13 +105,15 @@ const Index = () => {
 			tosubmit.phone === info.phone &&
 			tosubmit.organization === info.organization
 		) {
-			alert('수정된 정보가 없습니다.');
+			alert(t('no_change'));
+			navigate('/MyInfo');
 		} else if (
 			reviseInfo.nickname === '' &&
 			reviseInfo.phone === '' &&
 			reviseInfo.organization === ''
 		) {
-			alert('수정된 정보가 없습니다.');
+			alert(t('no_change'));
+			navigate('/MyInfo');
 		} else {
 			reviseSubmit();
 		}
@@ -126,9 +129,7 @@ const Index = () => {
 				const response = await getMypage(userId);
 				setInfo(response.data.data);
 				setReviseInfo(response.data.data);
-				console.log(response.data.data);
 			} catch (err) {
-				console.error(err);
 				setError(err);
 			}
 			setLoading(false);
@@ -139,7 +140,7 @@ const Index = () => {
 		return <Loading />;
 	}
 	if (error) {
-		return <div>에러가 발생했습니다.</div>;
+		return <Loading />;
 	}
 	if (!info) {
 		return <Loading />;
@@ -164,63 +165,63 @@ const Index = () => {
 				<div className="inrow">
 					<img src={Logo} alt="logo" />
 				</div>
-				<label>{info.nickname} 님의 개인정보 수정</label>
-				<span>닉네임</span>
+				<label>{t('revise_page')} </label>
+				<span>{t('nickname')}</span>
 				<span style={{ color: 'red' }}> *</span>
 				<div className="info">{info.nickname}</div>
 				<div className="revise-part">
 					<input
 						className="nickname"
 						type="nickname"
-						placeholder="수정을 원하시면 정보를 입력해주세요."
+						placeholder={t('dupl_plach')}
 						value={reviseInfo.nickname}
 						onChange={handleChange}
 					/>
 					<button className="dupl-button" onClick={nicknameDuplbutton}>
-						중복확인
+						{t('dupl_btn')}
 					</button>
 				</div>
 				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 					{errorInfo.nickname}
 				</div>
-				<span>전화번호</span>
+				<span>{t('phone')}</span>
 				<span style={{ color: 'red' }}> *</span>
 				<div className="info">{info.phone}</div>
 				<div className="revise-part">
 					<input
 						className="phone"
 						type="phone"
-						placeholder="수정을 원하시면 정보를 입력해주세요."
+						placeholder={t('dupl_plach')}
 						value={reviseInfo.phone}
 						onChange={handleChange}
 					/>
 					<button className="dupl-button" onClick={phoneDuplbutton}>
-						중복확인
+						{t('dupl_btn')}
 					</button>
 				</div>
 				<div className="errorMessage" id="checkMess" style={{ color: 'red' }}>
 					{errorInfo.phone}
 				</div>
 
-				<span>소속기관 (선택)</span>
+				<span>{t('organization')}</span>
 				<div className="info">
 					{info.organization ? (
 						<div>{info.organization}</div>
 					) : (
-						<div>입력된 정보가 없습니다.</div>
+						<div>{t('blank')}</div>
 					)}
 				</div>
 				<div className="revise-part">
 					<input
 						className="organization"
 						type="organization"
-						placeholder="수정을 원하시면 정보를 입력해주세요."
+						placeholder={t('dupl_plach')}
 						value={reviseInfo.organization}
 						onChange={handleChange}
 					/>
 				</div>
 				<button className="submit-button" onClick={isRevised}>
-					정보수정
+					{t('revise_btn')}
 				</button>
 			</div>
 		</div>
