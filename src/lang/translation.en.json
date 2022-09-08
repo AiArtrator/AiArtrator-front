@@ -90,7 +90,7 @@
     ,"detail_notice2":"* After running the model, you can always download the image since they are archived in the Image Library.  "
     ,"detail_notice3":"* According to the pricing policy, it would take some tokens to get the images by the model."
     ,"run_btn":"Run Model and Get IMG"
-    ,"cancel":"CANCEL"
+    ,"cancel":"Cancel"
 
     ,"left_token":"Balance"
     ,"now_bal":"'s Balance"
@@ -100,6 +100,31 @@
     ,"uploaded_model":"Uploaded"
     ,"subs_model":"Suscribed"
     ,"pur_model":"Purchased"
-    
 
+    ,"myup_title":"'s Uploaded Model List"
+    ,"myup_cnt":"Total Uploaded Models"
+    ,"revise":"Update"
+    ,"delete":"Delete"
+    ,"del_alert":"You are about to delete the model. Do you want to proceed?"
+
+    ,"mysubs_title":"'s Subscribed Model List"
+    ,"mysubs_cnt":"Total Subscribed Models"
+    ,"run":"Run Model"
+    ,"cancel_alert":"You are about to cancel subscirbe. Do you want to proceed?"
+    
+    ,"pur_title":"'s Model Usage History"
+    ,"pur_cnt":"Total Purchased Models"
+    ,"imgLib":"IMG Library"
+
+
+    ,"run_title":"Run Model & Get IMG"
+    ,"run_fee":"Model Usage Fee"
+    ,"run_cnt":"Total images to produce"
+    ,"images":"Images"
+    ,"run_notice1":"* The fee for ML API is 1 Token per image."
+    ,"total_fee":"Total Fee is"
+    ,"run_notice2":"* You will proceed the process, paying your Tokens."
+    ,"pay":"Make Payment"
+    ,"close":"Close"
+    
 }

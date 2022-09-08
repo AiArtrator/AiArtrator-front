@@ -125,11 +125,12 @@ const Index = () => {
 				numImg || 0,
 				-detailInfo.fee
 			);
-			alert(res.data.message);
+			console.log(res);
+			alert('SUCCESS');
 			navigate(`/Library/${postId}`);
 			setLoading(false);
 		} catch (err) {
-			console.log(err);
+			alert('ERROR');
 		}
 	};
 
@@ -190,11 +191,11 @@ const Index = () => {
 			</NetworkUseContainer>
 			{isPopup && (
 				<PopupContainer>
-					<div className="popupTitle">모델 이용하기</div>
+					<div className="popupTitle"> {t('run_title')} </div>
 					<div className="popupNetworkTitle">{detailInfo.title}</div>
-					<div className="subtitle">모델 이용료</div>
-					<div className="fee">{detailInfo.fee} 토큰</div>
-					<div className="subtitle">생성할 이미지 개수</div>
+					<div className="subtitle">{t('run_fee')}</div>
+					<div className="fee">{detailInfo.fee} Token</div>
+					<div className="subtitle">{t('run_cnt')}</div>
 					<input
 						className="numImg"
 						type="number"
@@ -203,23 +204,23 @@ const Index = () => {
 						min="0"
 						max="99999" // TODO: fix max value
 					/>
-					<div className="numImgAfter">개</div>
-					<div className="notice">* 기본 수수료는 이미지 당 1토큰 입니다.</div>
+					<div className="numImgAfter">{t('images')}</div>
+					<div className="notice">{t('run_notice1')}</div>
 					<div className="totalFee">
-						총 결제 금액은 {detailInfo.fee * (numImg || 0)} (토큰)입니다.
+						{t('total_fee')} {detailInfo.fee * (numImg || 0)} Token
 					</div>
 					<div className="popupDesc">
-						* 모델을 이용하여 이미지를 다운로드 받을 수 있습니다. 생성한
-						이미지들은 이미지 Library에 자동으로 아카이브 되며 언제든지 다시
-						다운로드 할 수 있습니다.
-						<br />* 결제 완료후 총 결제 금액만큼 토큰이 차감됩니다.
-						<br />* 1토큰은 10원입니다.
+						{t('detail_notice2')}
+						<br />
+						{t('run_notice2')}
+						<br />
+						{t('model_notice1')}
 					</div>
 					<div className="payButton" onClick={inference}>
-						결제하기
+						{t('pay')}
 					</div>
 					<div className="closeButton" onClick={() => setIsPopup(false)}>
-						닫기
+						{t('close')}
 					</div>
 				</PopupContainer>
 			)}

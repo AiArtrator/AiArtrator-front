@@ -97,8 +97,33 @@
     ,"account_summ":"토큰 사용 내역"
 
     ,"uploaded_model":"업로드한 모델"
-
-    ,"uploaded_model":"업로드한 모델"
     ,"subs_model":"구독한 모델"
-    ,"pur_model":"구매한 모델"
+    ,"pur_model":"결제한 모델"
+
+    ,"myup_title":" 님이 업로드한 모델 리스트입니다."
+    ,"myup_cnt":"업로드한 모델 개수 "
+    ,"revise":"수정하기"
+    ,"delete":"삭제하기"
+    ,"del_alert":"업로드한 모델을 삭제합니다."
+
+    ,"mysubs_title":" 님이 구독한 모델 리스트입니다."
+    ,"mysubs_cnt":"구독한 모델 개수 "
+    ,"run":"이미지 생성"
+    ,"cancel_alert":"구독을 취소합니다."
+
+    ,"pur_title":" 님이 결제한 모델 리스트입니다."
+    ,"pur_cnt":"결제한 모델 개수 "
+    ,"imgLib":"이미지 라이브러리"
+
+
+    ,"run_title":"이미지 생성"
+    ,"run_fee":"모델 이용료"
+    ,"run_cnt":"생성할 이미지 개수"
+    ,"images":"개"
+    ,"run_notice1":"* 기본 수수료는 이미지 당 1토큰 입니다."
+    ,"total_fee":"총 결제 금액"
+    ,"run_notice2":"* 결제 완료후 총 결제 금액 만큼 토큰이 차감됩니다."
+    ,"pay":"결제하기"
+    ,"close":"닫기"
+
 }

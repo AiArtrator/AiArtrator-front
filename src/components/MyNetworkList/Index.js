@@ -3,18 +3,19 @@ import './my-network-list.scss';
 
 import NetworksItem from './NetworkItems/Index.js';
 import Loading from '../Loading/Loading';
+import UploadBtn from '../UploadBtn/Index';
 
 import { getMyNetworkListById } from '../../axios/Network';
 
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import SearchPicto from '../../assets/search.png';
 import Refresh from '../../assets/refresh.png';
 
 // 내가 업로드한 모델 페이지
 const Index = () => {
-	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	const userId = useSelector((state) => state.user.user.id);
 	const nickname = useSelector((state) => state.user.user.nickname);
@@ -93,19 +94,15 @@ const Index = () => {
 	return (
 		<div className="list-block">
 			<div className="in-row">
-				<label>{nickname} 님이 업로드한 모델 리스트입니다.</label>
-				<button
-					onClick={() => {
-						navigate('/NetworkUpload');
-					}}
-				>
-					모델 업로드하기
-				</button>
+				<label>
+					{nickname} {t('myup_title')}
+				</label>
+				<UploadBtn />
 			</div>
 			<div className="in-row">
 				<input
 					type="search"
-					placeholder="모델 키워드 또는 태그를 검색하세요."
+					placeholder={t('seachplac_h')}
 					value={searchWord}
 					onChange={handleChange}
 					onKeyPress={handleKeyPress}
@@ -117,7 +114,9 @@ const Index = () => {
 					onClick={handleSearch}
 				/>
 			</div>
-			<div className="now-count">모델 개수는 {networkCnt}개 입니다.</div>
+			<div className="now-count">
+				{t('myup_cnt')} {networkCnt}
+			</div>
 
 			{networks.map((network) => {
 				return (

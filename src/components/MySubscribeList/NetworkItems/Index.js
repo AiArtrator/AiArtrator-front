@@ -9,8 +9,10 @@ import RunModel from '../../RunNetwork/runNetwork';
 import { useNavigate } from 'react-router-dom';
 import { postNetworkSubscribe } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Index = ({ network, onRemove }) => {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
 	var postIdURL = '/NetworkDetail/';
@@ -34,13 +36,12 @@ const Index = ({ network, onRemove }) => {
 			onRemove(tmp);
 		} catch (err) {
 			console.error(err);
-			console.log(err.response.data.message);
-			alert('에러 입니다.');
+			alert('Error');
 		}
 	};
 
 	const onDelete = () => {
-		if (window.confirm('구독을 취소합니다.')) {
+		if (window.confirm(t('cancel_alert'))) {
 			deleteSubscribe();
 		}
 	};
@@ -52,10 +53,10 @@ const Index = ({ network, onRemove }) => {
 			) : null}
 			<div className="inrow">
 				<div className="button" id="produce" onClick={onNavigate}>
-					이미지 생성
+					{t('run')}
 				</div>
 				<div className="button" onClick={onDelete}>
-					구독 취소
+					{t('cancel')}
 				</div>
 			</div>
 

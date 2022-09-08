@@ -10,8 +10,10 @@ import RunModel from '../../RunNetwork/runNetwork';
 import { useNavigate } from 'react-router-dom';
 import { postNetworkSubscribe } from '../../../axios/Network';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Index = ({ network }) => {
+	const { t } = useTranslation();
 	const navigate = useNavigate();
 	const { id, thumbnail, title, writer, summary, tagList } = network;
 	const [isPopup, setIspopup] = useState(false);
@@ -27,10 +29,7 @@ const Index = ({ network }) => {
 	};
 
 	const produceConfirm = () => {
-		if (window.confirm('해당 인공지능 모델로 이미지를 생성합니다.')) {
-			// 이미지 생성
-			setIspopup(true);
-		}
+		setIspopup(true);
 	};
 
 	return (
@@ -39,11 +38,11 @@ const Index = ({ network }) => {
 				<RunModel isPopup={isPopup} postId={id} setIspopup={setIspopup} />
 			) : null}
 			<div className="inrow">
-				<div className="button" id="produce" onClick={onNavigate}>
-					이미지 생성
-				</div>
 				<div className="button" id="library" onClick={produceConfirm}>
-					이미지 Library
+					{t('imgLib')}
+				</div>
+				<div className="button" id="produce" onClick={onNavigate}>
+					{t('run')}
 				</div>
 			</div>
 

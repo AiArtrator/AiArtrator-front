@@ -4,16 +4,17 @@ import './my-network-list.scss';
 import NetworksItem from './NetworkItems/Index.js';
 import { getMyNetworkListById } from '../../axios/Network';
 import Loading from '../../components/Loading/Loading';
+import UploadBtn from '../../components/UploadBtn/Index';
 
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import SearchPicto from '../../assets/search.png';
 import Refresh from '../../assets/refresh.png';
 
 // 내가 구독한 모델 페이지
 const Index = () => {
-	const navigate = useNavigate();
+	const { t } = useTranslation();
 	const userId = useSelector((state) => state.user.user.id);
 	const nickname = useSelector((state) => state.user.user.nickname);
 	const [networks, setNetworks] = useState(null);
@@ -34,7 +35,6 @@ const Index = () => {
 				setNetworks(response.data.data.postList);
 				setNetworkCnt(response.data.data.postList.length);
 			} catch (err) {
-				console.error(err);
 				setError(err);
 			}
 
@@ -56,13 +56,11 @@ const Index = () => {
 			setLoading(true);
 			setNetworks(null);
 			try {
-				console.log(searchWord);
 				const response = await getMyNetworkListById(userId, page, searchWord);
 				setNetworks(response.data.data.postList);
 				setNetworkCnt(response.data.data.postList.length);
 				setSearchWord('');
 			} catch (err) {
-				console.error(err);
 				setError(err);
 			}
 			setRefresh(true);
@@ -87,19 +85,15 @@ const Index = () => {
 	return (
 		<div className="list-block">
 			<div className="in-row">
-				<label>{nickname} 님이 구독중인 모델 리스트입니다.</label>
-				<button
-					onClick={() => {
-						navigate('/NetworkUpload');
-					}}
-				>
-					모델 업로드하기
-				</button>
+				<label>
+					{nickname} {t('mysubs_title')}
+				</label>
+				<UploadBtn />
 			</div>
 			<div className="in-row">
 				<input
 					type="search"
-					placeholder="모델 키워드 또는 태그를 검색하세요."
+					placeholder={t('seachplac_h')}
 					value={searchWord}
 					onChange={handleChange}
 					onKeyPress={handleKeyPress}
@@ -111,7 +105,9 @@ const Index = () => {
 					onClick={handleSearch}
 				/>
 			</div>
-			<div className="now-count">모델 개수는 {networkCnt}개 입니다.</div>
+			<div className="now-count">
+				{t('mysubs_cnt')} {networkCnt}
+			</div>
 
 			{networks.map((network) => {
 				return (

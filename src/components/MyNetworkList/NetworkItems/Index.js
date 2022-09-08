@@ -7,6 +7,7 @@ import defaultimg from '../../../assets/main.jpeg';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 import { deleteMyNetwork } from '../../../axios/Network';
 import Loading from 'react-loading';
@@ -15,6 +16,7 @@ import Loading from 'react-loading';
 const Index = ({ network, onRemove }) => {
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
+	const { t } = useTranslation();
 
 	const postIdUrl = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
@@ -61,7 +63,7 @@ const Index = ({ network, onRemove }) => {
 	};
 
 	const removeConfirm = () => {
-		if (window.confirm('업로드한 모델을 삭제합니다.')) {
+		if (window.confirm(t('del_alert'))) {
 			deleteModel();
 		}
 	};
@@ -72,10 +74,10 @@ const Index = ({ network, onRemove }) => {
 		<div style={{ width: '100%' }}>
 			<div className="inrow">
 				<div className="button" onClick={removeConfirm}>
-					삭제하기
+					{t('delete')}
 				</div>
 				<div className="button" id="revise" onClick={onNavigate}>
-					수정하기
+					{t('revise')}
 				</div>
 			</div>
 
