@@ -35,8 +35,11 @@
     "nickname":"Nickname",
     "phone":"Phone",
     "organization":"Organization Name (optional)",
-    "org_place":"Your school / company / etc "
+    "org_place":"Your school / company / etc ",
     
+    "seachres":"search result ",
+    "seachplac_h":"   Search Anything Yout Want ",
+    "modelcnt":"Total Models  "
     
 
 

@@ -35,6 +35,10 @@
     "nickname":"닉네임",
     "phone":"휴재폰 번호",
     "organization":"소속 (선택)",
-    "org_place":"소속 가관 이름을 입력해주세요."
+    "org_place":"소속 가관 이름을 입력해주세요.",
+
+    "seachres":"검색 결과 ",
+    "seachplac_h":"   모델의 키워드 혹은 태그를 입력하세요.",
+    "modelcnt":"판매 중인 모델  "
 
 }
