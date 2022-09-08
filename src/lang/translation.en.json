@@ -50,10 +50,23 @@
     "no_change":"Nothing changed.",
     "revise_page" : "Revise Information Page",
     "dupl_btn":"Dupl Check",
-    "dupl_plach":"Type new information"
-    
-    
+    "dupl_plach":"Type new information",
 
+    "upload_alert1":"This is not the model you uploaded."
+    ,"upload_thumbnail":"Upload Thumbnail"
+    ,"model_name":"Model Name"
+    ,"model_summary":"Introductin Summary"
+    ,"model_fee":"Usage Fee"
+    ,"model_fee2":"(fee for getting one image)"
+    ,"model_fee3":"Complimetary Model"
+    ,"model_notice1":"* 1 Token is equel to 1 cent."
+    ,"model_notice2":"* Except for Complimetary Models, you can get paid 90% of the revenue, payed for using the model. "
+    ,"model_notice3":"* If models are ran on Cloud API, it is 1 Token per image. "
+    ,"model_ver":"Model Version"
+    ,"model_detail":"About the Model"
+    ,"model_tag":"Tag"
+    ,"next":"Next  >"
+    ,"upload_alert2":"Fill the blank."
 
 
 }

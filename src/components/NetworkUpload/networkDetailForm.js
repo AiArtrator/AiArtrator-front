@@ -8,14 +8,17 @@ import {
 } from '../../reducers/network';
 import { postNetworkDetail, putNetworkDetail } from '../../axios/Network';
 import { imgSrcToFile, loadImg } from '../Utils';
-// import { DEFAULT_THUMBNAIL } from '../../constants';
 import defaultimg from '../../assets/thumb.jpeg';
+
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // eslint-disable-next-line react/prop-types
 const Index = ({ setStage, postId }) => {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
+	const { t } = useTranslation();
+
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const networkDetail = useSelector((state) => state.network.detail);
 	const nickname = useSelector((state) => state.user.user.nickname);
@@ -39,7 +42,7 @@ const Index = ({ setStage, postId }) => {
 	useEffect(() => {
 		if (postId && networkDetail) {
 			if (nickname !== networkDetail.writer.nickname) {
-				alert('본인의 게시물이 아닙니다!');
+				alert(t('upload_alert1'));
 				navigate(-1);
 			}
 			setDetailInfo({
@@ -122,7 +125,7 @@ const Index = ({ setStage, postId }) => {
 		return formData;
 	};
 
-	const saveNetworkDetail = async () => {
+	const submit = async () => {
 		try {
 			const formData = await createFormData();
 			let res;
@@ -132,13 +135,25 @@ const Index = ({ setStage, postId }) => {
 			setStage(1);
 		} catch (err) {
 			console.error(err.response);
-			if (err.response.data.message) alert(err.response.data.message);
+			if (err.response.data.message) alert('Error');
+		}
+	};
+	const saveNetworkDetail = () => {
+		if (
+			detailInfo.description === '' ||
+			detailInfo.fee === '' ||
+			detailInfo.summary === '' ||
+			detailInfo.title === '' ||
+			detailInfo.ver === '' ||
+			imgSrc === defaultimg
+		) {
+			alert(t('upload_alert2'));
+		} else {
+			submit();
 		}
 	};
 
 	return (
-		// <MiddleForm>
-		// 	<div className="title">모델 업로드</div>
 		<NetworkDetailForm>
 			<ImgContainer>
 				<img src={imgSrc} alt="thumbnail" />
@@ -150,13 +165,13 @@ const Index = ({ setStage, postId }) => {
 							accept=".jpeg, .jpg, .png"
 							onChange={(e) => loadImg((e?.target?.files)[0], setImgSrc)}
 						/>
-						썸네일 업로드
+						{t('upload_thumbnail')}
 					</label>
 				</div>
 			</ImgContainer>
 			<TextContainer>
 				<DetailInput>
-					<div className="inputTitle">모델 이름</div>
+					<div className="inputTitle"> {t('model_name')} </div>
 					<input
 						className="title"
 						type="text"
@@ -167,7 +182,7 @@ const Index = ({ setStage, postId }) => {
 					/>
 				</DetailInput>
 				<DetailInput>
-					<div className="inputTitle">요약</div>
+					<div className="inputTitle">{t('model_summary')}</div>
 					<input
 						className="summary"
 						type="text"
@@ -179,9 +194,9 @@ const Index = ({ setStage, postId }) => {
 				</DetailInput>
 				<FeeContainer isFree={isFree}>
 					<div className="feeTitle">
-						모델 이용료
+						{t('model_fee')}
 						<br />
-						(이미지 1장 기준)
+						{t('model_fee2')}
 					</div>
 					<input
 						className="fee"
@@ -192,7 +207,7 @@ const Index = ({ setStage, postId }) => {
 						onPaste={() => false}
 						disabled={isFree}
 					/>
-					<div className="feeUnit">토큰</div>
+					<div className="feeUnit">Token</div>
 					<div className="freeCheckbox">
 						<label htmlFor="freeCheckbox">
 							<input
@@ -203,21 +218,20 @@ const Index = ({ setStage, postId }) => {
 									setIsFree(!isFree);
 								}}
 							/>
-							무료
+							{t('model_fee3')}
 						</label>
 					</div>
 					<div className="noticeText">
-						* 1토큰은 10원에 해당됩니다.
+						{t('model_notice1')}
 						<br />
-						* 모델 이용료의 90%를 가져가실 수 있으며, ‘무료’ 를 선택할 시 수익은
-						발생되지 않습니다.
-						<br />* 모델을 이용할 때, 인공지능 서버 요금인 기본 수수료가 이미지
-						1장 기준 1토큰씩 추가로 부과됩니다.
+						{t('model_notice2')}
+						<br />
+						{t('model_notice3')}
 					</div>
 				</FeeContainer>
 			</TextContainer>
 			<DetailInput>
-				<div className="inputTitle">모델 버전</div>
+				<div className="inputTitle">{t('model_ver')}</div>
 				<input
 					className="ver"
 					type="text"
@@ -228,7 +242,7 @@ const Index = ({ setStage, postId }) => {
 				/>
 			</DetailInput>
 			<DetailInput>
-				<div className="inputTitle">모델 설명</div>
+				<div className="inputTitle">{t('model_detail')}</div>
 				<textarea
 					className="description"
 					type="text"
@@ -240,7 +254,7 @@ const Index = ({ setStage, postId }) => {
 				/>
 			</DetailInput>
 			<TagListContainer>
-				<div className="tagListTitle">태그 추가</div>
+				<div className="tagListTitle">{t('model_tag')}</div>
 				<div className="tagList">
 					<input
 						className="tag tagInput"
@@ -259,23 +273,13 @@ const Index = ({ setStage, postId }) => {
 				</div>
 			</TagListContainer>
 			<div className="detailUploadButton" onClick={saveNetworkDetail}>
-				다음 &gt;
+				{t('next')}
 			</div>
 		</NetworkDetailForm>
-		// {/* </MiddleForm> */}
 	);
 };
 
 export default Index;
-
-// const MiddleForm = styled.div`
-// 	display: table;
-// 	margin-left: auto;
-// 	margin-right: auto;
-// 	.title {
-// 		font-size: 20px;
-// 	}
-// `;
 
 const NetworkDetailForm = styled.div`
 	position: relative;

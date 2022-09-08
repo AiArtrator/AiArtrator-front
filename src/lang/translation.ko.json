@@ -50,5 +50,23 @@
     "no_change":"변경된 정보가 없습니다.",
     "revise_page" : "개인 정보 수정",
     "dupl_btn":"중복 체크",
-    "dupl_plach":"수정을 원하시면 정보를 입력해주세요."
+    "dupl_plach":"수정을 원하시면 정보를 입력해주세요.",
+
+    "upload_alert1":"타인이 업로드한 모델입니다."
+    ,"upload_thumbnail":"썸네일"
+    ,"model_name":"모델 이름"
+    ,"model_summary":"한줄 소개"
+    ,"model_fee":"모델 이용료"
+    ,"model_fee2":"(이미지 1장 기준)"
+    ,"model_fee3":"무료"
+    ,"model_notice1":"* 1토큰은 10원에 해당됩니다."
+    ,"model_notice2":"* 모델 이용료의 90%를 가져가실 수 있으며, '무료'를 선택할 시 수익은 발생되지 않습니다."
+    ,"model_notice3":"* 모델을 이용시 인공지능 서버 요금이 이미지 1장 기준 1토큰씩 추가로 부과됩니다."
+    ,"model_ver":"모델 버전"
+    ,"model_detail":"모델 설명"
+    ,"model_tag":"태그"
+    ,"next":"다음 >"
+    ,"upload_alert2":"필수 정보가 없습니다."
+
+
 }
