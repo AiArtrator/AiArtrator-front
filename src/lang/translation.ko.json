@@ -39,6 +39,10 @@
 
     "seachres":"검색 결과 ",
     "seachplac_h":"   모델의 키워드 혹은 태그를 입력하세요.",
-    "modelcnt":"판매 중인 모델  "
+    "modelcnt":"판매 중인 모델  ",
+
+    "revise_bnt" : "정보 수정",
+    "myinfo" : " 님의 개인정보",
+    "blank" : "입력된 정보가 없습니다."
 
 }

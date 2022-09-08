@@ -39,7 +39,12 @@
     
     "seachres":"search result ",
     "seachplac_h":"   Search Anything Yout Want ",
-    "modelcnt":"Total Models  "
+    "modelcnt":"Total Models  ",
+
+    "revise_bnt" : "Revise Information",
+    "myinfo" : "'s Account",
+    "blank" : "blank"
+    
     
 
 

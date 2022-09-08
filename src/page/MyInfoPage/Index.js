@@ -3,11 +3,15 @@ import './my-info-page.scss';
 import { getMypage } from '../../axios/User';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import Loading from '../../components/Loading/Loading';
+
 import Logo from '../../assets/logo/LogoBox1.png';
 
 const Index = () => {
+	const { t } = useTranslation();
+
 	const userId = useSelector((state) => state.user.user.id);
 	const [info, setInfo] = useState(null);
 	const [error, setError] = useState(null);
@@ -20,9 +24,7 @@ const Index = () => {
 			try {
 				const response = await getMypage(userId);
 				setInfo(response.data.data);
-				console.log(response.data.data);
 			} catch (err) {
-				console.error(err);
 				setError(err);
 			}
 			setLoading(false);
@@ -33,11 +35,10 @@ const Index = () => {
 		return <Loading />;
 	}
 	if (error) {
-		return <div>에러가 발생했습니다.</div>;
+		return <Loading />;
 	}
 	if (!info) {
-		console.log('아직 내 정보data가 설정되지 않았습니다. ');
-		return null;
+		return <Loading />;
 	}
 	return (
 		<div className="mypage-form">
@@ -45,24 +46,22 @@ const Index = () => {
 				<div className="inrow">
 					<img src={Logo} />
 				</div>
-				<label>{info.nickname} 님의 개인정보</label>
-				<label>이메일</label>
+				<label>
+					{info.nickname} {t('myinfo')}
+				</label>
+				<label>{t('email')}</label>
 				<div className="info"> {info.email}</div>
-				<label>닉네임</label>
+				<label>{t('nickname')}</label>
 				<div className="info">{info.nickname}</div>
-				<label>전화번호</label>
+				<label>{t('phone')}</label>
 				<div className="info">{info.phone}</div>
-				<label>소속기관</label>
+				<label>{t('organization')}</label>
 				<div className="info">
-					{info.organization ? (
-						<>{info.organization}</>
-					) : (
-						<>입력된 정보가 없습니다.</>
-					)}
+					{info.organization ? <>{info.organization}</> : <>{t('blank')}</>}
 				</div>
 				<Link to="/Revise">
 					{' '}
-					<button className="revise-button">정보수정</button>
+					<button className="revise-button">{t('revise_bnt')}</button>
 				</Link>
 			</div>
 		</div>
