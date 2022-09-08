@@ -37,6 +37,7 @@
 	.contents {
 		color: rgba(0, 0, 0, 0.598);
 		margin-top: 0.3rem;
+		width: calc(100% - 14rem);
 		.writer {
 			display: flex;
 			flex-direction: row;
@@ -74,7 +75,7 @@
 		.taglist {
 			display: flex;
 			flex-direction: row;
-
+			overflow: scroll;
 			.tag {
 				margin-right: 0.5rem;
 				font-size: 0.3rem;
