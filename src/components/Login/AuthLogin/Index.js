@@ -11,7 +11,7 @@ import { login } from '../../../axios/User';
 import { setAccsstoken, setUser } from '../../../reducers/user';
 
 import Logo from '../../../assets/logo/MainLogoH1.png';
-import { fetchToken } from '../../../reducers/token';
+// import { fetchToken } from '../../../reducers/token';
 
 const Index = () => {
 	const { t } = useTranslation();
@@ -24,10 +24,10 @@ const Index = () => {
 		password: '',
 	});
 
-	const loadToken = async () => {
-		const res = await dispatch(fetchToken());
-		console.log(res);
-	};
+	// const loadToken = async () => {
+	// 	const res = await dispatch(fetchToken());
+	// 	console.log(res);
+	// };
 
 	const loginSubmit = async () => {
 		try {
@@ -37,7 +37,7 @@ const Index = () => {
 			dispatch(setAccsstoken(res.data.data.accesstoken));
 			// console.log(`[+] login - userState: ${JSON.stringify(userState)}`);
 			navigate('/');
-			loadToken();
+			// loadToken();
 		} catch (err) {
 			console.error(err);
 			if (err.response.data.status === (403 || 412)) {
