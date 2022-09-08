@@ -1,6 +1,6 @@
 /* eslint-disable*/
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import './network-items.scss';
 
 import person from '../../../assets/person.png';
