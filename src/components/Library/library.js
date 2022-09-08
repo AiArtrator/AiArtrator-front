@@ -15,14 +15,14 @@ const Index = () => {
 	const { postId } = useParams();
 	const navigate = useNavigate();
 	const [detailInfo, setDetailInfo] = useState({
-		title: '로딩 중',
+		title: 'loading',
 		thumbnail: DEFAULT_THUMBNAIL,
-		writer: '로딩 중',
-		updatedAt: '로딩 중',
-		ver: '로딩 중',
-		summary: '로딩 중입니다.',
+		writer: 'loading',
+		updatedAt: 'loading',
+		ver: 'loading',
+		summary: 'loading',
 		tagList: [],
-		desc: '로딩 중',
+		desc: 'loading',
 		isSubscribed: false,
 		fee: 0,
 		weightUuid: '',
@@ -158,7 +158,9 @@ const Index = () => {
 				if (res.data.message) alert(res.data.message);
 				navigate(-1);
 			} else if (!res.data.data.length) {
-				alert('Never used!');
+				alert(
+					'You never tried to get the img with this model. No library exists '
+				);
 				navigate(-1);
 			} else {
 				res.data.data.reverse();
