@@ -1,8 +1,10 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import './network-items.scss';
 
 import person from '../../../assets/person.png';
+
+import RunModel from '../../RunNetwork/runNetwork';
 
 import { useNavigate } from 'react-router-dom';
 import { postNetworkSubscribe } from '../../../axios/Network';
@@ -13,10 +15,11 @@ const Index = ({ network, onRemove }) => {
 	const { id, thumbnail, title, writer, summary, tagList } = network;
 	var postIdURL = '/NetworkDetail/';
 	const accesstoken = useSelector((state) => state.user.accesstoken);
+	const [isPopup, setIspopup] = useState(false);
 
 	const onNavigate = (e) => {
 		if (e.target.id === 'produce') {
-			navigate('/'); // Todo: change the url - if needed to pay, go to payment page
+			setIspopup(true);
 		} else if (e.target.id === 'detail') {
 			postIdURL += id;
 			navigate(postIdURL);
@@ -44,6 +47,9 @@ const Index = ({ network, onRemove }) => {
 
 	return (
 		<>
+			{isPopup ? (
+				<RunModel isPopup={isPopup} postId={id} setIspopup={setIspopup} />
+			) : null}
 			<div className="inrow">
 				<div className="button" id="produce" onClick={onNavigate}>
 					이미지 생성
