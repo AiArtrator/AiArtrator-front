@@ -18,7 +18,6 @@ const Index = () => {
 	return (
 		<>
 			<Carousel />
-			{/* <InfiniteScroll /> */}
 			<NetworkLists />
 			<TopBtn />
 		</>

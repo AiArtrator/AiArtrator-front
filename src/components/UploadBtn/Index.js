@@ -5,7 +5,7 @@ import './upload-button.scss';
 
 const Index = () => {
 	const navigate = useNavigate();
-	const t = useTranslation();
+	const { t } = useTranslation();
 	return (
 		<>
 			<button

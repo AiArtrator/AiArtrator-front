@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './network-list.scss';
+
 import NetworksItem from './NetworkItems/Index.js';
 import { getNetworkList, getSearchNetwork } from '../../axios/Network';
-import SearchPicto from '../../assets/search.png';
-import { useNavigate } from 'react-router-dom';
-
 import TopBtn from '../TopBtn';
+import UploadBtn from '../UploadBtn/Index';
+
+import SearchPicto from '../../assets/search.png';
 
 const Index = () => {
 	const [networks, setNetworks] = useState(null);
@@ -15,7 +16,6 @@ const Index = () => {
 	const [searchWord, setSearchWord] = useState('');
 	const [resCount, setResCount] = useState(0);
 	const [result, setResult] = useState('');
-	const navigate = useNavigate();
 
 	const handleChange = (e) => {
 		setSearchWord(e.target.value);
@@ -91,7 +91,12 @@ const Index = () => {
 					onChange={handleChange}
 				/>
 
-				<img src={SearchPicto} alt="button" onClick={handleSearch} />
+				<img
+					className="search-img"
+					src={SearchPicto}
+					alt="button"
+					onClick={handleSearch}
+				/>
 			</div>
 			<div className="in-row">
 				{result ? (
@@ -99,13 +104,7 @@ const Index = () => {
 				) : (
 					<div className="now-count">현재 판매중인 모델 {networksCount} 개</div>
 				)}
-				<button
-					onClick={() => {
-						navigate('/NetworkUpload');
-					}}
-				>
-					모델 업로드하기
-				</button>
+				<UploadBtn />
 			</div>
 
 			{/* <div className="now-count">현재 판매중인 모델 {networksCount} 개</div> */}
