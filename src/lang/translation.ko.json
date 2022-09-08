@@ -14,5 +14,27 @@
     
     "login_alert1":"이메일 / 비밀번호를 확인해주세요. ",
     "login_btn":"로그인 Log-In",
-    "try_signup":"1초만에 회원가입"
+    "try_signup":"1초만에 회원가입",
+
+    "signup_alert1":"비밀번호가 일치하지 않습니다.",
+    "signup_alert2":"이미 가입된 이메일입니다.",
+    "signup_alert3":"이미 가입된 닉네임입니다.",
+    "signup_alert4": "패스워드는 최소 6자리 문자열이어야 합니다.",
+    "signup_alert5": "이미 가입된 전화번호 입니다.",
+    "signup_alert6": "필수 정보를 입력해주세요.",
+    "signup_alert7": "회원가입에 실패했습니다.",
+    "signup_alert8":"회원가입을 성공했습니다.",
+    "signup_alert9":"회원가입을 실패했습니다.",
+    "signup_alert10":"비밀번호를 입력하세요.",
+    "signup_alert11":"이메일을 입력하세요.",
+    "signup_alert12":"닉네임을 입력하세요.",
+    "signup_alert13":"전화번호를 입력하세요.",
+    "signup_alert14":"패스워드를 입력해주세요.",
+    "password":"패스워드",
+    "password_conf":"패스워드 확인",
+    "nickname":"닉네임",
+    "phone":"휴재폰 번호",
+    "organization":"소속 (선택)",
+    "org_place":"소속 가관 이름을 입력해주세요."
+
 }

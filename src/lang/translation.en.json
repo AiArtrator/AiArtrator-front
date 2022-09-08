@@ -1,7 +1,6 @@
 {
     "i18nbtn" : "ko",
 
-
     "modellist":"Model List",
     "login_signup":"LogIn / SignUp",
     "mymodels":"My Models",
@@ -11,11 +10,35 @@
 
     "uploadbtn":"Upload Model",
 
-    "email":"Email",
-
+    "email":"Email", 
     "login_alert1":"incorrect email or password",
     "login_btn":"Log In",
-    "try_signup":"Sign Up"
+    "try_signup":"Sign Up",
+
+
+    "signup_alert1":"Confirmation password doesn't match the password.",
+    "signup_alert2":"The Email is already registered.",
+    "signup_alert3":"The Nickname is already registered.",
+    "signup_alert4": "Password must be at least 7 characters.",
+    "signup_alert5": "The phone number is already registered.",
+    "signup_alert6": "Fill in the blanks.",
+    "signup_alert7": "Failed to create your account.",    
+    "signup_alert8":"Your account was created successfully.",
+    "signup_alert9":"Signup Failed.",
+    "signup_alert10":"Password can't be blank.",
+    "signup_alert11":"Email can't be blank.",
+    "signup_alert12":"Nickname can't be blank.",
+    "signup_alert13":"Phone number can't be blank.",
+    "signup_alert14":"Password confirmation can't be blank.",
+    "password":"Password",
+    "password_conf":"Password Confirmation",
+    "nickname":"Nickname",
+    "phone":"Phone",
+    "organization":"Organization Name (optional)",
+    "org_place":"Your school / company / etc "
+    
+    
+
 
 
 }

@@ -36,10 +36,26 @@ const Index = () => {
 
 	const checkForm = () => {
 		var ret = false;
-		if (info.password !== info.passwordCheck) {
+		if (info.password === '') {
 			setErrorInfo({
 				...errorInfo,
-				passwordCheck: '비밀번호가 일치하지 않습니다.',
+				password: t('signup_alert10'),
+			});
+			if (info.password === '') {
+				setErrorInfo({
+					...errorInfo,
+					password: t('signup_alert10'),
+				});
+			}
+		} else if (info.passwordCheck === '') {
+			setErrorInfo({
+				...errorInfo,
+				passwordCheck: t('signup_alert14'),
+			});
+		} else if (info.password !== info.passwordCheck) {
+			setErrorInfo({
+				...errorInfo,
+				passwordCheck: t('signup_alert1'),
 			});
 		} else {
 			setErrorInfo({ ...errorInfo, passwordCheck: '\u00a0' });
@@ -56,10 +72,21 @@ const Index = () => {
 			.catch((err) => {
 				setErrorInfo({
 					...errorInfo,
-					email: 'The Email is already registered.',
+					email: t('signup_alert2'),
 				});
 				console.error(err);
 			});
+	};
+
+	const handleEmail = () => {
+		if (info.email === '') {
+			setErrorInfo({
+				...errorInfo,
+				email: t('signup_alert11'),
+			});
+		} else {
+			emailDuplCheck();
+		}
 	};
 
 	const phoneDuplCheck = async () => {
@@ -72,9 +99,20 @@ const Index = () => {
 				console.error(err);
 				setErrorInfo({
 					...errorInfo,
-					phone: err.response.data.message,
+					phone: t('signup_alert5'),
 				});
 			});
+	};
+
+	const handlePhone = () => {
+		if (info.phone === '') {
+			setErrorInfo({
+				...errorInfo,
+				phone: t('signup_alert13'),
+			});
+		} else {
+			phoneDuplCheck();
+		}
 	};
 
 	const nicknameDuplCheck = async () => {
@@ -87,9 +125,39 @@ const Index = () => {
 				console.error(err);
 				setErrorInfo({
 					...errorInfo,
-					nickname: 'The Nickname is already registered.',
+					nickname: t('signup_alert3'),
 				});
 			});
+	};
+
+	const handleNickName = () => {
+		if (info.nickname === '') {
+			setErrorInfo({
+				...errorInfo,
+				nickname: t('signup_alert12'),
+			});
+		} else {
+			nicknameDuplCheck();
+		}
+	};
+
+	const handleError = (status) => {
+		if (status === 412) {
+			setErrorInfo({
+				...errorInfo,
+				password: t('signup_alert4'),
+				passwordCheck: t('signup_alert4'),
+			});
+		} else if (status === 409) {
+			setErrorInfo({
+				...errorInfo,
+				phone: t('signup_alert5'),
+			});
+		} else if (status === 400) {
+			alert(t('signup_alert6'));
+		} else if (status === 500) {
+			alert(t('signup_alert7'));
+		}
 	};
 
 	const signupSubmit = async () => {
@@ -100,11 +168,11 @@ const Index = () => {
 				dispatch(setAccsstoken(res.data.data.accesstoken));
 				console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
 				navigate('/');
-				alert('회원가입을 축하합니다.');
+				alert(t('signup_alert8'));
 			})
 			.catch((err) => {
-				console.error(err);
-				alert('ERROR', err.response.data.message);
+				handleError(err.response.data.status);
+				console.log(err.response.data.status);
 			});
 	};
 
@@ -113,20 +181,39 @@ const Index = () => {
 		const value = e.target.value;
 		if (className === 'email') {
 			setInfo({ ...info, email: value });
-			setErrorInfo({ ...errorInfo, email: '중복 확인이 필요합니다.' });
+			if (value === '') {
+				setErrorInfo({ ...errorInfo, email: t('signup_alert11') });
+			} else {
+				setErrorInfo({ ...errorInfo, email: '\u00a0' });
+			}
 		} else if (className === 'password') {
 			setInfo({ ...info, password: value });
+			if (value === '') {
+				setErrorInfo({ ...errorInfo, password: t('signup_alert10') });
+			} else {
+				setErrorInfo({ ...errorInfo, password: '\u00a0' });
+			}
 		} else if (className === 'passwordCheck') {
 			setInfo({ ...info, passwordCheck: value });
-			if (info.password === '') {
-				setErrorInfo({ ...errorInfo, password: '비밀번호를 입력하세요.' });
+			if (value === '') {
+				setErrorInfo({ ...errorInfo, passwordCheck: t('signup_alert14') });
+			} else {
+				setErrorInfo({ ...errorInfo, passwordCheck: '\u00a0' });
 			}
 		} else if (className === 'nickname') {
 			setInfo({ ...info, nickname: value });
-			setErrorInfo({ ...errorInfo, nickname: '중복 확인이 필요합니다.' });
+			if (value === '') {
+				setErrorInfo({ ...errorInfo, nickname: t('signup_alert12') });
+			} else {
+				setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
+			}
 		} else if (className === 'phone') {
 			setInfo({ ...info, phone: value });
-			setErrorInfo({ ...errorInfo, phone: '중복 확인이 필요합니다.' });
+			if (value === '') {
+				setErrorInfo({ ...errorInfo, phone: t('signup_alert13') });
+			} else {
+				setErrorInfo({ ...errorInfo, phone: '\u00a0' });
+			}
 		} else if (className === 'organization') {
 			setInfo({ ...info, organization: value });
 		} else {
@@ -143,15 +230,15 @@ const Index = () => {
 			info.phone === ''
 		) {
 			if (info.email === '') {
-				setErrorInfo({ ...errorInfo, email: '이메일을 입력하세요.' });
+				setErrorInfo({ ...errorInfo, email: t('signup_alert11') });
 			} else if (info.password === '') {
-				setErrorInfo({ ...errorInfo, password: '비밀번호를 입력하세요' });
+				setErrorInfo({ ...errorInfo, password: t('signup_alert10') });
 			} else if (info.passwordCheck === '') {
-				setErrorInfo({ ...errorInfo, passwordCheck: '비밀번호를 입력하세요' });
+				setErrorInfo({ ...errorInfo, passwordCheck: t('signup_alert14') });
 			} else if (info.nickname === '') {
-				setErrorInfo({ ...errorInfo, nickname: '닉네임을 입력하세요' });
+				setErrorInfo({ ...errorInfo, nickname: t('signup_alert12') });
 			} else if (info.phone === '') {
-				setErrorInfo({ ...errorInfo, phone: '전화번호를 입력하세요' });
+				setErrorInfo({ ...errorInfo, phone: t('signup_alert13') });
 			}
 		} else if (checkForm()) {
 			signupSubmit();
@@ -172,7 +259,7 @@ const Index = () => {
 					<input
 						className="email"
 						type="email"
-						placeholder="이메일을 입력해주세요. "
+						placeholder={t('signup_alert12')}
 						value={info.email}
 						onChange={handleChange}
 					/>
@@ -183,16 +270,16 @@ const Index = () => {
 					</div>
 				</div>
 				<div>
-					<span>비밀번호</span>
+					<span>{t('password')}</span>
 					<span style={{ color: 'red' }}> *</span>
 					<br />
 					<input
 						className="password"
 						type="password"
-						placeholder="비밀먼호를 입력해주세요. "
+						placeholder={t('signup_alert10')}
 						value={info.password}
 						onChange={handleChange}
-						onClick={emailDuplCheck}
+						onClick={handleEmail}
 					/>
 					<div className="line"></div>
 					<div className="errorMessage" id="checkMess">
@@ -200,13 +287,13 @@ const Index = () => {
 					</div>
 				</div>
 				<div>
-					<span>비밀번호 확인</span>
+					<span>{t('password_conf')}</span>
 					<span style={{ color: 'red' }}> *</span>
 					<br />
 					<input
 						className="passwordCheck"
 						type="password"
-						placeholder="비밀먼호를 입력해주세요. "
+						placeholder={t('signup_alert14')}
 						value={info.passwordCheck}
 						onChange={handleChange}
 					/>
@@ -216,13 +303,13 @@ const Index = () => {
 					</div>
 				</div>
 				<div>
-					<span>닉네임</span>
+					<span>{t('nickname')}</span>
 					<span style={{ color: 'red' }}> *</span>
 					<br />
 					<input
 						className="nickname"
 						type="nickname"
-						placeholder="닉네임을 입력해주세요. "
+						placeholder={t('signup_alert12')}
 						value={info.nickname}
 						onChange={handleChange}
 						onClick={checkForm}
@@ -234,16 +321,16 @@ const Index = () => {
 					</div>
 				</div>
 				<div>
-					<span>전화번호</span>
+					<span>{t('phone')}</span>
 					<span style={{ color: 'red' }}> *</span>
 					<br />
 					<input
 						className="phone"
 						type="phonenumber"
-						placeholder="휴대폰 번호를 입력해주세요. "
+						placeholder={t('signup_alert13')}
 						value={info.phone}
 						onChange={handleChange}
-						onClick={nicknameDuplCheck}
+						onClick={handleNickName}
 					/>
 					<div className="line"></div>
 					<div className="errorMessage" id="checkMess">
@@ -251,19 +338,19 @@ const Index = () => {
 					</div>
 				</div>
 				<div>
-					<label>소속기관 (선택)</label>
+					<label>{t('organization')}</label>
 					<input
 						className="organization"
 						type="text"
-						placeholder="소속 기관을 입력해주세요. "
+						placeholder={t('org_place')}
 						value={info.organization}
 						onChange={handleChange}
-						onClick={phoneDuplCheck}
+						onClick={handlePhone}
 					/>
 					<div className="line"></div>
 				</div>
 				<button className="submit-button" onClick={isPrepared}>
-					회원가입
+					{t('try_signup')}
 				</button>
 			</div>
 		</div>
