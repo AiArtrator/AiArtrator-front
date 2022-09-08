@@ -11,24 +11,14 @@ const Index = () => {
 			image: JPG2,
 			caption: `<div>
 					  <br/>
-					  <h1>Ai Artrator</h1>
 					  <br/>
-					  인공지능이 창조한 이미지를 
-					  <br /><br />30초만에 받아보세요 !
+					  The Platform of
+					  <br/><br/>
+					  Generative Models
+					  <h1>Ai Artrator</h1>
+					  <br /><h5>run the ML Models with the Cloud API</h5>
 
 					</div>`,
-		},
-		{
-			image: JPG1,
-			caption: `<div>
-			<br/>
-			<h1>Ai Artrator</h1>
-			<br/>
-			고사양 컴퓨터 없이, <br /><br />오직 스마트 폰만으로  
-			<br /><br />인공지능 서비스를 경험해보세요 !
-		
-
-		  </div>`,
 		},
 		{
 			image: JPG3,
@@ -36,10 +26,18 @@ const Index = () => {
 			<br/>
 			<br/>
 			<br/>
-			<h2>Ai Artrator</h2>모델의 weight를 업로드하고 
-			<br /><br />수익을 창출하세요 !
+			<h2>Ai Artrator</h2>Upload the ML Weight,
+			<br /><br />Get Tokens
 			
 
+		  </div>`,
+		},
+		{
+			image: JPG1,
+			caption: `<div>
+			<br/><br/><br/><br/>SHARE · SELL · PURCHASE<br/>
+			<h1>Ai Artrator</h1>
+			<h5>run the PREE ML Models with your smart phone</h5>
 		  </div>`,
 		},
 	];
