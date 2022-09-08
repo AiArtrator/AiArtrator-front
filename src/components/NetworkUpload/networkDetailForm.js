@@ -263,10 +263,7 @@ const Index = ({ setStage, postId }) => {
 					/>
 					{detailInfo.tagList.map((tagName) => (
 						<div className="tag" key={tagName}>
-							{tagName}{' '}
-							<span onClick={deleteTag} tagname={tagName}>
-								✖
-							</span>
+							{tagName} <span onClick={deleteTag}>✖</span>
 						</div>
 					))}
 				</div>
