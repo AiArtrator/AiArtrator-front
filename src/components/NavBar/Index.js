@@ -11,7 +11,7 @@ import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
 
 import MainLogo from '../../assets/logo/MainLogoH1.png';
-import { tokenStatusInNav } from '../../axios/User';
+// import { tokenStatusInNav } from '../../axios/User';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -22,23 +22,23 @@ const Index = () => {
 	const { t } = useTranslation();
 
 	const accesstoken = useSelector((state) => state.user.accesstoken);
-	const token = useSelector((state) => state.token);
-	const [nowToken, setNowToken] = useState(token);
+	// const token = useSelector((state) => state.token);
+	// const [nowToken, setNowToken] = useState(token);
 
-	if (accesstoken) {
-		useEffect(() => {
-			const fetchData = async () => {
-				setNowToken('Loading');
-				try {
-					const response = await tokenStatusInNav(accesstoken);
-					setNowToken(response.data.data);
-				} catch (err) {
-					console.error(err);
-				}
-			};
-			fetchData();
-		}, [token]);
-	}
+	// if (accesstoken) {
+	// 	useEffect(() => {
+	// 		const fetchData = async () => {
+	// 			setNowToken('Loading');
+	// 			try {
+	// 				const response = await tokenStatusInNav(accesstoken);
+	// 				setNowToken(response.data.data);
+	// 			} catch (err) {
+	// 				console.error(err);
+	// 			}
+	// 		};
+	// 		fetchData();
+	// 	}, [token]);
+	// }
 	return (
 		<div className="nav-layout">
 			<img
@@ -67,7 +67,7 @@ const Index = () => {
 								<li>
 									<Logout />
 								</li>
-								<li
+								{/* <li
 									style={{
 										height: '0.6rem',
 										fontSize: '0.5rem',
@@ -81,8 +81,8 @@ const Index = () => {
 									}}
 								>
 									{t('nowToken')}
-								</li>
-								<li
+								</li> */}
+								{/* <li
 									style={{
 										height: '2rem',
 										fontWeight: '400',
@@ -96,7 +96,7 @@ const Index = () => {
 									}}
 								>
 									{nowToken} Token
-								</li>
+								</li> */}
 							</ul>
 						</li>
 					) : (
