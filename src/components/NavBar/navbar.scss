@@ -19,7 +19,7 @@
 		border: 0px;
 		margin: 0px;
 
-		padding: 0px;
+		padding: 0rem;
 		font: 'sans-serif';
 		font-size: 1rem;
 		z-index: 999;
@@ -31,12 +31,16 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		// margin-bottom: 0.1rem;
 	}
 
 	.dropmenu li {
 		float: right;
-		padding: 0px;
+		padding: 0rem 2rem 0 0;
+	}
+	.dropmenu li:hover {
+		background: rgba(189, 201, 239, 0.643);
+		color: rgba(52, 50, 80, 0.858);
+		text-decoration: none;
 	}
 
 	.dropmenu li a {
@@ -50,9 +54,8 @@
 		text-decoration: none;
 	}
 
-	.dropmenu li a:hover,
 	.dropmenu ul li:hover a {
-		background: rgba(189, 201, 239, 0.643);
+		background: rgba(189, 201, 239, 0.089);
 		color: rgba(52, 50, 80, 0.858);
 		text-decoration: none;
 	}
@@ -80,9 +83,9 @@
 		width: 200px;
 	}
 
-	.dropmenu li:hover li a {
-		background: none;
-	}
+	// .dropmenu li:hover li a {
+	// 	background: none;
+	// }
 
 	.dropmenu li ul a {
 		display: block;
@@ -93,7 +96,6 @@
 		text-align: left;
 	}
 
-	.dropmenu li ul a:hover,
 	.dropmenu li ul li:hover a {
 		background: rgba(0, 0, 128, 1);
 		border: 0px;
