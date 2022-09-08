@@ -37,7 +37,7 @@ const Index = () => {
 			caption: `<div>
 			<br/><br/><br/><br/>SHARE · SELL · PURCHASE<br/>
 			<h1>Ai Artrator</h1>
-			<h5>run the PREE ML Models with your smart phone</h5>
+			<h5>run the PREE ML Models on Clould API with 1 cent </h5>
 		  </div>`,
 		},
 	];

@@ -76,7 +76,7 @@
     ,"back":"Back"
 
 
-    ,"detail_alert1":"Something wrong with the Model."
+    ,"detail_alert1":"Need to login first. If you are logged in, error exists in this model."
     ,"uploader":"Publisher"
     ,"anti_subscribe":"Cancelled the Subscription"
     ,"comp_subscribe":"Subscription Success"
