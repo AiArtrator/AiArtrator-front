@@ -55,7 +55,7 @@ const Index = ({ setStage }) => {
 			navigate(`/NetworkDetail/${networkDetail.id}`);
 		} catch (err) {
 			console.error(err.response);
-			alert('Error : '); // /////////////////  ㅅTodo
+			alert('Error : '); // /////////////////  Todo
 		}
 	};
 

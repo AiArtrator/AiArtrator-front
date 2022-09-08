@@ -4,29 +4,34 @@ import './my-bal-part.scss';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import MiniLogo from '../../../assets/logo/logo_c2.png';
 
 const Index = ({ myBalance }) => {
 	const usernickname = useSelector((state) => state.user.user.nickname);
 	const navigate = useNavigate();
+	const { t } = useTranslation();
 
 	const goFill = () => {
-		navigate('/'); // 주소 수정필요
+		navigate('/'); // After business registration
+		alert('If AI Artrator register business, it would be able to add Tokens.');
 	};
 
 	return (
 		<>
 			<div className="my-t-box">
-				<div className="my-t-title"> {usernickname} 님의 현재 보유 토큰</div>
+				<div className="my-t-title">
+					{usernickname} {t('now_bal')}
+				</div>
 
 				<div className="in-row">
 					<img className="my-t-logo" src={MiniLogo} />
 					<span>{myBalance} Token</span>
-					<button onClick={goFill}>충전하기</button>
+					<button onClick={goFill}>{t('fill_token')}</button>
 				</div>
 			</div>
-			<div className="about-token">*** 1토큰은 10원입니다.</div>
+			<div className="about-token">{t('model_notice1')}</div>
 		</>
 	);
 };

@@ -90,6 +90,12 @@
     ,"detail_notice2":"* After running the model, you can always download the image since they are archived in the Image Library.  "
     ,"detail_notice3":"* According to the pricing policy, it would take some tokens to get the images by the model."
     ,"run_btn":"Run Model and Get IMG"
+    ,"cancel":"CANCEL"
 
+    ,"left_token":"Balance"
+    ,"now_bal":"'s Balance"
+    ,"fill_token":"Add Token"
+    ,"account_summ":"Account Summary"
+    
 
 }

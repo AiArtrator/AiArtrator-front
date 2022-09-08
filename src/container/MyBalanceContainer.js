@@ -4,6 +4,7 @@ import './my-balance-container.scss';
 
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import MyBalanceBox from '../components/MyBalance/MyBalBox/index';
 import MyHistoryItem from '../components/MyBalance/HistoryCard/Index.js';
@@ -14,6 +15,7 @@ import MainLogo from '../assets/logo/logo_c1.png';
 
 const MyBalanceContainer = ({ myBalance, myHistory }) => {
 	const usernickname = useSelector((state) => state.user?.user?.usernickname);
+	const { t } = useTranslation();
 
 	if (!myHistory) return <Loading />;
 
@@ -24,7 +26,7 @@ const MyBalanceContainer = ({ myBalance, myHistory }) => {
 				<MyBalanceBox myBalance={myBalance} />
 
 				<div className="my-history">
-					<div className="hist-title">토큰 내역 조회</div>
+					<div className="hist-title">{t('account_summ')}</div>
 					<div>
 						<MyHistoryItem key={history.id} myHistory={history} />
 					</div>

@@ -1,11 +1,15 @@
 /* eslint-disable */
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
 import PropTypes from 'prop-types';
 import './historycard.scss';
 
 const Index = ({ myHistory }) => {
+	const { t } = useTranslation();
+
 	const defaultData = {
-		content: '결제내역이 없습니다. ',
+		content: 'No data. ',
 		createdAt: '0000-00-00',
 		price: '0 Token',
 		balance: ' 0 Token',
@@ -22,7 +26,7 @@ const Index = ({ myHistory }) => {
 				<div>{myHistory.price}</div>
 
 				<br />
-				<div className="rest-title">잔여토큰</div>
+				<div className="rest-title">{t('left_token')}</div>
 				{myHistory.balance}
 			</div>
 		</div>

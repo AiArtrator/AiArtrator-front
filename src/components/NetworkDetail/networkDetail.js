@@ -323,7 +323,7 @@ const TextContainer = styled.div`
 	}
 	.already-subscribed:hover::after {
 		color: rgba(0, 0, 128, 1);
-		content: ' - 구독 취소';
+		content: ' - Cancel';
 		font-weight: 500;
 	}
 
