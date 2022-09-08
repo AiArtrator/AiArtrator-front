@@ -20,10 +20,10 @@ const Index = ({ network, onRemove }) => {
 	const accesstoken = useSelector((state) => state.user.accesstoken);
 	const [isPopup, setIspopup] = useState(false);
 
-	const onNavigate = (e) => {
-		if (e.target.id === 'produce') {
+	const onNavigate = (e, type) => {
+		if (type === 'produce') {
 			setIspopup(true);
-		} else if (e.target.id === 'detail') {
+		} else if (type === 'detail') {
 			postIdURL += id;
 			navigate(postIdURL);
 		}
@@ -53,7 +53,11 @@ const Index = ({ network, onRemove }) => {
 				<RunModel isPopup={isPopup} postId={id} setIspopup={setIspopup} />
 			) : null}
 			<div className="inrow">
-				<div className="button" id="produce" onClick={onNavigate}>
+				<div
+					className="button"
+					id="produce"
+					onClick={(e) => onNavigate(e, 'produce')}
+				>
 					{t('run')}
 				</div>
 				<div className="button" onClick={onDelete}>
@@ -61,7 +65,11 @@ const Index = ({ network, onRemove }) => {
 				</div>
 			</div>
 
-			<div className="items-block" id="detail" onClick={onNavigate}>
+			<div
+				className="items-block"
+				id="detail"
+				onClick={(e) => onNavigate(e, 'detail')}
+			>
 				<img src={thumbnail} alt="thumbnail" />
 
 				<div className="contents">

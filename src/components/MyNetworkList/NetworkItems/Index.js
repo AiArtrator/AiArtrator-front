@@ -40,10 +40,10 @@ const Index = ({ network, onRemove }) => {
 		});
 	}, []);
 
-	const onNavigate = (e) => {
-		if (e.target.id === 'detail') {
+	const onNavigate = (e, type) => {
+		if (type === 'detail') {
 			navigate(postIdUrl + networkData.id);
-		} else if (e.target.id === 'revise') {
+		} else if (type === 'revise') {
 			navigate('/NetworkUpload/' + network.id);
 		}
 	};
@@ -75,12 +75,20 @@ const Index = ({ network, onRemove }) => {
 				<div className="button" onClick={removeConfirm}>
 					{t('delete')}
 				</div>
-				<div className="button" id="revise" onClick={onNavigate}>
+				<div
+					className="button"
+					id="revise"
+					onClick={(e) => onNavigate(e, 'revise')}
+				>
 					{t('revise')}
 				</div>
 			</div>
 
-			<div className="items-block" id="detail" onClick={onNavigate}>
+			<div
+				className="items-block"
+				id="detail"
+				onClick={(e) => onNavigate(e, 'detail')}
+			>
 				<img src={networkData.thumbnail} alt="thumbnail" />
 
 				<div className="contents">

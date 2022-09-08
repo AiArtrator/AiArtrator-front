@@ -19,11 +19,11 @@ const Index = ({ network }) => {
 	const [isPopup, setIspopup] = useState(false);
 	var postIdURL = '/NetworkDetail/';
 
-	const onNavigate = (e) => {
-		if (e.target.id === 'detail') {
+	const onNavigate = (e, type) => {
+		if (type === 'detail') {
 			postIdURL += id;
 			navigate(postIdURL);
-		} else if (e.target.id === 'library') {
+		} else if (type === 'library') {
 			navigate('/Library/' + id);
 		}
 	};
@@ -38,7 +38,11 @@ const Index = ({ network }) => {
 				<RunModel isPopup={isPopup} postId={id} setIspopup={setIspopup} />
 			) : null}
 			<div className="inrow">
-				<div className="button" id="library" onClick={onNavigate}>
+				<div
+					className="button"
+					id="library"
+					onClick={(e) => onNavigate(e, 'library')}
+				>
 					{t('imgLib')}
 				</div>
 				<div className="button" id="produce" onClick={produceConfirm}>
@@ -46,7 +50,11 @@ const Index = ({ network }) => {
 				</div>
 			</div>
 
-			<div className="items-block" id="detail" onClick={onNavigate}>
+			<div
+				className="items-block"
+				id="detail"
+				onClick={(e) => onNavigate(e, 'detail')}
+			>
 				<img src={thumbnail} alt="thumbnail" />
 
 				<div className="contents">
