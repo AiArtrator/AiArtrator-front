@@ -20,8 +20,8 @@ export const SET_ACCESSTOKEN = 'user/setAccesstoken';
 export const REMOVE_USER = 'user/removeUser';
 export const REMOVE_ACCESSTOKEN = 'user/removeAccesstoken';
 
-export const SET_TOKEN = 'setToken';
-export const GET_TOKEN = 'getToken';
+// export const SET_TOKEN = 'setToken';
+// export const GET_TOKEN = 'getToken';
 
 // action creators
 export const setUser = (user) => ({

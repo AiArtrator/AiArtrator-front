@@ -84,7 +84,7 @@ const runNetwork = ({ isPopup, postId, setIspopup }) => {
 			const res = await postInference(
 				accesstoken,
 				detailInfo.weightUuid,
-				numImg || 0,
+				1, // ! only one // numImg || 0,
 				-detailInfo.fee
 			);
 			alert(res.data.message);
@@ -106,7 +106,9 @@ const runNetwork = ({ isPopup, postId, setIspopup }) => {
 					<input
 						className="numImg"
 						type="number"
-						value={numImg}
+						// value={numImg}// ! only one
+						value="1" // ! only one
+						disabled // ! only one
 						onChange={handleNumImg}
 						min="0"
 						max="99999" // TODO: fix max value
