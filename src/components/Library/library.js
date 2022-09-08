@@ -255,6 +255,7 @@ const Library = styled.div`
 		grid-column: 1 / 2;
 		grid-row: 1/2;
 		justify-self: left;
+		width: 100%;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
