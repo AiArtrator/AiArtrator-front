@@ -69,7 +69,7 @@ const Index = ({ network }) => {
 					<p>{summary}</p>
 					<div className="taglist">
 						{tagList.map((tag) => (
-							<div className="tag" tag={tag} key={tag.id}>
+							<div className="tag" key={tag.id}>
 								{tag.name}
 							</div>
 						))}
