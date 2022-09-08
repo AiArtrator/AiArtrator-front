@@ -11,7 +11,7 @@ import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
 import OwnNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
 
 import MainLogo from '../../assets/logo/MainLogoH1.png';
-import { tokenStatusInNav } from '../../axios/User';
+// import { tokenStatusInNav } from '../../axios/User';
 
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -22,6 +22,23 @@ const Index = () => {
 	const { t } = useTranslation();
 
 	const accesstoken = useSelector((state) => state.user.accesstoken);
+
+	// const token = useSelector((state) => state.token);
+	// const [nowToken, setNowToken] = useState(token);
+
+	// if (accesstoken) {
+	// 	useEffect(() => {
+	// 		const fetchData = async () => {
+	// 			setNowToken('Loading');
+	// 			try {
+	// 				const response = await tokenStatusInNav(accesstoken);
+	// 				setNowToken(response.data.data);
+	// 			} catch (err) {
+	// 				console.error(err);
+	// 			}
+	// 		};
+	// 		fetchData();
+	// 	}, [token]);
 
 	return (
 		<div className="nav-layout">
@@ -51,6 +68,36 @@ const Index = () => {
 								<li>
 									<Logout />
 								</li>
+								{/* <li
+									style={{
+										height: '0.6rem',
+										fontSize: '0.5rem',
+										color: 'white',
+										background: 'rgba(0, 0, 0, 0.328)',
+										verticalAlign: 'center',
+										display: 'block',
+										lineHeight: '30px',
+										margin: '0px',
+										padding: '10px 20px',
+									}}
+								>
+									{t('nowToken')}
+								</li> */}
+								{/* <li
+									style={{
+										height: '2rem',
+										fontWeight: '400',
+										color: 'white',
+										background: 'rgba(0, 0, 0, 0.328)',
+										verticalAlign: 'center',
+										display: 'block',
+
+										margin: '0px',
+										padding: '5px 20px',
+									}}
+								>
+									{nowToken} Token
+								</li> */}
 							</ul>
 						</li>
 					) : (

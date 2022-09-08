@@ -39,17 +39,17 @@ const Index = () => {
 		setLoading(true);
 		if (networkDetail) {
 			setDetailInfo({
-				title: networkDetail.title,
-				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
-				updatedAt: networkDetail.updatedAt,
-				ver: networkDetail.ver,
-				summary: networkDetail.summary,
-				tagList: networkDetail.tagList,
-				desc: networkDetail.description,
-				isSubscribed: networkDetail.isSubscribed,
-				fee: networkDetail.fee,
-				weightUuid: networkDetail.weightUuid,
+				title: networkDetail?.title,
+				thumbnail: networkDetail?.thumbnail,
+				writer: networkDetail?.writer?.nickname,
+				updatedAt: networkDetail?.updatedAt,
+				ver: networkDetail?.ver,
+				summary: networkDetail?.summary,
+				tagList: networkDetail?.tagList,
+				desc: networkDetail?.description,
+				isSubscribed: networkDetail?.isSubscribed,
+				fee: networkDetail?.fee,
+				weightUuid: networkDetail?.weightUuid,
 			});
 			setLoading(false);
 		}
@@ -74,17 +74,17 @@ const Index = () => {
 		setLoading(true);
 		if (networkDetail) {
 			setDetailInfo({
-				title: networkDetail.title,
-				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
-				updatedAt: networkDetail.updatedAt,
-				ver: networkDetail.ver,
-				summary: networkDetail.summary,
-				tagList: networkDetail.tagList,
-				desc: networkDetail.description,
-				isSubscribed: networkDetail.isSubscribed,
-				fee: networkDetail.fee,
-				weightUuid: networkDetail.weightUuid,
+				title: networkDetail?.title,
+				thumbnail: networkDetail?.thumbnail,
+				writer: networkDetail?.writer?.nickname,
+				updatedAt: networkDetail?.updatedAt,
+				ver: networkDetail?.ver,
+				summary: networkDetail?.summary,
+				tagList: networkDetail?.tagList,
+				desc: networkDetail?.description,
+				isSubscribed: networkDetail?.isSubscribed,
+				fee: networkDetail?.fee,
+				weightUuid: networkDetail?.weightUuid,
 			});
 			setLoading(false);
 		}
@@ -145,7 +145,7 @@ const Index = () => {
 			const res = await postInference(
 				accesstoken,
 				detailInfo.weightUuid,
-				numImg || 0,
+				1, // ! only one // numImg || 0,
 				-detailInfo.fee
 			);
 			console.log(res);
@@ -222,7 +222,9 @@ const Index = () => {
 					<input
 						className="numImg"
 						type="number"
-						value={numImg}
+						// value={numImg} // ! only one
+						value="1" // ! only one
+						disabled // ! only one
 						onChange={handleNumImg}
 						min="0"
 						max="99999" // TODO: fix max value
