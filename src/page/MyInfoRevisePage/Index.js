@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -39,7 +40,6 @@ const Index = () => {
 		await nicknameDupl(reviseInfo)
 			.then((res) => {
 				setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
-				console.log(res);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -60,7 +60,6 @@ const Index = () => {
 		await phoneDupl(reviseInfo)
 			.then((res) => {
 				setErrorInfo({ ...errorInfo, phone: '\u00a0' });
-				console.log(res);
 			})
 			.catch((err) => {
 				console.log(err);

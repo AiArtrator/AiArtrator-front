@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 import React, { useState } from 'react';
 
 import { useTranslation } from 'react-i18next';
@@ -66,7 +66,6 @@ const Index = () => {
 	const emailDuplCheck = async () => {
 		await emailDupl(info)
 			.then((res) => {
-				console.log(res);
 				setErrorInfo({ ...errorInfo, email: '\u00a0' });
 			})
 			.catch((err) => {
@@ -92,7 +91,6 @@ const Index = () => {
 	const phoneDuplCheck = async () => {
 		await phoneDupl(info)
 			.then((res) => {
-				console.log(res);
 				setErrorInfo({ ...errorInfo, phone: '\u00a0' });
 			})
 			.catch((err) => {
@@ -118,7 +116,6 @@ const Index = () => {
 	const nicknameDuplCheck = async () => {
 		await nicknameDupl(info)
 			.then((res) => {
-				console.log(res);
 				setErrorInfo({ ...errorInfo, nickname: '\u00a0' });
 			})
 			.catch((err) => {
@@ -163,16 +160,15 @@ const Index = () => {
 	const signupSubmit = async () => {
 		await signup(info)
 			.then((res) => {
-				console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
+				// console.log(`[+] signup - res data: ${JSON.stringify(res.data.data)}`);
 				dispatch(setUser(res.data.data.user));
 				dispatch(setAccsstoken(res.data.data.accesstoken));
-				console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
+				// console.log(`[+] signup - userState: ${JSON.stringify(userState)}`);
 				navigate('/');
 				alert(t('signup_alert8'));
 			})
 			.catch((err) => {
 				handleError(err.response.data.status);
-				console.log(err.response.data.status);
 			});
 	};
 

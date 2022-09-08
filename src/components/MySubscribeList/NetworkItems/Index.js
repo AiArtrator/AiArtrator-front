@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import './network-items.scss';
@@ -32,7 +33,7 @@ const Index = ({ network, onRemove }) => {
 		const tmp = id;
 		try {
 			const res = await postNetworkSubscribe({ postId: id }, accesstoken);
-			console.log(res.data.message);
+
 			onRemove(tmp);
 		} catch (err) {
 			console.error(err);

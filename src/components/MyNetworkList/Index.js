@@ -1,3 +1,4 @@
+/* disable-eslint */
 import React, { useState, useEffect } from 'react';
 import './my-network-list.scss';
 
@@ -38,7 +39,6 @@ const Index = () => {
 				const response = await getMyNetworkListById(userId, page, searchWord);
 				setNetworks(response.data.data.postList);
 				setNetworkCnt(response.data.data.postList.length);
-				console.log(response.data.data);
 			} catch (err) {
 				console.error(err);
 				setError(err);

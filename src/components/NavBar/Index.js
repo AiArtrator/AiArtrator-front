@@ -22,7 +22,7 @@ const Index = () => {
 	const { t } = useTranslation();
 
 	const accesstoken = useSelector((state) => state.user.accesstoken);
-	const token = useSelector((state) => state.token.token);
+	const token = useSelector((state) => state.token);
 	const [nowToken, setNowToken] = useState(token);
 
 	useEffect(() => {
@@ -32,29 +32,11 @@ const Index = () => {
 				const response = await tokenStatusInNav(accesstoken);
 				setNowToken(response.data.data);
 			} catch (err) {
-				console.log('Navbar My Token Balance Err');
 				console.error(err);
 			}
 		};
 		fetchData();
 	}, []);
-
-	const updateT = async () => {
-		setNowToken('Loading');
-		try {
-			const response = await tokenStatusInNav(accesstoken);
-			setNowToken(response.data.data);
-		} catch (err) {
-			console.log('Navbar My Token Balance Err');
-			console.error(err);
-		}
-	};
-
-	const timeUpdate = () => {
-		setTimeout(() => {
-			updateT();
-		}, 500);
-	};
 
 	return (
 		<div className="nav-layout">

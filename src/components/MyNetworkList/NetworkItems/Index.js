@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React, { useEffect, useState } from 'react';
 import './network-items.scss';
 
@@ -12,7 +13,6 @@ import { useTranslation } from 'react-i18next';
 import { deleteMyNetwork } from '../../../axios/Network';
 import Loading from 'react-loading';
 
-// Todo : 삭제완료시 리렌더링 (useState사용으로 수정)
 const Index = ({ network, onRemove }) => {
 	const navigate = useNavigate();
 	const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ const Index = ({ network, onRemove }) => {
 		if (e.target.id === 'detail') {
 			navigate(postIdUrl + networkData.id);
 		} else if (e.target.id === 'revise') {
-			navigate('/NetworkUpload/' + network.id); // todo: update the addresss to postRevisePage
+			navigate('/NetworkUpload/' + network.id);
 		}
 	};
 
@@ -53,7 +53,6 @@ const Index = ({ network, onRemove }) => {
 		const tmp = networkData.id;
 		try {
 			const res = await deleteMyNetwork(networkData.id, accesstoken);
-			console.log(res.data.message);
 			onRemove(tmp);
 		} catch (err) {
 			console.error(err);

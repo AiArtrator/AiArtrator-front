@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React, { useState, useEffect, useRef } from 'react';
 import Axios from 'axios';
 import styled from 'styled-components';
@@ -22,7 +23,7 @@ const Test = () => {
 		const res = await Axios.get(`http://localhost:8080/sample-image.jpg`, {
 			responseType: 'arraybuffer',
 		});
-		console.log(res);
+
 		const b64 = Buffer.from(res.data, 'binary').toString('base64');
 		const imageUrl = `data:image/jpg;base64,${b64}`;
 		setImgSrc(imageUrl);
@@ -35,7 +36,7 @@ const Test = () => {
 		const img = new Image();
 		img.onload = () => {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			console.log(canvas, canvas.width, canvas.height);
+
 			ctx.fillStyle = '#ffffff';
 			ctx.fillRect(0, 0, canvas.width, canvas.height);
 			const dyH =
