@@ -218,6 +218,9 @@ const PopupContainer = styled.div`
 	.popupNetworkTitle {
 		grid-column: 1 / 6;
 		font-size: 22px;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		overflow: hidden;
 	}
 	.subtitle {
 		grid-column: 1 / 2;
