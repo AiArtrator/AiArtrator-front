@@ -34,11 +34,33 @@ const Index = () => {
 	const [isPopup, setIsPopup] = useState(false);
 	const [loading, setLoading] = useState(false);
 
+	const fill = () => {
+		setLoading(true);
+		if (networkDetail) {
+			setDetailInfo({
+				title: networkDetail.title,
+				thumbnail: networkDetail.thumbnail,
+				writer: networkDetail.writer.nickname,
+				updatedAt: networkDetail.updatedAt,
+				ver: networkDetail.ver,
+				summary: networkDetail.summary,
+				tagList: networkDetail.tagList,
+				desc: networkDetail.description,
+				isSubscribed: networkDetail.isSubscribed,
+				fee: networkDetail.fee,
+				weightUuid: networkDetail.weightUuid,
+			});
+			setLoading(false);
+		}
+	};
+
 	useEffect(() => {
 		setLoading(true);
 		const checkNetworkDetail = async () => {
 			const res = await dispatch(fetchNetworkDetail(postId, accesstoken));
-			if (!res.success) {
+			if (res.success) {
+				fill();
+			} else if (!res.success) {
 				alert(t('detail_alert1'));
 				navigate('/NetworkLists');
 			}
