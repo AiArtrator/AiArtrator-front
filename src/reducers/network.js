@@ -4,6 +4,7 @@ import { getNetworkDetailById } from '../axios/Network';
 const initialState = {};
 
 export const SET_NETWORKDETAIL = 'network/setNetworkDetail';
+export const CLR_NETWORKDETAIL = 'network/clearNetworkDetail';
 
 // action creators
 export const setNetworkDetail = (networkDetail) => ({
@@ -11,7 +12,7 @@ export const setNetworkDetail = (networkDetail) => ({
 	payload: networkDetail,
 });
 
-export const fetchNetworkDetail = (postId: String, accesstoken: String) => {
+export const fetchNetworkDetail = (postId, accesstoken) => {
 	return async (dispatch) => {
 		try {
 			const res = await getNetworkDetailById(postId, accesstoken);
@@ -23,6 +24,10 @@ export const fetchNetworkDetail = (postId: String, accesstoken: String) => {
 	};
 };
 
+export const clearNetworkDetail = () => ({
+	type: CLR_NETWORKDETAIL,
+});
+
 // Reducer
 // eslint-disable-next-line default-param-last
 const reducer = (state = initialState, action) => {
@@ -31,6 +36,12 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				detail: action.payload,
+			};
+		}
+		case CLR_NETWORKDETAIL: {
+			return {
+				...state,
+				detail: initialState,
 			};
 		}
 		default:
