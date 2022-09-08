@@ -22,7 +22,7 @@ const Index = ({ network }) => {
 			postIdURL += id;
 			navigate(postIdURL);
 		} else if (e.target.id === 'library') {
-			navigate('/'); // Todo: change the url
+			navigate('/Library/' + id);
 		}
 	};
 

@@ -8,9 +8,4 @@ const AuthRoute = () => {
 	return accesstoken ? <Outlet /> : <Navigate to="/login" />;
 };
 
-// AuthRoute.propTypes = {
-// 	children: PropTypes.element,
-// 	rest: PropTypes.object,
-// };
-
 export default AuthRoute;

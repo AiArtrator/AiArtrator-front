@@ -38,7 +38,7 @@ const Index = () => {
 			const res = await dispatch(fetchNetworkDetail(postId, accesstoken));
 			if (!res.success) {
 				alert(res.message);
-				navigate('/NetworkList');
+				navigate(-1);
 			}
 		};
 		checkNetworkDetail();

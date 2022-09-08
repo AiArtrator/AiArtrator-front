@@ -1,5 +1,4 @@
 import { getUserById, Logout } from '../axios/User';
-// import { getUserById } from '../axios/User';
 
 // Initial State
 const initialState = {
@@ -20,6 +19,9 @@ export const SET_USER = 'user/setUser';
 export const SET_ACCESSTOKEN = 'user/setAccesstoken';
 export const REMOVE_USER = 'user/removeUser';
 export const REMOVE_ACCESSTOKEN = 'user/removeAccesstoken';
+
+export const SET_TOKEN = 'setToken';
+export const GET_TOKEN = 'getToken';
 
 // action creators
 export const setUser = (user) => ({

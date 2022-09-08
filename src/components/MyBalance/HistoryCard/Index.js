@@ -30,6 +30,6 @@ const Index = ({ myHistory }) => {
 };
 
 Index.propTypes = {
-	myHistory: PropTypes.array,
+	myHistory: PropTypes.object,
 };
 export default Index;

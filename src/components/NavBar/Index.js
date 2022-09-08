@@ -1,3 +1,4 @@
+/* eslint-disable*/
 import React, { useEffect, useState } from 'react';
 import './navbar.scss';
 
@@ -21,7 +22,8 @@ const Index = () => {
 	const { t } = useTranslation();
 
 	const accesstoken = useSelector((state) => state.user.accesstoken);
-	const [nowToken, setNowToken] = useState('Loading');
+	const token = useSelector((state) => state.token.token);
+	const [nowToken, setNowToken] = useState(token);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -36,6 +38,24 @@ const Index = () => {
 		};
 		fetchData();
 	}, []);
+
+	const updateT = async () => {
+		setNowToken('Loading');
+		try {
+			const response = await tokenStatusInNav(accesstoken);
+			setNowToken(response.data.data);
+		} catch (err) {
+			console.log('Navbar My Token Balance Err');
+			console.error(err);
+		}
+	};
+
+	const timeUpdate = () => {
+		setTimeout(() => {
+			updateT();
+		}, 500);
+	};
+
 	return (
 		<div className="nav-layout">
 			<img

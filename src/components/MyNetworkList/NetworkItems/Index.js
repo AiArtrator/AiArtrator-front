@@ -42,7 +42,7 @@ const Index = ({ network, onRemove }) => {
 		if (e.target.id === 'detail') {
 			navigate(postIdUrl + networkData.id);
 		} else if (e.target.id === 'revise') {
-			navigate('/'); // todo: update the addresss to postRevisePage
+			navigate('/NetworkUpload/' + network.id); // todo: update the addresss to postRevisePage
 		}
 	};
 
@@ -74,12 +74,12 @@ const Index = ({ network, onRemove }) => {
 				<div className="button" onClick={removeConfirm}>
 					삭제하기
 				</div>
-				<div className="button" onClick={onNavigate}>
+				<div className="button" id="revise" onClick={onNavigate}>
 					수정하기
 				</div>
 			</div>
 
-			<div className="items-block" onClick={onNavigate}>
+			<div className="items-block" id="detail" onClick={onNavigate}>
 				<img src={networkData.thumbnail} alt="thumbnail" />
 
 				<div className="contents">
