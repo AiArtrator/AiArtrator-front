@@ -25,19 +25,20 @@ const Index = () => {
 	const token = useSelector((state) => state.token);
 	const [nowToken, setNowToken] = useState(token);
 
-	useEffect(() => {
-		const fetchData = async () => {
-			setNowToken('Loading');
-			try {
-				const response = await tokenStatusInNav(accesstoken);
-				setNowToken(response.data.data);
-			} catch (err) {
-				console.error(err);
-			}
-		};
-		fetchData();
-	}, []);
-
+	if (accesstoken) {
+		useEffect(() => {
+			const fetchData = async () => {
+				setNowToken('Loading');
+				try {
+					const response = await tokenStatusInNav(accesstoken);
+					setNowToken(response.data.data);
+				} catch (err) {
+					console.error(err);
+				}
+			};
+			fetchData();
+		}, [token]);
+	}
 	return (
 		<div className="nav-layout">
 			<img

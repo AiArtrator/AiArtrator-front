@@ -42,8 +42,6 @@ const Index = () => {
 			console.error(err);
 			if (err.response.data.status === (403 || 412)) {
 				alert(t('login_alert1'));
-			} else {
-				alert('ERROR');
 			}
 		}
 	};
