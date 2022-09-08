@@ -158,10 +158,8 @@ const Index = () => {
 				if (res.data.message) alert(res.data.message);
 				navigate(-1);
 			} else if (!res.data.data.length) {
-				alert(
-					'You never tried to get the img with this model. No library exists '
-				);
-				navigate(-1);
+				alert('Model is running on Cloud API');
+				navigate('/PurchasedNetwork');
 			} else {
 				res.data.data.reverse();
 				setLibrary(res.data.data);
@@ -176,7 +174,6 @@ const Index = () => {
 			setDetailInfo({
 				title: networkDetail.title,
 				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
 				updatedAt: networkDetail.updatedAt,
 				ver: networkDetail.ver,
 				summary: networkDetail.summary,
