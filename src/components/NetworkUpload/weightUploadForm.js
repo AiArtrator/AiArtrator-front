@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 
-import { clearNetworkDetail, setNetworkDetail } from '../../reducers/network';
+import { setNetworkDetail } from '../../reducers/network';
 import { postWeight } from '../../axios/Network';
 import startImg from '../../assets/weightUpload/start.svg';
 import inprogressImg from '../../assets/weightUpload/inprogress.svg';
@@ -51,7 +51,7 @@ const Index = ({ setStage }) => {
 			setImg(doneImg);
 			setText('Upload SUCCESS');
 			alert('Saved!');
-			dispatch(clearNetworkDetail());
+			// dispatch(clearNetworkDetail());
 			navigate(`/NetworkDetail/${networkDetail.id}`);
 		} catch (err) {
 			console.error(err.response);

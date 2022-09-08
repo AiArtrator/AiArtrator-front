@@ -39,17 +39,17 @@ const Index = () => {
 		setLoading(true);
 		if (networkDetail) {
 			setDetailInfo({
-				title: networkDetail.title,
-				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
-				updatedAt: networkDetail.updatedAt,
-				ver: networkDetail.ver,
-				summary: networkDetail.summary,
-				tagList: networkDetail.tagList,
-				desc: networkDetail.description,
-				isSubscribed: networkDetail.isSubscribed,
-				fee: networkDetail.fee,
-				weightUuid: networkDetail.weightUuid,
+				title: networkDetail?.title,
+				thumbnail: networkDetail?.thumbnail,
+				writer: networkDetail?.writer?.nickname,
+				updatedAt: networkDetail?.updatedAt,
+				ver: networkDetail?.ver,
+				summary: networkDetail?.summary,
+				tagList: networkDetail?.tagList,
+				desc: networkDetail?.description,
+				isSubscribed: networkDetail?.isSubscribed,
+				fee: networkDetail?.fee,
+				weightUuid: networkDetail?.weightUuid,
 			});
 			setLoading(false);
 		}
@@ -74,17 +74,17 @@ const Index = () => {
 		setLoading(true);
 		if (networkDetail) {
 			setDetailInfo({
-				title: networkDetail.title,
-				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
-				updatedAt: networkDetail.updatedAt,
-				ver: networkDetail.ver,
-				summary: networkDetail.summary,
-				tagList: networkDetail.tagList,
-				desc: networkDetail.description,
-				isSubscribed: networkDetail.isSubscribed,
-				fee: networkDetail.fee,
-				weightUuid: networkDetail.weightUuid,
+				title: networkDetail?.title,
+				thumbnail: networkDetail?.thumbnail,
+				writer: networkDetail?.writer?.nickname,
+				updatedAt: networkDetail?.updatedAt,
+				ver: networkDetail?.ver,
+				summary: networkDetail?.summary,
+				tagList: networkDetail?.tagList,
+				desc: networkDetail?.description,
+				isSubscribed: networkDetail?.isSubscribed,
+				fee: networkDetail?.fee,
+				weightUuid: networkDetail?.weightUuid,
 			});
 			setLoading(false);
 		}
