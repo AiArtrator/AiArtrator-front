@@ -22,6 +22,7 @@ const Index = () => {
 	const { t } = useTranslation();
 
 	const accesstoken = useSelector((state) => state.user.accesstoken);
+
 	// const token = useSelector((state) => state.token);
 	// const [nowToken, setNowToken] = useState(token);
 
@@ -38,7 +39,7 @@ const Index = () => {
 	// 		};
 	// 		fetchData();
 	// 	}, [token]);
-	// }
+
 	return (
 		<div className="nav-layout">
 			<img

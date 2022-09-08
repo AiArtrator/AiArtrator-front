@@ -15,14 +15,14 @@ const Index = () => {
 	const { postId } = useParams();
 	const navigate = useNavigate();
 	const [detailInfo, setDetailInfo] = useState({
-		title: '로딩 중',
+		title: 'loading',
 		thumbnail: DEFAULT_THUMBNAIL,
-		writer: '로딩 중',
-		updatedAt: '로딩 중',
-		ver: '로딩 중',
-		summary: '로딩 중입니다.',
+		writer: 'loading',
+		updatedAt: 'loading',
+		ver: 'loading',
+		summary: 'loading',
 		tagList: [],
-		desc: '로딩 중',
+		desc: 'loading',
 		isSubscribed: false,
 		fee: 0,
 		weightUuid: '',
@@ -158,8 +158,8 @@ const Index = () => {
 				if (res.data.message) alert(res.data.message);
 				navigate(-1);
 			} else if (!res.data.data.length) {
-				alert('Never used!');
-				navigate(-1);
+				alert('Model is running on Cloud API');
+				navigate('/PurchasedNetwork');
 			} else {
 				res.data.data.reverse();
 				setLibrary(res.data.data);
@@ -174,7 +174,6 @@ const Index = () => {
 			setDetailInfo({
 				title: networkDetail.title,
 				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
 				updatedAt: networkDetail.updatedAt,
 				ver: networkDetail.ver,
 				summary: networkDetail.summary,

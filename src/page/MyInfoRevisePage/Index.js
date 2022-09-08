@@ -80,9 +80,6 @@ const Index = () => {
 	const reviseSubmit = async () => {
 		await putReviseInfo(accesstoken, tosubmit)
 			.then((res) => {
-				console.log(
-					`[+] revise myinfo - res data: ${JSON.stringify(res.data)}`
-				);
 				alert(t('revise_succ'));
 				navigate('/MyInfo');
 			})

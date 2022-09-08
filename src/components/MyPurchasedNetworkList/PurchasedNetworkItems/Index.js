@@ -38,10 +38,10 @@ const Index = ({ network }) => {
 				<RunModel isPopup={isPopup} postId={id} setIspopup={setIspopup} />
 			) : null}
 			<div className="inrow">
-				<div className="button" id="library" onClick={produceConfirm}>
+				<div className="button" id="library" onClick={onNavigate}>
 					{t('imgLib')}
 				</div>
-				<div className="button" id="produce" onClick={onNavigate}>
+				<div className="button" id="produce" onClick={produceConfirm}>
 					{t('run')}
 				</div>
 			</div>
