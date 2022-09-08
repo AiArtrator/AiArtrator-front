@@ -20,7 +20,7 @@ const runNetwork = ({ isPopup, postId, setIspopup }) => {
 	const [detailInfo, setDetailInfo] = useState({
 		title: '로딩 중',
 		thumbnail: DEFAULT_THUMBNAIL,
-		writer: '로딩 중',
+
 		updatedAt: '로딩 중',
 		ver: '로딩 중',
 		summary: '로딩 중입니다.',
@@ -49,7 +49,7 @@ const runNetwork = ({ isPopup, postId, setIspopup }) => {
 			setDetailInfo({
 				title: networkDetail.title,
 				thumbnail: networkDetail.thumbnail,
-				writer: networkDetail.writer.nickname,
+
 				updatedAt: networkDetail.updatedAt,
 				ver: networkDetail.ver,
 				summary: networkDetail.summary,
