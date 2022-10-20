@@ -1,8 +1,6 @@
 .nav-layout {
 	position: fixed;
 	width: 100%;
-	// top: 0rem;
-
 	z-index: 999;
 
 	.logo {
@@ -35,7 +33,7 @@
 
 	.dropmenu li {
 		float: right;
-		padding: 0rem 2rem 0 0;
+		padding: 0rem 1rem 0 1rem;
 	}
 	.dropmenu li:hover {
 		background: rgba(189, 201, 239, 0.643);
