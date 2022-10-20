@@ -32,7 +32,7 @@ export const nicknameDupl = (data) => {
 	});
 };
 
-export const Logout = (accesstoken: String) => {
+export const Logout = (accesstoken) => {
 	return axios(
 		{
 			method: 'POST',
@@ -64,14 +64,14 @@ export const login = (data) => {
 	});
 };
 
-export const getMypage = (userId: String) => {
+export const getMypage = (userId) => {
 	return axios({
 		method: 'GET',
 		url: `/api/user/${userId}`,
 	});
 };
 
-export const putReviseInfo = (accesstoken: String, formData: Object) => {
+export const putReviseInfo = (accesstoken, formData) => {
 	return axios({
 		method: 'PUT',
 		url: '/api/user',
@@ -81,7 +81,7 @@ export const putReviseInfo = (accesstoken: String, formData: Object) => {
 };
 
 // 네비게이션바의 보유 토큰
-export const tokenStatusInNav = (accesstoken: String) => {
+export const tokenStatusInNav = (accesstoken) => {
 	return axios({
 		method: 'GET',
 		url: '/api/payment',
@@ -90,7 +90,7 @@ export const tokenStatusInNav = (accesstoken: String) => {
 };
 
 // 내 결제 내역 정보
-export const myPaymentHist = (accesstoken: String) => {
+export const myPaymentHist = (accesstoken) => {
 	return axios({
 		method: 'GET',
 		url: '/api/payment/list',

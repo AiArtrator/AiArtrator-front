@@ -16,15 +16,14 @@ export const getNetworkList = (data) => {
 	});
 };
 
-export const getSearchNetwork = (search: String) => {
+export const getSearchNetwork = (search) => {
 	return axios({
 		method: 'GET',
 		url: `/api/post/list?search=${search}`,
 	});
 };
 
-// 모델디테일 페이지
-export const getNetworkDetailById = (postId: String, accesstoken: String) => {
+export const getNetworkDetailById = (postId, accesstoken) => {
 	return axios({
 		method: 'GET',
 		headers: { accesstoken },
@@ -41,7 +40,7 @@ export const deleteMyNetwork = (postId, accesstoken) => {
 };
 
 // 구독 신청 및 취소
-export const postNetworkSubscribe = (data, accesstoken: String) => {
+export const postNetworkSubscribe = (data, accesstoken) => {
 	return axios({
 		method: 'POST',
 		headers: { accesstoken },
@@ -51,18 +50,14 @@ export const postNetworkSubscribe = (data, accesstoken: String) => {
 };
 
 // 내가 업로드한 모델 / 내가 구독중인 모델 / 이용 모델 페이지
-export const getMyNetworkListById = (
-	userId: String,
-	page: String,
-	search: String
-) => {
+export const getMyNetworkListById = (userId, page, search) => {
 	return axios({
 		method: 'GET',
 		url: `/api/user/${userId}/post/list?filter=${page}&search=${search}`,
 	});
 };
 
-export const postNetworkDetail = (accesstoken: String, formData: Object) => {
+export const postNetworkDetail = (accesstoken, formData) => {
 	return axios({
 		method: 'POST',
 		url: `/api/post`,
@@ -78,11 +73,7 @@ export const postNetworkDetailInfo = (postId) => {
 	});
 };
 
-export const putNetworkDetail = (
-	accesstoken: String,
-	postId: String,
-	formData: Object
-) => {
+export const putNetworkDetail = (accesstoken, postId, formData) => {
 	return axios({
 		method: 'PUT',
 		url: `/api/post/${postId}`,
@@ -91,12 +82,7 @@ export const putNetworkDetail = (
 	});
 };
 
-export const postWeight = (
-	accesstoken: String,
-	formData: Object,
-	fileName?: String,
-	setState?
-) => {
+export const postWeight = (accesstoken, formData, fileName, setState) => {
 	return axios({
 		method: 'POST',
 		url: `/api/post/weight`,
@@ -113,7 +99,7 @@ export const postWeight = (
 	});
 };
 
-export const ownNetworkList = (userId: String, accesstoken: String, data) => {
+export const ownNetworkList = (userId, accesstoken, data) => {
 	return axios({
 		method: 'GET',
 		url: `/api/user/${userId}/post/list`,
@@ -122,12 +108,7 @@ export const ownNetworkList = (userId: String, accesstoken: String, data) => {
 	});
 };
 
-export const postInference = (
-	accesstoken: String,
-	weightUuid: String,
-	imageCount: Number,
-	price: Number
-) => {
+export const postInference = (accesstoken, weightUuid, imageCount, price) => {
 	return axios({
 		method: 'POST',
 		url: `/api/inference`,
