@@ -1,4 +1,4 @@
-# P-O-G (Project of Generative model)
+# Ai Artrator
 
 인공지능 모델 구매 및 판매 플랫폼
 
