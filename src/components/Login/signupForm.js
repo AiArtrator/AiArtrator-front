@@ -11,6 +11,8 @@ import { setAccsstoken, setUser } from '../../reducers/user';
 import './signup-form.scss';
 import Logo from '../../assets/logo/MainLogoV1.png';
 
+// 서버에서 에러 처리를 한국어로만 지원하기에 프론트에서 모든 에러를 핸들링( 에러에 따른 알림을 영문 버전 / 한국 버전으로 제공 )하기 위해 코드가 복잡해졌습니다.
+// 서버의 에러 처리가 영문버전과 국문 버전을 모두 제공하도록 업데이트된 이후 리팩토링 예정입니다.
 const Index = () => {
 	const { t } = useTranslation();
 	const navigate = useNavigate();
