@@ -68,36 +68,6 @@ const Index = () => {
 								<li>
 									<Logout />
 								</li>
-								{/* <li
-									style={{
-										height: '0.6rem',
-										fontSize: '0.5rem',
-										color: 'white',
-										background: 'rgba(0, 0, 0, 0.328)',
-										verticalAlign: 'center',
-										display: 'block',
-										lineHeight: '30px',
-										margin: '0px',
-										padding: '10px 20px',
-									}}
-								>
-									{t('nowToken')}
-								</li> */}
-								{/* <li
-									style={{
-										height: '2rem',
-										fontWeight: '400',
-										color: 'white',
-										background: 'rgba(0, 0, 0, 0.328)',
-										verticalAlign: 'center',
-										display: 'block',
-
-										margin: '0px',
-										padding: '5px 20px',
-									}}
-								>
-									{nowToken} Token
-								</li> */}
 							</ul>
 						</li>
 					) : (

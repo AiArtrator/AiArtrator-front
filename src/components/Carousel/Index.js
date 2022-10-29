@@ -5,7 +5,10 @@ import JPG1 from '../../assets/carousel1.jpg';
 import JPG2 from '../../assets/carousel2.jpeg';
 import JPG3 from '../../assets/carousel3.jpeg';
 
+import { useTranslation } from 'react-i18next';
+
 const Index = () => {
+	const { t } = useTranslation();
 	const data = [
 		{
 			image: JPG2,
@@ -13,10 +16,10 @@ const Index = () => {
 					  <br/>
 					  <br/>
 					  <br/>
-					  The Platform of
-					  <br /><br />Generative Models
-					  <h1>Ai Artrator</h1>
-					  <h5>run the ML Models with the Cloud API</h5>
+					 ${t('carous1_1')}
+					  <br /><br /> ${t('carous1_2')}
+					  <h1>${t('carous1_3')}</h1>
+					  <h5>${t('carous1_4')}</h5>
 					</div>`,
 		},
 
@@ -26,8 +29,8 @@ const Index = () => {
 			<br/>
 			<br/>
 			<br/>
-			<h2>Ai Artrator</h2>Upload the ML Model 
-			<br /><br /> Get Tokens 
+			<h2>${t('carous2_1')}</h2>${t('carous2_2')}
+			<br /><br /> ${t('carous2_3')}
 			
 
 		  </div>`,
@@ -37,10 +40,11 @@ const Index = () => {
 			caption: `<div>
 			<br/>
 			<br/>
-			SHARE<br />
-			<br />SELL<br /><br />PURCHASE
-			<h1>Ai Artrator</h1>
-			<h5>run the FREE ML Models with your smart phone</h5>
+			${t('carous3_1')}<br />
+			<br />${t('carous3_2')}<br /><br />${t('carous3_3')}
+			<h1>${t('carous3_4')}</h1>
+			<h5>${t('carous3_5')}</h5>
+			<h5>${t('carous3_6')}</h5>
 		  </div>`,
 		},
 	];
