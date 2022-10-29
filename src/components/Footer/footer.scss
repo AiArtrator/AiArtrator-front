@@ -1,0 +1,33 @@
+.foot {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	text-align: center;
+	width: 100%;
+	height: auto;
+	z-index: 3;
+	position: absolute;
+	// position : relative;
+
+	//transform : translateY(1000%);
+	bottom: 0;
+	left: 0;
+	background-color: rgba(166, 185, 241, 0.3);
+	padding-top: 0.3rem;
+	padding-bottom: 0.3rem;
+	color: rgba(0, 0, 128, 1);
+	h3 {
+		font-size: 1rem;
+	}
+	.intro-button {
+		place-self: center;
+		width: 17%;
+		border-bottom: solid 0.1rem rgba(0, 0, 128, 1);
+		font-size: 1.1rem;
+		font-weight: 500;
+		cursor: pointer;
+	}
+	.intro-button:hover {
+		font-weight: 700;
+	}
+}

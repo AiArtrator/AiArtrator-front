@@ -1,0 +1,21 @@
+.hist-in-row {
+	padding: 5% 0 3% 0;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	border-bottom: solid 0.5px rgba(128, 128, 128, 0.622);
+	font-size: 1rem;
+	letter-spacing: 0.1rem;
+
+	color: rgb(52, 27, 127);
+	.created-at {
+		color: rgb(129, 103, 208);
+		padding: 1.5rem 0 0.2rem 0;
+		font-size: 1rem;
+	}
+	.rest-title {
+		color: grey;
+		padding: 1rem 0 0.2rem 0;
+		font-size: 0.1rem;
+	}
+}

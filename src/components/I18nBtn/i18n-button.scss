@@ -1,0 +1,19 @@
+.i18n-button {
+	position: fixed;
+	z-index: 300;
+	bottom: 0;
+	right: 0;
+	background: white;
+	padding: 1% 1% 1% 1%;
+	border: 0;
+	color: #4242d86e;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.176);
+	border-radius: 100%;
+	margin: 1rem;
+	cursor: pointer;
+}
+.i18n-button:hover {
+	font-weight: 700;
+	color: white;
+	background-color: #ababd5ce;
+}

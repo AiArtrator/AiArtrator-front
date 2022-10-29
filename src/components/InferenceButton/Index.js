@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Index = () => {
+const Index = function () {
 	return <></>;
 };
 

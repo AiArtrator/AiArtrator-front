@@ -1,0 +1,146 @@
+{
+    "i18nbtn" : "ko",
+
+    "modellist":"   Model List",
+    "login_signup":"LogIn / SignUp",
+    "mymodels":"My Models",
+    "mytoken_account":"My Tokens",
+    "logout":"Log Out",
+    "nowToken": "Token Balance",
+
+    "uploadbtn":"Upload Model",
+
+    "email":"Email", 
+    "login_alert1":"incorrect email or password",
+    "login_btn":"Log In",
+    "try_signup":"Sign Up",
+
+
+    "signup_alert1":"Confirmation password doesn't match the password.",
+    "signup_alert2":"The Email is already registered.",
+    "signup_alert3":"The Nickname is already registered.",
+    "signup_alert4": "Password must be at least 7 characters.",
+    "signup_alert5": "The phone number is already registered.",
+    "signup_alert6": "Fill in the blanks.",
+    "signup_alert7": "Failed to create your account.",    
+    "signup_alert8":"Your account was created successfully.",
+    "signup_alert9":"Signup Failed.",
+    "signup_alert10":"Password can't be blank.",
+    "signup_alert11":"Email can't be blank.",
+    "signup_alert12":"Nickname can't be blank.",
+    "signup_alert13":"Phone number can't be blank.",
+    "signup_alert14":"Password confirmation can't be blank.",
+    "password":"Password",
+    "password_conf":"Password Confirmation",
+    "nickname":"Nickname",
+    "phone":"Phone",
+    "organization":"Organization Name (optional)",
+    "org_place":"Your school / company / etc ",
+    
+    "seachres":"search result ",
+    "seachplac_h":"   Search Anything Yout Want ",
+    "modelcnt":"Total Models  ",
+
+    "revise_btn" : "Revise Information",
+    "myinfo" : "'s Account",
+    "blank" : "blank",
+
+    "revise_succ":"Your information is revised successfully.",
+    "revise_fail":"Failed to revise information.",
+    "no_change":"Nothing changed.",
+    "revise_page" : "Revise Information Page",
+    "dupl_btn":"Dupl Check",
+    "dupl_plach":"Type new information",
+
+    "upload_alert1":"This is not the model you uploaded."
+    ,"upload_thumbnail":"Upload Thumbnail"
+    ,"model_name":"Model Name"
+    ,"model_summary":"Introductin Summary"
+    ,"model_fee":"Usage Fee"
+    ,"model_fee2":"(fee for getting one image)"
+    ,"model_fee3":"Complimetary Model"
+    ,"model_notice1":"* 1 Token is equel to 1 cent."
+    ,"model_notice2":"* Except for Complimetary Models, you can get paid 90% of the revenue, payed for using the model. "
+    ,"model_notice3":"* If models are ran on Cloud API, it is 1 Token per image. "
+    ,"model_ver":"Model Version"
+    ,"model_detail":"About the Model"
+    ,"model_tag":"Tag"
+    ,"next":"Next  >"
+    ,"upload_alert2":"Fill the blank."
+
+    ,"upw_notice1":"Can be completed\nOnly after uploading the weight"
+    ,"Upload Model":"Upload Model"
+    ,"upw_alert1":"Choose a file."
+    ,"upw_alert2":"Select other"
+    ,"upload":"Upload"
+    ,"back":"Back"
+
+
+    ,"detail_alert1":"Need to login first. If you are logged in, error exists in this model."
+    ,"uploader":"Publisher"
+    ,"anti_subscribe":"Cancelled the Subscription"
+    ,"comp_subscribe":"Subscription Success"
+    ,"version":"Version"
+    ,"subscribe":"Subscribe"
+    ,"subs_list":"My Subscription List"
+    ,"detail_notice1":"* Subscribed Models are listed in My Models - My Subscriptions."
+    ,"subscribed":"Already Subscribed"
+    ,"subs_try":"Subscribe the Model"
+    ,"run_model":"Running the Model on Cloud API"
+    ,"detail_notice2":"* After running the model, you can always download the image since they are archived in the Image Library.  "
+    ,"detail_notice3":"* According to the pricing policy, it would take some tokens to get the images by the model."
+    ,"run_btn":"Run Model and Get IMG"
+    ,"cancel":"Cancel"
+
+    ,"left_token":"Balance"
+    ,"now_bal":"'s Balance"
+    ,"fill_token":"Add Token"
+    ,"account_summ":"Account Summary"
+
+    ,"uploaded_model":"Uploaded"
+    ,"subs_model":"Suscribed"
+    ,"pur_model":"Purchased"
+
+    ,"myup_title":"'s Uploaded Model List"
+    ,"myup_cnt":"Total Uploaded Models"
+    ,"revise":"Update"
+    ,"delete":"Delete"
+    ,"del_alert":"You are about to delete the model. Do you want to proceed?"
+
+    ,"mysubs_title":"'s Subscribed Model List"
+    ,"mysubs_cnt":"Total Subscribed Models"
+    ,"run":"Run Model"
+    ,"cancel_alert":"You are about to cancel subscirbe. Do you want to proceed?"
+    
+    ,"pur_title":"'s Model Usage History"
+    ,"pur_cnt":"Total Purchased Models"
+    ,"imgLib":"IMG Library"
+
+
+    ,"run_title":"Run Model & Get IMG"
+    ,"run_fee":"Model Usage Fee"
+    ,"run_cnt":"Total images to produce"
+    ,"images":"Images"
+    ,"run_notice1":"* The fee for ML API is 1 Token per image."
+    ,"total_fee":"Total Fee is"
+    ,"run_notice2":"* You will proceed the process, paying your Tokens."
+    ,"pay":"Make Payment"
+    ,"close":"Close"
+
+    ,"carous1_1": "The Platform of"
+    ,"carous1_2": "Generative Models"
+    ,"carous1_3": "Ai Artrator"
+    ,"carous1_4": "run the ML Models with the Cloud API"
+
+    ,"carous2_1": "Ai Artrator"
+    ,"carous2_2": "Upload the ML Model"
+    ,"carous2_3": "Get Tokens"
+
+    ,"carous3_1": "SHARE"
+    ,"carous3_2": "RUN ML Models"
+    ,"carous3_3": "Get Images"
+    ,"carous3_4": "Ai Artrator"
+    ,"carous3_5": "run the FREE ML Models without GPU"
+    ,"carous3_6": "( sell & purchase is in preparation )"
+    
+}

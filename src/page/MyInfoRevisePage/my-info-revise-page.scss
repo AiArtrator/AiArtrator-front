@@ -1,0 +1,126 @@
+.myrevise-form {
+	*,
+	*:before,
+	*:after {
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+	}
+	min-height: 46rem;
+	font-size: 0.7rem;
+
+	.reviseform {
+		height: 40rem;
+		width: 23rem;
+		background-color: rgba(255, 255, 255, 0.13);
+		position: absolute;
+		transform: translate(-50%, -50%);
+		top: 55%;
+		left: 50%;
+		border-radius: 10px;
+		// backdrop-filter: blur(12px);
+		border: 2px solid rgba(255, 255, 255, 0.1);
+		box-shadow: 0 0 20px rgba(8, 7, 16, 0.42);
+		padding: 50px 35px;
+	}
+	.reviseform * {
+		font-family: 'Poppins', sans-serif;
+		color: rgba(13, 0, 92, 1);
+		letter-spacing: 0.5px;
+		outline: none;
+		border: none;
+	}
+
+	.inrow {
+		text-align: center;
+		img {
+			width: 5rem;
+			height: 5rem;
+		}
+	}
+	.errorMessage {
+		margin-bottom: 0.8rem;
+	}
+
+	label {
+		display: block;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+		// font-size: 16px;
+		font-weight: 500;
+	}
+	.revise-part {
+		margin: 0 auto;
+
+		text-align: center; /*inline-block의 장점은 폰트의 성질도 포함되고 있어서 text-align으로 정렬을 쉽게 할수가 있다.*/
+		font-size: 0;
+		input {
+			display: inline-block;
+			// display: block;
+			height: 2rem;
+			width: 80%;
+			border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+			border-radius: 3px;
+			padding: 0 10px;
+			margin-top: 1rem;
+			margin-bottom: 0.5rem;
+			font-weight: 500;
+		}
+		::placeholder {
+			color: rgba(157, 157, 157, 1);
+			font-size: 0.7rem;
+			font-weight: 400;
+		}
+		.dupl-button {
+			display: inline-block;
+			// position: absolute;
+			// z-index: 9;
+			width: 15%;
+			// top: 13.8rem;
+			// right: 10%;
+			background-color: rgb(255, 255, 255);
+			color: rgba(13, 0, 92, 1);
+			padding: 0.2rem 0;
+			font-size: 0.2rem;
+			font-weight: 300;
+			border-radius: 3px;
+			cursor: pointer;
+			border: 0.01rem solid rgba(255, 255, 255, 0.1);
+			box-shadow: 0 0 0.4rem rgba(8, 7, 16, 0.171); //rgba(166, 185, 241, 0.534);
+		}
+		button:hover {
+			background-color: rgba(0, 0, 128, 1);
+			color: #ffffff;
+			margin-bottom: 0;
+			font-weight: 400;
+		}
+	}
+	.info {
+		position: relative;
+		z-index: 19;
+		margin-top: 0.5rem;
+		width: 100%;
+		background-color: rgba(166, 185, 241, 0.123);
+		color: rgba(13, 0, 92, 1);
+		padding: 10px 10px;
+		//font-size: 10px;
+		font-weight: 800;
+		border-radius: 5px;
+	}
+
+	.submit-button {
+		width: 100%;
+		background-color: rgba(166, 185, 241, 0.3);
+		color: rgba(13, 0, 92, 1);
+		padding: 10px 0;
+		font-size: 15px;
+		font-weight: 600;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	button:hover {
+		background-color: rgba(0, 0, 128, 1);
+		color: #ffffff;
+		margin-bottom: 0;
+	}
+}

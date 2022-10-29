@@ -1,89 +1,107 @@
-.dropmenu {
-	border: none;
-	border: 0px;
-	margin: 0px;
-	padding: 0px;
-	font: 'sans-serif';
-	font-size: 18px;
-}
+.nav-layout {
+	position: fixed;
+	width: 100%;
+	z-index: 999;
 
-.dropmenu ul {
-	background: #666;
-	height: 100px;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
+	.logo {
+		height: 2.5rem;
+		width: 8rem;
+		float: left;
+		margin-top: 0.5%;
+		margin-left: 3%;
+		cursor: pointer;
+	}
 
-.dropmenu li {
-	float: left;
-	padding: 0px;
-}
+	.dropmenu {
+		border: none;
+		border: 0px;
+		margin: 0px;
 
-.dropmenu li a {
-	background: #666;
-	color: #fff;
-	display: block;
-	line-height: 100px;
-	margin: 0px;
-	padding: 0px 25px;
-	text-align: center;
-	text-decoration: none;
-}
+		padding: 0rem;
+		font: 'sans-serif';
+		font-size: 1rem;
+		z-index: 999;
+	}
 
-.dropmenu li a:hover,
-.dropmenu ul li:hover a {
-	background: rgb(31, 31, 31);
-	color: #ffffff;
-	text-decoration: none;
-}
+	.dropmenu ul {
+		background: #fff;
+		height: 50px;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
 
-.dropmenu li ul {
-	background: rgba(173, 173, 173, 0.475) fff;
-	display: none;
-	height: auto;
-	border: 0px;
-	position: absolute;
-	width: 200px;
-	z-index: 200;
-	/*top:1em;
-	/*left:0;*/
-}
+	.dropmenu li {
+		float: right;
+		width: 10rem;
+		// padding: 0rem 1rem 0 1rem;
+	}
+	.dropmenu li:hover {
+		background: rgba(189, 201, 239, 0.643);
+		color: rgba(52, 50, 80, 0.858);
+		text-decoration: none;
+	}
 
-.dropmenu li:hover ul {
-	display: block;
-}
+	.dropmenu li a {
+		width: 10rem;
+		background: #fff;
+		color: rgb(52, 50, 80);
+		display: block;
+		line-height: 50px;
+		margin: 0px;
 
-.dropmenu li li {
-	background: rgba(173, 173, 173, 0.475);
-	display: block;
-	float: none;
-	margin: 0px;
-	padding: 0px;
-	width: 200px;
-}
+		text-align: center;
+		text-decoration: none;
+	}
 
-.dropmenu li:hover li a {
-	background: none;
-}
+	.dropmenu ul li:hover a {
+		background: rgba(189, 201, 239, 0.089);
+		color: rgba(52, 50, 80, 0.858);
+		text-decoration: none;
+	}
 
-.dropmenu li ul a {
-	display: block;
-	height: 80px;
-	font-size: 14px;
-	margin: 0px;
-	padding: 0px 10px 0px 15px;
-	text-align: left;
-}
+	.dropmenu li ul {
+		width: 10rem;
+		background: rgba(180, 194, 237, 0.569);
+		display: none;
+		height: auto;
+		border: 0px;
+		position: absolute;
+		width: 200px;
+		z-index: 200;
+	}
 
-.dropmenu li ul a:hover,
-.dropmenu li ul li:hover a {
-	background: rgba(173, 173, 173, 0.475);
-	border: 0px;
-	color: #ffffff;
-	text-decoration: none;
-}
+	.dropmenu li:hover ul {
+		display: block;
+	}
 
-.dropmenu p {
-	clear: left;
+	.dropmenu li li {
+		background: rgba(209, 216, 239, 0.49);
+		display: block;
+		float: none;
+		margin: 0px;
+		padding: 0px;
+		width: 200px;
+	}
+
+	.dropmenu li ul a {
+		display: block;
+		height: 50px;
+		font-size: 14px;
+		margin: 0px;
+
+		padding: 0px 10px 0px 15px;
+		text-align: left;
+	}
+
+	.dropmenu li ul li:hover a {
+		background: rgba(0, 0, 128, 1);
+		border: 0px;
+		color: #ffffff;
+		text-decoration: none;
+	}
+
+	.dropmenu p {
+		clear: left;
+	}
 }

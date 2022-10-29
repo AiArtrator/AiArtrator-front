@@ -1,0 +1,51 @@
+.side-nav {
+	position: relative;
+	display: flex;
+	align-items: center;
+	justify-content: left;
+	left: 0;
+	width: 7rem;
+	top: 7rem;
+
+	nav ul {
+		list-style-type: none;
+		padding: 0;
+		box-shadow: 0 0 16px rgba(24, 20, 49, 0.305);
+		border-radius: 20%;
+	}
+
+	nav ul li {
+		font-size: 40px;
+		font-family: sans-serif;
+		background-color: rgb(255, 255, 255);
+		border: 2px solid rgba(166, 185, 241, 0.3);
+		border-radius: 0.3rem;
+		letter-spacing: 0.1em;
+		width: 6rem;
+		height: 4rem;
+		position: relative;
+		overflow: hidden;
+		text-align: center;
+
+		cursor: pointer;
+	}
+
+	nav ul li span {
+		font-weight: 600;
+		color: #3d3d9d;
+		font-size: 0.7rem;
+		color: rgb(255, 255, 255);
+		mix-blend-mode: difference;
+	}
+
+	nav ul li:hover {
+		font-weight: 700;
+		background-color: #000080;
+		color: white;
+	}
+	nav ul li:active {
+		font-weight: 700;
+		background-color: #000080;
+		color: white;
+	}
+}

@@ -1,11 +1,25 @@
-import React from 'react';
-import OwnNetworkLists from '../../components/OwnNetworkList/Index.js';
-
+import React, { useEffect } from 'react';
+import NetworkLists from '../../components/NetworkList/Index.js';
+// import InfiniteScroll from '../../components/NetworkList/InfiniteScroll.js';
+import Carousel from '../../components/NetworkListCarousel/Index.js';
+import TopBtn from '../../components/TopBtn/index';
 const Index = () => {
+	const scrollTop = () => {
+		window.scrollTo({
+			top: 0,
+			behavior: 'smooth',
+		});
+	};
+
+	useEffect(() => {
+		scrollTop();
+	}, []);
+
 	return (
 		<>
-			<h2>모델들을 둘러볼 수 있는 페이지 입니다. </h2>
-			<OwnNetworkLists />
+			<Carousel />
+			<NetworkLists />
+			<TopBtn />
 		</>
 	);
 };

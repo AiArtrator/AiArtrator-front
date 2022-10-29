@@ -1,37 +1,86 @@
-import React from 'react';
+/* eslint-disable*/
+import React, { useEffect, useState } from 'react';
 import './navbar.scss';
-import Logo from './NavTitle/Index.js';
+
 import ModelLists from './ModelLists/Index.js';
 import MyMenus from './MyMenu/Index.js';
 import LogIn from './LogInButton/Index.js';
-import OwnNetworksBtn from './MyMenu/OwnNetworksButton/Index.js';
-import { Link } from 'react-router-dom';
+import Logout from './LogoutButton/Index.js';
+import MyTokenAccount from './MyTokenAccount/Index.js';
+import NetworkUploadBtn from './MyMenu/NetworkUploadButton/Index.js';
+import OwnNetworksBtn from './MyMenu/MyNetworksButton/Index.js';
+
+import MainLogo from '../../assets/logo/MainLogoH1.png';
+// import { tokenStatusInNav } from '../../axios/User';
+
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 const Index = () => {
+	const navigate = useNavigate();
+	const { t } = useTranslation();
+
+	const accesstoken = useSelector((state) => state.user.accesstoken);
+
+	// const token = useSelector((state) => state.token);
+	// const [nowToken, setNowToken] = useState(token);
+
+	// if (accesstoken) {
+	// 	useEffect(() => {
+	// 		const fetchData = async () => {
+	// 			setNowToken('Loading');
+	// 			try {
+	// 				const response = await tokenStatusInNav(accesstoken);
+	// 				setNowToken(response.data.data);
+	// 			} catch (err) {
+	// 				console.error(err);
+	// 			}
+	// 		};
+	// 		fetchData();
+	// 	}, [token]);
+
 	return (
-		<div className="dropmenu">
-			<ul>
-				<li>
-					<Logo />
-				</li>
-				<li>
-					<ModelLists />
-				</li>
-				<li>
-					<MyMenus />
-					<ul>
+		<div className="nav-layout">
+			<img
+				className="logo"
+				src={MainLogo}
+				onClick={() => {
+					navigate('/');
+				}}
+			/>
+			<div className="dropmenu">
+				<ul>
+					{accesstoken ? (
 						<li>
-							<OwnNetworksBtn />
+							<MyMenus />
+							<ul>
+								<li>
+									<NetworkUploadBtn />
+								</li>
+
+								<li>
+									<OwnNetworksBtn />
+								</li>
+								<li>
+									<MyTokenAccount />
+								</li>
+								<li>
+									<Logout />
+								</li>
+							</ul>
 						</li>
+					) : (
 						<li>
-							<Link to="/">임시 로그아웃</Link>
+							<LogIn />
 						</li>
-					</ul>
-				</li>
-				<li>
-					<LogIn />
-				</li>
-			</ul>
+					)}
+
+					<li>
+						<ModelLists />
+					</li>
+				</ul>
+			</div>
 		</div>
 	);
 };

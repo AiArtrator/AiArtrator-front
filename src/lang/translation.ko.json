@@ -1,0 +1,145 @@
+{
+    "i18nbtn":"en",
+
+    "modellist":"   모델 리스트",
+    "login_signup":"로그인",
+    "mymodels":"모델 관리",
+    "mytoken_account":"토큰 관리",
+    "logout":"로그아웃",
+    "nowToken": "보유 토큰",
+
+    "uploadbtn":"모델 업로드",
+
+    "email":"이메일",
+    
+    "login_alert1":"이메일 / 비밀번호를 확인해주세요. ",
+    "login_btn":"로그인 Log-In",
+    "try_signup":"1초만에 회원가입",
+
+    "signup_alert1":"비밀번호가 일치하지 않습니다.",
+    "signup_alert2":"이미 가입된 이메일입니다.",
+    "signup_alert3":"이미 가입된 닉네임입니다.",
+    "signup_alert4": "패스워드는 최소 6자리 문자열이어야 합니다.",
+    "signup_alert5": "이미 가입된 전화번호 입니다.",
+    "signup_alert6": "필수 정보를 입력해주세요.",
+    "signup_alert7": "회원가입에 실패했습니다.",
+    "signup_alert8":"회원가입을 성공했습니다.",
+    "signup_alert9":"회원가입을 실패했습니다.",
+    "signup_alert10":"비밀번호를 입력하세요.",
+    "signup_alert11":"이메일을 입력하세요.",
+    "signup_alert12":"닉네임을 입력하세요.",
+    "signup_alert13":"전화번호를 입력하세요.",
+    "signup_alert14":"패스워드를 입력해주세요.",
+    "password":"패스워드",
+    "password_conf":"패스워드 확인",
+    "nickname":"닉네임",
+    "phone":"휴재폰 번호",
+    "organization":"소속 (선택)",
+    "org_place":"소속 가관 이름을 입력해주세요.",
+
+    "seachres":"검색 결과 ",
+    "seachplac_h":"   모델의 키워드 혹은 태그를 입력하세요.",
+    "modelcnt":"판매 중인 모델  ",
+
+    "revise_btn" : "정보 수정",
+    "myinfo" : " 님의 개인정보",
+    "blank" : "입력된 정보가 없습니다.",
+
+    "revise_succ":"개인정보 수정에 성공했습니다.",
+    "revise_fail":"개인정보 수정에 실패했습니다.",
+    "no_change":"변경된 정보가 없습니다.",
+    "revise_page" : "개인 정보 수정",
+    "dupl_btn":"중복 체크",
+    "dupl_plach":"수정을 원하시면 정보를 입력해주세요.",
+
+    "upload_alert1":"타인이 업로드한 모델입니다."
+    ,"upload_thumbnail":"썸네일"
+    ,"model_name":"모델 이름"
+    ,"model_summary":"한줄 소개"
+    ,"model_fee":"모델 이용료"
+    ,"model_fee2":"(이미지 1장 기준)"
+    ,"model_fee3":"무료"
+    ,"model_notice1":"* 1토큰은 10원에 해당됩니다."
+    ,"model_notice2":"* 모델 이용료의 90%를 가져가실 수 있으며, '무료'를 선택할 시 수익은 발생되지 않습니다."
+    ,"model_notice3":"* 모델을 이용시 인공지능 서버 요금이 이미지 1장 기준 1토큰씩 추가로 부과됩니다."
+    ,"model_ver":"모델 버전"
+    ,"model_detail":"모델 설명"
+    ,"model_tag":"태그"
+    ,"next":"다음 >"
+    ,"upload_alert2":"필수 정보가 없습니다."
+
+    ,"upw_notice1":"Can be completed\nOnly after uploading the weight"
+    ,"Upload Model":"모델 업로드 하기"
+    ,"upw_alert1":"파일을 선택해주세요."
+    ,"upw_alert2":"다른 파일 선택"
+    ,"upload":"업로드"
+    ,"back":"이전"
+
+    ,"detail_alert1":"로그인을 먼저 해주세요."
+    ,"uploader":"게시자"
+    ,"anti_subscribe":"구독이 취소되었습니다."
+    ,"comp_subscribe":"구독을 완료했습니다."
+    ,"version":"모델 버전"
+    ,"subscribe":"모델 구독"
+    ,"subs_list":"나의 구독리스트"
+    ,"detail_notice1":"* 모델 구독시, 구독한 모델보기 페이지에서 확인 및 이용이 가능합니다."
+    ,"subscribed":"구독 중인 모델"
+    ,"subs_try":"구독하기"
+    ,"run_model":"모델 이용하기"
+    ,"detail_notice2":"* 모델을 이용하여 이미지를 디운로드 할 수 있고, 얻은 이미지들은 생성한 이미지 Library에 자동으로 아카이빙 되며 언제든지 다시 다운로드 할 수 있습니다."
+    ,"detail_notice3":"* 이용할 때마다 서비스 정책에 따라 금액이 부과됩니다. "
+    ,"run_btn":"이 모델로 이미지 얻기"
+    ,"cancel":"구독 취소"
+
+    ,"left_token":"잔액"
+    ,"now_bal":"님의 현재 보유 토큰"
+    ,"fill_token":"충전하기"
+    ,"account_summ":"토큰 사용 내역"
+
+    ,"uploaded_model":"업로드한 모델"
+    ,"subs_model":"구독한 모델"
+    ,"pur_model":"결제한 모델"
+
+    ,"myup_title":" 님이 업로드한 모델 리스트입니다."
+    ,"myup_cnt":"업로드한 모델 개수 "
+    ,"revise":"수정하기"
+    ,"delete":"삭제하기"
+    ,"del_alert":"업로드한 모델을 삭제합니다."
+
+    ,"mysubs_title":" 님이 구독한 모델 리스트입니다."
+    ,"mysubs_cnt":"구독한 모델 개수 "
+    ,"run":"이미지 생성"
+    ,"cancel_alert":"구독을 취소합니다."
+
+    ,"pur_title":" 님이 결제한 모델 리스트입니다."
+    ,"pur_cnt":"결제한 모델 개수 "
+    ,"imgLib":"이미지 라이브러리"
+
+
+    ,"run_title":"이미지 생성"
+    ,"run_fee":"모델 이용료"
+    ,"run_cnt":"생성할 이미지 개수"
+    ,"images":"개"
+    ,"run_notice1":"* 기본 수수료는 이미지 당 1토큰 입니다."
+    ,"total_fee":"총 결제 금액"
+    ,"run_notice2":"* 결제 완료후 총 결제 금액 만큼 토큰이 차감됩니다."
+    ,"pay":"결제하기"
+    ,"close":"닫기"
+
+    ,"carous1_1": "GPU 없이 사용가능한"
+    ,"carous1_2": "인공지능 이미지 생성 플랫폼"
+    ,"carous1_3": "Ai Artrator"
+    ,"carous1_4": "머신러닝 모델을 Cloud API로 경험하세요."
+
+    ,"carous2_1": "Ai Artrator"
+    ,"carous2_2": "이미지 생성 머신러닝 모델을 공유하고"
+    ,"carous2_3": "토큰을 획득하세요 !"
+
+    ,"carous3_1": "Cloud API 이미지 생성"
+    ,"carous3_2": "ML 모델 공유"
+    ,"carous3_3": "GPU 없이 ML 모델 이용"
+    ,"carous3_4": "Ai Artrator"
+    ,"carous3_5": "ML 모델 공유 · 모델로 이미지 생성 · 모델 매매"
+    ,"carous3_6": "( 사업자 등록후 모델 매매 기능 업데이트 )"
+
+}

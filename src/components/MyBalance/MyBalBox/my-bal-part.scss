@@ -1,0 +1,57 @@
+.my-t-box {
+	margin: 7% 0 2% 0;
+	border: 1rem #f1f1f1;
+	background-color: #f1f1f1;
+	border-radius: 0.5rem;
+	padding: 5% 0;
+	color: rgba(14, 12, 46, 0.897);
+	vertical-align: middle;
+	letter-spacing: 0.05rem;
+	.my-t-title {
+		padding: 2.5% 0;
+	}
+	.in-row {
+		display: flex;
+		flex-direction: row;
+
+		margin-left: 35%;
+
+		.my-t-logo {
+			width: 5%;
+			height: 5%;
+
+			margin: 0.1% 2% 0 0;
+			opacity: 50%;
+		}
+		span {
+			color: #0d0c36;
+			font-weight: 500;
+			font-size: 2rem;
+		}
+		button {
+			letter-spacing: 0.05rem;
+			margin-left: 3rem;
+			font-size: 0.8rem;
+			border: none;
+			width: auto;
+			padding: 0.3rem 1.5rem 0.3rem 1.5rem;
+			color: #eaf0fb;
+
+			font-weight: 600;
+			border-radius: 0.3rem;
+			cursor: pointer;
+			background-color: rgba(0, 0, 128, 1);
+		}
+		button:hover {
+			background-color: rgba(72, 118, 255, 0.3);
+			color: rgba(13, 0, 92, 1);
+			margin-bottom: 0;
+		}
+	}
+}
+.about-token {
+	display: flex;
+	font-size: 0.8rem;
+	color: rgb(44, 19, 106);
+	letter-spacing: 0.05rem;
+}
